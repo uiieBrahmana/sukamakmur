@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,44 +218,15 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">Menu Utama</li>
+                <li class="header">MAKANAN</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminperalatan">Peralatan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminmakanan">Makanan</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Pegawai</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpegawai">Buat Akun Pegawai</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpegawai">Daftar Pegawai</a></li>
-                    </ul>
-                </li>
-
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpesanan">Buat Pemesanan Baru</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpesanan">Lihat Semua Pesanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi Pemesanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi Pembayaran Pesanan</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Member</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakun">Lihat Semua Member</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminbuatakun">Buat Member Baru</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
                     </ul>
                 </li>
 
@@ -284,8 +251,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Pegawai
-                <small>Tambah Pegawai</small>
+                Kategori Makanan Baru
+                <small>Tambah Tipe</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -295,42 +262,56 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Pegawai</h3>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Buat Tipe Makanan Baru</h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+
+                        <form class="form-horizontal" method="post" action="#">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">ID Tipe Makanan</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="ID Tipe Makanan" id="namapemesan"
+                                                       name="namapemesan"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Keterangan" id="namapemesan"
+                                                       name="namapemesan"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Harga</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Harga" id="namapemesan"
+                                                       name="namapemesan"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button class="btn btn-info" name="submit" type="submit">Tambah</button>
+                                <button class="btn btn-default" type="reset">Reset</button>
+                            </div><!-- /.box-footer -->
+                        </form>
+                    </div>
                 </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Pegawai</th>
-                        <th>Nama Pegawai</th>
-                        <th>Alamat</th>
-                        <th>No. Telepon</th>
-                        <th>Email</th>
-                        <th>Status Pegawai</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Aksi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>Olit</td>
-                        <td>Jl. KH Hasyim Ashari gg. Masjid no 2</td>
-                        <td>081381461286</td>
-                        <td>olit@gmail.com</td>
-                        <td>Admin aplikasi</td>
-                        <td>olit123</td>
-                        <td>rahasia</td>
-                        <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
-                    </tr>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
             </div>
         </section><!-- /.content -->
         <!-- /.content -->
@@ -422,7 +403,7 @@
 <script src="css/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!--<script src="css/plugins/morris/morris.min.js"></script>-->
+<script src="css/plugins/morris/morris.min.js"></script>
 
 <script src="css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script src="css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -435,15 +416,6 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
+<script src="css/dist/js/pages/dashboard.js"></script>
 <script src="css/dist/js/demo.js"></script>
-
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function(){
-        $('#student').DataTable();
-    });
-</script>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hotel - Kompetensi SI</title>
+    <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url(); ?>">
+    <base href="<?php echo base_url()?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -40,7 +40,7 @@
     <header class="main-header">
         <a href="index.php" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
-            <span class="logo-lg"><b>Hotel</b>MCU</span>
+            <span class="logo-lg"><b>RC</b>Sukamakmur</span>
         </a>
 
         <!-- Header Navbar -->
@@ -152,7 +152,7 @@
                             <!-- The user image in the navbar-->
                             <img src="css/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Kompetensi SI</span>
+                            <span class="hidden-xs">Manager</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -160,7 +160,7 @@
                                 <img src="css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Kompetensi SI - Web Developer
+                                    1575002-Dwi
                                     <small>Member since Nov. 2015</small>
                                 </p>
                             </li>
@@ -202,7 +202,7 @@
                     <img src="css/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Kompetensi SI</p>
+                    <p>Manager</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -218,45 +218,47 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">Main Menu</li>
+                <li class="header">Menu Utama</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Front Office</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="reservasi.php">Reservasi</a></li>
-                        <li><a href="checkin.php">Check In</a></li>
-                        <li><a href="checkout.php">Check Out</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminperalatan">Peralatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminmakanan">Makanan</a></li>
                     </ul>
                 </li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Back Office</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Pegawai</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="penjualan.php">Penjualan</a></li>
-                        <li><a href="housekeep.php">House Keeping</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpegawai">Buat Akun Pegawai</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpegawai">Daftar Pegawai</a></li>
                     </ul>
                 </li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Inventory</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="stok.php">Pendataan Stok</a></li>
-                        <li><a href="barang.php">Penyediaan Barang</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpesanan">Buat Pemesanan Baru</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpesanan">Lihat Semua Pesanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi Pemesanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi Pembayaran Pesanan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Member</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakun">Lihat Semua Member</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminbuatakun">Buat Member Baru</a></li>
                     </ul>
                 </li>
 
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Keuangan</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="booking.php">Booking</a></li>
-                        <li><a href="cashbank.php">Cash Bank</a></li>
-                        <li><a href="jurnal.php">Jurnal</a></li>
-                    </ul>
-                </li>
 
                 <li class="header">Version - 0.1 beta</li>
                 <!--
@@ -479,7 +481,7 @@
             Kompetensi SI
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Universitas Kristen Maranatha</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="#">Universitas Kristen Maranatha</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->

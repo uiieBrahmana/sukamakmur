@@ -22,17 +22,57 @@ class Administrator extends CI_Controller
     {
         $this->load->view('BuatPesananKegiatan');
     }
-
-    public function buatpesananmakanan()
+    public function adminlihatakun()
     {
-        $this->load->view('BuatPesananMakanan');
+        $this->load->view('AdminLihatAkun');
+    }
+
+    public function adminbuatakun()
+    {
+        $this->load->view('AdminBuatAkun');
+    }
+    public function admintambahpesanan()
+    {
+        $this->load->view('AdminTambahPesanan');
+    }
+    public function adminlihatpesanan()
+    {
+        $this->load->view('AdminListPesanan');
+    }
+    public function adminkonfirmasipesanan()
+    {
+        $this->load->view('AdminKonfirmasiPesanan');
+    }
+    public function adminkonfirmasipembayaran()
+    {
+        $this->load->view('AdminKonfirmasiPembayaran');
+    }
+    public function admintambahmakanan()
+    {
+        $this->load->view('AdminTambahMakanan');
+    }
+
+    public function adminlihatmakanan()
+    {
+        $this->load->view('AdminLihatMakanan');
+    }
+    public function adminlihatpegawai()
+    {
+        $this->load->view('AdminLihatPegawai');
+    }
+    public function admintambahpegawai()
+    {
+        $this->load->view('AdminTambahPegawai');
     }
 
     public function adminlihatkegiatan()
     {
         $this->load->view('AdminLihatKegiatan');
     }
-
+    public function admintambahkegiatan()
+    {
+        $this->load->view('AdminTambahKegiatan');
+    }
     public function adminlihatlaporan()
     {
         $this->load->view('AdminLihatLaporan');
@@ -52,4 +92,41 @@ class Administrator extends CI_Controller
     {
         $this->load->view('ApprovePembayaran');
     }
+    public function adminakomodasi()
+    {
+        $this->load->view('AdminAkomodasi');
+    }
+    public function adminmakanan()
+    {
+        $this->load->view('AdminMakanan');
+    }
+    public function admintambahtipemakanan()
+    {
+        $this->load->view('AdminTambahTipeMakanan');
+    }
+    public function adminperalatan()
+    {
+        $this->load->view('AdminPeralatan');
+    }
+    public function adminkegiatan()
+    {
+        $this->load->view('AdminKegiatan');
+    }
+    public function admintambahakomodasi()
+    {
+        $this->load->view('AdminTambahAkomodasi');
+    }
+    public function adminlihatakomodasi()
+    {
+        $this->load->view('AdminLihatAkomodasi');
+    }
+    public function adminlihatperalatan()
+    {
+        $this->load->view('AdminLihatPeralatan');
+    }
+    public function admintambahperalatan()
+    {
+        $this->load->view('AdminTambahPeralatan');
+    }
+
 }

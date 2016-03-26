@@ -284,8 +284,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Pegawai
-                <small>Tambah Pegawai</small>
+                Pesanan
+                <small>Daftar Pemesanan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -297,33 +297,26 @@
         <section class="content">
             <div class="box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Pegawai</h3>
+                    <h3 class="box-title">Semua Pemesanan</h3>
                 </div>
-                <table id="student" class="table table-bordered table-striped">
+                <table width="100%" id="student" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID Pegawai</th>
-                        <th>Nama Pegawai</th>
-                        <th>Alamat</th>
-                        <th>No. Telepon</th>
-                        <th>Email</th>
-                        <th>Status Pegawai</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Aksi</th>
+                        <th>No Pemesanan</th>
+                        <th>ID Tamu</th>
+                        <th>Tanggal Pesan</th>
+                        <th>Total Harga</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr>
                         <td>1</td>
-                        <td>Olit</td>
-                        <td>Jl. KH Hasyim Ashari gg. Masjid no 2</td>
-                        <td>081381461286</td>
-                        <td>olit@gmail.com</td>
-                        <td>Admin aplikasi</td>
-                        <td>olit123</td>
-                        <td>rahasia</td>
+                        <td>1</td>
+                        <td>2 Januari 2016</td>
+                        <td>1500000</td>
+                        <td>Lunas</td>
                         <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
                     </tr>
 

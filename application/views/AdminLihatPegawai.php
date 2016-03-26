@@ -315,17 +315,17 @@
                     </thead>
                     <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>Olit</td>
-                        <td>Jl. KH Hasyim Ashari gg. Masjid no 2</td>
-                        <td>081381461286</td>
-                        <td>olit@gmail.com</td>
-                        <td>Admin aplikasi</td>
-                        <td>olit123</td>
-                        <td>rahasia</td>
-                        <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
-                    </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Olit</td>
+                            <td>Jl. KH Hasyim Ashari gg. Masjid no 2</td>
+                            <td>081381461286</td>
+                            <td>olit@gmail.com</td>
+                            <td>Admin aplikasi</td>
+                            <td>olit123</td>
+                            <td>rahasia</td>
+                            <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                        </tr>
 
 
                     </tbody>
