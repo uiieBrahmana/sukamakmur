@@ -391,7 +391,7 @@
 
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <button class="btn btn-info" name="submit" type="submit">Tambah Pegawai</button>
+                                <input type="submit" class="btn btn-info" name="_submit" value="Tambah Pegawai">
                                 <button class="btn btn-default" type="reset">Reset</button>
                             </div><!-- /.box-footer -->
                         </form>
@@ -488,7 +488,7 @@
 <script src="css/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="css/plugins/morris/morris.min.js"></script>
+<!--<script src="css/plugins/morris/morris.min.js"></script>-->
 
 <script src="css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script src="css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -501,6 +501,6 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<script src="css/dist/js/pages/dashboard.js"></script>
+<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
 <script src="css/dist/js/demo.js"></script>
 </html>
