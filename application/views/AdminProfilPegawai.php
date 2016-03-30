@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,17 +218,46 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">AKOMODASI</li>
+                <li class="header">Menu Utama</li>
 
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakomodasi">Lihat Semua Akomodasi</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahakomodasi">Tambah Akomodasi</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminperalatan">Peralatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminmakanan">Makanan</a></li>
                     </ul>
                 </li>
 
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Pegawai</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpegawai">Buat Akun Pegawai</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpegawai">Daftar Pegawai</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpesanan">Buat Pemesanan Baru</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpesanan">Lihat Semua Pesanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi Pemesanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi Pembayaran Pesanan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Member</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakun">Lihat Semua Member</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminbuatakun">Buat Member Baru</a></li>
+                    </ul>
+                </li>
 
 
                 <li class="header">Version - 0.1 beta</li>
@@ -255,8 +280,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Akomodasi
-                <small>Lihat Akomodasi</small>
+                Pegawai
+                <small>Detail Pegawai</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -266,51 +291,92 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Akomodasi</h3>
+
+            <div class="row">
+              <div class="col-md-9">
+
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+<!--                            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">-->
+
+                            <h3 class="profile-username text-center">Nurcholid Achmad</h3>
+
+                            <p class="text-muted text-center">Pendamping Outbond</p>
+
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>ID PETUGAS</b> <a class="pull-right">1</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Tanggal Lahir</b> <a class="pull-right">26 November 1993</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Jenis Kelamin</b> <a class="pull-right">Laki-laki</a>
+                                </li>
+                            </ul>
+
+                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                    <!-- About Me Box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">INFORMASI KONTAK</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <strong><i class="fa fa-mobile-phone margin-r-5"></i> No. Handphone</strong>
+
+                            <p class="text-muted">
+                                081235645879
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Alamat</strong>
+
+                            <p class="text-muted">Jalan KH. Hasyim Ashari gang Masjid no 2 Tangerang</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-inbox margin-r-5"></i> Email</strong>
+
+                            <p class="text-muted">nurcholid@yahoo.com</p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-user margin-r-5"></i> Username</strong>
+
+                            <p class="text-muted">nurcholid</p>
+                            <hr>
+
+                            <strong><i class="fa fa-lock margin-r-5"></i> Password</strong>
+                            <p class="text-muted">12345</p>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
                 </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Akomodasi</th>
-                        <th>Nama</th>
-                        <th>Kapasitas</th>
-                        <th>Status</th>
-                        <th>Harga</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <!-- /.col -->
 
-                    <tr>
-                        <td>1</td>
-                        <td>Karmel</td>
-                        <td>200</td>
-                        <td>Ready</td>
-                        <td>Rp 1500000</td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailakomodasi" class="btn btn-sm btn-info">Detail</a></td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai" class="btn btn-sm btn-info">Hapus</a></td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai" class="btn btn-sm btn-info">Ubah</a></td>
-                    </tr>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
+                <!-- /.col -->
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
-    </div>
+            <!-- /.row -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Kompetensi SI
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Universitas Kristen Maranatha</a>.</strong> All rights reserved.
-    </footer>
+        </section>
+            <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                Kompetensi SI
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2016 <a href="#">Universitas Kristen Maranatha</a>.</strong> All rights reserved.
+        </footer>
 
     <!-- Control Sidebar -->
     <!-- Control Sidebar -->
@@ -403,13 +469,4 @@
 <script src="css/dist/js/app.min.js"></script>
 <!--<script src="css/dist/js/pages/dashboard.js"></script>-->
 <script src="css/dist/js/demo.js"></script>
-
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function(){
-        $('#student').DataTable();
-    });
-</script>
 </html>

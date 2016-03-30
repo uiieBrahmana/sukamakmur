@@ -317,7 +317,7 @@
                         <td>2 Januari 2016</td>
                         <td>1500000</td>
                         <td>Lunas</td>
-                        <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                        <td><a href="<?php echo base_url()?>index.php/administrator/adminpemesanandetail" class="btn btn-sm btn-info">Detail</a></td>
                     </tr>
 
 

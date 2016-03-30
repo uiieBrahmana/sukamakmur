@@ -324,7 +324,7 @@
                             <td>Admin aplikasi</td>
                             <td>olit123</td>
                             <td>rahasia</td>
-                            <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                            <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai" class="btn btn-sm btn-info">Detail</a></td>
                         </tr>
 
 

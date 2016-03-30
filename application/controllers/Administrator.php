@@ -132,6 +132,10 @@ class Administrator extends CI_Controller
     {
         $this->load->view('AdminLihatKegiatan');
     }
+    public function detailprofilpegawai()
+    {
+        $this->load->view('AdminProfilPegawai');
+    }
 
     public function admintambahkegiatan()
     {
@@ -141,11 +145,6 @@ class Administrator extends CI_Controller
     public function adminlihatlaporan()
     {
         $this->load->view('AdminLihatLaporan');
-    }
-
-    public function adminlihatpemesanan()
-    {
-        $this->load->view('AdminLihatPemesanan');
     }
 
     public function adminpemesanandetail()
@@ -161,6 +160,9 @@ class Administrator extends CI_Controller
     public function adminakomodasi()
     {
         $this->load->view('AdminAkomodasi');
+    }
+    public function detailakomodasi(){
+        $this->load->view('AdminAkomodasiDetail');
     }
 
     public function adminmakanan()
