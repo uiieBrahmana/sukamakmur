@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url()?>">
+    <base href="<?php echo base_url() ?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -228,10 +228,10 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminperalatan">Peralatan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminmakanan">Makanan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminperalatan">Peralatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminmakanan">Makanan</a></li>
                     </ul>
                 </li>
 
@@ -239,8 +239,10 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Pegawai</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpegawai">Buat Akun Pegawai</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpegawai">Daftar Pegawai</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpegawai">Buat Akun
+                                Pegawai</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpegawai">Daftar
+                                Pegawai</a></li>
                     </ul>
                 </li>
 
@@ -248,18 +250,24 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahpesanan">Buat Pemesanan Baru</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatpesanan">Lihat Semua Pesanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi Pemesanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi Pembayaran Pesanan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpesanan">Buat Pemesanan
+                                Baru</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpesanan">Lihat Semua
+                                Pesanan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi
+                                Pemesanan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi
+                                Pembayaran Pesanan</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Member</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakun">Lihat Semua Member</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminbuatakun">Buat Member Baru</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakun">Lihat Semua
+                                Member</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminbuatakun">Buat Member Baru</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -299,7 +307,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Daftar Pegawai</h3>
                 </div>
-                <table id="student" class="table table-bordered table-striped">
+                <table id="tabledata" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>ID Pegawai</th>
@@ -314,20 +322,19 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     <tr>
-                        <td>1</td>
-                        <td>Olit</td>
-                        <td>Jl. KH Hasyim Ashari gg. Masjid no 2</td>
-                        <td>081381461286</td>
-                        <td>olit@gmail.com</td>
-                        <td>Admin aplikasi</td>
-                        <td>olit123</td>
-                        <td>rahasia</td>
-                        <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                        <?php foreach ($Akun as $value) { ?>
+                            <td><?php echo $value['idpetugas'] ?></td>
+                            <td><?php echo $value['nama'] ?></td>
+                            <td><?php echo $value['alamat'] ?></td>
+                            <td><?php echo $value['notelp'] ?></td>
+                            <td><?php echo $value['email'] ?></td>
+                            <td><?php echo $value['status'] ?></td>
+                            <td><?php echo $value['username'] ?></td>
+                            <td>*******</td>
+                            <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                        <?php } ?>
                     </tr>
-
-
                     </tbody>
                 </table>
                 <!-- Your Page Content Here -->
@@ -442,8 +449,8 @@
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
-    $(document).ready(function(){
-        $('#student').DataTable();
+    $(document).ready(function () {
+        $('#tabledata').DataTable();
     });
 </script>
 </html>

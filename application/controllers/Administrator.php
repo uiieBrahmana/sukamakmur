@@ -26,8 +26,7 @@ class Administrator extends CI_Controller
 
     public function adminlihatakun()
     {
-        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `tamu`");
-        var_dump($data);
+        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `petugas`");
         $this->load->view('AdminLihatAkun', $data);
     }
 
@@ -132,6 +131,7 @@ class Administrator extends CI_Controller
     {
         $this->load->view('AdminLihatKegiatan');
     }
+
     public function detailprofilpegawai()
     {
         $this->load->view('AdminProfilPegawai');
@@ -161,7 +161,9 @@ class Administrator extends CI_Controller
     {
         $this->load->view('AdminAkomodasi');
     }
-    public function detailakomodasi(){
+
+    public function detailakomodasi()
+    {
         $this->load->view('AdminAkomodasiDetail');
     }
 
