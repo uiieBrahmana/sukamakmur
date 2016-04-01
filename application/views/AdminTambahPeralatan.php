@@ -38,9 +38,9 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <a href="index.php" class="logo">
+        <a href="index.php/administrator/" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
-            <span class="logo-lg"><b>RC</b>Sukamakmur</span>
+            <span class="logo-lg">RC Sukamakmur</span>
         </a>
 
         <!-- Header Navbar -->
@@ -299,7 +299,7 @@
                         </div><!-- /.box-header -->
                         <!-- form start -->
 
-                        <form class="form-horizontal" method="post" action="#">
+                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahperalatan">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -308,7 +308,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Nama" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="nama"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -317,7 +317,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Harga Sewa" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="hargasewa"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -326,7 +326,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Keterangan" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="keterangan"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -335,7 +335,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Jumlah" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="jumlah"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -344,7 +344,7 @@
 
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <button class="btn btn-info" name="submit" type="submit">Tambah Peralatan</button>
+                                <button class="btn btn-info" name="_submit" type="submit">Tambah Peralatan</button>
                                 <button class="btn btn-default" type="reset">Reset</button>
                             </div><!-- /.box-footer -->
                         </form>

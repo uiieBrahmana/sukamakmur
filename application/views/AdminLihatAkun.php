@@ -40,11 +40,10 @@
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
-
     <header class="main-header">
-        <a href="index.php" class="logo">
+        <a href="index.php/administrator/" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
-            <span class="logo-lg"><b>RC</b>Sukamakmur</span>
+            <span class="logo-lg">RC Sukamakmur</span>
         </a>
 
         <!-- Header Navbar -->
@@ -322,8 +321,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <?php foreach ($Akun as $value) { ?>
+                    <?php foreach ($Akun as $value) { ?>
+                        <tr>
                             <td><?php echo $value['idpetugas'] ?></td>
                             <td><?php echo $value['nama'] ?></td>
                             <td><?php echo $value['alamat'] ?></td>
@@ -333,8 +332,8 @@
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
                             <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
-                        <?php } ?>
-                    </tr>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
                 <!-- Your Page Content Here -->

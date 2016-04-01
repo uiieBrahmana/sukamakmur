@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url()?>">
+    <base href="<?php echo base_url() ?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -42,9 +42,9 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <a href="index.php" class="logo">
+        <a href="index.php/administrator/" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
-            <span class="logo-lg"><b>RC</b>Sukamakmur</span>
+            <span class="logo-lg">RC Sukamakmur</span>
         </a>
 
         <!-- Header Navbar -->
@@ -228,11 +228,12 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakomodasi">Lihat Semua Akomodasi</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahakomodasi">Tambah Akomodasi</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakomodasi">Lihat Semua
+                                Akomodasi</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahakomodasi">Tambah
+                                Akomodasi</a></li>
                     </ul>
                 </li>
-
 
 
                 <li class="header">Version - 0.1 beta</li>
@@ -282,16 +283,21 @@
                     </thead>
                     <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>Karmel</td>
-                        <td>200</td>
-                        <td>Ready</td>
-                        <td>Rp 1500000</td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailakomodasi" class="btn btn-sm btn-info">Detail</a></td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai" class="btn btn-sm btn-info">Hapus</a></td>
-                        <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai" class="btn btn-sm btn-info">Ubah</a></td>
-                    </tr>
+                    <?php foreach ($Akomodasi as $Value) { ?>
+                        <tr>
+                            <td><?php echo $Value['idakomodasi'] ?></td>
+                            <td><?php echo $Value['nama'] ?></td>
+                            <td><?php echo $Value['kapasitas'] ?></td>
+                            <td><?php echo $Value['status'] ?></td>
+                            <td>Rp <?php echo number_format($Value['harga']) ?></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
+                                   class="btn btn-sm btn-info">Detail</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Hapus</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Ubah</a></td>
+                        </tr>
+                    <?php } ?>
 
 
                     </tbody>
@@ -408,7 +414,7 @@
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#student').DataTable();
     });
 </script>

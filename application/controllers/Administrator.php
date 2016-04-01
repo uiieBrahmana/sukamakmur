@@ -119,11 +119,16 @@ class Administrator extends CI_Controller
 
     public function adminlihatpegawai()
     {
-        $this->load->view('AdminLihatPegawai');
+        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `petugas`");
+        $this->load->view('AdminLihatPegawai', $data);
     }
 
     public function admintambahpegawai()
     {
+        $submit = $this->input->post('_submit');
+        if ($submit) {
+
+        }
         $this->load->view('AdminTambahPegawai');
     }
 
@@ -239,16 +244,45 @@ class Administrator extends CI_Controller
 
     public function adminlihatakomodasi()
     {
-        $this->load->view('AdminLihatAkomodasi');
+        $data['Akomodasi'] = $this->akomodasi->FetchAll("SELECT * FROM `AKOMODASI`");
+        $this->load->view('AdminLihatAkomodasi', $data);
     }
 
     public function adminlihatperalatan()
     {
+        $data['Peralatan'] = $this->akomodasi->FetchAll("SELECT * FROM `PERALATAN`");
         $this->load->view('AdminLihatPeralatan');
     }
 
     public function admintambahperalatan()
     {
+        $submit = $this->input->post('_submit');
+
+        if (isset($submit)) {
+            $nama = $this->input->post('nama');
+            $hargasewa = $this->input->post('hargasewa');
+            $keterangan = $this->input->post('keterangan');
+            $jumlah = $this->input->post('jumlah');
+
+
+
+
+                    $query = InsertBuilder('Peralatan', array(
+                        'nama' => $nama,
+                        'hargasewa' => $hargasewa,
+                        'keterangan' => $keterangan,
+                        'jumlah' => $jumlah
+                    ));
+                    $result = $this->akomodasi->Save($query, array($nama, $hargasewa, $keterangan, $jumlah));
+
+                    if ($result) {
+                        echo 'sukses';
+                    } else {
+                        echo 'gagal';
+                    }
+
+            }
+
         $this->load->view('AdminTambahPeralatan');
     }
 
