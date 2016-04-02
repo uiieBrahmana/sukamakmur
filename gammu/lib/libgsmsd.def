@@ -1,0 +1,265 @@
+EXPORTS
+    GSM_StringArray_Add @1
+    GSM_StringArray_Find @2
+    GSM_StringArray_Free @3
+    GSM_StringArray_New @4
+    SMSDFiles @5 DATA
+    SMSDFiles_ReadConfiguration @6
+    SMSDMySQL @7 DATA
+    SMSDMySQL_AffectedRows @8
+    SMSDMySQL_Free @9
+    SMSDMySQL_FreeResult @10
+    SMSDMySQL_GetBool @11
+    SMSDMySQL_GetDate @12
+    SMSDMySQL_GetNumber @13
+    SMSDMySQL_GetString @14
+    SMSDMySQL_NextRow @15
+    SMSDMySQL_QuoteString @16
+    SMSDMySQL_SeqID @17
+    SMSDNull @18 DATA
+    SMSDODBC @19 DATA
+    SMSDODBC_AffectedRows @20
+    SMSDODBC_Free @21
+    SMSDODBC_FreeResult @22
+    SMSDODBC_GetBool @23
+    SMSDODBC_GetDate @24
+    SMSDODBC_GetNumber @25
+    SMSDODBC_GetString @26
+    SMSDODBC_NextRow @27
+    SMSDODBC_QuoteString @28
+    SMSDODBC_SeqID @29
+    SMSDPgSQL @30 DATA
+    SMSDPgSQL_AffectedRows @31
+    SMSDPgSQL_Free @32
+    SMSDPgSQL_FreeResult @33
+    SMSDPgSQL_GetBool @34
+    SMSDPgSQL_GetDate @35
+    SMSDPgSQL_GetNumber @36
+    SMSDPgSQL_GetString @37
+    SMSDPgSQL_NextRow @38
+    SMSDPgSQL_QuoteString @39
+    SMSDPgSQL_SeqID @40
+    SMSDSQL @41 DATA
+    SMSDSQL_ParseDate @42
+    SMSDSQL_ReadConfiguration @43
+    SMSDSQL_Time2String @44
+    SMSDSQL_option @45
+    SMSDSQL_queries @46 DATA
+    SMSD_CheckDBVersion @47
+    SMSD_CheckMultipart @48
+    SMSD_CheckRemoteNumber @49
+    SMSD_CheckSMSCNumber @50
+    SMSD_CheckSMSStatus @51
+    SMSD_CheckSecurity @52
+    SMSD_CloseLog @53
+    SMSD_ConfigureLogging @54
+    SMSD_EmptyFunction @55
+    SMSD_FreeConfig @56
+    SMSD_FreeSharedMemory @57
+    SMSD_GetStatus @58
+    SMSD_Init @59
+    SMSD_InitSharedMemory @60
+    SMSD_InjectSMS @61
+    SMSD_LoadIniNumbersList @62
+    SMSD_LoadNumbersFile @63
+    SMSD_Log @64
+    SMSD_LogErrno @65
+    SMSD_LogError @66
+    SMSD_Log_Function @67
+    SMSD_MainLoop @68
+    SMSD_NewConfig @69
+    SMSD_NoneFunction @70
+    SMSD_NotImplementedFunction @71
+    SMSD_NotSupportedFunction @72
+    SMSD_PhoneStatus @73
+    SMSD_ProcessSMS @74
+    SMSD_ReadConfig @75
+    SMSD_ReadDeleteSMS @76
+    SMSD_RunOn @77
+    SMSD_RunOnCommand @78
+    SMSD_RunOnReceiveEnvironment @79
+    SMSD_SendSMS @80
+    SMSD_SendSMSStatusCallback @81
+    SMSD_Shutdown @82
+    SMSD_Terminate @83
+    SMSD_ValidMessage @84
+    SMSGetService @85
+    SMSMySQL_GetString @86
+    currtime_fallback @87 DATA
+    currtime_freetds @88 DATA
+    currtime_mysql @89 DATA
+    currtime_odbc @90 DATA
+    currtime_pgsql @91 DATA
+    currtime_sqlite @92 DATA
+    escape_char_fallback @93 DATA
+    escape_char_freetds @94 DATA
+    escape_char_mysql @95 DATA
+    escape_char_odbc @96 DATA
+    escape_char_pgsql @97 DATA
+    escape_char_sqlite @98 DATA
+    eventlog_close @99
+    eventlog_init @100
+    eventlog_log @101
+    limit_clause_access @102 DATA
+    limit_clause_fallback @103 DATA
+    now_access @104 DATA
+    now_fallback @105 DATA
+    now_freetds @106 DATA
+    now_mysql @107 DATA
+    now_odbc @108 DATA
+    now_pgsql @109 DATA
+    now_plus_access @110 DATA
+    now_plus_fallback @111 DATA
+    now_plus_freetds @112 DATA
+    now_plus_mysql @113 DATA
+    now_plus_odbc @114 DATA
+    now_plus_pgsql @115 DATA
+    now_plus_sqlite @116 DATA
+    now_sqlite @117 DATA
+    smsd_name @118 DATA
+    strptime @119
+    top_clause_access @120 DATA
+    top_clause_fallback @121 DATA
+
+IMPORTS
+
+    libpq.dll.PQbackendPID
+    libpq.dll.PQbinaryTuples
+    libpq.dll.PQcancel
+    libpq.dll.PQclear
+    libpq.dll.PQclientEncoding
+    libpq.dll.PQcmdStatus
+    libpq.dll.PQcmdTuples
+    libpq.dll.PQconndefaults
+    libpq.dll.PQconnectPoll
+    libpq.dll.PQconnectStart
+    libpq.dll.PQconnectdb
+    libpq.dll.PQconnectionNeedsPassword
+    libpq.dll.PQconnectionUsedPassword
+    libpq.dll.PQconninfoFree
+    libpq.dll.PQconsumeInput
+    libpq.dll.PQdb
+    libpq.dll.PQdescribePortal
+    libpq.dll.PQdescribePrepared
+    libpq.dll.PQdisplayTuples
+    libpq.dll.PQdsplen
+    libpq.dll.PQencryptPassword
+    libpq.dll.PQendcopy
+    libpq.dll.PQenv2encoding
+    libpq.dll.PQerrorMessage
+    libpq.dll.PQescapeBytea
+    libpq.dll.PQescapeByteaConn
+    libpq.dll.PQescapeString
+    libpq.dll.PQescapeStringConn
+    libpq.dll.PQexec
+    libpq.dll.PQexecParams
+    libpq.dll.PQexecPrepared
+    libpq.dll.PQfformat
+    libpq.dll.PQfinish
+    libpq.dll.PQflush
+    libpq.dll.PQfmod
+    libpq.dll.PQfn
+    libpq.dll.PQfname
+    libpq.dll.PQfnumber
+    libpq.dll.PQfreeCancel
+    libpq.dll.PQfreeNotify
+    libpq.dll.PQfreemem
+    libpq.dll.PQfsize
+    libpq.dll.PQftable
+    libpq.dll.PQftablecol
+    libpq.dll.PQftype
+    libpq.dll.PQgetCancel
+    libpq.dll.PQgetCopyData
+    libpq.dll.PQgetResult
+    libpq.dll.PQgetisnull
+    libpq.dll.PQgetlength
+    libpq.dll.PQgetline
+    libpq.dll.PQgetlineAsync
+    libpq.dll.PQgetssl
+    libpq.dll.PQgetvalue
+    libpq.dll.PQhost
+    libpq.dll.PQinitSSL
+    libpq.dll.PQisBusy
+    libpq.dll.PQisnonblocking
+    libpq.dll.PQisthreadsafe
+    libpq.dll.PQmakeEmptyPGresult
+    libpq.dll.PQmblen
+    libpq.dll.PQnfields
+    libpq.dll.PQnotifies
+    libpq.dll.PQnparams
+    libpq.dll.PQntuples
+    libpq.dll.PQoidStatus
+    libpq.dll.PQoidValue
+    libpq.dll.PQoptions
+    libpq.dll.PQparameterStatus
+    libpq.dll.PQparamtype
+    libpq.dll.PQpass
+    libpq.dll.PQport
+    libpq.dll.PQprepare
+    libpq.dll.PQprint
+    libpq.dll.PQprintTuples
+    libpq.dll.PQprotocolVersion
+    libpq.dll.PQputCopyData
+    libpq.dll.PQputCopyEnd
+    libpq.dll.PQputline
+    libpq.dll.PQputnbytes
+    libpq.dll.PQregisterThreadLock
+    libpq.dll.PQrequestCancel
+    libpq.dll.PQresStatus
+    libpq.dll.PQreset
+    libpq.dll.PQresetPoll
+    libpq.dll.PQresetStart
+    libpq.dll.PQresultErrorField
+    libpq.dll.PQresultErrorMessage
+    libpq.dll.PQresultStatus
+    libpq.dll.PQsendDescribePortal
+    libpq.dll.PQsendDescribePrepared
+    libpq.dll.PQsendPrepare
+    libpq.dll.PQsendQuery
+    libpq.dll.PQsendQueryParams
+    libpq.dll.PQsendQueryPrepared
+    libpq.dll.PQserverVersion
+    libpq.dll.PQsetClientEncoding
+    libpq.dll.PQsetErrorVerbosity
+    libpq.dll.PQsetNoticeProcessor
+    libpq.dll.PQsetNoticeReceiver
+    libpq.dll.PQsetdbLogin
+    libpq.dll.PQsetnonblocking
+    libpq.dll.PQsocket
+    libpq.dll.PQstatus
+    libpq.dll.PQtrace
+    libpq.dll.PQtransactionStatus
+    libpq.dll.PQtty
+    libpq.dll.PQunescapeBytea
+    libpq.dll.PQuntrace
+    libpq.dll.PQuser
+    libpq.dll.appendBinaryPQExpBuffer
+    libpq.dll.appendPQExpBuffer
+    libpq.dll.appendPQExpBufferChar
+    libpq.dll.appendPQExpBufferStr
+    libpq.dll.createPQExpBuffer
+    libpq.dll.destroyPQExpBuffer
+    libpq.dll.enlargePQExpBuffer
+    libpq.dll.initPQExpBuffer
+    libpq.dll.lo_close
+    libpq.dll.lo_creat
+    libpq.dll.lo_create
+    libpq.dll.lo_export
+    libpq.dll.lo_import
+    libpq.dll.lo_lseek
+    libpq.dll.lo_open
+    libpq.dll.lo_read
+    libpq.dll.lo_tell
+    libpq.dll.lo_truncate
+    libpq.dll.lo_unlink
+    libpq.dll.lo_write
+    libpq.dll.pg_char_to_encoding
+    libpq.dll.pg_encoding_to_char
+    libpq.dll.pg_utf_mblen
+    libpq.dll.pg_valid_server_encoding
+    libpq.dll.pg_valid_server_encoding_id
+    libpq.dll.pgresStatus
+    libpq.dll.pqsignal
+    libpq.dll.printfPQExpBuffer
+    libpq.dll.resetPQExpBuffer
+    libpq.dll.termPQExpBuffer
