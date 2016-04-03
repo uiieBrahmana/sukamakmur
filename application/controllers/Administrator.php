@@ -251,7 +251,7 @@ class Administrator extends CI_Controller
     public function adminlihatperalatan()
     {
         $data['Peralatan'] = $this->akomodasi->FetchAll("SELECT * FROM `PERALATAN`");
-        $this->load->view('AdminLihatPeralatan');
+        $this->load->view('AdminLihatPeralatan',$data);
     }
 
     public function admintambahperalatan()

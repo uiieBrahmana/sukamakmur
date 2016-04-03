@@ -222,16 +222,16 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">AKOMODASI</li>
+                <li class="header">PERALATAN</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Peralatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakomodasi">Lihat Semua
-                                Akomodasi</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahakomodasi">Tambah
-                                Akomodasi</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatperalatan">Lihat Semua
+                                Peralatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahperalatan">Tambah
+                                Peralatan</a></li>
                     </ul>
                 </li>
 
@@ -256,8 +256,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Akomodasi
-                <small>Lihat Akomodasi</small>
+                Peralatan
+                <small>Lihat Peralatan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -287,10 +287,9 @@
                         <tr>
                             <td><?php echo $Value['idperalatan'] ?></td>
                             <td><?php echo $Value['nama'] ?></td>
-                            <td><?php echo $Value['hargasewa'] ?></td>
+                            <td>Rp <?php echo number_format($Value['hargasewa']) ?></td>
                             <td><?php echo $Value['keterangan'] ?></td>
                             <td><?php echo $Value['jumlah'] ?></td>
-                            <td>Rp <?php echo number_format($Value['harga']) ?></td>
                             <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
                                    class="btn btn-sm btn-info">Detail</a></td>
                             <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
