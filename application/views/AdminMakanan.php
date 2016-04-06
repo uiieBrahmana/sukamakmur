@@ -226,6 +226,7 @@
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
                         <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
                         <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
                     </ul>
                 </li>

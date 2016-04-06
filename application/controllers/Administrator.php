@@ -145,6 +145,7 @@ class Administrator extends CI_Controller
 
     public function admintambahkegiatan()
     {
+        $submit = $this->input->post('_submit');
         if (isset($submit)) {
             $nama = $this->input->post('nama');
             $lamakegiatan = $this->input->post('lamakegiatan');
@@ -154,7 +155,7 @@ class Administrator extends CI_Controller
             $keterangan = $this->input->post('keterangan');
 
 
-            $query = InsertBuilder('Peralatan', array(
+            $query = InsertBuilder('Kegiatan', array(
                 'nama' => $nama,
                 'lamakegiatan' => $lamakegiatan,
                 'pesertamin' => $pesertamin,
@@ -279,6 +280,10 @@ class Administrator extends CI_Controller
     {
         $data['Peralatan'] = $this->akomodasi->FetchAll("SELECT * FROM `PERALATAN`");
         $this->load->view('AdminLihatPeralatan',$data);
+    }
+    public function adminlihattipemakanan()
+    {
+        $this->load->view('AdminLihatTipeMakanan');
     }
 
     public function admintambahperalatan()

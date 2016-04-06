@@ -222,16 +222,16 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">KEGIATAN</li>
+                <li class="header">PERALATAN</li>
 
-                         <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Kegiatan</span> <i
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Peralatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatkegiatan">Lihat Semua
-                                Kegiatan</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahkegiatan">Tambah
-                                Kegiatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatperalatan">Lihat Semua
+                                Peralatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahperalatan">Tambah
+                                Peralatan</a></li>
                     </ul>
                 </li>
 
@@ -256,8 +256,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Kegiatan
-                <small>Lihat Kegiatan</small>
+                Peralatan
+                <small>Lihat Peralatan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -269,27 +269,27 @@
         <section class="content">
             <div class="box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Kegiatan</h3>
+                    <h3 class="box-title">Daftar Peralatan</h3>
                 </div>
                 <table id="student" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID Kegiatan</th>
+                        <th>ID Peralatan</th>
                         <th>Nama</th>
-                        <th>Harga</th>
-                        <th>Peserta Min</th>
-                        <th>Peserta Max</th>
+                        <th>Harga sewa</th>
+                        <th>Keterangan</th>
+                        <th>Jumlah</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <?php foreach ($Kegiatan as $Value) { ?>
+                    <?php foreach ($Peralatan as $Value) { ?>
                         <tr>
-                            <td><?php echo $Value['idkegiatan'] ?></td>
+                            <td><?php echo $Value['idperalatan'] ?></td>
                             <td><?php echo $Value['nama'] ?></td>
-                            <td>Rp <?php echo number_format($Value['harga']) ?></td>
-                            <td><?php echo $Value['pesertamin'] ?></td>
-                            <td><?php echo $Value['pesertamax'] ?></td>
+                            <td>Rp <?php echo number_format($Value['hargasewa']) ?></td>
+                            <td><?php echo $Value['keterangan'] ?></td>
+                            <td><?php echo $Value['jumlah'] ?></td>
                             <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
                                    class="btn btn-sm btn-info">Detail</a></td>
                             <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"

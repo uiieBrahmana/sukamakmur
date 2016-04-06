@@ -218,18 +218,20 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">PERALATAN</li>
+                <li class="header">KEGIATAN</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Peralatan</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Kegiatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatperalatan">Lihat Semua
-                                Peralatan</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahperalatan">Tambah
-                                Peralatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatkegiatan">Lihat Semua
+                                Kegiatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahkegiatan">Tambah
+                                Kegiatan</a></li>
                     </ul>
                 </li>
+
+
 
 
                 <li class="header">Version - 0.1 beta</li>
@@ -279,7 +281,7 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Nama</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Nama Kegiatan" id="namakegiatan"
+                                                <input required type="text" placeholder="Nama Kegiatan" id="nama"
                                                        name="nama"
                                                        class="form-control col-lg-3">
                                             </div>
@@ -289,7 +291,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Lama Kegiatan" id="lamakegiatan"
-                                                       name="hargasewa"
+                                                       name="lamakegiatan"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -298,7 +300,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Peserta Minimal" id="pesertaminimal"
-                                                       name="keterangan"
+                                                       name="pesertamin"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -307,7 +309,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Peserta Maksimal" id="pesertamaksimal"
-                                                       name="jumlah"
+                                                       name="pesertamax"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -316,7 +318,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Harga" id="harga"
-                                                       name="jumlah"
+                                                       name="harga"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -325,7 +327,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Keterangan" id="keterangan"
-                                                       name="jumlah"
+                                                       name="keterangan"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
