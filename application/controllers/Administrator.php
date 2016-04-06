@@ -134,7 +134,8 @@ class Administrator extends CI_Controller
 
     public function adminlihatkegiatan()
     {
-        $this->load->view('AdminLihatKegiatan');
+        $data['Kegiatan'] = $this->akomodasi->FetchAll("SELECT * FROM `kegiatan`");
+        $this->load->view('AdminLihatKegiatan',$data);
     }
 
     public function detailprofilpegawai()
@@ -144,6 +145,32 @@ class Administrator extends CI_Controller
 
     public function admintambahkegiatan()
     {
+        if (isset($submit)) {
+            $nama = $this->input->post('nama');
+            $lamakegiatan = $this->input->post('lamakegiatan');
+            $pesertamin = $this->input->post('pesertamin');
+            $pesertamax = $this->input->post('pesertamax');
+            $harga = $this->input->post('harga');
+            $keterangan = $this->input->post('keterangan');
+
+
+            $query = InsertBuilder('Peralatan', array(
+                'nama' => $nama,
+                'lamakegiatan' => $lamakegiatan,
+                'pesertamin' => $pesertamin,
+                'pesertamax' => $pesertamax,
+                'harga' => $harga,
+                'keterangan' => $keterangan
+            ));
+            $result = $this->akomodasi->Save($query, array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
+
+            if ($result) {
+                echo 'sukses';
+            } else {
+                echo 'gagal';
+            }
+
+        }
         $this->load->view('AdminTambahKegiatan');
     }
 
