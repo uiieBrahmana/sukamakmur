@@ -26,7 +26,7 @@ class Administrator extends CI_Controller
 
     public function adminlihatakun()
     {
-        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `petugas`");
+        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `TAMU`");
         $this->load->view('AdminLihatAkun', $data);
     }
 
@@ -93,15 +93,15 @@ class Administrator extends CI_Controller
 
         $submit = $this->input->post('_submit');
         if ($submit) {
-            $tipe = $this->input->post('tipe');
+            $idtipemakanan = $this->input->post('idtipemakanan');
             $keterangan = $this->input->post('keterangan');
 
             $querymenumakan = InsertBuilder('menumakanan', array(
-                'idtipemakanan' => $tipe,
+                'idtipemakanan' => $idtipemakanan,
                 'keterangan' => $keterangan,
             ));
 
-            $idmenumakanan = $this->akomodasi->Save($querymenumakan, array($tipe, $keterangan));
+            $idmenumakanan = $this->akomodasi->Save($querymenumakan, array($idtipemakanan, $keterangan));
 
             if ($idmenumakanan) {
                 echo 'success';
@@ -114,7 +114,8 @@ class Administrator extends CI_Controller
 
     public function adminlihatmakanan()
     {
-        $this->load->view('AdminLihatMakanan');
+        $data['MenuMakanan'] =$this->akomodasi->FetchAll("SELECT * FROM `MenuMakanan`") ;
+        $this->load->view('AdminLihatMakanan',$data);
     }
 
     public function adminlihatpegawai()
@@ -207,6 +208,26 @@ class Administrator extends CI_Controller
 
     public function admintambahtipemakanan()
     {
+        $submit = $this->input->post('_submit');
+        if(isset($submit)){
+            $idtipemakanan = $this->input->post('idtipemakanan');
+            $keterangan = $this->input->post('keterangan');
+            $harga = $this->input->post('harga');
+
+            $query = InsertBuilder('TipeMakanan',array(
+                'idtipemakanan' =>$idtipemakanan,
+                'keterangan' =>$keterangan,
+                'harga' =>$harga
+            ));
+            $result = $this->akomodasi->Save($query, array($idtipemakanan, $keterangan, $harga));
+
+            if($result){
+                echo 'sukses';
+            }else{
+                echo 'belum berhasil';
+            }
+        }
+
         $this->load->view('AdminTambahTipeMakanan');
     }
 
@@ -283,7 +304,9 @@ class Administrator extends CI_Controller
     }
     public function adminlihattipemakanan()
     {
-        $this->load->view('AdminLihatTipeMakanan');
+
+        $data['TipeMakanan'] = $this->akomodasi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
+        $this->load->view('AdminLihatTipeMakanan',$data);
     }
 
     public function admintambahperalatan()

@@ -271,7 +271,7 @@
                         </div><!-- /.box-header -->
                         <!-- form start -->
 
-                        <form class="form-horizontal" method="post" action="#">
+                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahtipemakanan">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -279,8 +279,8 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">ID Tipe Makanan</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="ID Tipe Makanan" id="namapemesan"
-                                                       name="namapemesan"
+                                                <input required type="text" placeholder="ID Tipe Makanan" id="idtipemakanan"
+                                                       name="idtipemakanan"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -288,17 +288,16 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Keterangan" id="namapemesan"
-                                                       name="namapemesan"
+                                                <input required type="text" placeholder="Keterangan" id="keterangan"
+                                                       name="keterangan"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="namapemesan">Harga</label>
-
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Harga" id="namapemesan"
-                                                       name="namapemesan"
+                                                <input required type="text" placeholder="Harga" id="harga"
+                                                       name="harga"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -307,7 +306,7 @@
 
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <button class="btn btn-info" name="submit" type="submit">Tambah</button>
+                                <button class="btn btn-info" name="_submit" type="submit">Tambah</button>
                                 <button class="btn btn-default" type="reset">Reset</button>
                             </div><!-- /.box-footer -->
                         </form>

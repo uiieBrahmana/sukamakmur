@@ -309,12 +309,11 @@
                 <table id="tabledata" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID Pegawai</th>
-                        <th>Nama Pegawai</th>
+                        <th>ID Tamu</th>
+                        <th>Nama Tamu</th>
                         <th>Alamat</th>
-                        <th>No. Telepon</th>
                         <th>Email</th>
-                        <th>Status Pegawai</th>
+                        <th>No. Telepon</th>
                         <th>Username</th>
                         <th>Password</th>
                         <th>Aksi</th>
@@ -323,12 +322,11 @@
                     <tbody>
                     <?php foreach ($Akun as $value) { ?>
                         <tr>
-                            <td><?php echo $value['idpetugas'] ?></td>
+                            <td><?php echo $value['idtamu'] ?></td>
                             <td><?php echo $value['nama'] ?></td>
                             <td><?php echo $value['alamat'] ?></td>
-                            <td><?php echo $value['notelp'] ?></td>
                             <td><?php echo $value['email'] ?></td>
-                            <td><?php echo $value['status'] ?></td>
+                            <td><?php echo $value['notelp'] ?></td>
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
                             <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
