@@ -5,50 +5,74 @@ class Login extends CI_Controller
 {
 
 
+    /**
+     * Login constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $auth = $this->session->userdata('ID');
+        if (isset($auth))
+            redirect('/administrator/');
+    }
 
     public function index()
     {
         $submit = $this->input->post('_submit');
         if (isset($submit)) {
             $username = $this->input->post('username');
-            $pasword = $this->input->post('password');
+            $password = $this->input->post('password');
 
-            $this->Auth($username, $pasword);
-
+            $this->Auth($username, $password);
+            $auth = $this->session->userdata('ID');
+            if (isset($auth))
+                redirect('/administrator/');
+            else
+                $this->load->view('GagalLogin');
 
         } else {
             // untuk mengubah file view yang dituju
             $this->load->view('Login');
-
         }
 
     }
 
     function Auth($username, $password)
     {
+        $hasilLogin = $this->koneksi->fetchAll(
+            "SELECT idpetugas as ID, nama, notelp, username, `password` FROM `petugas`
+            WHERE username = '$username' AND `password` = '$password' LIMIT 1
+            UNION SELECT idtamu, nama, notelp, username, `password` FROM `tamu`
+            WHERE username = '$username' AND `password` = '$password' LIMIT 1"
+        );
 
+        if (isset($hasilLogin[0])) {
+            $this->session->set_userdata('ID', $hasilLogin[0]['ID']);
+            $this->session->set_userdata('nama', $hasilLogin[0]['nama']);
+            $this->session->set_userdata('username', $hasilLogin[0]['username']);
+        }
+    }
+
+    function gagal()
+    {
+        echo "gagagl salah";
     }
 
     function GetUser()
     {
-
-    }
-
-    /**
-     * @return bool
-     */
-    function IsAuthenticated()
-    {
-        return false;
+        return $this->session->all_userdata();
     }
 
     function GetRole()
     {
-        $CI =& get_instance();
+
     }
 
-    function RemovePresence()
+    function logout()
     {
-        @session_destroy();
+        $this->session->unset_userdata('ID');
+        $this->session->unset_userdata('nama');
+        $this->session->unset_userdata('username');
+        redirect('/login/');
     }
 }

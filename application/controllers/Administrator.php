@@ -10,11 +10,10 @@ class Administrator extends CI_Controller
      */
     public function __construct()
     {
-        @session_start();
         parent::__construct();
-        if (!IsAuthenticated())
+        $auth = $this->session->userdata('ID');
+        if (!isset($auth))
             redirect('/login/');
-
     }
 
     public function login()
