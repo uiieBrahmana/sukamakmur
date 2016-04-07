@@ -33,7 +33,7 @@ class Login extends CI_Controller
                     case 'Manager':
                         redirect('/manager/');
                         break;
-                    case 'Admin':
+                    case 'Administrator':
                         redirect('/administrator/');
                         break;
                     default:

@@ -11,18 +11,24 @@ class Administrator extends CI_Controller
         $role = $this->session->userdata('role');
         if (!isset($auth))
             redirect('/login/');
-        if (strcasecmp($role, 'Manager') != 0 || strcasecmp($role, 'Administrator') != 0) {
+        if (strcasecmp($role, 'Administrator') != 0) {
             redirect('/pengunjung/');
         }
     }
 
-    public function login()
-    {
-        $this->load->view('LoginAdmin');
-    }
-
     public function index()
     {
+        $idtamu = 1;
+        $nama = 'Update Builder';
+
+        $builder = UpdateBuilder('tamu', // tabel tujuan
+            array('idtamu' => $idtamu), // where kondisi (urut 1)
+            array('nama' => $nama) // data yang diubah (urut 2)
+        );
+
+        // simpan berurutan dari where kondsi dan data yang diubah
+        $idupdate = $this->koneksi->Save($builder, array($idtamu, $nama));
+
         $this->load->view('AdminBeranda');
     }
 

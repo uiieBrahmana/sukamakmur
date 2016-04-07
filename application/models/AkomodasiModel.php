@@ -19,4 +19,5 @@ class AkomodasiModel extends CI_Model
         $this->db->query($sql, $arrdata);
         return $this->db->insert_id();
     }
+
 }
