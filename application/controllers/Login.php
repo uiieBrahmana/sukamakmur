@@ -24,9 +24,21 @@ class Login extends CI_Controller
             $password = $this->input->post('password');
 
             $this->Auth($username, $password);
-            $auth = $this->session->userdata('ID');
+            $auth = $this->session->userdata('role');
             if (isset($auth))
-                redirect('/administrator/');
+                switch($auth) {
+                    case 'Tamu':
+                        redirect('/pengunjung/');
+                        break;
+                    case 'Manager':
+                        redirect('/manager/');
+                        break;
+                    case 'Admin':
+                        redirect('/administrator/');
+                        break;
+                    default:
+                        break;
+                }
             else
                 $this->load->view('GagalLogin');
 
@@ -40,9 +52,9 @@ class Login extends CI_Controller
     function Auth($username, $password)
     {
         $hasilLogin = $this->koneksi->fetchAll(
-            "SELECT idpetugas as ID, nama, notelp, username, `password` FROM `petugas`
+            "SELECT idpetugas as ID, nama, notelp, username, `password`, `status` FROM `petugas`
             WHERE username = '$username' AND `password` = '$password' LIMIT 1
-            UNION SELECT idtamu, nama, notelp, username, `password` FROM `tamu`
+            UNION SELECT idtamu, nama, notelp, username, `password`, 'Tamu' as `status` FROM `tamu`
             WHERE username = '$username' AND `password` = '$password' LIMIT 1"
         );
 
@@ -50,22 +62,8 @@ class Login extends CI_Controller
             $this->session->set_userdata('ID', $hasilLogin[0]['ID']);
             $this->session->set_userdata('nama', $hasilLogin[0]['nama']);
             $this->session->set_userdata('username', $hasilLogin[0]['username']);
+            $this->session->set_userdata('role', $hasilLogin[0]['status']);
         }
-    }
-
-    function gagal()
-    {
-        echo "gagagl salah";
-    }
-
-    function GetUser()
-    {
-        return $this->session->all_userdata();
-    }
-
-    function GetRole()
-    {
-
     }
 
     function logout()

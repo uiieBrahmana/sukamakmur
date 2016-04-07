@@ -4,16 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Administrator extends CI_Controller
 {
 
-
-    /**
-     * Administrator constructor.
-     */
     public function __construct()
     {
         parent::__construct();
         $auth = $this->session->userdata('ID');
+        $role = $this->session->userdata('role');
         if (!isset($auth))
             redirect('/login/');
+        if (strcasecmp($role, 'Manager') != 0 || strcasecmp($role, 'Administrator') != 0) {
+            redirect('/pengunjung/');
+        }
     }
 
     public function login()
