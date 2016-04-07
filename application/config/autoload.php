@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','file', 'querybuilder', 'smsgateway');
+$autoload['helper'] = array('url','file', 'querybuilder', 'smsgateway', 'authentication');
 
 /*
 | -------------------------------------------------------------------
@@ -126,4 +126,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('AkomodasiModel' => 'akomodasi');
+$autoload['model'] = array('AkomodasiModel' => 'koneksi');

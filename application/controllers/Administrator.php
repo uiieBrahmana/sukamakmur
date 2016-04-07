@@ -4,6 +4,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Administrator extends CI_Controller
 {
 
+
+    /**
+     * Administrator constructor.
+     */
+    public function __construct()
+    {
+        @session_start();
+        parent::__construct();
+        if (!IsAuthenticated())
+            redirect('/login/');
+
+    }
+
+    public function login()
+    {
+        $this->load->view('LoginAdmin');
+    }
+
     public function index()
     {
         $this->load->view('AdminBeranda');
@@ -26,7 +44,7 @@ class Administrator extends CI_Controller
 
     public function adminlihatakun()
     {
-        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `TAMU`");
+        $data['Akun'] = $this->koneksi->FetchAll("SELECT * FROM `TAMU`");
         $this->load->view('AdminLihatAkun', $data);
     }
 
@@ -54,7 +72,7 @@ class Administrator extends CI_Controller
                 'password' => $password
             ));
 
-            $idtamu = $this->akomodasi->Save($queryakun, array($nama, $tanggallahir,
+            $idtamu = $this->koneksi->Save($queryakun, array($nama, $tanggallahir,
                 $jeniskelamin, $alamat, $email, $notelp, $username, $password));
 
             if ($idtamu) {
@@ -89,7 +107,7 @@ class Administrator extends CI_Controller
 
     public function admintambahmakanan()
     {
-        $data['TipeMakanan'] = $this->akomodasi->FetchAll("SELECT * FROM TIPEMAKANAN");
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM TIPEMAKANAN");
 
         $submit = $this->input->post('_submit');
         if ($submit) {
@@ -101,7 +119,7 @@ class Administrator extends CI_Controller
                 'keterangan' => $keterangan,
             ));
 
-            $idmenumakanan = $this->akomodasi->Save($querymenumakan, array($idtipemakanan, $keterangan));
+            $idmenumakanan = $this->koneksi->Save($querymenumakan, array($idtipemakanan, $keterangan));
 
             if ($idmenumakanan) {
                 echo 'success';
@@ -114,13 +132,13 @@ class Administrator extends CI_Controller
 
     public function adminlihatmakanan()
     {
-        $data['MenuMakanan'] =$this->akomodasi->FetchAll("SELECT * FROM `MenuMakanan`") ;
-        $this->load->view('AdminLihatMakanan',$data);
+        $data['MenuMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `MenuMakanan`");
+        $this->load->view('AdminLihatMakanan', $data);
     }
 
     public function adminlihatpegawai()
     {
-        $data['Akun'] = $this->akomodasi->FetchAll("SELECT * FROM `petugas`");
+        $data['Akun'] = $this->koneksi->FetchAll("SELECT * FROM `petugas`");
         $this->load->view('AdminLihatPegawai', $data);
     }
 
@@ -135,8 +153,8 @@ class Administrator extends CI_Controller
 
     public function adminlihatkegiatan()
     {
-        $data['Kegiatan'] = $this->akomodasi->FetchAll("SELECT * FROM `kegiatan`");
-        $this->load->view('AdminLihatKegiatan',$data);
+        $data['Kegiatan'] = $this->koneksi->FetchAll("SELECT * FROM `kegiatan`");
+        $this->load->view('AdminLihatKegiatan', $data);
     }
 
     public function detailprofilpegawai()
@@ -164,7 +182,7 @@ class Administrator extends CI_Controller
                 'harga' => $harga,
                 'keterangan' => $keterangan
             ));
-            $result = $this->akomodasi->Save($query, array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
+            $result = $this->koneksi->Save($query, array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
 
             if ($result) {
                 echo 'sukses';
@@ -209,21 +227,21 @@ class Administrator extends CI_Controller
     public function admintambahtipemakanan()
     {
         $submit = $this->input->post('_submit');
-        if(isset($submit)){
+        if (isset($submit)) {
             $idtipemakanan = $this->input->post('idtipemakanan');
             $keterangan = $this->input->post('keterangan');
             $harga = $this->input->post('harga');
 
-            $query = InsertBuilder('TipeMakanan',array(
-                'idtipemakanan' =>$idtipemakanan,
-                'keterangan' =>$keterangan,
-                'harga' =>$harga
+            $query = InsertBuilder('TipeMakanan', array(
+                'idtipemakanan' => $idtipemakanan,
+                'keterangan' => $keterangan,
+                'harga' => $harga
             ));
-            $result = $this->akomodasi->Save($query, array($idtipemakanan, $keterangan, $harga));
+            $result = $this->koneksi->Save($query, array($idtipemakanan, $keterangan, $harga));
 
-            if($result){
+            if ($result) {
                 echo 'sukses';
-            }else{
+            } else {
                 echo 'belum berhasil';
             }
         }
@@ -265,7 +283,7 @@ class Administrator extends CI_Controller
                     'filedata' => $filedata
                 ));
 
-                $idfoto = $this->akomodasi->Save($queryfoto, array($namafile, pathinfo($namafile, PATHINFO_EXTENSION),
+                $idfoto = $this->koneksi->Save($queryfoto, array($namafile, pathinfo($namafile, PATHINFO_EXTENSION),
                     file_get_contents($filedata)));
 
                 if ($idfoto) {
@@ -277,7 +295,7 @@ class Administrator extends CI_Controller
                         'harga' => $harga,
                         'fotoakomodasi' => $idfoto
                     ));
-                    $result = $this->akomodasi->Save($query, array($nama, $keterangan, $kapasitas, $status, $harga, $idfoto));
+                    $result = $this->koneksi->Save($query, array($nama, $keterangan, $kapasitas, $status, $harga, $idfoto));
 
                     if ($result) {
                         echo 'sukses';
@@ -293,20 +311,21 @@ class Administrator extends CI_Controller
 
     public function adminlihatakomodasi()
     {
-        $data['Akomodasi'] = $this->akomodasi->FetchAll("SELECT * FROM `AKOMODASI`");
+        $data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `AKOMODASI`");
         $this->load->view('AdminLihatAkomodasi', $data);
     }
 
     public function adminlihatperalatan()
     {
-        $data['Peralatan'] = $this->akomodasi->FetchAll("SELECT * FROM `PERALATAN`");
-        $this->load->view('AdminLihatPeralatan',$data);
+        $data['Peralatan'] = $this->koneksi->FetchAll("SELECT * FROM `PERALATAN`");
+        $this->load->view('AdminLihatPeralatan', $data);
     }
+
     public function adminlihattipemakanan()
     {
 
-        $data['TipeMakanan'] = $this->akomodasi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
-        $this->load->view('AdminLihatTipeMakanan',$data);
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
+        $this->load->view('AdminLihatTipeMakanan', $data);
     }
 
     public function admintambahperalatan()
@@ -319,24 +338,21 @@ class Administrator extends CI_Controller
             $keterangan = $this->input->post('keterangan');
             $jumlah = $this->input->post('jumlah');
 
+            $query = InsertBuilder('Peralatan', array(
+                'nama' => $nama,
+                'hargasewa' => $hargasewa,
+                'keterangan' => $keterangan,
+                'jumlah' => $jumlah
+            ));
+            $result = $this->koneksi->Save($query, array($nama, $hargasewa, $keterangan, $jumlah));
 
-
-
-                    $query = InsertBuilder('Peralatan', array(
-                        'nama' => $nama,
-                        'hargasewa' => $hargasewa,
-                        'keterangan' => $keterangan,
-                        'jumlah' => $jumlah
-                    ));
-                    $result = $this->akomodasi->Save($query, array($nama, $hargasewa, $keterangan, $jumlah));
-
-                    if ($result) {
-                        echo 'sukses';
-                    } else {
-                        echo 'gagal';
-                    }
-
+            if ($result) {
+                echo 'sukses';
+            } else {
+                echo 'gagal';
             }
+
+        }
 
         $this->load->view('AdminTambahPeralatan');
     }
