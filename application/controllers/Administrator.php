@@ -159,8 +159,34 @@ class Administrator extends CI_Controller
     public function admintambahpegawai()
     {
         $submit = $this->input->post('_submit');
-        if ($submit) {
+        if (isset($submit)) {
+            $nama = $this->input->post('nama');
+            $alamat = $this->input->post('alamat');
+            $tglLahir = $this->input->post('tglLahir');
+            $jenisKelamin = $this->input->post('jenisKelamin');
+            $notelp = $this->input->post('notelp');
+            $email = $this->input->post('email');
+            $status = $this->input->post('status');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
 
+            $kueri = InsertBuilder('petugas', array(
+                'nama' => $nama,
+                'alamat' => $alamat,
+                'tglLahir' => $tglLahir,
+                'jenisKelamin' => $jenisKelamin,
+                'notelp' => $notelp,
+                'email' => $email,
+                'status' => $status,
+                'username' => $username,
+                'password' => $password
+            ));
+            $result = $this->koneksi->Save($kueri, array($nama,$alamat,$tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password));
+            if($result){
+                echo 'sukses';
+            }else {
+                echo 'gagal';
+            }
         }
         $this->load->view('AdminTambahPegawai');
     }
@@ -171,9 +197,25 @@ class Administrator extends CI_Controller
         $this->load->view('AdminLihatKegiatan', $data);
     }
 
-    public function detailprofilpegawai()
+    public function detailprofilpegawai($domain, $id)
     {
-        $this->load->view('AdminProfilPegawai');
+        switch ($domain){
+            case 'delete':
+                $kueripegawai = DeleteBuilder('petugas', array('idpetugas' => $id));
+                $idpetugas = $this->koneksi->Save($kueripegawai, array($id));
+                redirect('/administrator/adminlihatpegawai/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = ".$id);
+                $data['Pegawai'] = $result[0];
+                $this->load->view('AdminUpdateAkun',$data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = ".$id);
+                $data['Pegawai'] = $result[0];
+                $this->load->view('AdminProfilPegawai',$data);
+                break;
+        }
     }
 
     public function detailprofilmember($domain, $id)
@@ -192,7 +234,7 @@ class Administrator extends CI_Controller
             case 'view':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
                 $data['Member'] = $result[0];
-                $this->load->view('AdminLihatMember', $data);
+                $this->load->view('DetailProfilMember', $data);
                 break;
         }
     }

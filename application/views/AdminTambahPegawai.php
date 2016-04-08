@@ -299,7 +299,7 @@
                         </div><!-- /.box-header -->
                         <!-- form start -->
 
-                        <form class="form-horizontal" method="post" action="#">
+                        <form class="form-horizontal" method="post" action="index.php/Administrator/admintambahpegawai">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -308,7 +308,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Nama Pegawai" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="nama"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -317,7 +317,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Alamat" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="alamat"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -326,7 +326,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Tanggal Lahir" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="tglLahir"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -335,7 +335,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Jenis Kelamin" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="jenisKelamin"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -347,15 +347,15 @@
                                                 <input required type="text" id="notelppemesan"
                                                        data-inputmask="'mask': ['9999-999-99999']"
                                                        data-mask
-                                                       name="notelppemesan" class="form-control col-lg-3">
+                                                       name="notelp" class="form-control col-lg-3">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="namapemesan">Email</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Email" id="namapemesan"
-                                                       name="namapemesan"
+                                                <input required type="email" placeholder="Email" id="namapemesan"
+                                                       name="email"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -364,7 +364,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Status" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="status"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -373,7 +373,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Username" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="username"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>
@@ -382,7 +382,7 @@
 
                                             <div class="col-sm-10">
                                                 <input required type="text" placeholder="Password" id="namapemesan"
-                                                       name="namapemesan"
+                                                       name="password"
                                                        class="form-control col-lg-3">
                                             </div>
                                         </div>

@@ -40,7 +40,6 @@
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
-
     <header class="main-header">
         <a href="index.php/administrator/" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
@@ -292,8 +291,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Pegawai
-                <small>Tambah Pegawai</small>
+                Member
+                <small>Detail Member</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -303,45 +302,83 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Pegawai</h3>
+
+            <div class="row">
+                <div class="col-md-9">
+
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <!--                            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">-->
+
+                            <h3 class="profile-username text-center"> <?php echo $Member['nama']; ?></h3>
+
+
+
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>ID PETUGAS</b> <a class="pull-right"> <?php echo $Member['idtamu']; ?></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Tanggal Lahir</b> <a class="pull-right"> <?php echo $Member['tanggallahir']; ?></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Jenis Kelamin</b> <a class="pull-right"><?php echo $Member['jeniskelamin']; ?></a>
+                                </li>
+                            </ul>
+
+                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                    <!-- About Me Box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">INFORMASI KONTAK</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <strong><i class="fa fa-mobile-phone margin-r-5"></i> No. Telepon</strong>
+
+                            <p class="text-muted">
+                                <?php echo $Member['notelp']; ?>
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Alamat</strong>
+
+                            <p class="text-muted"> <?php echo $Member['alamat']; ?></p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-inbox margin-r-5"></i> Email</strong>
+
+                            <p class="text-muted"> <?php echo $Member['email']; ?></p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-user margin-r-5"></i> Username</strong>
+
+                            <p class="text-muted"> <?php echo $Member['username']; ?></p>
+                            <hr>
+
+                            <strong><i class="fa fa-lock margin-r-5"></i> Password</strong>
+
+                            <p class="text-muted"> <?php echo $Member['password']; ?></p>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
                 </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Pegawai</th>
-                        <th>Nama Pegawai</th>
-                        <th>Alamat</th>
-                        <th>No. Telepon</th>
-                        <th>Email</th>
-                        <th>Status Pegawai</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Aksi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <!-- /.col -->
 
-                    <?php foreach ($Akun as $value) { ?>
-                        <tr>
-                            <td><?php echo $value['idpetugas'] ?></td>
-                            <td><?php echo $value['nama'] ?></td>
-                            <td><?php echo $value['alamat'] ?></td>
-                            <td><?php echo $value['notelp'] ?></td>
-                            <td><?php echo $value['email'] ?></td>
-                            <td><?php echo $value['status'] ?></td>
-                            <td><?php echo $value['username'] ?></td>
-                            <td>*******</td>
-                            <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai/view/<?php echo $value['idpetugas'] ?>" class="btn btn-sm btn-info">Detail</a></td>
-                        </tr>
-                    <?php } ?>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
+                <!-- /.col -->
             </div>
+            <!-- /.row -->
+
         </section><!-- /.content -->
         <!-- /.content -->
     </div>
@@ -453,7 +490,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#student').DataTable();
+        $('#tabledata').DataTable();
     });
 </script>
 </html>
