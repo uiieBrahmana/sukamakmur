@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url() ?>">
+    <base href="<?php echo base_url()?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,16 +218,14 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">MAKANAN</li>
+                <li class="header">AKOMODASI</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakomodasi">Lihat Semua Akomodasi</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahakomodasi">Tambah Akomodasi</a></li>
                     </ul>
                 </li>
 
@@ -257,8 +251,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Makanan
-                <small>Lihat Menu Makanan</small>
+                Dashboard
+                <small>Control panel</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -268,38 +262,63 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Makanan</h3>
-                </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Makanan</th>
-                        <th>Paket Makanan</th>
-                        <th>Keterangan</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php foreach ($MenuMakanan as $Value) { ?>
-                        <tr>
-                            <td><?php echo $Value['idmenumakanan'] ?></td>
-                            <td><?php echo $Value['idtipemakanan'] ?></td>
-                            <td><?php echo $Value['keterangan'] ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
-                        </tr>
-                    <?php } ?>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>150</h3>
+                            <p>New Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <p>Bounce Rate</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>44</h3>
+                            <p>User Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p>Unique Visitors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
             </div>
-        </section><!-- /.content -->
+            <!-- /.row -->
+        </section>
         <!-- /.content -->
     </div>
 
@@ -389,7 +408,7 @@
 <script src="css/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!--<script src="css/plugins/morris/morris.min.js"></script>-->
+<script src="css/plugins/morris/morris.min.js"></script>
 
 <script src="css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script src="css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -402,15 +421,4 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
-
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#student').DataTable();
-    });
-</script>
 </html>

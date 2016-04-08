@@ -53,9 +53,9 @@ class Login extends CI_Controller
     {
         $hasilLogin = $this->koneksi->fetchAll(
             "SELECT idpetugas as ID, nama, notelp, username, `password`, `status` FROM `petugas`
-            WHERE username = '$username' AND `password` = '$password' LIMIT 1
+            WHERE username = '$username' AND `password` = '$password'
             UNION SELECT idtamu, nama, notelp, username, `password`, 'Tamu' as `status` FROM `tamu`
-            WHERE username = '$username' AND `password` = '$password' LIMIT 1"
+            WHERE username = '$username' AND `password` = '$password'"
         );
 
         if (isset($hasilLogin[0])) {

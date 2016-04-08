@@ -19,17 +19,6 @@ class Administrator extends CI_Controller
 
     public function index()
     {
-        $idtamu = 1;
-        $nama = 'Update Builder';
-
-        $builder = UpdateBuilder('tamu', // tabel tujuan
-            array('idtamu' => $idtamu), // where kondisi (urut 1)
-            array('nama' => $nama) // data yang diubah (urut 2)
-        );
-
-        // simpan berurutan dari where kondsi dan data yang diubah
-        $idupdate = $this->koneksi->Save($builder, array($idtamu, $nama));
-
         $this->load->view('AdminBeranda');
     }
 
@@ -181,39 +170,44 @@ class Administrator extends CI_Controller
                 'username' => $username,
                 'password' => $password
             ));
-            $result = $this->koneksi->Save($kueri, array($nama,$alamat,$tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password));
-            if($result){
+            $result = $this->koneksi->Save($kueri, array($nama, $alamat, $tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password));
+            if ($result) {
                 echo 'sukses';
-            }else {
+            } else {
                 echo 'gagal';
             }
         }
         $this->load->view('AdminTambahPegawai');
     }
 
+    public function adminKegiatan()
+    {
+        $this->load->view('admin/kegiatan/AdminKegiatan');
+    }
+
     public function adminlihatkegiatan()
     {
         $data['Kegiatan'] = $this->koneksi->FetchAll("SELECT * FROM `kegiatan`");
-        $this->load->view('AdminLihatKegiatan', $data);
+        $this->load->view('admin/kegiatan/AdminLihatKegiatan', $data);
     }
 
     public function detailprofilpegawai($domain, $id)
     {
-        switch ($domain){
+        switch ($domain) {
             case 'delete':
                 $kueripegawai = DeleteBuilder('petugas', array('idpetugas' => $id));
                 $idpetugas = $this->koneksi->Save($kueripegawai, array($id));
                 redirect('/administrator/adminlihatpegawai/success');
                 break;
             case 'update':
-                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = ".$id);
+                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = " . $id);
                 $data['Pegawai'] = $result[0];
-                $this->load->view('AdminUpdateAkun',$data);
+                $this->load->view('AdminUpdateAkun', $data);
                 break;
             case 'view':
-                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = ".$id);
+                $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = " . $id);
                 $data['Pegawai'] = $result[0];
-                $this->load->view('AdminProfilPegawai',$data);
+                $this->load->view('AdminProfilPegawai', $data);
                 break;
         }
     }
@@ -239,11 +233,12 @@ class Administrator extends CI_Controller
         }
     }
 
-    public function adminupdateakun(){
+    public function adminupdateakun()
+    {
 
         $submit = $this->input->post('submit');
 
-        if(isset($submit)){
+        if (isset($submit)) {
             $id = $this->input->post('idtamu');
             $nama = $this->input->post('nama');
             $tanggallahir = $this->input->post('tanggallahir');
@@ -290,7 +285,7 @@ class Administrator extends CI_Controller
         }
     }
 
-    public function admintambahkegiatan()
+    public function adminTambahKegiatan()
     {
         $submit = $this->input->post('_submit');
         if (isset($submit)) {
@@ -314,13 +309,79 @@ class Administrator extends CI_Controller
                 array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
 
             if ($result) {
-                echo 'sukses';
+                redirect('/administrator/adminlihatkegiatan/success');
             } else {
                 echo 'gagal';
             }
 
         }
-        $this->load->view('AdminTambahKegiatan');
+        $this->load->view('admin/kegiatan/AdminTambahKegiatan');
+    }
+
+    public function detailkegiatan($domain, $id)
+    {
+        switch ($domain) {
+            case 'delete':
+                $kuerikegiatan = DeleteBuilder('kegiatan', array('idkegiatan' => $id));
+                $idkegiatan = $this->koneksi->Save($kuerikegiatan, array($id));
+                redirect('/administrator/adminlihatkegiatan/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `kegiatan` WHERE idkegiatan = " . $id);
+                $data['Kegiatan'] = $result[0];
+                $this->load->view('admin/kegiatan/AdminUpdateKegiatan', $data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `kegiatan` WHERE idkegiatan = " . $id);
+                $data['Kegiatan'] = $result[0];
+                $this->load->view('admin/kegiatan/AdminKegiatanDetail', $data);
+                break;
+        }
+    }
+
+    public function adminupdatekegiatan(){
+        $submit = $this->input->post('submit');
+
+        if (isset($submit)) {
+            $id = $this->input->post('idkegiatan');
+            $nama = $this->input->post('nama');
+            $lamakegiatan = $this->input->post('lamakegiatan');
+            $pesertamin = $this->input->post('pesertamin');
+            $pesertamax = $this->input->post('pesertamax');
+            $keterangan = $this->input->post('keterangan');
+            $harga = $this->input->post('harga');
+
+            $queryakun = UpdateBuilder('kegiatan',
+                array(
+                    'idkegiatan' => $id,
+                ),
+                array(
+                    'idkegiatan' => $id,
+                    'nama' => $nama,
+                    'lamakegiatan' => $lamakegiatan,
+                    'pesertamin' => $pesertamin,
+                    'pesertamax' => $pesertamax,
+                    'keterangan' => $keterangan,
+                    'harga' => $harga,
+                )
+            );
+
+            $idtamu = $this->koneksi->Save($queryakun, array(
+                $id,
+                $nama,
+                $lamakegiatan,
+                $pesertamin,
+                $pesertamax,
+                $keterangan,
+                $harga,
+            ));
+
+            if ($idtamu == 0) {
+                redirect('/administrator/adminlihatkegiatan/success');
+            } else {
+                echo 'failed';
+            }
+        }
     }
 
     public function adminlihatlaporan()
@@ -340,12 +401,120 @@ class Administrator extends CI_Controller
 
     public function adminakomodasi()
     {
-        $this->load->view('AdminAkomodasi');
+        $this->load->view('admin/akomodasi/AdminAkomodasi');
     }
 
-    public function detailakomodasi()
+    public function detailakomodasi($domain, $id)
     {
-        $this->load->view('AdminAkomodasiDetail');
+        switch ($domain) {
+            case 'delete':
+                $kueriakomodasi = DeleteBuilder('akomodasi', array('idakomodasi' => $id));
+                $idakomodasi = $this->koneksi->Save($kueriakomodasi, array($id));
+                redirect('/administrator/adminlihatakomodasi/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE idakomodasi = " . $id);
+                $data['Akomodasi'] = $result[0];
+                $this->load->view('admin/akomodasi/AdminUpdateAkomodasi', $data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE idakomodasi = " . $id);
+                $data['Akomodasi'] = $result[0];
+                $this->load->view('admin/akomodasi/AdminAkomodasiDetail', $data);
+                break;
+        }
+    }
+
+    public function adminupdateakomodasi()
+    {
+        $submit = $this->input->post('submit');
+        if (isset($submit)) {
+            $idakomodasi = $this->input->post('idakomodasi');
+            $nama = $this->input->post('nama');
+            $keterangan = $this->input->post('keterangan');
+            $kapasitas = $this->input->post('kapasitas');
+            $status = $this->input->post('status');
+            $harga = $this->input->post('harga');
+
+            $builder = UpdateBuilder('akomodasi',
+                array('idakomodasi' => $idakomodasi),
+                array(
+                    'idakomodasi' => $idakomodasi,
+                    'nama' => $nama,
+                    'keterangan' => $keterangan,
+                    'kapasitas' => $kapasitas,
+                    'status' => $status,
+                    'harga' => $harga
+                )
+            );
+
+            $idupdate = $this->koneksi->Save($builder, array($idakomodasi, $nama, $keterangan, $kapasitas, $status, $harga));
+            if ($idupdate == 0)
+                redirect('/administrator/adminlihatakomodasi/success');
+            else
+                echo 'update gagal';
+        }
+    }
+
+    public function adminlihatakomodasi()
+    {
+        $data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `AKOMODASI`");
+        $this->load->view('admin/akomodasi/AdminLihatAkomodasi', $data);
+    }
+
+    public function admintambahakomodasi()
+    {
+        $submit = $this->input->post('_submit');
+
+        if (isset($submit)) {
+            $nama = $this->input->post('nama');
+            $keterangan = $this->input->post('keterangan');
+            $kapasitas = $this->input->post('kapasitas');
+            $status = $this->input->post('status');
+            $harga = $this->input->post('harga');
+
+            $namafile = $_FILES['fotoakomodasi']['name'];
+            $ekstensifile = $_FILES['fotoakomodasi']['type'];
+            $filedata = $_FILES['fotoakomodasi']['tmp_name'];
+            $error = $_FILES['fotoakomodasi']['error'];
+            $size = $_FILES['fotoakomodasi']['size'];
+
+            // jika foto ga error
+            if ($error == 0) {
+                $query = InsertBuilder('Akomodasi', array(
+                    'nama' => $nama,
+                    'keterangan' => $keterangan,
+                    'kapasitas' => $kapasitas,
+                    'status' => $status,
+                    'harga' => $harga,
+                ));
+
+                $result = $this->koneksi->Save($query,
+                    array($nama, $keterangan, $kapasitas, $status, $harga));
+
+                $queryfoto = InsertBuilder('fotoakomodasi', array(
+                    'idakomodasi' => $result,
+                    'namafile' => $namafile,
+                    'ekstensifile' => pathinfo($namafile, PATHINFO_EXTENSION),
+                    'filedata' => $filedata
+                ));
+
+                $foto = $this->koneksi->Save($queryfoto, array(
+                    $result,
+                    $namafile,
+                    pathinfo($namafile, PATHINFO_EXTENSION),
+                    file_get_contents($filedata)
+                ));
+
+                if ($queryfoto == 0 && $foto == 0)
+                    redirect('/administrator/adminlihatakomodasi/success');
+                else {
+                    //gagal handle
+                }
+            }
+        }
+
+        $this->load->view('admin/akomodasi/AdminTambahAkomodasi');
     }
 
     public function adminmakanan()
@@ -378,90 +547,18 @@ class Administrator extends CI_Controller
         $this->load->view('AdminTambahTipeMakanan');
     }
 
-    public function adminperalatan()
+    public function adminPeralatan()
     {
-        $this->load->view('AdminPeralatan');
+        $this->load->view('admin/peralatan/AdminPeralatan');
     }
 
-    public function adminkegiatan()
-    {
-        $this->load->view('AdminKegiatan');
-    }
-
-    public function admintambahakomodasi()
-    {
-        $submit = $this->input->post('_submit');
-
-        if (isset($submit)) {
-            $nama = $this->input->post('nama');
-            $keterangan = $this->input->post('keterangan');
-            $kapasitas = $this->input->post('kapasitas');
-            $status = $this->input->post('status');
-            $harga = $this->input->post('harga');
-
-            $namafile = $_FILES['fotoakomodasi']['name'];
-            $ekstensifile = $_FILES['fotoakomodasi']['type'];
-            $filedata = $_FILES['fotoakomodasi']['tmp_name'];
-            $error = $_FILES['fotoakomodasi']['error'];
-            $size = $_FILES['fotoakomodasi']['size'];
-
-            if ($error == 0) {
-                $queryfoto = InsertBuilder('fotoakomodasi', array(
-                    'namafile' => $namafile,
-                    'ekstensifile' => pathinfo($namafile, PATHINFO_EXTENSION),
-                    'filedata' => $filedata
-                ));
-
-                $idfoto = $this->koneksi->Save($queryfoto, array(
-                    $namafile,
-                    pathinfo($namafile, PATHINFO_EXTENSION),
-                    file_get_contents($filedata)
-                ));
-
-                if ($idfoto) {
-                    $query = InsertBuilder('Akomodasi', array(
-                        'nama' => $nama,
-                        'keterangan' => $keterangan,
-                        'kapasitas' => $kapasitas,
-                        'status' => $status,
-                        'harga' => $harga,
-                        'fotoakomodasi' => $idfoto
-                    ));
-                    $result = $this->koneksi->Save($query,
-                        array($nama, $keterangan, $kapasitas, $status, $harga, $idfoto));
-
-                    if ($result) {
-                        echo 'sukses';
-                    } else {
-                        echo 'gagal';
-                    }
-                }
-            }
-        }
-
-        $this->load->view('AdminTambahAkomodasi');
-    }
-
-    public function adminlihatakomodasi()
-    {
-        $data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `AKOMODASI`");
-        $this->load->view('AdminLihatAkomodasi', $data);
-    }
-
-    public function adminlihatperalatan()
+    public function adminLihatPeralatan()
     {
         $data['Peralatan'] = $this->koneksi->FetchAll("SELECT * FROM `PERALATAN`");
-        $this->load->view('AdminLihatPeralatan', $data);
+        $this->load->view('admin/peralatan/AdminLihatPeralatan', $data);
     }
 
-    public function adminlihattipemakanan()
-    {
-
-        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
-        $this->load->view('AdminLihatTipeMakanan', $data);
-    }
-
-    public function admintambahperalatan()
+    public function adminTambahPeralatan()
     {
         $submit = $this->input->post('_submit');
 
@@ -480,14 +577,71 @@ class Administrator extends CI_Controller
             $result = $this->koneksi->Save($query, array($nama, $hargasewa, $keterangan, $jumlah));
 
             if ($result) {
-                echo 'sukses';
+                redirect('/administrator/adminlihatperalatan/success');
             } else {
-                echo 'gagal';
+                // pesan gagal
             }
 
         }
 
-        $this->load->view('AdminTambahPeralatan');
+        $this->load->view('admin/peralatan/AdminTambahPeralatan');
+    }
+
+    public function detailPeralatan($domain, $id)
+    {
+        switch ($domain) {
+            case 'delete':
+                $kueriakomodasi = DeleteBuilder('peralatan', array('idperalatan' => $id));
+                $idakomodasi = $this->koneksi->Save($kueriakomodasi, array($id));
+                redirect('/administrator/adminlihatperalatan/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `peralatan` WHERE idperalatan = " . $id);
+                $data['Peralatan'] = $result[0];
+                $this->load->view('admin/peralatan/AdminUpdatePeralatan', $data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `peralatan` WHERE idperalatan = " . $id);
+                $data['Peralatan'] = $result[0];
+                $this->load->view('admin/peralatan/AdminPeralatanDetail', $data);
+                break;
+        }
+    }
+
+    public function adminUpdatePeralatan()
+    {
+        $submit = $this->input->post('submit');
+        if (isset($submit)) {
+            $idperalatan = $this->input->post('idperalatan');
+            $nama = $this->input->post('nama');
+            $hargasewa = $this->input->post('hargasewa');
+            $keterangan = $this->input->post('keterangan');
+            $jumlah = $this->input->post('jumlah');
+
+            $builder = UpdateBuilder('peralatan',
+                array('idperalatan' => $idperalatan),
+                array(
+                    'idperalatan' => $idperalatan,
+                    'nama' => $nama,
+                    'hargasewa' => $hargasewa,
+                    'keterangan' => $keterangan,
+                    'jumlah' => $jumlah,
+                )
+            );
+
+            $idupdate = $this->koneksi->Save($builder, array($idperalatan, $nama, $hargasewa, $keterangan, $jumlah));
+            if ($idupdate == 0)
+                redirect('/administrator/adminlihatperalatan/success');
+            else
+                echo 'update gagal';
+        }
+    }
+
+    public function adminLihatTipeMakanan()
+    {
+
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
+        $this->load->view('AdminLihatTipeMakanan', $data);
     }
 
 }

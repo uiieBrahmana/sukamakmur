@@ -218,16 +218,14 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">MAKANAN</li>
+                <li class="header">KEGIATAN</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Kegiatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatkegiatan">Lihat Semua Kegiatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahkegiatan">Tambah Kegiatan Baru</a></li>
                     </ul>
                 </li>
 
@@ -252,8 +250,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Kategori Makanan Baru
-                <small>Tambah Tipe</small>
+                Dashboard
+                <small>Control panel</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -261,55 +259,62 @@
             </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Atur Makanan Baru</h3>
-                        </div><!-- /.box-header -->
-                        <!-- form start -->
-
-                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahmakanan">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Tipe Makanan</label>
-
-                                            <div class="col-sm-10">
-                                                <select name="idtipemakanan" id ="idtipemakanan" class="form-control col-lg-3">
-                                                    <?php
-                                                    foreach ($TipeMakanan as $v) {
-                                                        echo "<option value='" . $v['idtipemakanan'] . "'>Paket " . $v['idtipemakanan'] . " : " . $v['keterangan'] . "</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Keterangan" id="keterangan"
-                                                       name="keterangan"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                                <button class="btn btn-info" type="submit" name="_submit" value="_submit">Tambah</button>
-                                <button class="btn btn-default" type="reset">Reset</button>
-                            </div><!-- /.box-footer -->
-                        </form>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>150</h3>
+                            <p>New Orders</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <p>Bounce Rate</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>44</h3>
+                            <p>User Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p>Unique Visitors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
 
     <!-- Main Footer -->
@@ -411,6 +416,4 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<script src="css/dist/js/pages/dashboard.js"></script>
-<script src="css/dist/js/demo.js"></script>
 </html>

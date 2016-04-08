@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url() ?>">
+    <base href="<?php echo base_url()?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,16 +218,16 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">KEGIATAN</li>
+                <li class="header">MAKANAN</li>
 
-                         <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Kegiatan</span> <i
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatkegiatan">Lihat Semua
-                                Kegiatan</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahkegiatan">Tambah
-                                Kegiatan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
                     </ul>
                 </li>
 
@@ -256,8 +252,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Kegiatan
-                <small>Lihat Kegiatan</small>
+                Kategori Makanan Baru
+                <small>Tambah Tipe</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -267,42 +263,50 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Kegiatan</h3>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Atur Makanan Baru</h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+
+                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahmakanan">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Tipe Makanan</label>
+
+                                            <div class="col-sm-10">
+                                                <select name="idtipemakanan" id ="idtipemakanan" class="form-control col-lg-3">
+                                                    <?php
+                                                    foreach ($TipeMakanan as $v) {
+                                                        echo "<option value='" . $v['idtipemakanan'] . "'>Paket " . $v['idtipemakanan'] . " : " . $v['keterangan'] . "</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Keterangan" id="keterangan"
+                                                       name="keterangan"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button class="btn btn-info" type="submit" name="_submit" value="_submit">Tambah</button>
+                                <button class="btn btn-default" type="reset">Reset</button>
+                            </div><!-- /.box-footer -->
+                        </form>
+                    </div>
                 </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Kegiatan</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
-                        <th>Peserta Min</th>
-                        <th>Peserta Max</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php foreach ($Kegiatan as $Value) { ?>
-                        <tr>
-                            <td><?php echo $Value['idkegiatan'] ?></td>
-                            <td><?php echo $Value['nama'] ?></td>
-                            <td>Rp <?php echo number_format($Value['harga']) ?></td>
-                            <td><?php echo $Value['pesertamin'] ?></td>
-                            <td><?php echo $Value['pesertamax'] ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
-                                   class="btn btn-sm btn-info">Detail</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
-                        </tr>
-                    <?php } ?>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
             </div>
         </section><!-- /.content -->
         <!-- /.content -->
@@ -394,7 +398,7 @@
 <script src="css/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!--<script src="css/plugins/morris/morris.min.js"></script>-->
+<script src="css/plugins/morris/morris.min.js"></script>
 
 <script src="css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script src="css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -407,15 +411,4 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
-
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#student').DataTable();
-    });
-</script>
 </html>

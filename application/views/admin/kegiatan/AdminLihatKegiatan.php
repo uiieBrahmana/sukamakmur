@@ -222,16 +222,16 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">AKOMODASI</li>
+                <li class="header">KEGIATAN</li>
 
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
+                         <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Kegiatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakomodasi">Lihat Semua
-                                Akomodasi</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahakomodasi">Tambah
-                                Akomodasi</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatkegiatan">Lihat Semua
+                                Kegiatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahkegiatan">Tambah
+                                Kegiatan</a></li>
                     </ul>
                 </li>
 
@@ -256,8 +256,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Akomodasi
-                <small>Lihat Akomodasi</small>
+                Kegiatan
+                <small>Lihat Kegiatan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -269,33 +269,35 @@
         <section class="content">
             <div class="box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Akomodasi</h3>
+                    <h3 class="box-title">Daftar Kegiatan</h3>
                 </div>
                 <table id="student" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID Akomodasi</th>
+                        <th>ID Kegiatan</th>
                         <th>Nama</th>
-                        <th>Kapasitas</th>
-                        <th>Status</th>
                         <th>Harga</th>
+                        <th>Peserta Min</th>
+                        <th>Peserta Max</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <?php foreach ($Akomodasi as $Value) { ?>
+                    <?php foreach ($Kegiatan as $Value) { ?>
                         <tr>
-                            <td><?php echo $Value['idakomodasi'] ?></td>
+                            <td><?php echo $Value['idkegiatan'] ?></td>
                             <td><?php echo $Value['nama'] ?></td>
-                            <td><?php echo $Value['kapasitas'] ?></td>
-                            <td><?php echo $Value['status'] ?></td>
                             <td>Rp <?php echo number_format($Value['harga']) ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
-                                   class="btn btn-sm btn-info">Detail</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
+                            <td><?php echo $Value['pesertamin'] ?></td>
+                            <td><?php echo $Value['pesertamax'] ?></td>
+                            <td>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailkegiatan/view/<?php echo $Value['idkegiatan'] ?>"
+                                   class="btn btn-sm btn-default">Detail</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailkegiatan/update/<?php echo $Value['idkegiatan'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailkegiatan/delete/<?php echo $Value['idkegiatan'] ?>"
+                                   class="btn btn-sm btn-danger">Hapus</a>
+                            </td>
                         </tr>
                     <?php } ?>
 
@@ -407,8 +409,6 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
 
 <script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>

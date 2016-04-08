@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url()?>">
+    <base href="<?php echo base_url() ?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
+
+    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
+    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
+
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -40,7 +44,7 @@
     <header class="main-header">
         <a href="index.php/administrator/" class="logo">
             <span class="logo-mini"><b>S</b>U</span>
-            <span class="logo-lg"><b>RC</b>Sukamakmur</span>
+            <span class="logo-lg">RC Sukamakmur</span>
         </a>
 
         <!-- Header Navbar -->
@@ -217,18 +221,20 @@
                 </div>
             </form>
 
+            <ul class="sidebar-menu">
+                <li class="header">MAKANAN</li>
 
-                <ul class="sidebar-menu">
-                    <li class="header">AKOMODASI</li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
+                    </ul>
+                </li>
 
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
-                                class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatakomodasi">Lihat Semua Akomodasi</a></li>
-                            <li><a href="<?php echo base_url()?>index.php/administrator/admintambahakomodasi">Tambah Akomodasi</a></li>
-                        </ul>
-                    </li>
 
 
                 <li class="header">Version - 0.1 beta</li>
@@ -251,8 +257,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Akomodasi
-                <small>Tambah Akomodasi</small>
+                Makanan
+                <small>Lihat Menu Makanan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -262,85 +268,36 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Tambah Akomodasi Baru</h3>
-                        </div><!-- /.box-header -->
-                        <!-- form start -->
-
-                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahakomodasi" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Nama Akomodasi</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Nama Akomodasi" id="namapemesan"
-                                                       name="nama"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Keterangan" id="namapemesan"
-                                                       name="keterangan"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Kapasitas</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Kapasitas" id="namapemesan"
-                                                       name="kapasitas"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Harga</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Harga" id="namapemesan"
-                                                       name="harga"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Status</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="text" placeholder="Status" id="namapemesan"
-                                                       name="status"
-                                                       class="form-control col-lg-3">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Gambar</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="file" id="namapemesan"
-                                                       name="fotoakomodasi">
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </div>
-
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                                <input type="submit" class="btn btn-info" name="_submit" value="Tambah Akomodasi">
-                                <button class="btn btn-default" type="reset">Reset</button>
-                            </div><!-- /.box-footer -->
-                        </form>
-                    </div>
+            <div class="box-body">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Daftar Makanan</h3>
                 </div>
+                <table id="student" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID Makanan</th>
+                        <th>Paket Makanan</th>
+                        <th>Keterangan</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <?php foreach ($MenuMakanan as $Value) { ?>
+                        <tr>
+                            <td><?php echo $Value['idmenumakanan'] ?></td>
+                            <td><?php echo $Value['idtipemakanan'] ?></td>
+                            <td><?php echo $Value['keterangan'] ?></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Hapus</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Ubah</a></td>
+                        </tr>
+                    <?php } ?>
+
+
+                    </tbody>
+                </table>
+                <!-- Your Page Content Here -->
             </div>
         </section><!-- /.content -->
         <!-- /.content -->
@@ -445,6 +402,13 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
+
+<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#student').DataTable();
+    });
+</script>
 </html>

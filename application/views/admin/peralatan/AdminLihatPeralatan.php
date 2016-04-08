@@ -222,19 +222,18 @@
             </form>
 
             <ul class="sidebar-menu">
-                <li class="header">MAKANAN</li>
+                <li class="header">PERALATAN</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Makanan</span> <i
+                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Peralatan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihatmakanan">Lihat Semua Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahmakanan">Tambah Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/adminlihattipemakanan">Lihat Tipe Makanan</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/administrator/admintambahtipemakanan">Tambah Tipe Makanan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatperalatan">Lihat Semua
+                                Peralatan</a></li>
+                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahperalatan">Tambah
+                                Peralatan</a></li>
                     </ul>
                 </li>
-
 
 
                 <li class="header">Version - 0.1 beta</li>
@@ -257,8 +256,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Makanan
-                <small>Lihat Tipe Makanan</small>
+                Peralatan
+                <small>Lihat Peralatan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -270,27 +269,34 @@
         <section class="content">
             <div class="box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Tipe Makanan</h3>
+                    <h3 class="box-title">Daftar Peralatan</h3>
                 </div>
                 <table id="student" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID Tipe Makanan</th>
+                        <th>ID Peralatan</th>
+                        <th>Nama</th>
+                        <th>Harga sewa</th>
                         <th>Keterangan</th>
-                        <th>Harga</th>
+                        <th>Jumlah</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <?php foreach ($TipeMakanan as $Value) { ?>
+                    <?php foreach ($Peralatan as $Value) { ?>
                         <tr>
-                            <td><?php echo $Value['idtipemakanan'] ?></td>
+                            <td><?php echo $Value['idperalatan'] ?></td>
+                            <td><?php echo $Value['nama'] ?></td>
+                            <td>Rp <?php echo number_format($Value['hargasewa']) ?></td>
                             <td><?php echo $Value['keterangan'] ?></td>
-                            <td>Rp <?php echo number_format($Value['harga']) ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
+                            <td><?php echo $Value['jumlah'] ?></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailperalatan/view/<?php echo $Value['idperalatan'] ?>"
+                                   class="btn btn-sm btn-default">Detail</a>
+                            <a href="<?php echo base_url() ?>index.php/administrator/detailperalatan/update/<?php echo $Value['idperalatan'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                            <a href="<?php echo base_url() ?>index.php/administrator/detailperalatan/delete/<?php echo $Value['idperalatan'] ?>"
+                                   class="btn btn-sm btn-danger">Hapus</a>
+                            </td>
                         </tr>
                     <?php } ?>
 
@@ -402,8 +408,6 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
 
 <script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>

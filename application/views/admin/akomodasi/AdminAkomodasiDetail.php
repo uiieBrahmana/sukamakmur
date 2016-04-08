@@ -269,21 +269,21 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <!--                            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">-->
+                            <!--<img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">-->
 
-                            <h3 class="profile-username text-center">Karmel</h3>
+                            <h3 class="profile-username text-center"><?php echo $Akomodasi['nama'] ?></h3>
 
-                            <p class="text-muted text-center">210</p>
+                            <p class="text-muted text-center"><?php echo $Akomodasi['kapasitas'] ?></p>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Kapasitas</b> <a class="pull-right">1</a>
+                                    <b>Kapasitas</b> <a class="pull-right"><?php echo $Akomodasi['kapasitas'] ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Harga</b> <a class="pull-right">26 November 1993</a>
+                                    <b>Harga</b> <a class="pull-right">Rp. <?php echo number_format($Akomodasi['harga']) ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Status</b> <a class="pull-right">Laki-laki</a>
+                                    <b>Status</b> <a class="pull-right"><?php echo $Akomodasi['status'] ?></a>
                                 </li>
                             </ul>
 
@@ -303,7 +303,7 @@
                             <strong><i class="fa fa-mobile-phone margin-r-5"></i> Keterangan</strong>
 
                             <p class="text-muted">
-                                Harga termasuk perlengkapan tidur, perlengkapan mandi, dan kotak P3K
+                                <?php echo $Akomodasi['keterangan'] ?>
                             </p>
 
                         </div>
@@ -691,6 +691,4 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
 </html>

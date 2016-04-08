@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Retreat Centre GBKP Sukamakmur</title>
 
-    <base href="<?php echo base_url() ?>">
+    <base href="<?php echo base_url()?>">
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
@@ -25,10 +25,6 @@
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-
-    <link rel="stylesheet" href="css/plugins/datatables/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
-
     <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -256,8 +252,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Peralatan
-                <small>Lihat Peralatan</small>
+                Kelola Fasilitas
+                <small>Tambah Peralatan</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -267,42 +263,65 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="box-body">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Peralatan</h3>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Tambah Peralatan Baru</h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+
+                        <form class="form-horizontal" method="post" action="index.php/administrator/admintambahperalatan">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Nama</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Nama" id="namapemesan"
+                                                       name="nama"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Harga Sewa</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Harga Sewa" id="namapemesan"
+                                                       name="hargasewa"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Keterangan" id="namapemesan"
+                                                       name="keterangan"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="namapemesan">Jumlah</label>
+
+                                            <div class="col-sm-10">
+                                                <input required type="text" placeholder="Jumlah" id="namapemesan"
+                                                       name="jumlah"
+                                                       class="form-control col-lg-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button class="btn btn-info" name="_submit" type="submit">Tambah Peralatan</button>
+                                <button class="btn btn-default" type="reset">Reset</button>
+                            </div><!-- /.box-footer -->
+                        </form>
+                    </div>
                 </div>
-                <table id="student" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Peralatan</th>
-                        <th>Nama</th>
-                        <th>Harga sewa</th>
-                        <th>Keterangan</th>
-                        <th>Jumlah</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php foreach ($Peralatan as $Value) { ?>
-                        <tr>
-                            <td><?php echo $Value['idperalatan'] ?></td>
-                            <td><?php echo $Value['nama'] ?></td>
-                            <td>Rp <?php echo number_format($Value['hargasewa']) ?></td>
-                            <td><?php echo $Value['keterangan'] ?></td>
-                            <td><?php echo $Value['jumlah'] ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi"
-                                   class="btn btn-sm btn-info">Detail</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
-                        </tr>
-                    <?php } ?>
-
-
-                    </tbody>
-                </table>
-                <!-- Your Page Content Here -->
             </div>
         </section><!-- /.content -->
         <!-- /.content -->
@@ -394,7 +413,7 @@
 <script src="css/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<!--<script src="css/plugins/morris/morris.min.js"></script>-->
+<script src="css/plugins/morris/morris.min.js"></script>
 
 <script src="css/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script src="css/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -407,15 +426,5 @@
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
-<!--<script src="css/dist/js/pages/dashboard.js"></script>-->
-<script src="css/dist/js/demo.js"></script>
 
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#student').DataTable();
-    });
-</script>
 </html>
