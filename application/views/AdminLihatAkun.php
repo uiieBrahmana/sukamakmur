@@ -311,7 +311,6 @@
                     <tr>
                         <th>ID Tamu</th>
                         <th>Nama Tamu</th>
-                        <th>Alamat</th>
                         <th>Email</th>
                         <th>No. Telepon</th>
                         <th>Username</th>
@@ -324,12 +323,15 @@
                         <tr>
                             <td><?php echo $value['idtamu'] ?></td>
                             <td><?php echo $value['nama'] ?></td>
-                            <td><?php echo $value['alamat'] ?></td>
                             <td><?php echo $value['email'] ?></td>
                             <td><?php echo $value['notelp'] ?></td>
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
                             <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Hapus</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
+                                   class="btn btn-sm btn-info">Ubah</a></td>
                         </tr>
                     <?php } ?>
                     </tbody>
