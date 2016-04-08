@@ -15,11 +15,13 @@ class Administrator extends CI_Controller
         if (strcasecmp($role, 'Administrator') != 0) {
             redirect('/pengunjung/');
         }
+
+        //$this->load->view('template/head');
     }
 
     public function index()
     {
-        $this->load->view('AdminBeranda');
+        $this->load->view('admin/AdminBeranda');
     }
 
     public function buatpesananfasilitas()
@@ -79,7 +81,7 @@ class Administrator extends CI_Controller
             ));
 
             if ($idtamu) {
-                echo 'success';
+                redirect('/administrator/adminlihatakun/success');
             } else {
                 echo 'failed';
             }
@@ -108,6 +110,61 @@ class Administrator extends CI_Controller
         $this->load->view('AdminKonfirmasiPembayaran');
     }
 
+    public function detailmakanan($domain, $id)
+    {
+        switch ($domain) {
+            case 'delete':
+                $menumakanan = DeleteBuilder('menumakanan', array('idmenumakanan' => $id));
+                $id = $this->koneksi->Save($menumakanan, array($id));
+                redirect('/administrator/adminlihatmakanan/success');
+                break;
+            case 'update':
+                // todo : join table
+                $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
+                $data['Menumakanan'] = $result[0];
+                $this->load->view('admin/makanan/AdminUpdateMakanan', $data);
+                break;
+            case 'view':
+                // todo : join table
+                $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
+                $data['Menumakanan'] = $result[0];
+                $this->load->view('admin/makanan/AdminMakananDetail', $data);
+                break;
+        }
+    }
+
+    public function adminupdatemakanan(){
+        $submit = $this->input->post('submit');
+
+        if (isset($submit)) {
+            $idmenumakanan = $this->input->post('idmenumakanan');
+            $idtipemakanan = $this->input->post('idtipemakanan');
+            $keterangan = $this->input->post('keterangan');
+
+            $querymakanan = UpdateBuilder('menumakanan',
+                array(
+                    'idmenumakanan' => $idmenumakanan,
+                ),
+                array(
+                    'idtipemakanan' => $idtipemakanan,
+                    'keterangan' => $keterangan,
+                )
+            );
+
+            $id = $this->koneksi->Save($querymakanan, array(
+                $idmenumakanan,
+                $idtipemakanan,
+                $keterangan,
+            ));
+
+            if ($id == 0) {
+                redirect('/administrator/adminlihatmakanan/success');
+            } else {
+                echo 'failed';
+            }
+        }
+    }
+
     public function admintambahmakanan()
     {
         $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM TIPEMAKANAN");
@@ -125,18 +182,70 @@ class Administrator extends CI_Controller
             $idmenumakanan = $this->koneksi->Save($querymenumakan, array($idtipemakanan, $keterangan));
 
             if ($idmenumakanan) {
-                echo 'success';
+                redirect('/administrator/adminlihatmakanan/success');
             } else {
                 echo 'failed';
             }
         }
-        $this->load->view('AdminTambahMakanan', $data);
+        $this->load->view('admin/makanan/AdminTambahMakanan', $data);
     }
 
     public function adminlihatmakanan()
     {
         $data['MenuMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `MenuMakanan`");
-        $this->load->view('AdminLihatMakanan', $data);
+        $this->load->view('admin/makanan/AdminLihatMakanan', $data);
+    }
+
+    public function adminLihatTipeMakanan()
+    {
+
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
+        $this->load->view('admin/makanan/AdminLihatTipeMakanan', $data);
+    }
+
+    public function detailTipeMakanan($domain, $id)
+    {
+        switch ($domain) {
+            case 'delete':
+                $kueritipemakanan = DeleteBuilder('tipemakanan', array('idtipemakanan' => $id));
+                $idtipemakanan = $this->koneksi->Save($kueritipemakanan, array($id));
+                redirect('/administrator/adminlihattipemakanan/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `tipemakanan` WHERE idtipemakanan = '$id'");
+                $data['TipeMakanan'] = $result[0];
+                $this->load->view('admin/makanan/AdminUpdateTipeMakanan', $data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `tipemakanan` WHERE idtipemakanan = '$id'");
+                $data['TipeMakanan'] = $result[0];
+                $this->load->view('admin/makanan/AdminTipeMakananDetail', $data);
+                break;
+        }
+    }
+
+    public function adminupdatetipemakanan(){
+
+        $submit = $this->input->post('submit');
+        if (isset($submit)) {
+            $idtipemakanan = $this->input->post('idtipemakanan');
+            $keterangan = $this->input->post('keterangan');
+            $harga = $this->input->post('harga');
+
+            $builder = UpdateBuilder('tipemakanan',
+                array('idtipemakanan' => $idtipemakanan),
+                array(
+                    'keterangan' => $keterangan,
+                    'harga' => $harga,
+                )
+            );
+
+            $idupdate = $this->koneksi->Save($builder, array($idtipemakanan, $keterangan, $harga));
+            if ($idupdate == 0)
+                redirect('/administrator/adminlihattipemakanan/success');
+            else
+                echo 'update gagal';
+        }
     }
 
     public function adminlihatpegawai()
@@ -172,7 +281,7 @@ class Administrator extends CI_Controller
             ));
             $result = $this->koneksi->Save($kueri, array($nama, $alamat, $tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password));
             if ($result) {
-                echo 'sukses';
+                redirect('/administrator/adminlihatpegawai/success');
             } else {
                 echo 'gagal';
             }
@@ -519,7 +628,7 @@ class Administrator extends CI_Controller
 
     public function adminmakanan()
     {
-        $this->load->view('AdminMakanan');
+        $this->load->view('admin/makanan/AdminMakanan');
     }
 
     public function admintambahtipemakanan()
@@ -538,13 +647,13 @@ class Administrator extends CI_Controller
             $result = $this->koneksi->Save($query, array($idtipemakanan, $keterangan, $harga));
 
             if ($result) {
-                echo 'sukses';
+                redirect('/administrator/adminmakanan/success');
             } else {
                 echo 'belum berhasil';
             }
         }
 
-        $this->load->view('AdminTambahTipeMakanan');
+        $this->load->view('admin/makanan/AdminTambahTipeMakanan');
     }
 
     public function adminPeralatan()
@@ -635,13 +744,6 @@ class Administrator extends CI_Controller
             else
                 echo 'update gagal';
         }
-    }
-
-    public function adminLihatTipeMakanan()
-    {
-
-        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
-        $this->load->view('AdminLihatTipeMakanan', $data);
     }
 
 }

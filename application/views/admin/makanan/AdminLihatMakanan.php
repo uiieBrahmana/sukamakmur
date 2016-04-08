@@ -287,10 +287,13 @@
                             <td><?php echo $Value['idmenumakanan'] ?></td>
                             <td><?php echo $Value['idtipemakanan'] ?></td>
                             <td><?php echo $Value['keterangan'] ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailmakanan/view/<?php echo $Value['idmenumakanan'] ?>"
+                                   class="btn btn-sm btn-default">Detail</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailmakanan/update/<?php echo $Value['idmenumakanan'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailmakanan/delete/<?php echo $Value['idmenumakanan'] ?>"
+                                   class="btn btn-sm btn-danger">Hapus</a>
+                            </td>
                         </tr>
                     <?php } ?>
 

@@ -287,10 +287,13 @@
                             <td><?php echo $Value['idtipemakanan'] ?></td>
                             <td><?php echo $Value['keterangan'] ?></td>
                             <td>Rp <?php echo number_format($Value['harga']) ?></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
+                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailtipemakanan/view/<?php echo $Value['idtipemakanan'] ?>"
+                                   class="btn btn-sm btn-default">Detail</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailtipemakanan/update/<?php echo $Value['idtipemakanan'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailtipemakanan/delete/<?php echo $Value['idtipemakanan'] ?>"
+                                   class="btn btn-sm btn-danger">Hapus</a>
+                            </td>
                         </tr>
                     <?php } ?>
 
