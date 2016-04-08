@@ -323,9 +323,8 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Gambar</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="file" placeholder="Status" id="namapemesan"
-                                                       name="fotoakomodasi"
-                                                       class="form-control col-lg-3">
+                                                <input required type="file" id="namapemesan"
+                                                       name="fotoakomodasi">
                                             </div>
                                         </div>
 

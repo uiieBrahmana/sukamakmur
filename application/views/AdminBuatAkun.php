@@ -343,7 +343,7 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Email</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Email" id="namapemesan"
+                                                <input required type="email" placeholder="Email" id="namapemesan"
                                                        name="email"
                                                        class="form-control col-lg-3">
                                             </div>
@@ -372,7 +372,7 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Password</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="Password" id="namapemesan"
+                                                <input required type="password" placeholder="Password" id="namapemesan"
                                                        name="password"
                                                        class="form-control col-lg-3">
                                             </div>
@@ -384,6 +384,7 @@
                             <div class="box-footer">
                                 <input type="submit" class="btn btn-info" name="_submit" value="Buat Akun">
                                 <button class="btn btn-default" type="reset">Reset</button>
+                                <input type="hidden" name="update" value="update">
                             </div><!-- /.box-footer -->
                         </form>
                     </div>
