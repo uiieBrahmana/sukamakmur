@@ -333,7 +333,7 @@
                             <td><?php echo $value['status'] ?></td>
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
-                            <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
+                            <td><a href="<?php echo base_url(); ?>" class="btn btn-sm btn-info">Detail</a></td>
                         </tr>
                     <?php } ?>
 

@@ -9,8 +9,9 @@ class Administrator extends CI_Controller
         parent::__construct();
         $auth = $this->session->userdata('ID');
         $role = $this->session->userdata('role');
-        if (!isset($auth))
+        if (!isset($auth)) {
             redirect('/login/');
+        }
         if (strcasecmp($role, 'Administrator') != 0) {
             redirect('/pengunjung/');
         }
@@ -77,8 +78,16 @@ class Administrator extends CI_Controller
                 'password' => $password
             ));
 
-            $idtamu = $this->koneksi->Save($queryakun, array($nama, $tanggallahir,
-                $jeniskelamin, $alamat, $email, $notelp, $username, $password));
+            $idtamu = $this->koneksi->Save($queryakun, array(
+                $nama,
+                $tanggallahir,
+                $jeniskelamin,
+                $alamat,
+                $email,
+                $notelp,
+                $username,
+                $password
+            ));
 
             if ($idtamu) {
                 echo 'success';
@@ -167,6 +176,78 @@ class Administrator extends CI_Controller
         $this->load->view('AdminProfilPegawai');
     }
 
+    public function detailprofilmember($domain, $id)
+    {
+        switch ($domain) {
+            case 'delete':
+                $queryakun = DeleteBuilder('tamu', array('idtamu' => $id));
+                $idtamu = $this->koneksi->Save($queryakun, array($id));
+                redirect('/administrator/adminlihatakun/success');
+                break;
+            case 'update':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
+                $data['Member'] = $result[0];
+                $this->load->view('AdminUpdateAkun', $data);
+                break;
+            case 'view':
+                $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
+                $data['Member'] = $result[0];
+                $this->load->view('AdminLihatMember', $data);
+                break;
+        }
+    }
+
+    public function adminupdateakun(){
+
+        $submit = $this->input->post('submit');
+
+        if(isset($submit)){
+            $id = $this->input->post('idtamu');
+            $nama = $this->input->post('nama');
+            $tanggallahir = $this->input->post('tanggallahir');
+            $jeniskelamin = $this->input->post('jeniskelamin');
+            $alamat = $this->input->post('alamat');
+            $email = $this->input->post('email');
+            $notelp = $this->input->post('notelp');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $queryakun = UpdateBuilder('tamu',
+                array(
+                    'idtamu' => $id,
+                ),
+                array(
+                    'nama' => $nama,
+                    'tanggallahir' => $tanggallahir,
+                    'jeniskelamin' => $jeniskelamin,
+                    'alamat' => $alamat,
+                    'email' => $email,
+                    'notelp' => $notelp,
+                    'username' => $username,
+                    'password' => $password
+                )
+            );
+
+            $idtamu = $this->koneksi->Save($queryakun, array(
+                $id,
+                $nama,
+                $tanggallahir,
+                $jeniskelamin,
+                $alamat,
+                $email,
+                $notelp,
+                $username,
+                $password
+            ));
+
+            if ($idtamu == 0) {
+                redirect('/administrator/adminlihatakun/success');
+            } else {
+                echo 'failed';
+            }
+        }
+    }
+
     public function admintambahkegiatan()
     {
         $submit = $this->input->post('_submit');
@@ -187,7 +268,8 @@ class Administrator extends CI_Controller
                 'harga' => $harga,
                 'keterangan' => $keterangan
             ));
-            $result = $this->koneksi->Save($query, array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
+            $result = $this->koneksi->Save($query,
+                array($nama, $lamakegiatan, $pesertamin, $pesertamax, $harga, $keterangan));
 
             if ($result) {
                 echo 'sukses';
@@ -288,8 +370,11 @@ class Administrator extends CI_Controller
                     'filedata' => $filedata
                 ));
 
-                $idfoto = $this->koneksi->Save($queryfoto, array($namafile, pathinfo($namafile, PATHINFO_EXTENSION),
-                    file_get_contents($filedata)));
+                $idfoto = $this->koneksi->Save($queryfoto, array(
+                    $namafile,
+                    pathinfo($namafile, PATHINFO_EXTENSION),
+                    file_get_contents($filedata)
+                ));
 
                 if ($idfoto) {
                     $query = InsertBuilder('Akomodasi', array(
@@ -300,7 +385,8 @@ class Administrator extends CI_Controller
                         'harga' => $harga,
                         'fotoakomodasi' => $idfoto
                     ));
-                    $result = $this->koneksi->Save($query, array($nama, $keterangan, $kapasitas, $status, $harga, $idfoto));
+                    $result = $this->koneksi->Save($query,
+                        array($nama, $keterangan, $kapasitas, $status, $harga, $idfoto));
 
                     if ($result) {
                         echo 'sukses';

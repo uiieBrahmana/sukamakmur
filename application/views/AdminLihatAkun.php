@@ -327,11 +327,14 @@
                             <td><?php echo $value['notelp'] ?></td>
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
-                            <td><a href="#" class="btn btn-sm btn-info">Detail</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Hapus</a></td>
-                            <td><a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai"
-                                   class="btn btn-sm btn-info">Ubah</a></td>
+                            <td>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/view/<?php echo $value['idtamu'] ?>"
+                                   class="btn btn-sm btn-info">Detail</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/delete/<?php echo $value['idtamu'] ?>"
+                                   class="btn btn-sm btn-info">Hapus</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/update/<?php echo $value['idtamu'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
