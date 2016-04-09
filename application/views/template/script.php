@@ -18,4 +18,5 @@
 <script src="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script src="css/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
+<script src="css/plugins/iCheck/icheck.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>

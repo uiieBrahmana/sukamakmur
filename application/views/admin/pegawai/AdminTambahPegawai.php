@@ -126,7 +126,7 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Alamat</label>
 
                                             <div class="col-sm-5">
-                                                <textarea required name="alamat" style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
+                                                <textarea required name="alamat" class="form-control" style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">

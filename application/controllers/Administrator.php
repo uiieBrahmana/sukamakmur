@@ -26,7 +26,16 @@ class Administrator extends CI_Controller
 
     public function admintambahpesanan()
     {
-        $this->load->view('admin/pesanan/AdminTambahPesanan');
+
+        $submit = $this->input->post('_submit');
+
+        if(isset($submit)){
+            var_dump($_POST);
+        }
+
+        $data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM TAMU');
+        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
+        $this->load->view('admin/pesanan/AdminTambahPesanan', $data);
     }
 
     public function adminlihatpesanan()
@@ -57,12 +66,12 @@ class Administrator extends CI_Controller
 
     public function adminkonfirmasipembayaran()
     {
-        $this->load->view('AdminKonfirmasiPembayaran');
+        $this->load->view('admin/pesanan/AdminKonfirmasiPembayaran');
     }
 
     public function adminkonfirmasipesanan()
     {
-        $this->load->view('AdminKonfirmasiPesanan');
+        $this->load->view('admin/pesanan/AdminKonfirmasiPesanan');
     }
 
     public function adminlihatlaporan()

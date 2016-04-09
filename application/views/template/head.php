@@ -17,11 +17,12 @@
     <link rel="stylesheet" href="css/plugins/colorpicker/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" href="css/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/plugins/morris/morris.css">
+    <link rel="stylesheet" href="css/plugins/iCheck/all.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet" href="css/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="css/plugins/daterangepicker/daterangepicker-bs3.css">
     <link rel="stylesheet" href="css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="css/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
-    <link rel="stylesheet" href="css/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/dist/css/AdminLTE.css">
 </head>

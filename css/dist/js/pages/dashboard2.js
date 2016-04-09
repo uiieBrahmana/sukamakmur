@@ -190,7 +190,8 @@ $(function () {
       selected: {
         fill: 'yellow'
       },
-      selectedHover: {}
+      selectedHover: {
+      }
     },
     markerStyle: {
       initial: {
