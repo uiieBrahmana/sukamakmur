@@ -40,11 +40,11 @@ class Login extends CI_Controller
                         break;
                 }
             else
-                $this->load->view('GagalLogin');
+                $this->load->view('auth/GagalLogin');
 
         } else {
             // untuk mengubah file view yang dituju
-            $this->load->view('Login');
+            $this->load->view('auth/Login');
         }
 
     }
