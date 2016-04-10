@@ -22,7 +22,9 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Akomodasi</span>
-                            <span class="info-box-number">-</span>
+                            <span class="info-box-number">
+                                -
+                            </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div><!-- /.col -->
@@ -32,7 +34,9 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Makanan</span>
-                            <span class="info-box-number">-</span>
+                            <span class="info-box-number">
+                                -
+                            </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div>
@@ -44,7 +48,9 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Peralatan</span>
-                            <span class="info-box-number">-</span>
+                            <span class="info-box-number">
+                                -
+                            </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div><!-- /.col -->
@@ -54,7 +60,9 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Aktivitas</span>
-                            <span class="info-box-number">-</span>
+                            <span class="info-box-number">
+                                -
+                            </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
                 </div><!-- /.col -->

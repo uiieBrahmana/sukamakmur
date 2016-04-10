@@ -16,6 +16,12 @@ class Service extends CI_Controller
         header('Content-Type: application/json');
     }
 
+    public function KapasitasAkomodasi(){
+        $idakomodasi = $this->input->post('idakomodasi');
+        $kapasitas = $this->koneksi->FetchAll("SELECT kapasitas FROM `akomodasi` where idakomodasi = $idakomodasi;");
+        echo json_encode($kapasitas[0]);
+    }
+
     public function AvailableAkomodasi()
     {
         $idakomodasi = $this->input->post('idakomodasi');
@@ -34,7 +40,8 @@ class Service extends CI_Controller
             $temp = $this->koneksi->FetchAll(
                 "SELECT * FROM `pesananakomodasi` where idakomodasi = $idakomodasi
                 and tanggal = STR_TO_DATE('" . $dt->format("d-m-Y") . "','%d-%m-%Y');");
-            $data['Akomodasi'][$k]['Tanggal'] = $dt->format("d-m-Y");
+            $data['Akomodasi'][$k]['Tanggal'] = $dt->format("d F Y");
+            $data['Akomodasi'][$k]['IDTanggal'] = $dt->format("Y-m-d");
             $data['Akomodasi'][$k]['Result'] = (sizeof($temp) > 0 && isset($temp)) ? false : true;
         }
         echo json_encode($data);
