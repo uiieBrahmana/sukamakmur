@@ -35,6 +35,9 @@ class Administrator extends CI_Controller
 
         $data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM TAMU');
         $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
+        $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
+        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
         $this->load->view('admin/pesanan/AdminTambahPesanan', $data);
     }
 

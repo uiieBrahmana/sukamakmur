@@ -40,7 +40,19 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function test(){
+    public function AvailableMakanan()
+    {
+        $mulai = $this->input->post('tanggalmakan');
+        $begin = new DateTime(date("Y-m-d", strtotime($mulai)));
+
+        $sisa = $this->koneksi->FetchAll("SELECT (1000 - sum(IFNULL(porsi,0))) as sisa FROM `pesananmakanan`
+                where tanggalpemesanan = STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y');");
+
+        echo json_encode($sisa[0]);
+    }
+
+    public function test()
+    {
         $this->load->view('test');
     }
 }

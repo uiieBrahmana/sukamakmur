@@ -102,7 +102,8 @@
                             <h3 class="box-title">Quick Example</h3>
                         </div>
 
-                        <form role="form" method="post" action="<?php echo base_url() ?>index.php/administrator/admintambahpesanan" name="add">
+                        <form role="form" method="post"
+                              action="<?php echo base_url() ?>index.php/administrator/admintambahpesanan" name="add">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tamu</label>
@@ -142,14 +143,15 @@
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Tanggal</label>
                                                 <input type="text" placeholder="dari" name="tanggalmasuk"
-                                                       class="form-control ">
+                                                       value="<?php echo date("d-m-Y") ?>"
+                                                       class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Hingga</label>
                                                 <select name="tanggalkeluar" class="form-control select2">
                                                     <option value="1">1 Hari</option>
                                                     <option value="2">2 Hari</option>
-                                                    <option value="3">3 Hari</option>
+                                                    <option value="3" selected>3 Hari</option>
                                                     <option value="4">4 Hari</option>
                                                     <option value="5">5 Hari</option>
                                                     <option value="6">6 Hari</option>
@@ -177,11 +179,9 @@
 
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Keterangan</label>
-                                                <textarea required name="keterangan" class="form-control" style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
-
+                                                <textarea required name="keteranganakomodasi" class="form-control"
+                                                          style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -195,82 +195,128 @@
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse">
                                         <div class="box-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor
-                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                            tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                            sapiente
-                                            ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                            beer
-                                            farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                                            of them
-                                            accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel box box-success">
-                                    <div class="box-header with-border">
-                                        <h4 class="box-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                Pesanan Peralatan
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse">
-                                        <div class="box-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor
-                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                            tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                            sapiente
-                                            ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                            beer
-                                            farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                                            of them
-                                            accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel box box-info">
-                                    <div class="box-header with-border">
-                                        <h4 class="box-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                Pesanan Kegiatan
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse">
-                                        <div class="box-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor
-                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                            tempor, sunt
-                                            aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                            shoreditch et.
-                                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                            sapiente
-                                            ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                            beer
-                                            farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                                            of them
-                                            accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="box-footer">
-                                <button class="btn btn-primary" type="submit" name="_submit">Submit</button>
-                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Menu</label>
+                                                <select name="idmenu" class="form-control select2">
+                                                    <?php foreach ($MenuMakanan as $Value) {
+                                                        $data = $Value;
+                                                        echo "<option value='" . $data['idmenumakanan'] . "'>" . $data['idtipemakanan'] . " " . $data['keterangan'] . "</option>";
+                                                    } ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Tanggal</label>
+                                                <input type="text" placeholder="dari" name="tanggalmakan"
+                                                       value="<?php echo date("d-m-Y") ?>"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Waktu</label>
+                                                <select name="waktumakan" class="form-control select2">
+                                                    <option value="Pagi">Pagi</option>
+                                                    <option value="Siang">Siang</option>
+                                                    <option value="Malam">Malam</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Jumlah Porsi</label>
+                                                <input type="text" name="jumlahporsi" placeholder="jumlah porsi"
+                                                       class="form-control">
+
+                                                <p class="help-block" id="sisaporsi"></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Keterangan</label>
+                                                <textarea required name="keteranganmakanan" class="form-control"
+                                                          style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div id="makananadd" class="btn btn-info">Tambahkan</div>
+                                            </div>
+
+                                            <div id="makanres">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" disabled> Pilih makanan dahulu.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel box box-success">
+                                        <div class="box-header with-border">
+                                            <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                   href="#collapseThree">
+                                                    Pesanan Peralatan
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="box-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry
+                                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                                dolor
+                                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                                tempor, sunt
+                                                aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                                shoreditch et.
+                                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                nesciunt
+                                                sapiente
+                                                ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                                craft
+                                                beer
+                                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
+                                                heard
+                                                of them
+                                                accusamus labore sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel box box-info">
+                                        <div class="box-header with-border">
+                                            <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                   href="#collapseThree">
+                                                    Pesanan Kegiatan
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="box-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry
+                                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                                dolor
+                                                brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
+                                                tempor, sunt
+                                                aliqua put a bird on it squid single-origin coffee nulla assumenda
+                                                shoreditch et.
+                                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                nesciunt
+                                                sapiente
+                                                ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                                                craft
+                                                beer
+                                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
+                                                heard
+                                                of them
+                                                accusamus labore sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button class="btn btn-primary" type="submit" name="_submit">Submit</button>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -297,10 +343,15 @@
         });
 
         $('.select2').select2();
+
         $('form[name=add]').validate({
             rules: {
                 idtamu: {
                     required: true
+                },
+                jumlahporsi: {
+                    required: true,
+                    range: [1, 1000]
                 }
             },
             showErrors: function (errorMap, errorList) {
@@ -339,6 +390,63 @@
             $("table tr:eq(" + lineOffset + ")").after(line.clone(true));
         });
 
+        $('input[name=tanggalmasuk]').on('change', function () {
+            $('select[name=tanggalkeluar]').trigger('change');
+        });
+
+        $('select[name=idakomodasi]').on('change', function () {
+            $('select[name=tanggalkeluar]').trigger('change');
+        });
+
+        $('input[name=tanggalmasuk]').on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+
+        $('select[name=tanggalkeluar]').trigger('change');
+
+
+        $('input[name=tanggalmakan]').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+        $('input[name=tanggalmakan]').on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+        $('input[name=tanggalmakan]').on('change', function () {
+            $.ajax({
+                    method: "POST",
+                    url: "index.php/service/AvailableMakanan",
+                    data: {
+                        tanggalmakan: $('input[name=tanggalmakan]').val(),
+                    }
+                })
+                .done(function (msg) {
+                    console.log(msg.sisa);
+                    if (msg.sisa == null) {
+                        $('p[id=sisaporsi]').html('Sisa porsi tersedia 1000 *Retreat Centre hanya bisa mengakomodir 1000 pesanan per harinya');
+                        $("input[name*=jumlahporsi]").rules("remove", "range");
+                        $("input[name*=jumlahporsi]").rules("add", {
+                            range: [1, 1000]
+                        });
+
+                    } else {
+                        $('p[id=sisaporsi]').html('Sisa porsi tersedia ' + msg.sisa + ' *Retreat Centre hanya bisa mengakomodir 1000 pesanan per harinya');
+                        $("input[name*=jumlahporsi]").rules("remove", "range");
+                        $("input[name*=jumlahporsi]").rules("add", {
+                            range: [1, msg.sisa]
+                        });
+                    }
+                });
+        });
+
+        $('input[name=tanggalmakan]').trigger('change');
+
+        $('div[id=makananadd]').on('click', function () {
+            var htmlcontent = '';
+            htmlcontent += '<div class="checkbox">';
+            htmlcontent += '<label><input checked type="checkbox" name="checkmakanan[]" value="' + $('input[name=tanggalmakan]').val() + '">' + $('input[name=jumlahporsi]').val() + ' Tersedia</label>';
+            htmlcontent += '</div>';
+            $('div[id=makanres]').append(htmlcontent);
+        });
     });
 </script>
 </html>
