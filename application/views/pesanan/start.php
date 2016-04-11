@@ -29,13 +29,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($Pesanan as $value) { ?>
                                 <tr>
-                                    <td>101</td>
-                                    <td>12 April 2016</td>
-                                    <td>Rp 1.200.000</td>
-                                    <td>Lunas</td>
-                                    <td><a class="btn btn-info" href="">Detail</a></td>
+                                    <td><?php echo $value['idpemesanan'] ?></td>
+                                    <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
+                                    <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
+                                    <td><?php echo $value['status'] ?></td>
+                                    <td><a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a></td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                 </div>

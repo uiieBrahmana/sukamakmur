@@ -148,9 +148,7 @@
 
                 });
         });
-        $('input[name=tanggalmasuk]').on('change', function () {
-            $('select[name=tanggalkeluar]').trigger('change');
-        });
+
         $('select[name=idakomodasi]').on('change', function () {
             $.ajax({
                     method: "POST",
@@ -169,9 +167,9 @@
         });
         $('input[name=tanggalmasuk]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
+            $('select[name=tanggalkeluar]').trigger('change');
         });
         $('select[name=idakomodasi]').trigger('change');
-        $('select[name=tanggalkeluar]').trigger('change');
     });
 </script>
 

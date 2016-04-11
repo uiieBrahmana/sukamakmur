@@ -19,7 +19,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <div class="box-body">
-                        <form name="add" action="pesan/akomodasi" method="post">
+                        <form name="add" action="pesan/makanan" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Menu</label>
                                 <select name="idmenu" class="form-control select2">
@@ -53,14 +53,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Keterangan</label>
-                                <textarea name="keteranganmakanan" class="form-control"  style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
-
+                                <textarea name="keteranganmakanan" class="form-control"
+                                          style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
                             </div>
 
 
                             <input type="submit" name="submit" class="btn btn-info btn-block" value="Simpan">
                             <input type="reset" name="reset" class="btn btn-warning btn-block" value="Reset">
-                            <p class="help-block">*Retreat Centre hanya bisa mengakomodir 1000 pesanan per harinya</p>
+
+                            <p class="help-block">*RC Sukamakmur hanya bisa menyediakan 1000 porsi per harinya.</p>
 
                         </form>
                     </div>
@@ -108,25 +109,22 @@
                     }
                 })
                 .done(function (msg) {
-                    if (msg.sisa == null) {
-                        $('p[id=sisaporsi]').html('Sisa porsi tersedia 1000.');
-                        $("input[name*=jumlahporsi]").rules("remove", "range");
-                        $("input[name*=jumlahporsi]").rules("add", {
-                            range: [1, 1000]
-                        });
-
-                    } else {
-                        $('p[id=sisaporsi]').html('Sisa porsi tersedia ' + msg.sisa + '.');
-                        $("input[name*=jumlahporsi]").rules("remove", "range");
-                        $("input[name*=jumlahporsi]").rules("add", {
-                            range: [1, msg.sisa]
-                        });
-                    }
+                    $('p[id=sisaporsi]').html('Sisa porsi tersedia ' + msg.sisa + '.');
+                    $("input[name*=jumlahporsi]").rules("remove", "range");
+                    $("input[name*=jumlahporsi]").rules("add", {
+                        range: [1, msg.sisa]
+                    });
+                    if (msg.sisa == 0)
+                        $('input[name=submit]').prop('disabled', true);
+                    else
+                        $('input[name=submit]').prop('disabled', false);
                 });
         });
 
         $('input[name=tanggalmakan]').trigger('changeDate');
-
+        $('select[name=idmenu]').on('change', function () {
+            $('input[name=tanggalmakan]').trigger('changeDate');
+        });
     });
 </script>
 

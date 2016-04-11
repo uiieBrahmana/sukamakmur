@@ -618,14 +618,14 @@ class Administrator extends CI_Controller
                 $queryfoto = InsertBuilder('fotoakomodasi', array(
                     'idakomodasi' => $result,
                     'namafile' => $namafile,
-                    'ekstensifile' => pathinfo($namafile, PATHINFO_EXTENSION),
+                    'ekstensifile' => $ekstensifile,
                     'filedata' => $filedata
                 ));
 
                 $foto = $this->koneksi->Save($queryfoto, array(
                     $result,
                     $namafile,
-                    pathinfo($namafile, PATHINFO_EXTENSION),
+                    $ekstensifile,
                     file_get_contents($filedata)
                 ));
 
