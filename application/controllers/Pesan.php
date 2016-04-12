@@ -62,7 +62,8 @@ class Pesan extends CI_Controller
         $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
         pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
         WHERE pn.IDPEMESANAN = ' . $idpesanan);
-        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM PESANANKEGIATAN WHERE IDPEMESANAN = ' . $idpesanan);
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM PESANANKEGIATAN
+        WHERE IDPEMESANAN = ' . $idpesanan);
 
         $this->load->view('pesanan/overview', $data);
     }
