@@ -81,7 +81,7 @@
             rules: {
                 jumlahalat: {
                     required: true,
-                    range: [1, 20]
+                    range: [1, 10]
                 }
             },
             showErrors: function (errorMap, errorList) {
@@ -105,6 +105,11 @@
                         range: [1, msg.sisa]
                     });
 
+                    if (msg.sisa <= 0) {
+                        $("input[name=submit]").prop('disabled', true);
+                    } else {
+                        $("input[name=submit]").prop('disabled', false);
+                    }
                 });
         });
 

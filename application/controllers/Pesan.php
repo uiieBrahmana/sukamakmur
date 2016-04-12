@@ -49,7 +49,22 @@ class Pesan extends CI_Controller
         if (!isset($idpesanan)) {
             redirect('/pesan/');
         }
-        $this->load->view('pesanan/overview');
+
+        $data['id'] = $idpesanan;
+        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM PESANANAKOMODASI p
+        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
+        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM PESANANKEGIATAN WHERE IDPEMESANAN = ' . $idpesanan);
+
+        $this->load->view('pesanan/overview', $data);
     }
 
     public function summary()
@@ -86,7 +101,7 @@ class Pesan extends CI_Controller
                 $this->koneksi->Save($insert, array($idpesanan, $idakomodasi, $jumlah, $val, $keterangan));
             }
 
-            redirect('/pesan/overview/');
+            redirect('/pesan/overview/'.$idpesanan);
         }
 
         $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
@@ -119,7 +134,7 @@ class Pesan extends CI_Controller
             );
             $this->koneksi->Save($insert, array($idpesanan, $idmenu, $tanggalmakan, $jumlahporsi, $waktumakan, $keterangan));
 
-            redirect('/pesan/overview/');
+            redirect('/pesan/overview/'.$idpesanan);
         }
 
         $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
@@ -150,7 +165,7 @@ class Pesan extends CI_Controller
             );
             $this->koneksi->Save($insert, array($idpesanan, $idperalatan, $jumlahalat, $tanggalsewa, $keterangan));
 
-            redirect('/pesan/overview/');
+            redirect('/pesan/overview/'.$idpesanan);
         }
 
         $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
@@ -182,7 +197,7 @@ class Pesan extends CI_Controller
             );
             $this->koneksi->Save($insert, array($idpesanan, $idkegiatan, $jumlah, $tanggal, $keterangan));
 
-            redirect('/pesan/overview/');
+            redirect('/pesan/overview/'.$idpesanan);
 
         }
 
