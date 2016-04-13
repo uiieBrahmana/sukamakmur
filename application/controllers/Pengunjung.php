@@ -13,28 +13,28 @@ class Pengunjung extends CI_Controller
         $this->load->view('tamu/BuatAkun');
     }
 
-    public function fasilitas()
-    {
-        $this->load->view('tamu/Fasilitas');
-    }
-
-    public function kegiatan()
-    {
-        $this->load->view('tamu/Kegiatan');
-    }
-
     public function pencarian()
     {
         $this->load->view('tamu/Pencarian');
     }
 
-    public function penginapan()
+    public function akomodasi()
     {
-        $this->load->view('tamu/Penginapan');
+        $this->load->view('tamu/Akomodasi');
+    }
+
+    public function makanan()
+    {
+        $this->load->view('tamu/Makanan');
     }
 
     public function peralatan()
     {
         $this->load->view('tamu/Peralatan');
+    }
+
+    public function kegiatan()
+    {
+        $this->load->view('tamu/Kegiatan');
     }
 }

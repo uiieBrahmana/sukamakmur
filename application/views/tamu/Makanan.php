@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="pengunjung/akomodasi">Akomodasi</a></li>
-                        <li><a href="pengunjung/makanan">Makanan</a></li>
+                        <li class="active"><a href="pengunjung/makanan">Makanan</a></li>
                         <li><a href="pengunjung/peralatan">Peralatan</a></li>
                         <li><a href="pengunjung/kegiatan">Kegiatan</a></li>
                     </ul>
