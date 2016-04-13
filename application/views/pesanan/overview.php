@@ -34,14 +34,19 @@
                                 <?php foreach ($Akomodasi as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <img alt="-" src="service/images/<?php echo $value['idakomodasi']; ?>"
-                                                 class="img-circle">
-                                            <span class="username"><?php echo $value['nama']; ?> untuk <?php echo $value['jumlahtamu']; ?> orang</span>
-                                            <span class="description">
+                                            <span style="margin-left: 0px;" class="username"><?php echo $value['nama']; ?>
+                                                <br/>
+                                                untuk <?php echo $value['jumlahtamu']; ?> orang</span>
+                                            <span style="margin-left: 0px;" class="description">
                                                 "<?php echo $value['ket']; ?>"
                                                 <br/>
                                                 Rp. <?php echo number_format($value['harga']); ?>
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])); ?></span>
+                                        </div>
+                                        <div class="box-tools">
+                                            <a href="pesan/batalkan/akomodasi/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                                <i class="fa fa-close"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -84,6 +89,11 @@
                                                 Rp. <?php echo number_format($value['harga'] * $value['porsi']); ?>
                                                 - <?php echo date("d F Y", strtotime($value['tanggalpemesanan'])) ?> (<?php echo $value['waktupemesanan'] ?>)</span>
                                         </div>
+                                        <div class="box-tools">
+                                            <a href="pesan/batalkan/makanan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                                <i class="fa fa-close"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 <?php } ?>
 
@@ -114,7 +124,7 @@
                                 <?php foreach ($Peralatan as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username"><?php echo $value['nama'] ?> (<?php echo $value['jumlahdisewa'] ?> unit)</span>
+                                            <span style="margin-left: 0px;" class="username"><?php echo $value['jumlahdisewa'] ?> <?php echo $value['nama'] ?> (Rp. <?php echo number_format($value['hargasewa']); ?> per unit)</span>
                                             <span style="margin-left: 0px;" class="description">
                                                 <?php echo $value['keterangan'] ?>
                                                 <br/>
@@ -122,6 +132,11 @@
                                                 <br/>
                                                 Rp. <?php echo number_format($value['hargasewa'] * $value['jumlahdisewa']); ?>
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
+                                        </div>
+                                        <div class="box-tools">
+                                            <a href="pesan/batalkan/peralatan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                                <i class="fa fa-close"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -154,9 +169,17 @@
                                 <?php foreach ($Kegiatan as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username"><a href="#"><?php echo $value['name'] ?></a></span>
-                                            <span style="margin-left: 0px;" class="description"><?php echo number_format($value['harga']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
+                                            <span style="margin-left: 0px;" class="username"><?php echo $value['nama'] ?>
+                                                <br/>
+                                                Untuk <?php echo $value['jumlahpeserta'] ?> (Rp. <?php echo number_format($value['harga']); ?> per orang)</span>
+                                            <span style="margin-left: 0px;" class="description">
+                                                "<?php echo $value['ket'] ?>"<br/>
+                                                Rp. <?php echo number_format($value['harga'] * $value['jumlahpeserta']); ?> - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
+                                        </div>
+                                        <div class="box-tools">
+                                            <a href="pesan/batalkan/kegiatan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                                <i class="fa fa-close"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -171,17 +194,33 @@
             </div>
             <div class="row">
                 <div class="col-xs-2"></div>
-                <div class="col-xs-4">
-                    <div class="box-body">
-                        <a href="" class="btn btn-info btn-block">Lanjut Pembayaran</a>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="box-body">
-                        <a href="" class="btn btn-danger btn-block">Batalkan Pesanan</a>
-                    </div>
+                <div class="col-xs-8 text-center text-warning">
+                    <h2><b>Total Rp. <?php echo number_format($Total); ?>,-</b></h2>
                 </div>
                 <div class="col-xs-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-3">
+                    <div class="box-body">
+                        <a href="" class="btn btn-info btn-block">Selesai dan Lanjutkan Pembayaran</a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="box-body">
+                        <a href="pesan/batalkansemua/<?php echo $id; ?>" class="btn btn-danger btn-block">Batalkan Pesanan</a>
+                    </div>
+                </div>
+                <div class="col-xs-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-3">
+                    <div class="box-body">
+                        <a href="pesan/" class="btn btn-warning btn-block">Kembali ke Daftar Pesanan</a>
+                    </div>
+                </div>
+                <div class="col-xs-3"></div>
             </div>
         </section>
     </div>
