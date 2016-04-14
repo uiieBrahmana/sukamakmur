@@ -46,16 +46,7 @@
 
 
                 <li class="header">Version - 0.1 beta</li>
-                <!--
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
-                -->
+
             </ul>
         </section>
     </aside>
@@ -82,19 +73,22 @@
                         </div><!-- /.box-header -->
                         <!-- form start -->
 
-                        <form name="add" class="form-horizontal" method="post"
-                              action="<?php echo base_url() ?>index.php/administrator/adminupdateakomodasi">
+                        <form name="add" class="form-horizontal" method="post" action="administrator/adminupdateakomodasi">
 
-                            <input type="hidden" name="idakomodasi" value="<?php echo $Akomodasi['idakomodasi'] ?>"><br/>
+                            <input type="hidden" name="idakomodasi"
+                                   value="<?php echo $Akomodasi['idakomodasi'] ?>"><br/>
 
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="box-body">
+
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Nama Akomodasi</label>
+                                            <label class="col-sm-2 control-label" for="namapemesan">Nama
+                                                Akomodasi</label>
 
                                             <div class="col-sm-5">
-                                                <input required type="text" placeholder="Nama Akomodasi" value="<?php echo $Akomodasi['nama'] ?>"
+                                                <input required type="text" placeholder="Nama Akomodasi"
+                                                       value="<?php echo $Akomodasi['nama'] ?>"
                                                        name="nama" class="form-control">
                                             </div>
                                         </div>
@@ -102,14 +96,16 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
 
                                             <div class="col-sm-5">
-                                                <textarea name="keterangan" style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"><?php echo $Akomodasi['keterangan'] ?></textarea>
+                                                <textarea name="keterangan" class="form-control"
+                                                          style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"><?php echo $Akomodasi['keterangan'] ?></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="namapemesan">Kapasitas</label>
 
                                             <div class="col-sm-2">
-                                                <input required type="text" placeholder="Kapasitas" value="<?php echo $Akomodasi['kapasitas'] ?>"
+                                                <input required type="text" placeholder="Kapasitas"
+                                                       value="<?php echo $Akomodasi['kapasitas'] ?>"
                                                        name="kapasitas" class="form-control">
                                             </div>
                                         </div>
@@ -117,7 +113,8 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Harga</label>
 
                                             <div class="col-sm-3">
-                                                <input required type="text" placeholder="Harga" value="<?php echo $Akomodasi['harga'] ?>"
+                                                <input required type="text" placeholder="Harga"
+                                                       value="<?php echo $Akomodasi['harga'] ?>"
                                                        name="harga" class="form-control">
                                             </div>
                                         </div>
@@ -127,7 +124,7 @@
                                             <div class="col-sm-3">
                                                 <select class="form-control" name="status">
                                                     <?php
-                                                    if($Akomodasi['status'] == 'Tersedia'){
+                                                    if ($Akomodasi['status'] == 'Tersedia') {
                                                         echo "<option value='Tersedia' selected>Tersedia</option>";
                                                         echo "<option value='Tidak Tersedia'>Tidak Tersedia</option>";
                                                     } else {
@@ -140,19 +137,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="namapemesan">Gambar</label>
-
-                                            <div class="col-sm-10">
-                                                <input required type="file" name="fotoakomodasi">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="box-footer text-center">
-                                <input type="submit" class="btn btn-info" name="_submit" value="Tambah Akomodasi">
+                                <input type="submit" class="btn btn-info" name="submit" value="Perbarui Akomodasi">
                                 <button class="btn btn-default" type="reset">Reset</button>
                             </div>
                         </form>
@@ -172,7 +162,7 @@
 <script src="css/plugins/validate/additional-methods.min.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('form[name=add]').validate({
             rules: {
                 kapasitas: {
@@ -184,7 +174,7 @@
                     number: true
                 }
             },
-            showErrors: function(errorMap, errorList) {
+            showErrors: function (errorMap, errorList) {
                 this.defaultShowErrors();
             }
         });

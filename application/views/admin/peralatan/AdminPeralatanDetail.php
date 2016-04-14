@@ -44,67 +44,51 @@
                     </ul>
                 </li>
 
-
                 <li class="header">Version - 0.1 beta</li>
-                <!--
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
-                -->
+
             </ul>
         </section>
     </aside>
+
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+
         <section class="content-header">
             <h1>
                 Peralatan
                 <small>Lihat Peralatan</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
             <div class="box box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Peralatan</h3>
+                    <h3 class="box-title">Detail Data Peralatan</h3>
                 </div>
-                <table>
+                <table class="table table-striped">
                     <tr>
-                        <td>idperalatan</td>
+                        <td>ID</td>
                         <td><?php echo $Peralatan['idperalatan'] ?></td>
                     </tr>
                     <tr>
-                        <td>nama</td>
+                        <td>Nama</td>
                         <td><?php echo $Peralatan['nama'] ?></td>
                     </tr>
                     <tr>
-                        <td>hargasewa</td>
+                        <td>Harga Sewa</td>
                         <td>Rp. <?php echo number_format($Peralatan['hargasewa']) ?></td>
                     </tr>
                     <tr>
-                        <td>keterangan</td>
+                        <td>Keterangan</td>
                         <td><?php echo $Peralatan['keterangan'] ?></td>
                     </tr>
                     <tr>
-                        <td>jumlah</td>
-                        <td><?php echo $Peralatan['jumlah'] ?></td>
+                        <td>Jumlah</td>
+                        <td><?php echo $Peralatan['jumlah'] ?> unit</td>
                     </tr>
                 </table>
-
-                <!-- Your Page Content Here -->
+                <a href="administrator/adminlihatperalatan" class="btn btn-info">Kembali</a>
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
     <?php $this->load->view('template/footer'); ?>
     <?php $this->load->view('template/sidebar'); ?>

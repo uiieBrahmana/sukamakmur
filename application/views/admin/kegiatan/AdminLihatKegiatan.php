@@ -48,21 +48,15 @@
     </aside>
 
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
                 Kegiatan
                 <small>Lihat Kegiatan</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
-            <div class="box-body">
+            <div class="box box-body">
                 <div class="box-header with-border">
                     <h3 class="box-title">Daftar Kegiatan</h3>
                 </div>
@@ -74,6 +68,7 @@
                         <th>Harga</th>
                         <th>Peserta Min</th>
                         <th>Peserta Max</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -95,14 +90,11 @@
                             </td>
                         </tr>
                     <?php } ?>
-
-
                     </tbody>
                 </table>
-                <!-- Your Page Content Here -->
+
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
 
     <?php $this->load->view('template/footer'); ?>
@@ -117,7 +109,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#student').DataTable();
+        $('#student').DataTable({
+            "aoColumnDefs": [
+                {'bSortable': false, 'aTargets': [5]}
+            ]
+        });
     });
 </script>
 </html>

@@ -73,20 +73,20 @@
             </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
 
             <div class="box box-body">
-
                 <div class="box-header with-border">
                     <h3 class="box-title">Tambah Akomodasi Baru</h3>
                 </div>
 
-                <form name="add" class="form-horizontal" method="post" action="index.php/administrator/admintambahakomodasi"
+                <form name="add" class="form-horizontal" method="post"
+                      action="administrator/admintambahakomodasi"
                       enctype="multipart/form-data">
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="box-body">
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="namapemesan">Nama Akomodasi</label>
 
@@ -99,7 +99,8 @@
                                     <label class="col-sm-2 control-label" for="namapemesan">Keterangan</label>
 
                                     <div class="col-sm-5">
-                                        <textarea required name="keterangan" style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
+                                        <textarea class="form-control" required name="keterangan"
+                                                  style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -128,25 +129,18 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="namapemesan">Gambar</label>
 
-                                    <div class="col-sm-10">
-                                        <input required type="file" name="fotoakomodasi">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="box-footer text-center">
                         <input type="submit" class="btn btn-info" name="_submit" value="Tambah Akomodasi">
                         <button class="btn btn-default" type="reset">Reset</button>
+
                     </div>
                 </form>
             </div>
-
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
 
     <?php $this->load->view('template/footer'); ?>
@@ -155,11 +149,12 @@
 </body>
 
 <?php $this->load->view('template/script'); ?>
+
 <script src="css/plugins/validate/jquery.validate.min.js"></script>
 <script src="css/plugins/validate/additional-methods.min.js"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('form[name=add]').validate({
             rules: {
                 kapasitas: {
@@ -171,7 +166,7 @@
                     number: true
                 }
             },
-            showErrors: function(errorMap, errorList) {
+            showErrors: function (errorMap, errorList) {
                 this.defaultShowErrors();
             }
         });

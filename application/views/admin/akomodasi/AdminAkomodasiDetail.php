@@ -43,16 +43,7 @@
                 </li>
 
                 <li class="header">Version - 0.1 beta</li>
-                <!--
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
-                -->
+
             </ul>
         </section>
     </aside>
@@ -68,7 +59,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    
+
                     <div class="box box-header">
                         <h3 class="profile-username text-center"><?php echo $Akomodasi['nama'] ?></h3>
                     </div>
@@ -109,30 +100,34 @@
                             <input type="submit" class="btn btn-block btn-info" value="Simpan Gambar" name="submit"/>
                         </form>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-8">
                     <div class="box box-body">
+
                         <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
+
+                            <!--
                             <ol class="carousel-indicators">
-                                <li class="" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                                <li class="active" data-slide-to="1" data-target="#carousel-example-generic"></li>
+                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                <li class="" data-slide-to="1" data-target="#carousel-example-generic"></li>
                                 <li class="" data-slide-to="2" data-target="#carousel-example-generic"></li>
                             </ol>
+                            -->
+                            <ol class="carousel-indicators">
+                                <?php foreach ($Size as $key => $value) { ?>
+                                <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                <?php } ?>
+                            </ol>
+
                             <div class="carousel-inner">
-                                <div class="item">
+                                <?php foreach ($Size as $key => $value) { ?>
+                                <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
                                     <img alt="First slide"
-                                         src="service/images/<?php echo $Akomodasi['idakomodasi'] ?>/0">
+                                         src="service/images/<?php echo $Akomodasi['idakomodasi'].'/'. $key ?>">
                                 </div>
-                                <div class="item active">
-                                    <img alt="Second slide"
-                                         src="service/images/<?php echo $Akomodasi['idakomodasi'] ?>/1">
-                                </div>
-                                <div class="item">
-                                    <img alt="Third slide"
-                                         src="service/images/<?php echo $Akomodasi['idakomodasi'] ?>/2">
-                                </div>
+                                <?php } ?>
                             </div>
                             <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
                                 <span class="fa fa-angle-left"></span>

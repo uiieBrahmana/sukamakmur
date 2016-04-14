@@ -58,18 +58,13 @@
         </section>
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
                 Kelola Fasilitas
                 <small>Tambah Peralatan</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+
         </section>
 
         <!-- Main content -->
@@ -79,9 +74,10 @@
                     <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Tambah Peralatan Baru</h3>
-                        </div><!-- /.box-header -->
-                        <!-- form start -->
-                        <form name="add" class="form-horizontal" method="post" action="index.php/administrator/admintambahperalatan">
+                        </div>
+
+                        <form name="add" class="form-horizontal" method="post" action="administrator/admintambahperalatan">
+
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -123,12 +119,14 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            </div><!-- /.box-body -->
                             <div class="box-footer">
                                 <button class="btn btn-info" name="_submit" type="submit">Tambah Peralatan</button>
                                 <button class="btn btn-default" type="reset">Reset</button>
-                            </div><!-- /.box-footer -->
+                                <a class="btn btn-danger" href="administrator/adminlihatperalatan">Batalkan</a>
+                            </div>
+
                         </form>
                     </div>
                 </div>

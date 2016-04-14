@@ -74,9 +74,11 @@
 
         <section class="content">
             <div class="box box-body">
+
                 <div class="box-header with-border">
                     <h3 class="box-title">Daftar Peralatan</h3>
                 </div>
+
                 <table id="student" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -110,7 +112,9 @@
 
                     </tbody>
                 </table>
+
             </div>
+
         </section>
     </div>
 
