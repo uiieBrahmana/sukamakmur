@@ -50,8 +50,68 @@
         <div class="container">
 
             <section class="content-header">
-                <h1>
-                </h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box box-body">
+                            <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
+                                <ol class="carousel-indicators">
+                                    <li class="" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                    <li class="active" data-slide-to="1"
+                                        data-target="#carousel-example-generic"></li>
+                                    <li class="" data-slide-to="2" data-target="#carousel-example-generic"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="item">
+                                        <img alt="First slide"
+                                             src="http://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap">
+
+                                        <div class="carousel-caption">
+                                            Jambur
+                                        </div>
+                                    </div>
+                                    <div class="item active">
+                                        <img alt="Second slide"
+                                             src="http://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap">
+
+                                        <div class="carousel-caption">
+                                            Bethel
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img alt="Third slide"
+                                             src="http://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap">
+
+                                        <div class="carousel-caption">
+                                            Migdal
+                                        </div>
+                                    </div>
+                                </div>
+                                <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
+                                    <span class="fa fa-angle-left"></span>
+                                </a>
+                                <a data-slide="next" href="#carousel-example-generic"
+                                   class="right carousel-control">
+                                    <span class="fa fa-angle-right"></span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="box box-body"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body"></div>
+                    </div>
+                </div>
             </section>
 
             <section class="content">

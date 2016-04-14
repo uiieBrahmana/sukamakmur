@@ -114,13 +114,13 @@ class Service extends CI_Controller
         $this->load->view('test');
     }
 
-    public function images($id)
+    public function images($id, $posisi = 0)
     {
         $result = $this->koneksi->FetchAll("select * from fotoakomodasi where idakomodasi = $id");
         if (!is_array($result))
             die('not available');
 
-        header('Content-Type: '.$result[0]['ekstensifile']);
-        echo $result[0]['filedata'];
+        header('Content-Type: '.$result[$posisi]['ekstensifile']);
+        echo $result[$posisi]['filedata'];
     }
 }

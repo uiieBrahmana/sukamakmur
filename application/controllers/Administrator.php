@@ -529,6 +529,32 @@ class Administrator extends CI_Controller
 
     public function detailakomodasi($domain, $id)
     {
+        $submit = $this->input->post('submit');
+
+        if(isset($submit)){
+            $namafile = $_FILES['fotoakomodasi']['name'];
+            $ekstensifile = $_FILES['fotoakomodasi']['type'];
+            $filedata = $_FILES['fotoakomodasi']['tmp_name'];
+            $error = $_FILES['fotoakomodasi']['error'];
+            $size = $_FILES['fotoakomodasi']['size'];
+
+            if ($error == 0) {
+                $queryfoto = InsertBuilder('fotoakomodasi', array(
+                    'idakomodasi' => $id,
+                    'namafile' => $namafile,
+                    'ekstensifile' => $ekstensifile,
+                    'filedata' => $filedata
+                ));
+                $this->koneksi->Save($queryfoto, array(
+                    $id,
+                    $namafile,
+                    $ekstensifile,
+                    file_get_contents($filedata)
+                ));
+
+            }
+        }
+
         switch ($domain) {
             case 'delete':
                 $kueriakomodasi = DeleteBuilder('akomodasi', array('idakomodasi' => $id));
