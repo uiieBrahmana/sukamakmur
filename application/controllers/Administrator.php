@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Administrator extends CI_Controller
 {
 
+
+
     public function __construct()
     {
         parent::__construct();
@@ -16,7 +18,6 @@ class Administrator extends CI_Controller
             redirect('/pengunjung/');
         }
 
-        //$this->load->view('template/head');
     }
 
     public function index()
@@ -149,6 +150,7 @@ class Administrator extends CI_Controller
             case 'update':
                 // todo : join table
                 $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
+                $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM TIPEMAKANAN");
                 $data['Menumakanan'] = $result[0];
                 $this->load->view('admin/makanan/AdminUpdateMakanan', $data);
                 break;
@@ -282,7 +284,7 @@ class Administrator extends CI_Controller
 
     public function admintambahpegawai()
     {
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
         if (isset($submit)) {
             $nama = $this->input->post('nama');
             $alamat = $this->input->post('alamat');
@@ -305,7 +307,9 @@ class Administrator extends CI_Controller
                 'username' => $username,
                 'password' => $password
             ));
-            $result = $this->koneksi->Save($kueri, array($nama, $alamat, $tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password));
+            $result = $this->koneksi->Save($kueri, array(
+                $nama, $alamat, $tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password
+            ));
             if ($result) {
                 redirect('/administrator/adminlihatpegawai/success');
             } else {
@@ -605,7 +609,7 @@ class Administrator extends CI_Controller
 
     public function admintambahakomodasi()
     {
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
 
         if (isset($submit)) {
             $nama = $this->input->post('nama');
@@ -645,7 +649,7 @@ class Administrator extends CI_Controller
 
     public function admintambahtipemakanan()
     {
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
         if (isset($submit)) {
             $idtipemakanan = $this->input->post('idtipemakanan');
             $keterangan = $this->input->post('keterangan');
@@ -658,11 +662,8 @@ class Administrator extends CI_Controller
             ));
             $result = $this->koneksi->Save($query, array($idtipemakanan, $keterangan, $harga));
 
-            if ($result) {
-                redirect('/administrator/adminmakanan/success');
-            } else {
-                echo 'belum berhasil';
-            }
+            redirect('/administrator/adminlihattipemakanan/success');
+
         }
 
         $this->load->view('admin/makanan/AdminTambahTipeMakanan');
@@ -681,7 +682,7 @@ class Administrator extends CI_Controller
 
     public function adminTambahPeralatan()
     {
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
 
         if (isset($submit)) {
             $nama = $this->input->post('nama');

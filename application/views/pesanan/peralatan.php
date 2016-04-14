@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <?php $this->load->view('template/head'); ?>
-<body class="hold-transition skin-red sidebar-mini">
+
+<body class="hold-transition skin-red layout-top-nav">
 <div class="wrapper">
 
-    <?php $this->load->view('template/header'); ?>
+    <?php $this->load->view('template/tamumenu'); ?>
 
     <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-                Pemesanan
-                <small>Peralatan</small>
-            </h1>
-        </section>
 
-        <section class="content">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="box-body">
-                        <form name="add" action="pesan/peralatan" method="post">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Peralatan</label>
-                                <select name="idperalatan" class="form-control select2">
-                                    <?php foreach ($Peralatan as $Value) {
-                                        $data = $Value;
-                                        echo "<option value='" . $data['idperalatan'] . "'>" . $data['nama'] . "</option>";
-                                    } ?>
-                                </select>
-                            </div>
+        <div class="container">
+            <section class="content-header">
+                <h1>
+                    Pemesanan
+                    <small>Peralatan</small>
+                </h1>
+            </section>
 
-                            <div class="form-group">
-                                <label for="tanggalmakan">Tanggal</label>
-                                <input type="text" placeholder="dari" name="tanggalsewa"
-                                       value="<?php echo date("d F Y") ?>"
-                                       class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Jumlah Alat</label>
-                                <input type="text" name="jumlahalat" placeholder="jumlah"
-                                       class="form-control">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="box-body">
+                            <form name="add" action="pesan/peralatan" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Peralatan</label>
+                                    <select name="idperalatan" class="form-control select2">
+                                        <?php foreach ($Peralatan as $Value) {
+                                            $data = $Value;
+                                            echo "<option value='" . $data['idperalatan'] . "'>" . $data['nama'] . "</option>";
+                                        } ?>
+                                    </select>
+                                </div>
 
-                                <p class="help-block" id="sisaalat"></p>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Keterangan</label>
+                                <div class="form-group">
+                                    <label for="tanggalmakan">Tanggal</label>
+                                    <input type="text" placeholder="dari" name="tanggalsewa"
+                                           value="<?php echo date("d F Y") ?>"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Jumlah Alat</label>
+                                    <input type="text" name="jumlahalat" placeholder="jumlah"
+                                           class="form-control">
+
+                                    <p class="help-block" id="sisaalat"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Keterangan</label>
                                 <textarea name="keteranganalat" class="form-control"
                                           style="max-width: 100%; min-width: 100%; min-height: 60px; max-height: 120px;"></textarea>
-                            </div>
+                                </div>
 
-                            <input type="submit" name="submit" class="btn btn-info btn-block" value="Simpan">
-                            <input type="reset" name="reset" class="btn btn-warning btn-block" value="Reset">
+                                <input type="submit" name="submit" class="btn btn-info btn-block" value="Simpan">
+                                <input type="reset" name="reset" class="btn btn-warning btn-block" value="Reset">
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
+                    <div class="col-md-4"></div>
                 </div>
-                <div class="col-md-4"></div>
-            </div>
 
-        </section>
+            </section>
+        </div>
+
     </div>
 
     <?php $this->load->view('template/footer'); ?>
-    <?php $this->load->view('template/sidebar'); ?>
 </div>
 </body>
 

@@ -67,10 +67,7 @@
                 Akomodasi
                 <small>Tambah Akomodasi</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+
         </section>
 
         <section class="content">
@@ -134,7 +131,7 @@
                         </div>
                     </div>
                     <div class="box-footer text-center">
-                        <input type="submit" class="btn btn-info" name="_submit" value="Tambah Akomodasi">
+                        <input type="submit" class="btn btn-info" name="submit" value="Tambah Akomodasi">
                         <button class="btn btn-default" type="reset">Reset</button>
 
                     </div>

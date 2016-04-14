@@ -138,10 +138,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="lockscreen.php" class="btn btn-default btn-flat">Kunci</a>
+                                <a href="lock" class="btn btn-default btn-flat">Kunci</a>
                             </div>
                             <div class="pull-right">
-                                <a href="logout.php" class="btn btn-default btn-flat">Keluar</a>
+                                <a href="logout" class="btn btn-default btn-flat">Keluar</a>
                             </div>
                         </li>
                     </ul>

@@ -5,6 +5,7 @@
 <div class="wrapper">
 
     <?php $this->load->view('template/header') ?>
+    
     <aside class="main-sidebar">
         <section class="sidebar">
             <div class="user-panel">
@@ -85,31 +86,25 @@
         </section>
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        
         <section class="content-header">
             <h1>
                 Pegawai
                 <small>Tambah Pegawai</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
         </section>
 
-        <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="box box-info">
+                    <div class="box box-body">
+                        
                         <div class="box-header with-border">
                             <h3 class="box-title">Tambah Pegawai Baru</h3>
-                        </div><!-- /.box-header -->
-                        <!-- form start -->
+                        </div>
 
-                        <form name="add" class="form-horizontal" method="post" action="index.php/Administrator/admintambahpegawai">
+                        <form name="add" class="form-horizontal" method="post" action="administrator/admintambahpegawai">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
@@ -173,9 +168,9 @@
 
                                             <div class="col-sm-3">
                                                 <select class="form-control" name="status">
-                                                    <option value="manager">Manager</option>
-                                                    <option value="administrator">Admin Aplikasi</option>
-                                                    <option value="petugaslain">Petugas lainnya</option>
+                                                    <option value="Manager">Manager</option>
+                                                    <option value="Administrator">Administrator Aplikasi</option>
+                                                    <option value="Trainer">Trainer Kegiatan</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -200,24 +195,21 @@
                                     </div>
                                 </div>
 
-                            </div><!-- /.box-body -->
+                            </div>
                             <div class="box-footer">
-                                <input type="submit" class="btn btn-info" name="_submit" value="Tambah Pegawai">
+                                <input type="submit" class="btn btn-info" name="submit" value="Tambah Pegawai">
                                 <button class="btn btn-default" type="reset">Reset</button>
-                            </div><!-- /.box-footer -->
+                                <a href="administrator/adminlihatpegawai" class="btn btn-danger">Kembali</a>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
 
-    <!-- Main Footer -->
     <?php $this->load->view('template/footer') ?>
 
-    <!-- Control Sidebar -->
-    <!-- Control Sidebar -->
     <?php $this->load->view('template/sidebar') ?>
 </div>
 </body>
@@ -228,20 +220,14 @@
 
 <script>
     $(document).ready(function(){
+
         $('input[name=tglLahir]').datepicker();
         $('input[name=notelp]').inputmask();
+
         $('form[name=add]').validate({
             rules: {
                 nama:{
                   required :true
-                },
-                kapasitas: {
-                    required: true,
-                    number: true
-                },
-                harga: {
-                    required: true,
-                    number: true
                 }
             },
             showErrors: function(errorMap, errorList) {

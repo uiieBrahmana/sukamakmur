@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="box-footer">
-                                <button class="btn btn-info" name="_submit" type="submit">Tambah Peralatan</button>
+                                <button class="btn btn-info" name="submit" type="submit">Tambah Peralatan</button>
                                 <button class="btn btn-default" type="reset">Reset</button>
                                 <a class="btn btn-danger" href="administrator/adminlihatperalatan">Batalkan</a>
                             </div>

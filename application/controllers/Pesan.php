@@ -6,12 +6,17 @@ class Pesan extends CI_Controller
     private $userId;
     private $role;
 
+    private $data;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->userId = $this->session->userdata('ID');
         $this->role = $this->session->userdata('role');
+
+        $this->data['ID'] = $this->session->userdata('ID');
+        $this->data['Role'] = $this->session->userdata('role');
 
         if (!isset($this->userId)) {
             redirect('/login/');
@@ -23,8 +28,8 @@ class Pesan extends CI_Controller
         // todo : update total harga semua pesannannya.
 
         $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
-        $data['Pesanan'] = $this->koneksi->FetchAll($sql);
-        $this->load->view('pesanan/start', $data);
+        $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
+        $this->load->view('pesanan/start', $this->data);
     }
 
     public function overview($jenis = '')
@@ -38,7 +43,7 @@ class Pesan extends CI_Controller
                 );
                 $idpesanan = $this->koneksi->Save($insert, array($this->userId, date("Y-m-d H:i:s"), 'DRAFT'));
                 $this->session->set_userdata('pesanan', $idpesanan);
-                $data['IdPesanan'] = $idpesanan;
+                $this->data['IdPesanan'] = $idpesanan;
                 break;
             default:
                 $this->session->set_userdata('pesanan', $jenis);
@@ -50,38 +55,38 @@ class Pesan extends CI_Controller
             redirect('/pesan/');
         }
 
-        $data['id'] = $idpesanan;
-        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        $this->data['id'] = $idpesanan;
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
         FROM PESANANAKOMODASI p
         LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
-        $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
         m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
         LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
         LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
         WHERE pm.IDPEMESANAN = ' . $idpesanan);
-        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
         pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
         WHERE pn.IDPEMESANAN = ' . $idpesanan);
-        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
         pn.tanggal, pn.keterangan as ket
         FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
         WHERE IDPEMESANAN = ' . $idpesanan);
 
         $totalHarga = 0;
-        foreach ($data['Akomodasi'] as $value) {
+        foreach ($this->data['Akomodasi'] as $value) {
             $totalHarga += $value['harga'];
         }
-        foreach ($data['Makanan'] as $value) {
+        foreach ($this->data['Makanan'] as $value) {
             $totalHarga += ($value['harga'] * $value['porsi']);
         }
-        foreach ($data['Peralatan'] as $value) {
+        foreach ($this->data['Peralatan'] as $value) {
             $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
         }
-        foreach ($data['Kegiatan'] as $value) {
+        foreach ($this->data['Kegiatan'] as $value) {
             $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
         }
-        $data['Total'] = $totalHarga;
-        $this->load->view('pesanan/overview', $data);
+        $this->data['Total'] = $totalHarga;
+        $this->load->view('pesanan/overview', $this->data);
     }
 
     public function summary()
@@ -90,7 +95,7 @@ class Pesan extends CI_Controller
         if (!isset($idpesanan)) {
             redirect('/pesan/');
         }
-        $this->load->view('pesanan/summary');
+        $this->load->view('pesanan/summary', $this->data);
     }
 
     public function akomodasi()
@@ -121,8 +126,8 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
-        $this->load->view('pesanan/akomodasi', $data);
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
+        $this->load->view('pesanan/akomodasi', $this->data);
     }
 
     public function makanan()
@@ -154,8 +159,8 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
-        $this->load->view('pesanan/makanan', $data);
+        $this->data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
+        $this->load->view('pesanan/makanan', $this->data);
     }
 
     public function peralatan()
@@ -185,8 +190,8 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
-        $this->load->view('pesanan/peralatan', $data);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
+        $this->load->view('pesanan/peralatan', $this->data);
     }
 
     public function aktivitas()
@@ -218,8 +223,8 @@ class Pesan extends CI_Controller
 
         }
 
-        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
-        $this->load->view('pesanan/aktivitas', $data);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
+        $this->load->view('pesanan/aktivitas', $this->data);
     }
 
     public function batalkan($jenis, $iditem)

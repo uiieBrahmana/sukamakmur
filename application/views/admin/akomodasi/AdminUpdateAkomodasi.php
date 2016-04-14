@@ -57,10 +57,7 @@
                 Akomodasi
                 <small>Tambah Akomodasi</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
+
         </section>
 
         <!-- Main content -->
@@ -149,8 +146,7 @@
                     </div>
                 </div>
             </div>
-        </section><!-- /.content -->
-        <!-- /.content -->
+        </section>
     </div>
 
     <?php $this->load->view('template/footer'); ?>

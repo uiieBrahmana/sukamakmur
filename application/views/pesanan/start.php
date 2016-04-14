@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <?php $this->load->view('template/head'); ?>
-<body class="hold-transition skin-red sidebar-mini">
+
+<body class="hold-transition skin-red layout-top-nav">
 <div class="wrapper">
 
-    <?php $this->load->view('template/header'); ?>
+    <?php $this->load->view('template/tamumenu'); ?>
 
     <div class="content-wrapper">
-        <section class="content-header">
-            <h1>
-                Pemesanan
-                <small>Daftar Pemesanan</small>
-            </h1>
-        </section>
+        <div class="container">
+            <section class="content-header">
+                <h1>
+                    Pemesanan
+                    <small>Daftar Pemesanan</small>
+                </h1>
+            </section>
 
-        <section class="content">
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+            <section class="content">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
                         <table id="datatable" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -29,7 +32,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($Pesanan as $value) { ?>
+                            <?php foreach ($Pesanan as $value) { ?>
                                 <tr>
                                     <td><?php echo $value['idpemesanan'] ?></td>
                                     <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
@@ -37,24 +40,25 @@
                                     <td><?php echo $value['status'] ?></td>
                                     <td><a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a></td>
                                 </tr>
-                                <?php } ?>
+                            <?php } ?>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-lg-2"></div>
                 </div>
-                <div class="col-lg-2"></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
-                    <a href="pesan/overview/new" class="btn btn-info btn-block">Pemesanan Baru</a>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <a href="pesan/overview/new" class="btn btn-info btn-block">Pemesanan Baru</a>
+                    </div>
+                    <div class="col-lg-2"></div>
                 </div>
-                <div class="col-lg-2"></div>
-            </div>
-        </section>
+            </section>
+        </div>
+
     </div>
 
     <?php $this->load->view('template/footer'); ?>
-    <?php $this->load->view('template/sidebar'); ?>
 </div>
 </body>
 

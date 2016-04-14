@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <?php $this->load->view('template/head'); ?>
-<body class="hold-transition skin-red sidebar-mini">
+
+<body class="hold-transition skin-red layout-top-nav">
 <div class="wrapper">
 
-    <?php $this->load->view('template/header'); ?>
+    <?php $this->load->view('template/tamumenu'); ?>
 
     <div class="content-wrapper">
 
-        <section class="content-header">
-            <h1>
-                Pemesanan
-                <small>Overview Pemesanan</small>
-            </h1>
-        </section>
+        <div class="container">
+            <section class="content-header">
+                <h1>
+                    Pemesanan
+                    <small>Overview Pemesanan</small>
+                </h1>
+            </section>
 
-        <section class="content">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="info-box">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="info-box">
                         <span class="info-box-icon bg-aqua"><a title="Tambah Pesanan Akomodasi / Penginapan"
                                                                style="color: white" href="pesan/akomodasi"><i
                                     class="fa fa-plus"></i></a></span>
 
-                        <div class="info-box-content">
-                            <span class=""><b>Akomodasi / Penginapan</b></span>
+                            <div class="info-box-content">
+                                <span class=""><b>Akomodasi / Penginapan</b></span>
                             <span class="info-box-content">
 
                                 <?php if (sizeof($Akomodasi) == 0)
@@ -55,23 +58,23 @@
 
 
                             </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="info-box">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="info-box">
                     <span class="info-box-icon bg-green">
                         <a title="Tambah Pesanan Makanan / Snack" style="color: white" href="pesan/makanan">
                             <i class="fa fa-plus"></i>
                         </a>
                     </span>
 
-                        <div class="info-box-content">
-                            <span class=""><b>Makanan / Snack</b></span>
+                            <div class="info-box-content">
+                                <span class=""><b>Makanan / Snack</b></span>
                             <span class="info-box-content">
 
                                 <?php if (sizeof($Makanan) == 0)
@@ -100,21 +103,21 @@
 
 
                             </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="info-box">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="info-box">
                 <span class="info-box-icon bg-yellow"><a title="Tambah Pesanan Peralatan" style="color: white"
                                                          href="pesan/peralatan"><i
                             class="fa fa-plus"></i></a></span>
 
-                        <div class="info-box-content">
-                            <span class=""><b>Peralatan / Fasilitas</b></span>
+                            <div class="info-box-content">
+                                <span class=""><b>Peralatan / Fasilitas</b></span>
                             <span class="info-box-content">
 
 
@@ -145,21 +148,21 @@
 
 
                             </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="info-box">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="info-box">
                 <span class="info-box-icon bg-red"><a title="Tambah Pesanan Aktivitas / Kegiatan" style="color: white"
                                                       href="pesan/aktivitas"><i
                             class="fa fa-plus"></i></a></span>
 
-                        <div class="info-box-content">
-                            <span class=""><b>Aktivitas / Kegiatan</b></span>
+                            <div class="info-box-content">
+                                <span class=""><b>Aktivitas / Kegiatan</b></span>
                             <span class="info-box-content">
 
 
@@ -188,46 +191,47 @@
 
 
                             </span>
-                        </div><!-- /.info-box-content -->
-                    </div><!-- /.info-box -->
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8 text-center text-warning">
-                    <h2><b>Total Rp. <?php echo number_format($Total); ?>,-</b></h2>
-                </div>
-                <div class="col-xs-2"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-3">
-                    <div class="box-body">
-                        <a href="" class="btn btn-info btn-block">Selesai dan Lanjutkan Pembayaran</a>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
                     </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="col-xs-3">
-                    <div class="box-body">
-                        <a href="pesan/batalkansemua/<?php echo $id; ?>" class="btn btn-danger btn-block">Batalkan Pesanan</a>
+                <div class="row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-8 text-center text-warning">
+                        <h2><b>Total Rp. <?php echo number_format($Total); ?>,-</b></h2>
                     </div>
+                    <div class="col-xs-2"></div>
                 </div>
-                <div class="col-xs-3"></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-3">
-                    <div class="box-body">
-                        <a href="pesan/" class="btn btn-warning btn-block">Kembali ke Daftar Pesanan</a>
+                <div class="row">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <div class="box-body">
+                            <a href="" class="btn btn-info btn-block">Selesai dan Lanjutkan Pembayaran</a>
+                        </div>
                     </div>
+                    <div class="col-xs-3">
+                        <div class="box-body">
+                            <a href="pesan/batalkansemua/<?php echo $id; ?>" class="btn btn-danger btn-block">Batalkan Pesanan</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-3"></div>
                 </div>
-                <div class="col-xs-3"></div>
-            </div>
-        </section>
+                <div class="row">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <div class="box-body">
+                            <a href="pesan/" class="btn btn-warning btn-block">Kembali ke Daftar Pesanan</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-3"></div>
+                </div>
+            </section>
+        </div>
+
     </div>
 
     <?php $this->load->view('template/footer'); ?>
-    <?php $this->load->view('template/sidebar'); ?>
 </div>
 </body>
 

@@ -15,3 +15,11 @@
 <script src="css/plugins/fastclick/fastclick.min.js"></script>
 <script src="css/plugins/iCheck/icheck.min.js"></script>
 <script src="css/dist/js/app.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('input[name=search]').datepicker({format: 'dd MM yyyy', startDate: new Date()});
+        $('input[name=search]').on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>
