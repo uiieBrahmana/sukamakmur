@@ -113,10 +113,9 @@
                         <th>Nama Pegawai</th>
                         <th>Alamat</th>
                         <th>No. Telepon</th>
-                        <th>Email</th>
+                        <!--<th>Email</th>-->
                         <th>Status Pegawai</th>
                         <th>Username</th>
-                        <th>Password</th>
                         <th width="170px">Aksi</th>
                     </tr>
                     </thead>
@@ -128,10 +127,9 @@
                             <td><?php echo $value['nama'] ?></td>
                             <td><?php echo $value['alamat'] ?></td>
                             <td><?php echo $value['notelp'] ?></td>
-                            <td><?php echo $value['email'] ?></td>
+                            <!--<td><?php // echo $value['email'] ?></td>-->
                             <td><?php echo $value['status'] ?></td>
                             <td><?php echo $value['username'] ?></td>
-                            <td>*******</td>
                             <td>
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai/view/<?php echo $value['idpetugas'] ?>"
                                    class="btn btn-sm btn-default">Detail</a>
@@ -167,7 +165,7 @@
     $(document).ready(function () {
         $('#student').DataTable({
             "aoColumnDefs": [
-                {'bSortable': false, 'aTargets': [8]}
+                {'bSortable': false, 'aTargets': [6]}
             ]
         });
     });

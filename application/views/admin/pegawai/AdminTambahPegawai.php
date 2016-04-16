@@ -136,7 +136,7 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">Jenis Kelamin</label>
 
                                             <div class="col-sm-3">
-                                                <select name="jenisKelamin" id="" class="form-control">
+                                                <select name="jenisKelamin" class="form-control">
                                                     <option value="W">Wanita</option>
                                                     <option value="P">Pria</option>
                                                 </select>
@@ -147,7 +147,7 @@
                                                 Handphone</label>
 
                                             <div class="col-sm-3">
-                                                <input required type="text" id="notelppemesan"
+                                                <input required type="text"
                                                        data-inputmask="'mask': ['9999-999-99999']"
                                                        data-mask
                                                        name="notelp" class="form-control">
@@ -220,7 +220,10 @@
 <script>
     $(document).ready(function(){
 
-        $('input[name=tglLahir]').datepicker();
+        $('input[name=tglLahir]').datepicker({format: 'dd MM yyyy'});
+        $('input[name=tglLahir]').on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
         $('input[name=notelp]').inputmask();
 
         $('form[name=add]').validate({

@@ -322,6 +322,7 @@ class Administrator extends CI_Controller
             $nama = $this->input->post('nama');
             $alamat = $this->input->post('alamat');
             $tglLahir = $this->input->post('tglLahir');
+            $tglLahir = date("Y-m-d", strtotime($tglLahir));
             $jenisKelamin = $this->input->post('jenisKelamin');
             $notelp = $this->input->post('notelp');
             $email = $this->input->post('email');
@@ -384,6 +385,54 @@ class Administrator extends CI_Controller
         }
     }
 
+    public function adminUpdatePegawai()
+    {
+
+        $submit = $this->input->post('submit');
+
+        if (isset($submit)) {
+            $id = $this->input->post('idpetugas');
+            $nama = $this->input->post('nama');
+            $alamat = $this->input->post('alamat');
+            $tglLahir = $this->input->post('tglLahir');
+            $tglLahir = date("Y-m-d", strtotime($tglLahir));
+            $jenisKelamin = $this->input->post('jenisKelamin');
+            $notelp = $this->input->post('notelp');
+            $email = $this->input->post('email');
+            $status = $this->input->post('status');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $queryakun = UpdateBuilder('petugas',
+                array(
+                    'idpetugas' => $id,
+                ),
+                array(
+                    'idpetugas' => $id,
+                    'nama' => $nama,
+                    'alamat' => $alamat,
+                    'tglLahir' => $tglLahir,
+                    'jenisKelamin' => $jenisKelamin,
+                    'notelp' => $notelp,
+                    'email' => $email,
+                    'status' => $status,
+                    'username' => $username,
+                    'password' => $password
+                )
+            );
+
+            $idpetugas = $this->koneksi->Save($queryakun, array(
+                $id, $nama, $alamat, $tglLahir, $jenisKelamin, $notelp, $email, $status, $username, $password
+            ));
+
+            if ($idpetugas == 0) {
+                redirect('/administrator/adminlihatpegawai/success');
+            } else {
+                echo 'failed';
+            }
+        }
+    }
+
     public function detailprofilmember($domain, $id)
     {
         switch ($domain) {
@@ -395,7 +444,7 @@ class Administrator extends CI_Controller
             case 'update':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
                 $data['Member'] = $result[0];
-                $this->load->view('admin/tamu/AdminUpdatePegawai', $data);
+                $this->load->view('admin/tamu/AdminUpdateAkun', $data);
                 break;
             case 'view':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
@@ -405,7 +454,7 @@ class Administrator extends CI_Controller
         }
     }
 
-    public function AdminUpdatePegawai()
+    public function adminUpdateAkun()
     {
 
         $submit = $this->input->post('submit');
@@ -413,8 +462,8 @@ class Administrator extends CI_Controller
         if (isset($submit)) {
             $id = $this->input->post('idtamu');
             $nama = $this->input->post('nama');
-            $tanggallahir = $this->input->post('tanggallahir');
-            $tanggallahir = date("Y-m-d", strtotime($tanggallahir));
+            $tglLahir = $this->input->post('tanggallahir');
+            $tglLahir = date("Y-m-d", strtotime($tglLahir));
             $jeniskelamin = $this->input->post('jeniskelamin');
             $alamat = $this->input->post('alamat');
             $email = $this->input->post('email');
@@ -428,7 +477,7 @@ class Administrator extends CI_Controller
                 ),
                 array(
                     'nama' => $nama,
-                    'tanggallahir' => $tanggallahir,
+                    'tanggallahir' => $tglLahir,
                     'jeniskelamin' => $jeniskelamin,
                     'alamat' => $alamat,
                     'email' => $email,

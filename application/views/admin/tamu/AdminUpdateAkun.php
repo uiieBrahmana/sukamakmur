@@ -88,7 +88,7 @@
         <section class="content-header">
             <h1>
                 Akun Baru
-                <small>Tambah Akun</small>
+                <small>Update Akun</small>
             </h1>
         </section>
 
@@ -97,7 +97,7 @@
                 <div class="col-lg-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Buat Akun Baru</h3>
+                            <h3 class="box-title">Update Data Akun</h3>
                         </div>
 
                         <form name="add" class="form-horizontal" method="post" action="administrator/adminupdateakun">
@@ -195,7 +195,7 @@
 
                             </div>
                             <div class="box-footer text-center">
-                                <input type="submit" class="btn btn-info" name="submit" value="Buat Akun">
+                                <input type="submit" class="btn btn-info" name="submit" value="Update Data Akun">
                                 <button class="btn btn-default" type="reset">Reset</button>
                                 <input type="hidden" name="update" value="update">
                             </div>
