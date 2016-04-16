@@ -1,3 +1,5 @@
+
+
 <form action="<?php echo base_url(); ?>index.php/administrator/adminupdatepegawai/" method="post">
     <input type="hidden" name="idtamu" value="<?php echo $Member['idpegawai']; ?>"><br/>
     <input type="text" name="nama" value="<?php echo $Member['nama']; ?>"><br/>

@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Administrator extends CI_Controller
 {
 
-
-
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +26,7 @@ class Administrator extends CI_Controller
     public function admintambahpesanan()
     {
 
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
 
         if (isset($submit)) {
             var_dump($_POST);
@@ -44,28 +42,62 @@ class Administrator extends CI_Controller
 
     public function adminlihatpesanan()
     {
-        $data['Pesanan'] = $this->koneksi->FetchAll("select psn.*, t.nama as namatamu, a.nama as namaakomodasi,
-        m.idtipemakanan, p.nama as namaperalatan, k.nama as namakegiatan
-        from pemesanan psn
-        left join tamu t using(idtamu)
-        left join akomodasi a using(idakomodasi)
-        left join menumakanan m on(idmenumakanan = idmakanan)
-        left join peralatan p using(idperalatan)
-        left join kegiatan k using(idkegiatan);");
+        $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+        LEFT JOIN tamu t USING (idtamu) ORDER BY tanggalpesan ASC;");
+
         $this->load->view('admin/pesanan/AdminListPesanan', $data);
     }
 
     public function adminpemesanandetail($idpesanan = 0)
     {
-        $data['Pesanan'] = $this->koneksi->FetchAll("select psn.*, t.nama as namatamu, a.nama as namaakomodasi,
-        m.idtipemakanan, p.nama as namaperalatan, k.nama as namakegiatan
-        from pemesanan psn
-        left join tamu t using(idtamu)
-        left join akomodasi a using(idakomodasi)
-        left join menumakanan m on(idmenumakanan = idmakanan)
-        left join peralatan p using(idperalatan)
-        left join kegiatan k using(idkegiatan) where psn.idpemesanan = $idpesanan;");
-        $this->load->view('admin/pesanan/AdminPemesananDetail');
+
+        if (!isset($idpesanan)) {
+            redirect('administrator/adminlihatpesanan');
+        }
+
+        $data['id'] = $idpesanan;
+        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM PESANANAKOMODASI p
+        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
+        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE IDPEMESANAN = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $data['Pesanan'] = $pesan[0];
+
+        /*
+        $totalHarga = 0;
+        foreach ($data['Akomodasi'] as $value) {
+            $totalHarga += $value['harga'];
+        }
+        foreach ($data['Makanan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['porsi']);
+        }
+        foreach ($data['Peralatan'] as $value) {
+            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
+        }
+        foreach ($data['Kegiatan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
+        }
+        $data['Total'] = $totalHarga;
+        */
+
+        $this->load->view('admin/pesanan/AdminPemesananDetail', $data);
     }
 
     public function adminkonfirmasipembayaran()
@@ -96,10 +128,11 @@ class Administrator extends CI_Controller
 
     public function adminbuatakun()
     {
-        $submit = $this->input->post('_submit');
+        $submit = $this->input->post('submit');
         if ($submit) {
             $nama = $this->input->post('nama');
             $tanggallahir = $this->input->post('tanggallahir');
+            $tanggallahir = date("Y-m-d", strtotime($tanggallahir));
             $jeniskelamin = $this->input->post('jeniskelamin');
             $alamat = $this->input->post('alamat');
             $email = $this->input->post('email');
@@ -341,7 +374,7 @@ class Administrator extends CI_Controller
             case 'update':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = " . $id);
                 $data['Pegawai'] = $result[0];
-                $this->load->view('admin/pegawai/AdminUpdateAkun', $data);
+                $this->load->view('admin/pegawai/AdminUpdatePegawai', $data);
                 break;
             case 'view':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `petugas` WHERE idpetugas = " . $id);
@@ -362,7 +395,7 @@ class Administrator extends CI_Controller
             case 'update':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
                 $data['Member'] = $result[0];
-                $this->load->view('admin/tamu/AdminUpdateAkun', $data);
+                $this->load->view('admin/tamu/AdminUpdatePegawai', $data);
                 break;
             case 'view':
                 $result = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $id);
@@ -372,7 +405,7 @@ class Administrator extends CI_Controller
         }
     }
 
-    public function adminupdateakun()
+    public function AdminUpdatePegawai()
     {
 
         $submit = $this->input->post('submit');
@@ -381,6 +414,7 @@ class Administrator extends CI_Controller
             $id = $this->input->post('idtamu');
             $nama = $this->input->post('nama');
             $tanggallahir = $this->input->post('tanggallahir');
+            $tanggallahir = date("Y-m-d", strtotime($tanggallahir));
             $jeniskelamin = $this->input->post('jeniskelamin');
             $alamat = $this->input->post('alamat');
             $email = $this->input->post('email');

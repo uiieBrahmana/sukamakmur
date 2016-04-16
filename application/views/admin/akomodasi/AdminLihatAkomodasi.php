@@ -66,7 +66,7 @@
                         <th>Kapasitas</th>
                         <th>Status</th>
                         <th>Harga</th>
-                        <th>Aksi</th>
+                        <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -83,7 +83,7 @@
                         <th>ID Tipe Makanan</th>
                         <th>Keterangan</th>
                         <th>Harga</th>
-                        <th>Aksi</th>
+                        <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

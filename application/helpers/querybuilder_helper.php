@@ -74,4 +74,48 @@ function DeleteBuilder($tablename, $array)
     return substr($del_text, 0, -4);
 }
 
+function indonesianMonth($datesource)
+{
+$datepart = explode(" ",$datesource);
+    switch($datepart[1]){
+        case "January":
+            $datepart[1] = "Januari";
+            break;
+        case "February":
+            $datepart[1] = "Februari";
+            break;
+        case "March":
+            $datepart[1] = "Maret";
+            break;
+        case "April":
+            $datepart[1] = "April";
+            break;
+        case "May":
+            $datepart[1] = "Mei";
+            break;
+        case "June":
+            $datepart[1] = "Juni";
+            break;
+        case "July":
+            $datepart[1] = "Juli";
+            break;
+        case "August":
+            $datepart[1] = "Agustus";
+            break;
+        case "September":
+            $datepart[1] = "September";
+            break;
+        case "October":
+            $datepart[1] = "Oktober";
+            break;
+        case "November":
+            $datepart[1] = "November";
+            break;
+        case "December":
+            $datepart[1] = "Desember";
+            break;
+    }
+    return $datepart[0]." ". $datepart[1]." ". $datepart[2];
+}
+
 ?>

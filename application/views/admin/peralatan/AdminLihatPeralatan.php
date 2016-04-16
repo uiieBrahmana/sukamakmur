@@ -87,7 +87,7 @@
                         <th>Harga sewa</th>
                         <th>Keterangan</th>
                         <th>Jumlah</th>
-                        <th>Aksi</th>
+                        <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

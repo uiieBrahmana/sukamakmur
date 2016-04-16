@@ -9,9 +9,10 @@
     <?php $this->load->view('template/tamumenu'); ?>
 
     <div class="content-wrapper">
+
         <div class="container">
 
-            <section class="content-header">
+            <section class="content">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="box box-body">
@@ -19,7 +20,8 @@
 
                                 <ol class="carousel-indicators">
                                     <?php foreach ($Size as $key => $value) { ?>
-                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0"
+                                            data-target="#carousel-example-generic"></li>
                                     <?php } ?>
                                 </ol>
 
@@ -27,7 +29,7 @@
                                     <?php foreach ($Size as $key => $value) { ?>
                                         <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
                                             <img alt="First slide"
-                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'].'/'. $key ?>">
+                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'] . '/' . $key ?>">
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -43,25 +45,39 @@
                     </div>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="box box-body"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="box box-body"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="box box-body"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="box box-body"></div>
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h1>
+                            Selamat Datang di RC Sukamakmur
+                        </h1>
                     </div>
                 </div>
-            </section>
-
-            <section class="content">
-
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="box box-body">
+                            <h3>Pengantar 1</h3>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body">
+                            <h3>Pengantar 2</h3>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body">
+                            <h3>Pengantar 3</h3>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body">
+                            <h3>Pengantar 4</h3>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
         </div>

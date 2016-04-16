@@ -68,7 +68,7 @@
                         <th>Harga</th>
                         <th>Peserta Min</th>
                         <th>Peserta Max</th>
-                        <th>Action</th>
+                        <th width="170px">Action</th>
                     </tr>
                     </thead>
                     <tbody>

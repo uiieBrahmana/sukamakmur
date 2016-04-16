@@ -82,7 +82,7 @@
                         <th>ID Makanan</th>
                         <th>Paket Makanan</th>
                         <th>Keterangan</th>
-                        <th width="150px">Aksi</th>
+                        <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -25,9 +25,45 @@ class Pengunjung extends CI_Controller
         $this->load->view('tamu/Beranda', $this->data);
     }
 
-    public function buatAkun()
+    public function buatakun()
     {
-        $this->load->view('tamu/BuatAkun', $this->data);
+        $submit = $this->input->post('submit');
+        if ($submit) {
+            $nama = $this->input->post('nama');
+            $tanggallahir = $this->input->post('tanggallahir');
+            $tanggallahir = date("Y-m-d", strtotime($tanggallahir));
+            $jeniskelamin = $this->input->post('jeniskelamin');
+            $alamat = $this->input->post('alamat');
+            $email = $this->input->post('email');
+            $notelp = $this->input->post('notelp');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $queryakun = InsertBuilder('tamu', array(
+                'nama' => $nama,
+                'tanggallahir' => $tanggallahir,
+                'jeniskelamin' => $jeniskelamin,
+                'alamat' => $alamat,
+                'email' => $email,
+                'notelp' => $notelp,
+                'username' => $username,
+                'password' => $password
+            ));
+
+            $this->koneksi->Save($queryakun, array(
+                $nama,
+                $tanggallahir,
+                $jeniskelamin,
+                $alamat,
+                $email,
+                $notelp,
+                $username,
+                $password
+            ));
+            $this->load->view('tamu/BerhasilBuatAkun', $this->data);
+        } else {
+            $this->load->view('tamu/BuatAkun', $this->data);
+        }
     }
 
     public function pencarian()
@@ -37,6 +73,11 @@ class Pengunjung extends CI_Controller
 
     public function akomodasi()
     {
+        $result = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE idakomodasi = 2");
+        $size = $this->koneksi->FetchAll("SELECT * FROM `fotoakomodasi` WHERE idakomodasi = 2");
+
+        $this->data['Size'] = $size;
+        $this->data['Akomodasi'] = $result[0];
         $this->load->view('tamu/Akomodasi', $this->data);
     }
 

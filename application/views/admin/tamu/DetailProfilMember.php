@@ -57,8 +57,6 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpesanan">Buat Pemesanan
-                                Baru</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpesanan">Lihat Semua
                                 Pesanan</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi
@@ -119,7 +117,7 @@
                                     <b>ID PETUGAS</b> <span class="pull-right"> <?php echo $Member['idtamu']; ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Tanggal Lahir</b> <span class="pull-right"> <?php echo $Member['tanggallahir']; ?></span>
+                                    <b>Tanggal Lahir</b> <span class="pull-right"> <?php echo indonesianMonth(date("d F Y", strtotime($Member['tanggallahir']))); ?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Jenis Kelamin</b> <span class="pull-right"><?php echo (strcmp($Member['jeniskelamin'], 'W') == 0) ? 'Wanita' : 'Pria'; ?></span>
@@ -164,21 +162,17 @@
                             <strong><i class="fa fa-lock margin-r-5"></i> Password</strong>
 
                             <p class="text-muted"> <?php echo $Member['password']; ?></p>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
 
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3"></div>
             </div>
-
         </section>
     </div>
     <?php $this->load->view('template/footer'); ?>
     <?php $this->load->view('template/sidebar'); ?>
 </div>
 </body>
-
 <?php $this->load->view('template/script'); ?>
-
 </html>

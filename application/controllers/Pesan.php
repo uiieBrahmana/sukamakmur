@@ -26,9 +26,17 @@ class Pesan extends CI_Controller
     public function index()
     {
         // todo : update total harga semua pesannannya.
+        $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
+        $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
+
+        foreach ($this->data['Pesanan'] as $key => $item) {
+            $this->pesanankosong($item['idpemesanan']);
+        }
 
         $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
+
+
         $this->load->view('pesanan/start', $this->data);
     }
 
@@ -264,5 +272,30 @@ class Pesan extends CI_Controller
         $result = $this->koneksi->Save($sql, array($idpemesanan));
 
         redirect('/pesan/');
+    }
+
+    private function pesanankosong($idpesanan)
+    {
+
+        $sql = "SELECT count(*) as jumlah
+                FROM pesananakomodasi a
+                LEFT JOIN pesananmakanan b USING (idpemesanan)
+                LEFT JOIN pesananperalatan c USING (idpemesanan)
+                LEFT JOIN pesanankegiatan d USING (idpemesanan)
+                WHERE idpemesanan = $idpesanan GROUP BY idpemesanan";
+        $hasil = $this->koneksi->FetchAll($sql);
+
+        if ($hasil == null) {
+
+            $sql = DeleteBuilder('pemesanan', array('idpemesanan' => $idpesanan));
+            $result = $this->koneksi->Save($sql, array($idpesanan));
+
+            $this->data['PesananKosong'] = true;
+            return true;
+
+        } else {
+            $this->data['PesananKosong'] = false;
+            return false;
+        }
     }
 }

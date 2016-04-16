@@ -57,8 +57,6 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpesanan">Buat Pemesanan
-                                Baru</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpesanan">Lihat Semua
                                 Pesanan</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi
@@ -119,7 +117,7 @@
                         <th>Status Pegawai</th>
                         <th>Username</th>
                         <th>Password</th>
-                        <th>Aksi</th>
+                        <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -134,7 +132,15 @@
                             <td><?php echo $value['status'] ?></td>
                             <td><?php echo $value['username'] ?></td>
                             <td>*******</td>
-                            <td><a href="<?php echo base_url()?>index.php/administrator/detailprofilpegawai/view/<?php echo $value['idpetugas'] ?>" class="btn btn-sm btn-info">Detail</a></td>
+                            <td>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai/view/<?php echo $value['idpetugas'] ?>"
+                                   class="btn btn-sm btn-default">Detail</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai/update/<?php echo $value['idpetugas'] ?>"
+                                   class="btn btn-sm btn-info">Ubah</a>
+                                <a href="<?php echo base_url() ?>index.php/administrator/detailprofilpegawai/delete/<?php echo $value['idpetugas'] ?>"
+                                   class="btn btn-sm btn-danger">Hapus</a>
+
+                            </td>
                         </tr>
                     <?php } ?>
 

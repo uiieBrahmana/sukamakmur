@@ -57,8 +57,6 @@
                     <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpesanan">Buat Pemesanan
-                                Baru</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpesanan">Lihat Semua
                                 Pesanan</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi
@@ -121,7 +119,7 @@
                                     <b>ID PETUGAS</b> <span class="pull-right"> <?php echo $Pegawai['idpetugas']; ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Tanggal Lahir</b> <span class="pull-right"> <?php echo $Pegawai['tglLahir']; ?></span>
+                                    <b>Tanggal Lahir</b> <span class="pull-right"> <?php echo indonesianMonth(date("d F Y", strtotime($Pegawai['tglLahir'])))?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Jenis Kelamin</b> <span class="pull-right"><?php echo (strcmp($Pegawai['jenisKelamin'], 'W') == 0) ? 'Wanita' : 'Pria'; ?></span>

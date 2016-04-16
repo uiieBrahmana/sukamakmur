@@ -109,9 +109,31 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function test()
+    public function hitungtotalharga()
     {
-        $this->load->view('test');
+        $idpemesanan = $this->input->post('idpemesanan');
+        $totalharga = $this->input->post('totalharga');
+
+        $sqlupdate = UpdateBuilder('pemesanan',
+            array(
+                'idpemesanan' => $idpemesanan,
+            ),
+            array(
+                'idpemesanan' => $idpemesanan,
+                'totalharga' => $totalharga,
+            )
+        );
+
+        $hasil = $this->koneksi->Save($sqlupdate, array(
+            $idpemesanan,
+            $totalharga
+        ));
+
+        if ($hasil) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function images($idakomodasi, $posisi = 0)

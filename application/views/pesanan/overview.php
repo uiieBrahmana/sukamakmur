@@ -237,16 +237,19 @@
 
 <?php $this->load->view('template/script'); ?>
 
-<script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
 <script>
     $(document).ready(function () {
-        $('#student').DataTable({
-            "aoColumnDefs": [
-                {'bSortable': false, 'aTargets': [5]}
-            ]
-        });
+        $.ajax({
+                method: "POST",
+                url: "index.php/service/hitungtotalharga",
+                data: {
+                    idpemesanan: <?php echo $id ?>,
+                    totalharga: <?php echo $Total ?>,
+                }
+            })
+            .done(function (msg) {
+                console.log(msg);
+            });
     });
 </script>
 
