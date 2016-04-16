@@ -298,4 +298,27 @@ class Pesan extends CI_Controller
             return false;
         }
     }
+
+    public function checkout($idpemesanan)
+    {
+        if ($idpemesanan == null)
+            $idpemesanan = $this->session->userdata('pesanan');
+
+        $sqlupdate = UpdateBuilder('pemesanan',
+            array(
+                'idpemesanan' => $idpemesanan,
+            ),
+            array(
+                'idpemesanan' => $idpemesanan,
+                'status' => 'CHECKOUT',
+            )
+        );
+
+        $hasil = $this->koneksi->Save($sqlupdate, array(
+            $idpemesanan,
+            'CHECKOUT'
+        ));
+
+        $this->load->view('pesanan/checkout', $this->data);
+    }
 }

@@ -207,7 +207,7 @@
                     <div class="col-xs-3"></div>
                     <div class="col-xs-3">
                         <div class="box-body">
-                            <a href="" class="btn btn-info btn-block">Selesai dan Lanjutkan Pembayaran</a>
+                            <a href="pesan/checkout/<?php echo $id; ?>" class="btn btn-info btn-block">Selesai dan Lanjutkan Checkout</a>
                         </div>
                     </div>
                     <div class="col-xs-3">
