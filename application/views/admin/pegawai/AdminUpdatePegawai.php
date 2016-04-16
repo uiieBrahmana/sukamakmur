@@ -138,8 +138,13 @@
 
                                             <div class="col-sm-3">
                                                 <select name="jenisKelamin" class="form-control">
-                                                    <option value="W">Wanita</option>
-                                                    <option value="P">Pria</option>
+                                                    <?php if ($Pegawai['jenisKelamin'] == 'W') { ?>
+                                                        <option selected value="W">Wanita</option>
+                                                        <option value="P">Pria</option>
+                                                    <?php } else { ?>
+                                                        <option value="W">Wanita</option>
+                                                        <option selected value="P">Pria</option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -168,9 +173,9 @@
 
                                             <div class="col-sm-3">
                                                 <select class="form-control" name="status">
-                                                    <option value="Manager">Manager</option>
-                                                    <option value="Administrator">Administrator Aplikasi</option>
-                                                    <option value="Trainer">Trainer Kegiatan</option>
+                                                    <option <?php echo ($Pegawai['status'] == 'Manager') ? 'selected' : '' ?> value="Manager">Manager</option>
+                                                    <option <?php echo ($Pegawai['status'] == 'Administrator') ? 'selected' : '' ?> value="Administrator">Administrator Aplikasi</option>
+                                                    <option <?php echo ($Pegawai['status'] == 'Trainer') ? 'selected' : '' ?> value="Trainer">Trainer Kegiatan</option>
                                                 </select>
                                             </div>
                                         </div>
