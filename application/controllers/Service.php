@@ -3,10 +3,6 @@
 class Service extends CI_Controller
 {
 
-
-    /**
-     * Service constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -130,9 +126,9 @@ class Service extends CI_Controller
         ));
 
         if ($hasil) {
-            return true;
+            json_encode(1);
         } else {
-            return false;
+            json_encode(0);
         }
     }
 
@@ -150,6 +146,17 @@ class Service extends CI_Controller
     {
         $result = $this->koneksi->FetchAll("select count(*) as jumlah from fotoakomodasi where idakomodasi = $idakomodasi");
         echo json_encode($result[0]);
+    }
+
+    public function usernameSimilarity($username)
+    {
+        $result = $this->koneksi->FetchAll("select username from tamu where username = '$username'
+        UNION select username from petugas where username = '$username'");
+
+        if (!isset($result[0]) || $result[0] == null)
+            json_encode(0);
+        else
+            json_encode(1);
     }
 
 }
