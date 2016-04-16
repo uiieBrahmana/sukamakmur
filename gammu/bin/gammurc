@@ -8,7 +8,7 @@
 
 [gammu]
 
-device = com9:
+device = com4:
 connection = at19200
 ; Do not use model configuration unless you really need it
 ;model = 6110
@@ -23,7 +23,7 @@ connection = at19200
 
 [gammu1]
 
-device = com9:
+device = com4:
 ;model = 6110
 connection = fbusblue
 ;synchronizetime = yes

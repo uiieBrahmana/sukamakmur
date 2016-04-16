@@ -4,7 +4,7 @@
 # Gammu configuration, this section is like section "gammu" in "gammurc" file,
 # see gammurc(5) for documentation.
 [gammu]
-device = com9
+device = com4
 #model = 6110
 connection = at19200
 #synchronizetime = yes
@@ -62,7 +62,7 @@ user = root
 password = 
 pc = localhost
 # pc can also contain port or socket path after colon (eg. localhost:/path/to/socket)
-database = pembayaranapp
+database = rcsukamakmur
 
 # DBI configuration
 driver = mysql

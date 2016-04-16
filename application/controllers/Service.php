@@ -151,4 +151,5 @@ class Service extends CI_Controller
         $result = $this->koneksi->FetchAll("select count(*) as jumlah from fotoakomodasi where idakomodasi = $idakomodasi");
         echo json_encode($result[0]);
     }
+
 }

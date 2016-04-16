@@ -43,7 +43,7 @@ class Administrator extends CI_Controller
     public function adminlihatpesanan()
     {
         $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) ORDER BY tanggalpesan ASC;");
+        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('DRAFT', 'DONE') ORDER BY tanggalpesan ASC;");
 
         $this->load->view('admin/pesanan/AdminListPesanan', $data);
     }

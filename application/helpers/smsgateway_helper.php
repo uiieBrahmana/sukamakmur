@@ -1,7 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dwiPa
- * Date: 26/03/2016
- * Time: 20.45
- */
+
+
+function sendsms($number, $test)
+{
+    $sql = InsertBuilder('outbox', array(
+        'DestinationNumber' => '',
+        'TextDecoded' => '',
+        'CreatorID' => '',
+    ));
+
+    $CI =& get_instance();
+    $CI->koneksi->Save($sql, array(
+        $number,
+        $test,
+        'RCSukamakmur'
+    ));
+}

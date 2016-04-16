@@ -1,0 +1,17 @@
+gammu --identify
+// untuk install service gammu
+gammu-smsd -c smsdrc -i
+// untuk menjalankan service gammu
+gammu-smsd -c smsdrc -s
+// untuk mengirim sms dengan metode inject
+gammu-smsd-inject -c smsdrc TEXT 082129293180 -text “coba”
+// untuk mengirim sms dengan metode inject dengan jumlah karakter > 166
+gammu-smsd-inject -c smsdrc EMS 08xxxxxxxxxx -text “coba”
+// untuk stop service gammu
+gammu-smsd -c smsdrc -k
+// untuk uninstall service gammu
+gammu-smsd -c smsdrc -u
+
+MSVCR71.dll
+c>windows>system32
+c>windows>syswow64
