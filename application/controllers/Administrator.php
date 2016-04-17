@@ -43,7 +43,7 @@ class Administrator extends CI_Controller
     public function adminlihatpesanan()
     {
         $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('DRAFT', 'DONE') ORDER BY tanggalpesan ASC;");
+        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('DRAFT', 'FINISHED') ORDER BY tanggalpesan ASC;");
 
         $this->load->view('admin/pesanan/AdminListPesanan', $data);
     }
@@ -102,12 +102,18 @@ class Administrator extends CI_Controller
 
     public function adminkonfirmasipembayaran()
     {
-        $this->load->view('admin/pesanan/AdminKonfirmasiPembayaran');
+        $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('WAITING') ORDER BY tanggalpesan ASC;");
+
+        $this->load->view('admin/pesanan/AdminKonfirmasiPembayaran', $data);
     }
 
     public function adminkonfirmasipesanan()
     {
-        $this->load->view('admin/pesanan/AdminKonfirmasiPesanan');
+
+        $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('CHECKOUT') ORDER BY tanggalpesan ASC;");
+        $this->load->view('admin/pesanan/AdminKonfirmasiPesanan', $data);
     }
 
     public function adminlihatlaporan()

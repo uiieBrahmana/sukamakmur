@@ -71,18 +71,7 @@
                     </ul>
                 </li>
 
-
                 <li class="header">Version - 0.1 beta</li>
-                <!--
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
-                -->
             </ul>
         </section>
     </aside>
