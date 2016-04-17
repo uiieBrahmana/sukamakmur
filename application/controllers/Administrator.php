@@ -20,16 +20,20 @@ class Administrator extends CI_Controller
 
     public function index()
     {
+        // todo : statisctic dan diagram
         $this->load->view('admin/AdminBeranda');
     }
 
+    /**
+     * @deprecated
+     */
     public function admintambahpesanan()
     {
 
         $submit = $this->input->post('submit');
 
         if (isset($submit)) {
-            var_dump($_POST);
+
         }
 
         $data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM TAMU');
@@ -37,6 +41,7 @@ class Administrator extends CI_Controller
         $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
         $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
         $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
+
         $this->load->view('admin/pesanan/AdminTambahPesanan', $data);
     }
 
@@ -100,6 +105,58 @@ class Administrator extends CI_Controller
         $this->load->view('admin/pesanan/AdminPemesananDetail', $data);
     }
 
+    public function adminKonfirmasiPesananDetail($idpesanan = 0)
+    {
+
+        if (!isset($idpesanan)) {
+            redirect('administrator/adminkonfirmasipesanan');
+        }
+
+        $data['id'] = $idpesanan;
+        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM PESANANAKOMODASI p
+        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
+        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE IDPEMESANAN = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $data['Pesanan'] = $pesan[0];
+
+        /*
+        $totalHarga = 0;
+        foreach ($data['Akomodasi'] as $value) {
+            $totalHarga += $value['harga'];
+        }
+        foreach ($data['Makanan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['porsi']);
+        }
+        foreach ($data['Peralatan'] as $value) {
+            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
+        }
+        foreach ($data['Kegiatan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
+        }
+        $data['Total'] = $totalHarga;
+        */
+
+        $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $data);
+    }
+
     public function adminkonfirmasipembayaran()
     {
         $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
@@ -114,16 +171,6 @@ class Administrator extends CI_Controller
         $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
         LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('CHECKOUT') ORDER BY tanggalpesan ASC;");
         $this->load->view('admin/pesanan/AdminKonfirmasiPesanan', $data);
-    }
-
-    public function adminlihatlaporan()
-    {
-        $this->load->view('AdminLihatLaporan');
-    }
-
-    public function approvepembayaran()
-    {
-        $this->load->view('ApprovePembayaran');
     }
 
     public function adminlihatakun()
@@ -361,6 +408,7 @@ class Administrator extends CI_Controller
 
     public function adminKegiatan()
     {
+        //todo : dashboard kegiatan di admin
         $this->load->view('admin/kegiatan/AdminKegiatan');
     }
 
@@ -607,6 +655,7 @@ class Administrator extends CI_Controller
 
     public function adminakomodasi()
     {
+        // todo : dashboard akomodasi di admin
         $this->load->view('admin/akomodasi/AdminAkomodasi');
     }
 
@@ -733,6 +782,7 @@ class Administrator extends CI_Controller
 
     public function adminmakanan()
     {
+        // todo : dashboard makanan di admin
         $this->load->view('admin/makanan/AdminMakanan');
     }
 
@@ -760,6 +810,7 @@ class Administrator extends CI_Controller
 
     public function adminPeralatan()
     {
+        // todo : dashboard peralatan di admin
         $this->load->view('admin/peralatan/AdminPeralatan');
     }
 
@@ -848,4 +899,40 @@ class Administrator extends CI_Controller
         }
     }
 
+    public function accPesanan($idpemesanan)
+    {
+
+        $sqlupdate = UpdateBuilder('pemesanan',
+            array(
+                'idpemesanan' => $idpemesanan,
+            ),
+            array(
+                'idpemesanan' => $idpemesanan,
+                'status' => 'WAITING',
+            )
+        );
+
+        $hasil = $this->koneksi->Save($sqlupdate, array(
+            $idpemesanan,
+            'WAITING'
+        ));
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpemesanan);
+        $data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpemesanan);
+        $data['Pesanan'] = $pesan[0];
+
+        $kalimat = 'RC Sukamakmur -
+        Dear ' . $tamu[0]['nama'] . ', Pesanan Anda dengan nomor pesanan #' . $pesan[0]['idpemesanan'] .
+            'menunggu pembayaran. Harap bayar Rp. ' . number_format($pesan[0]['totalharga']) . '
+        maksimal 1x 24 jam setelah menerima SMS ini.';
+
+        $telp = str_replace('-', '', $tamu[0]['notelp']);
+        sendsms($telp, $kalimat);
+
+        $this->load->view('admin/pesanan/Approved', $data);
+    }
 }

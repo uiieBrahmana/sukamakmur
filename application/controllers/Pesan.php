@@ -321,4 +321,24 @@ class Pesan extends CI_Controller
 
         $this->load->view('pesanan/checkout', $this->data);
     }
+
+    public function verify()
+    {
+
+    }
+
+    public function notify()
+    {
+
+    }
+
+    public function cancel()
+    {
+
+    }
+
+    public function redirect()
+    {
+
+    }
 }

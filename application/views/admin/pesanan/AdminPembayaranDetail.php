@@ -155,12 +155,10 @@
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])); ?></span>
                                 </div>
                                 <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/akomodasi/<?php //echo $value['did']; ?>"
+                                    <a href="pesan/batalkan/akomodasi/<?php echo $value['did']; ?>"
                                        title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                         <i class="fa fa-close"></i>
                                     </a>
-                                    -->
                                 </div>
                             </div>
 
@@ -188,12 +186,10 @@
                                                 (<?php echo $value['waktupemesanan'] ?>)</span>
                                 </div>
                                 <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/makanan/<?php //echo $value['did']; ?>"
+                                    <a href="pesan/batalkan/makanan/<?php echo $value['did']; ?>"
                                        title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                         <i class="fa fa-close"></i>
                                     </a>
-                                    -->
                                 </div>
                             </div>
 
@@ -221,12 +217,10 @@
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
                                 </div>
                                 <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/peralatan/<?php //echo $value['did']; ?>"
+                                    <a href="pesan/batalkan/peralatan/<?php echo $value['did']; ?>"
                                        title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                         <i class="fa fa-close"></i>
                                     </a>
-                                    -->
                                 </div>
                             </div>
 
@@ -252,12 +246,10 @@
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
                                 </div>
                                 <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/kegiatan/<?php //echo $value['did']; ?>"
+                                    <a href="pesan/batalkan/kegiatan/<?php echo $value['did']; ?>"
                                        title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                         <i class="fa fa-close"></i>
                                     </a>
-                                    -->
                                 </div>
                             </div>
                         <?php } ?>

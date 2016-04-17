@@ -38,7 +38,8 @@
                                 <?php foreach ($Akomodasi as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username"><?php echo $value['nama']; ?>
+                                            <span style="margin-left: 0px;"
+                                                  class="username"><?php echo $value['nama']; ?>
                                                 <br/>
                                                 untuk <?php echo $value['jumlahtamu']; ?> orang</span>
                                             <span style="margin-left: 0px;" class="description">
@@ -48,7 +49,8 @@
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])); ?></span>
                                         </div>
                                         <div class="box-tools">
-                                            <a href="pesan/batalkan/akomodasi/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                            <a href="pesan/batalkan/akomodasi/<?php echo $value['did']; ?>"
+                                               title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                                 <i class="fa fa-close"></i>
                                             </a>
                                         </div>
@@ -84,17 +86,23 @@
                                 <?php foreach ($Makanan as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username">Paket <?php echo $value['idtipemakanan'] ?> untuk <?php echo $value['porsi'] ?> orang (Rp. <?php echo number_format($value['harga']); ?> per porsi)</span>
+                                            <span style="margin-left: 0px;"
+                                                  class="username">Paket <?php echo $value['idtipemakanan'] ?>
+                                                untuk <?php echo $value['porsi'] ?>
+                                                orang (Rp. <?php echo number_format($value['harga']); ?>
+                                                per porsi)</span>
                                             <span style="margin-left: 0px;" class="description">
                                                 <?php echo $value['ketmenu']; ?>
                                                 <br/>
                                                 "<?php echo $value['keterangan']; ?>"
                                                 <br/>
                                                 Rp. <?php echo number_format($value['harga'] * $value['porsi']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggalpemesanan'])) ?> (<?php echo $value['waktupemesanan'] ?>)</span>
+                                                - <?php echo date("d F Y", strtotime($value['tanggalpemesanan'])) ?>
+                                                (<?php echo $value['waktupemesanan'] ?>)</span>
                                         </div>
                                         <div class="box-tools">
-                                            <a href="pesan/batalkan/makanan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                            <a href="pesan/batalkan/makanan/<?php echo $value['did']; ?>"
+                                               title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                                 <i class="fa fa-close"></i>
                                             </a>
                                         </div>
@@ -128,7 +136,9 @@
                                 <?php foreach ($Peralatan as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username"><?php echo $value['jumlahdisewa'] ?> <?php echo $value['nama'] ?> (Rp. <?php echo number_format($value['hargasewa']); ?> per unit)</span>
+                                            <span style="margin-left: 0px;"
+                                                  class="username"><?php echo $value['jumlahdisewa'] ?> <?php echo $value['nama'] ?>
+                                                (Rp. <?php echo number_format($value['hargasewa']); ?> per unit)</span>
                                             <span style="margin-left: 0px;" class="description">
                                                 <?php echo $value['keterangan'] ?>
                                                 <br/>
@@ -138,7 +148,8 @@
                                                 - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
                                         </div>
                                         <div class="box-tools">
-                                            <a href="pesan/batalkan/peralatan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                            <a href="pesan/batalkan/peralatan/<?php echo $value['did']; ?>"
+                                               title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                                 <i class="fa fa-close"></i>
                                             </a>
                                         </div>
@@ -173,15 +184,19 @@
                                 <?php foreach ($Kegiatan as $value) { ?>
                                     <div class="box-header with-border">
                                         <div class="user-block">
-                                            <span style="margin-left: 0px;" class="username"><?php echo $value['nama'] ?>
+                                            <span style="margin-left: 0px;"
+                                                  class="username"><?php echo $value['nama'] ?>
                                                 <br/>
-                                                Untuk <?php echo $value['jumlahpeserta'] ?> (Rp. <?php echo number_format($value['harga']); ?> per orang)</span>
+                                                Untuk <?php echo $value['jumlahpeserta'] ?>
+                                                (Rp. <?php echo number_format($value['harga']); ?> per orang)</span>
                                             <span style="margin-left: 0px;" class="description">
                                                 "<?php echo $value['ket'] ?>"<br/>
-                                                Rp. <?php echo number_format($value['harga'] * $value['jumlahpeserta']); ?> - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
+                                                Rp. <?php echo number_format($value['harga'] * $value['jumlahpeserta']); ?>
+                                                - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
                                         </div>
                                         <div class="box-tools">
-                                            <a href="pesan/batalkan/kegiatan/<?php echo $value['did']; ?>" title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
+                                            <a href="pesan/batalkan/kegiatan/<?php echo $value['did']; ?>"
+                                               title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
                                                 <i class="fa fa-close"></i>
                                             </a>
                                         </div>
@@ -207,18 +222,40 @@
                     <div class="col-xs-3"></div>
                     <div class="col-xs-3">
                         <div class="box-body">
-                            <a href="pesan/checkout/<?php echo $id; ?>" class="btn btn-info btn-block">Selesai dan Lanjutkan Checkout</a>
+                            <a href="pesan/checkout/<?php echo $id; ?>" class="btn btn-info btn-block">Bayar dengan BANK
+                                TRANSFER</a>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="box-body">
-                            <a href="pesan/batalkansemua/<?php echo $id; ?>" class="btn btn-danger btn-block">Batalkan Pesanan</a>
+                            <FORM NAME="order" METHOD="Post"
+                                  ACTION="https://apps.myshortcart.com/payment/request-payment/">
+                                <input type="hidden" name="BASKET"
+                                       value="Gold,70000.00,1,70000.00;Administration fee,5000.00,1,5000.00">
+                                <input type="hidden" name="STOREID" value="00123548">
+                                <input type="hidden" name="TRANSIDMERCHANT" value="000001">
+                                <input type="hidden" name="AMOUNT" value="75000.00">
+                                <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/">
+                                <input type="hidden" name=”WORDS” value=”febc0f139e58fa8b7ca7c04c9ddc22f0aed92e6d”>
+                                <input type="hidden" name="CNAME" value="Buayo Putra">
+                                <input type="hidden" name="CEMAIL" value="buayo@gmail.com">
+                                <input type="hidden" name="CWPHONE" value="0210000011">
+                                <input type="hidden" name="CHPHONE" value="0210980901">
+                                <input type="hidden" name="CMPHONE" value="081298098090">
+                                <input name="submit" type="submit" class="btn btn-primary btn-block" value="Bayar dengan DOKU WALLET"/>
+                            </FORM>
                         </div>
                     </div>
                     <div class="col-xs-3"></div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <div class="box-body">
+                            <a href="pesan/batalkansemua/<?php echo $id; ?>" class="btn btn-danger btn-block">Batalkan
+                                Pesanan</a>
+                        </div>
+                    </div>
                     <div class="col-xs-3">
                         <div class="box-body">
                             <a href="pesan/" class="btn btn-warning btn-block">Kembali ke Daftar Pesanan</a>

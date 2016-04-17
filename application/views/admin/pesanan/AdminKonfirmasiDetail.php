@@ -126,7 +126,7 @@
                                     class="pull-right">Rp <?php echo number_format($Pesanan['totalharga']) ?></span>
                             </li>
                         </ul>
-                        <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
+                        <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary btn-block"><b>Approve Pesanan</b></a>
                     </div>
 
 

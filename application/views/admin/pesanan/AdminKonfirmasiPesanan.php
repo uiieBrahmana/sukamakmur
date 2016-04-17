@@ -121,7 +121,7 @@
                             <td>Rp. <?php echo number_format($Value['totalharga']) ?></td>
                             <td><?php echo $Value['status'] ?></td>
                             <td>
-                                <a href="<?php echo base_url()?>index.php/administrator/adminpemesanandetail/<?php echo $Value['idpemesanan'] ?>" class="btn btn-sm btn-info">Detail</a>
+                                <a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanandetail/<?php echo $Value['idpemesanan'] ?>" class="btn btn-sm btn-info">Detail</a>
                             </td>
                         </tr>
                     <?php } ?>
