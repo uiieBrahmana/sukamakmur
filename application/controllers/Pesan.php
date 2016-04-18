@@ -65,20 +65,25 @@ class Pesan extends CI_Controller
 
         $this->data['id'] = $idpesanan;
         $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
-        FROM PESANANAKOMODASI p
-        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
         $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
-        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
-        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (IDMENUMAKANAN)
         LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
-        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        WHERE pm.idpemesanan = ' . $idpesanan);
         $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
-        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
-        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
         $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
         pn.tanggal, pn.keterangan as ket
-        FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
-        WHERE IDPEMESANAN = ' . $idpesanan);
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Tamu'] = $tamu[0];
 
         $totalHarga = 0;
         foreach ($this->data['Akomodasi'] as $value) {
@@ -134,7 +139,7 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM akomodasi');
         $this->load->view('pesanan/akomodasi', $this->data);
     }
 
@@ -167,7 +172,7 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $this->data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
+        $this->data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM menumakanan');
         $this->load->view('pesanan/makanan', $this->data);
     }
 
@@ -198,7 +203,7 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM peralatan');
         $this->load->view('pesanan/peralatan', $this->data);
     }
 
@@ -231,7 +236,7 @@ class Pesan extends CI_Controller
 
         }
 
-        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM kegiatan');
         $this->load->view('pesanan/aktivitas', $this->data);
     }
 
@@ -320,25 +325,5 @@ class Pesan extends CI_Controller
         ));
 
         $this->load->view('pesanan/checkout', $this->data);
-    }
-
-    public function verify()
-    {
-        echo 'Stop';
-    }
-
-    public function notify()
-    {
-        echo 'Stop';
-    }
-
-    public function cancel()
-    {
-
-    }
-
-    public function redirect()
-    {
-
     }
 }

@@ -236,13 +236,18 @@
                                 <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
                                 <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
                                 <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
-                                <input type="hidden" name="WORDS" value="<?php echo securedHash($id, $Total.'.00'); ?>">
-                                <input type="hidden" name="CNAME" value="Didit Velliz">
-                                <input type="hidden" name="CEMAIL" value="divell@gmail.com">
-                                <input type="hidden" name="CWPHONE" value="0210000011">
-                                <input type="hidden" name="CHPHONE" value="0210980901">
-                                <input type="hidden" name="CMPHONE" value="081298098090">
-                                <input name="submit" type="submit" class="btn btn-primary btn-block" value="Bayar dengan DOKU WALLET"/>
+                                <input type="hidden" name="WORDS"
+                                       value="<?php echo securedHash($id, $Total . '.00'); ?>">
+                                <input type="hidden" name="CNAME" value="<?php $Tamu['nama'] ?>">
+                                <input type="hidden" name="CEMAIL" value="<?php $Tamu['email'] ?>">
+                                <input type="hidden" name="CWPHONE"
+                                       value="<?php str_replace('-', '', $Tamu['notelp']) ?>">
+                                <input type="hidden" name="CHPHONE"
+                                       value="<?php str_replace('-', '', $Tamu['notelp']) ?>">
+                                <input type="hidden" name="CMPHONE"
+                                       value="<?php str_replace('-', '', $Tamu['notelp']) ?>">
+                                <input name="submit" type="submit" class="btn btn-primary btn-block"
+                                       value="Bayar dengan DOKU WALLET"/>
                             </FORM>
                         </div>
                     </div>

@@ -159,4 +159,82 @@ class Service extends CI_Controller
             json_encode(1);
     }
 
+    #region payment
+    public function verify()
+    {
+        $transidmerchant = $this->input->post("TRANSIDMERCHANT");
+        $totalamount = $this->input->post("AMOUNT");
+        $storeid = $this->input->post("STOREID");
+        if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+
+            $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
+            $data = $this->koneksi->FetchAll($sql);
+
+            if ($data === null)
+                echo 'Stop';
+            else
+                echo 'Continue';
+        } else {
+            echo 'Stop';
+        }
+
+    }
+
+    public function notify()
+    {
+        $transidmerchant = $this->input->post("TRANSIDMERCHANT");
+        $totalamount = $this->input->post("AMOUNT");
+
+        //Result can be (Success or Fail)
+        $result = strtoupper($this->input->post("RESULT"));
+
+        if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+            // Maybe you will do anything else ex : send mail to your cust.
+            echo 'Continue';
+        } else {
+            echo 'Stop';
+        }
+    }
+
+    public function cancel($idpemesanan = null)
+    {
+        if ($idpemesanan == null)
+            $idpemesanan = $this->session->userdata('pesanan');
+
+        $sql = DeleteBuilder('pemesanan', array('idpemesanan' => $idpemesanan));
+        $result = $this->koneksi->Save($sql, array($idpemesanan));
+
+        redirect('/pesan/');
+    }
+
+    public function redirect()
+    {
+        $sucess = $this->input->post('RESULT');
+        $idpemesanan = $this->input->post('TRANSIDMERCHANT');
+
+        if (strcasecmp(strtoupper($sucess), 'SUCCESS') == 0) {
+
+            if ($idpemesanan == null)
+                $idpemesanan = $this->session->userdata('pesanan');
+
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $idpemesanan,
+                ),
+                array(
+                    'idpemesanan' => $idpemesanan,
+                    'status' => 'FINISHED',
+                )
+            );
+
+            $this->koneksi->Save($sqlupdate, array(
+                $idpemesanan,
+                'FINISHED'
+            ));
+        }
+
+        redirect('/pesan/summary');
+    }
+    #end region payment
+
 }

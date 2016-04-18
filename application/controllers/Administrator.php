@@ -62,20 +62,20 @@ class Administrator extends CI_Controller
 
         $data['id'] = $idpesanan;
         $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
-        FROM PESANANAKOMODASI p
-        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
         $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
-        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
-        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
         LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
-        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        WHERE pm.idpemesanan = ' . $idpesanan);
         $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
-        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
-        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
         $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
         pn.tanggal, pn.keterangan as ket
-        FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
-        WHERE IDPEMESANAN = ' . $idpesanan);
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
 
         $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
         LEFT JOIN tamu t USING (idtamu)
@@ -114,20 +114,20 @@ class Administrator extends CI_Controller
 
         $data['id'] = $idpesanan;
         $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
-        FROM PESANANAKOMODASI p
-        LEFT JOIN AKOMODASI a USING (IDAKOMODASI) WHERE p.IDPEMESANAN = ' . $idpesanan);
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
         $data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
-        m.keterangan as ketmenu, pm.* FROM PESANANMAKANAN pm
-        LEFT JOIN MENUMAKANAN m USING (IDMENUMAKANAN)
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
         LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
-        WHERE pm.IDPEMESANAN = ' . $idpesanan);
+        WHERE pm.idpemesanan = ' . $idpesanan);
         $data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
-        pn.tanggal FROM PESANANPERALATAN pn LEFT JOIN peralatan p using (idperalatan)
-        WHERE pn.IDPEMESANAN = ' . $idpesanan);
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
         $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
         pn.tanggal, pn.keterangan as ket
-        FROM PESANANKEGIATAN pn LEFT JOIN kegiatan k USING (idkegiatan)
-        WHERE IDPEMESANAN = ' . $idpesanan);
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
 
         $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
         LEFT JOIN tamu t USING (idtamu)
