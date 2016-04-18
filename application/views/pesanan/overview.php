@@ -231,14 +231,14 @@
                             <FORM NAME="order" METHOD="Post"
                                   ACTION="https://apps.myshortcart.com/payment/request-payment/">
                                 <input type="hidden" name="BASKET"
-                                       value="Gold,70000.00,1,70000.00;Administration fee,5000.00,1,5000.00">
+                                       value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
                                 <input type="hidden" name="STOREID" value="00123548">
-                                <input type="hidden" name="TRANSIDMERCHANT" value="000001">
-                                <input type="hidden" name="AMOUNT" value="75000.00">
-                                <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/">
-                                <input type="hidden" name=”WORDS” value=”febc0f139e58fa8b7ca7c04c9ddc22f0aed92e6d”>
-                                <input type="hidden" name="CNAME" value="Buayo Putra">
-                                <input type="hidden" name="CEMAIL" value="buayo@gmail.com">
+                                <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
+                                <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
+                                <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
+                                <input type="hidden" name="WORDS" value="<?php echo securedHash($id, $Total.'.00'); ?>">
+                                <input type="hidden" name="CNAME" value="Didit Velliz">
+                                <input type="hidden" name="CEMAIL" value="divell@gmail.com">
                                 <input type="hidden" name="CWPHONE" value="0210000011">
                                 <input type="hidden" name="CHPHONE" value="0210980901">
                                 <input type="hidden" name="CMPHONE" value="081298098090">

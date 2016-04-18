@@ -324,12 +324,12 @@ class Pesan extends CI_Controller
 
     public function verify()
     {
-
+        echo 'Stop';
     }
 
     public function notify()
     {
-
+        echo 'Stop';
     }
 
     public function cancel()
