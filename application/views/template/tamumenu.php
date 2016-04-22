@@ -25,9 +25,14 @@
 
                 </ul>
 
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" role="search" method="post" action="pengunjung/cari">
                     <div class="form-group">
                         <input type="text" name="search" class="form-control" id="navbar-search-input" placeholder="Search">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">
+                            <i class="btn btn-flat fa fa-search"></i>
+                        </button>
                     </div>
                 </form>
 
@@ -35,14 +40,14 @@
 
             <div class="navbar-custom-menu">
 
-                <?php if($ID == null) { ?>
-                <ul class="nav navbar-nav">
-                    <li><a href="login/">Login</a></li>
-                    <li><a href="pengunjung/buatakun">Register</a></li>
-                </ul>
+                <?php if ($ID == null) { ?>
+                    <ul class="nav navbar-nav">
+                        <li><a href="login/">Login</a></li>
+                        <li><a href="pengunjung/buatakun">Register</a></li>
+                    </ul>
                 <?php } ?>
 
-                <?php if($ID != null) { ?>
+                <?php if ($ID != null) { ?>
                     <ul class="nav navbar-nav">
                         <li><a href="pesan/">Pesanan</a></li>
                         <li><a href="logout/">Logout</a></li>

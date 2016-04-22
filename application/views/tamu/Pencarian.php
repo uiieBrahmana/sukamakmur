@@ -17,7 +17,7 @@
             </section>
 
             <section class="content">
-
+                <?php var_dump($SisaMakanan); ?>
             </section>
 
         </div>
