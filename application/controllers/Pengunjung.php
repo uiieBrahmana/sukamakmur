@@ -12,7 +12,6 @@ class Pengunjung extends CI_Controller
 
         $this->data['ID'] = $this->session->userdata('ID');
         $this->data['Role'] = $this->session->userdata('role');
-
     }
 
     public function index()

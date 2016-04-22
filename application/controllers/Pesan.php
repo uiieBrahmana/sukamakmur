@@ -108,6 +108,52 @@ class Pesan extends CI_Controller
         if (!isset($idpesanan)) {
             redirect('/pesan/');
         }
+
+        if (!is_numeric($idpesanan))
+            redirect('/pesan/');
+        
+        $this->data['id'] = $idpesanan;
+
+        $tamu = $this->koneksi->FetchAll('SELECT * FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Tamu'] = $tamu[0];
+
+        if (strcasecmp($tamu[0]['status'], 'FINISHED') != 0) {
+            redirect('/pesan/');
+        }
+
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.idpemesanan = ' . $idpesanan);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $totalHarga = 0;
+        foreach ($this->data['Akomodasi'] as $value) {
+            $totalHarga += $value['harga'];
+        }
+        foreach ($this->data['Makanan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['porsi']);
+        }
+        foreach ($this->data['Peralatan'] as $value) {
+            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
+        }
+        foreach ($this->data['Kegiatan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
+        }
+        $this->data['Total'] = $totalHarga;
+
         $this->load->view('pesanan/summary', $this->data);
     }
 

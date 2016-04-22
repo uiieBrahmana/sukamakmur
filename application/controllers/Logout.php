@@ -9,6 +9,7 @@ class Logout extends CI_Controller
         $this->session->unset_userdata('ID');
         $this->session->unset_userdata('nama');
         $this->session->unset_userdata('username');
+        $this->session->unset_userdata('role');
         redirect('pengunjung/');
 
     }

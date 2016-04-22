@@ -218,6 +218,8 @@
                     </div>
                     <div class="col-xs-2"></div>
                 </div>
+
+                <?php if ($Total > 0) { ?>
                 <div class="row">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-3">
@@ -253,6 +255,8 @@
                     </div>
                     <div class="col-xs-3"></div>
                 </div>
+                <?php } ?>
+
                 <div class="row">
                     <div class="col-xs-3"></div>
                     <div class="col-xs-3">

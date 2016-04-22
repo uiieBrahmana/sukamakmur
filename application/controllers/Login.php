@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 
-
     /**
      * Login constructor.
      */
@@ -26,17 +25,18 @@ class Login extends CI_Controller
             $this->Auth($username, $password);
             $auth = $this->session->userdata('role');
             if (isset($auth))
-                switch($auth) {
+                switch ($auth) {
                     case 'Tamu':
-                        redirect('/pengunjung/');
+                        redirect('/pesan/');
                         break;
                     case 'Manager':
-                        redirect('/manager/');
+                        redirect('/administrator/');
                         break;
                     case 'Administrator':
                         redirect('/administrator/');
                         break;
                     default:
+                        redirect('/login/');
                         break;
                 }
             else

@@ -21,28 +21,30 @@
                 <div class="row">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
-                        <table id="datatable" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID Pesanan</th>
-                                <th>Tanggal</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Detail</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php foreach ($Pesanan as $value) { ?>
+                        <div class="box box-body">
+                            <table id="datatable" class="table table-bordered table-striped">
+                                <thead>
                                 <tr>
-                                    <td><?php echo $value['idpemesanan'] ?></td>
-                                    <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
-                                    <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
-                                    <td><?php echo $value['status'] ?></td>
-                                    <td><a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a></td>
+                                    <th>ID Pesanan</th>
+                                    <th>Tanggal</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Detail</th>
                                 </tr>
-                            <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($Pesanan as $value) { ?>
+                                    <tr>
+                                        <td><?php echo $value['idpemesanan'] ?></td>
+                                        <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
+                                        <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
+                                        <td><?php echo $value['status'] ?></td>
+                                        <td><a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a></td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-lg-2"></div>
                 </div>

@@ -12,7 +12,7 @@ class Administrator extends CI_Controller
         if (!isset($auth)) {
             redirect('/login/');
         }
-        if (strcasecmp($role, 'Administrator') != 0) {
+        if (strcasecmp($role, 'Tamu') == 0) {
             redirect('/pengunjung/');
         }
 
@@ -36,11 +36,11 @@ class Administrator extends CI_Controller
 
         }
 
-        $data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM TAMU');
-        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM AKOMODASI');
-        $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM MENUMAKANAN');
-        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM PERALATAN');
-        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM KEGIATAN');
+        $data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM tamu');
+        $data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM akomodasi');
+        $data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM menumakanan');
+        $data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM peralatan');
+        $data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM kegiatan');
 
         $this->load->view('admin/pesanan/AdminTambahPesanan', $data);
     }
@@ -48,7 +48,7 @@ class Administrator extends CI_Controller
     public function adminlihatpesanan()
     {
         $data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('DRAFT', 'FINISHED') ORDER BY tanggalpesan ASC;");
+        LEFT JOIN tamu t USING (idtamu) ORDER BY tanggalpesan ASC;");
 
         $this->load->view('admin/pesanan/AdminListPesanan', $data);
     }
@@ -175,7 +175,7 @@ class Administrator extends CI_Controller
 
     public function adminlihatakun()
     {
-        $data['Akun'] = $this->koneksi->FetchAll("SELECT * FROM `TAMU`");
+        $data['Akun'] = $this->koneksi->FetchAll("SELECT * FROM `tamu`");
         $this->load->view('admin/tamu/AdminLihatAkun', $data);
     }
 
@@ -236,7 +236,7 @@ class Administrator extends CI_Controller
             case 'update':
                 // todo : join table
                 $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
-                $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM TIPEMAKANAN");
+                $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM tipemakanan");
                 $data['Menumakanan'] = $result[0];
                 $this->load->view('admin/makanan/AdminUpdateMakanan', $data);
                 break;
@@ -284,7 +284,7 @@ class Administrator extends CI_Controller
 
     public function admintambahmakanan()
     {
-        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM TIPEMAKANAN");
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM tipemakanan");
 
         $submit = $this->input->post('submit');
         if ($submit) {
@@ -305,14 +305,14 @@ class Administrator extends CI_Controller
 
     public function adminlihatmakanan()
     {
-        $data['MenuMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `MenuMakanan`");
+        $data['MenuMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `menumakanan`");
         $this->load->view('admin/makanan/AdminLihatMakanan', $data);
     }
 
     public function adminLihatTipeMakanan()
     {
 
-        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `TIPEMAKANAN`");
+        $data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM `tipemakanan`");
         $this->load->view('admin/makanan/AdminLihatTipeMakanan', $data);
     }
 
@@ -741,7 +741,7 @@ class Administrator extends CI_Controller
 
     public function adminlihatakomodasi()
     {
-        $data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `AKOMODASI`");
+        $data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `akomodasi`");
         $this->load->view('admin/akomodasi/AdminLihatAkomodasi', $data);
     }
 
@@ -816,7 +816,7 @@ class Administrator extends CI_Controller
 
     public function adminLihatPeralatan()
     {
-        $data['Peralatan'] = $this->koneksi->FetchAll("SELECT * FROM `PERALATAN`");
+        $data['Peralatan'] = $this->koneksi->FetchAll("SELECT * FROM `peralatan`");
         $this->load->view('admin/peralatan/AdminLihatPeralatan', $data);
     }
 
