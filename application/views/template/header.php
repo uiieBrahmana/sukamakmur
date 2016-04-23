@@ -18,6 +18,11 @@
                     </a>
 
                     <ul class="dropdown-menu">
+                        <li class="user-panel">
+                            <div class="">
+                                <?php echo $this->session->userdata('nama'); ?>
+                            </div>
+                        </li>
                         <li class="user-footer">
                             <div class="">
                                 <a href="logout" class="btn btn-default btn-flat btn-block">Keluar</a>

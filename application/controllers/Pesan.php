@@ -102,9 +102,13 @@ class Pesan extends CI_Controller
         $this->load->view('pesanan/overview', $this->data);
     }
 
-    public function summary()
+    public function summary($idp)
     {
         $idpesanan = $this->session->userdata('pesanan');
+        if (!isset($idpesanan)) {
+            $idpesanan = $idp;
+        }
+
         if (!isset($idpesanan)) {
             redirect('/pesan/');
         }

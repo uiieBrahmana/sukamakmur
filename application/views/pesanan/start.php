@@ -39,7 +39,12 @@
                                         <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
                                         <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
                                         <td><?php echo $value['status'] ?></td>
-                                        <td><a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a></td>
+                                        <td>
+                                            <a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
+                                            <?php if(strcmp($value['status'], 'FINISHED') == 0){ ?>
+                                            <a class="btn btn-info" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>

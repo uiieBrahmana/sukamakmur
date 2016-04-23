@@ -20,6 +20,7 @@
         $('input[name=search]').datepicker({format: 'dd MM yyyy', startDate: new Date()});
         $('input[name=search]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
+            $('form[name=searchtamu]').submit();
         });
     });
 </script>

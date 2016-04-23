@@ -25,14 +25,9 @@
 
                 </ul>
 
-                <form class="navbar-form navbar-left" role="search" method="post" action="pengunjung/cari">
+                <form name="searchtamu" class="navbar-form navbar-left" role="search" method="post" action="pengunjung/cari">
                     <div class="form-group">
-                        <input type="text" name="search" class="form-control" id="navbar-search-input" placeholder="Search">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit">
-                            <i class="btn btn-flat fa fa-search"></i>
-                        </button>
+                        <input type="text" name="search" value="<?php echo (isset($DateSearch)) ? $DateSearch : '' ?>" class="form-control" id="navbar-search-input" placeholder="Search">
                     </div>
                 </form>
 
@@ -50,7 +45,24 @@
                 <?php if ($ID != null) { ?>
                     <ul class="nav navbar-nav">
                         <li><a href="pesan/">Pesanan</a></li>
-                        <li><a href="logout/">Logout</a></li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="hidden-xs"><?php echo $this->session->userdata('role'); ?></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="user-panel">
+                                    <div class="">
+                                        <?php echo $this->session->userdata('nama'); ?>
+                                    </div>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="">
+                                        <a href="logout/" class="btn btn-default btn-flat btn-block">Keluar</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 <?php } ?>
             </div>
