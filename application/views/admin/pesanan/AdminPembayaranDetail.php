@@ -11,21 +11,11 @@
     <aside class="main-sidebar">
         <section class="sidebar">
 
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
-
             <ul class="sidebar-menu">
                 <li class="header">Menu Utama</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
+                    <a href="#"><i class="fa fa-home"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
@@ -36,7 +26,7 @@
                 </li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Pegawai</span> <i
+                    <a href="#"><i class="fa fa-users"></i> <span>Kelola Akun Pegawai</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpegawai">Buat Akun
@@ -47,7 +37,7 @@
                 </li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Pemesanan</span> <i
+                    <a href="#"><i class="fa fa-tasks"></i> <span>Kelola Pemesanan</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpesanan">Lihat Semua
@@ -59,7 +49,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Akun Member</span> <i
+                    <a href="#"><i class="fa fa-archive"></i> <span>Kelola Akun Member</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakun">Lihat Semua
@@ -69,18 +59,6 @@
                     </ul>
                 </li>
 
-
-                <li class="header">Version - 0.1 beta</li>
-                <!--
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
-                </li>
-                -->
             </ul>
         </section>
     </aside>
