@@ -1073,9 +1073,9 @@ class Administrator extends CI_Controller
             'menunggu pembayaran. Harap bayar Rp. ' . number_format($pesan[0]['totalharga']) . '
         maksimal 1x 24 jam setelah menerima SMS ini.';
 
-        $telp = str_replace('-', '', $tamu[0]['notelp']);
-        sendsms($telp, $kalimat);
+        // $telp = str_replace('-', '', $tamu[0]['notelp']);
+        // sendsms($telp, $kalimat);
 
-        $this->load->view('admin/pesanan/Approved', $data);
+        $this->load->view('admin/pesanan/AdminApprovePesanan', $data);
     }
 }

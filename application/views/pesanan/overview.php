@@ -222,13 +222,15 @@
                 <?php if ($Total > 0) { ?>
                 <div class="row">
                     <div class="col-xs-3"></div>
+                    <!--
                     <div class="col-xs-3">
                         <div class="box-body">
-                            <a href="pesan/checkout/<?php echo $id; ?>" class="btn btn-info btn-block">Bayar dengan BANK
+                            <a href="pesan/checkout/<?php //echo $id; ?>" class="btn btn-info btn-block">Bayar dengan BANK
                                 TRANSFER</a>
                         </div>
                     </div>
-                    <div class="col-xs-3">
+                    -->
+                    <div class="col-xs-6">
                         <div class="box-body">
                             <FORM NAME="order" METHOD="Post"
                                   ACTION="https://apps.myshortcart.com/payment/request-payment/">
