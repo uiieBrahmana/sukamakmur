@@ -21,11 +21,13 @@ class Pesan extends CI_Controller
         if (!isset($this->userId)) {
             redirect('/login/');
         }
+
+        $this->data['open'] = 'open';
     }
 
     public function index()
     {
-        // todo : update total harga semua pesannannya.
+
         $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
 
@@ -80,10 +82,14 @@ class Pesan extends CI_Controller
         FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
         WHERE idpemesanan = ' . $idpesanan);
 
-        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        $tamu = $this->koneksi->FetchAll('SELECT t.*, p.status FROM pemesanan p
         LEFT JOIN tamu t USING (idtamu)
         WHERE p.idpemesanan = ' . $idpesanan);
         $this->data['Tamu'] = $tamu[0];
+
+        if(strcmp($tamu[0]['status'], 'FINISHED') == 0){
+            redirect('/pesan/');
+        }
 
         $totalHarga = 0;
         foreach ($this->data['Akomodasi'] as $value) {

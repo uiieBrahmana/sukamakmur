@@ -45,7 +45,7 @@
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipesanan">Konfirmasi
                                 Pemesanan</a></li>
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminkonfirmasipembayaran">Konfirmasi
-                                Pembayaran Pesanan</a></li>
+                                Pembayaran</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

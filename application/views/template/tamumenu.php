@@ -44,9 +44,15 @@
 
                 <?php if ($ID != null) { ?>
                     <ul class="nav navbar-nav">
-                        <li><a href="pesan/">Pesanan</a></li>
+                        <li class="user user-menu <?php echo (isset($open)) ? $open : '' ?>">
+                            <a href="pesan/" class="dropdown-toggle">
+                                <i class="fa fa-archive"></i>
+                                <span class="hidden-xs">Pesanan</span>
+                            </a>
+                        </li>
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
                                 <span class="hidden-xs"><?php echo $this->session->userdata('role'); ?></span>
                             </a>
 

@@ -13,7 +13,7 @@
                 <li class="header">AKOMODASI</li>
 
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Kelola Fasilitas</span> <i
+                    <a href="#"><i class="fa fa-home"></i> <span>Kelola Fasilitas</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatakomodasi">Lihat Semua

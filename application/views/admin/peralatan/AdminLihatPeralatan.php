@@ -3,7 +3,7 @@
 
 <?php $this->load->view('template/head'); ?>
 
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 <div class="wrapper">
 
     <?php $this->load->view('template/header'); ?>

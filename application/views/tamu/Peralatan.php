@@ -13,24 +13,29 @@
 
             <section class="content-header">
                 <h1>
+                    Peralatan Tersedia
+                    <small><?php echo $DateSearch ?></small>
                 </h1>
             </section>
 
             <section class="content">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Peralatan A</h1>
+                <?php foreach($TotalPeralatan as $k => $v) { ?>
+                    <div class="col-lg-4 col-xs-6">
+                        <div class="info-box bg-red">
+                            <span class="info-box-icon"><i class="fa fa-gear"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"><?php echo $v['nama'] ?></span>
+                                <span class="info-box-number"><?php echo $v['jumlah'] ?> unit</span>
+
+                        <span class="progress-description">
+                          Rp. <?php echo number_format($v['hargasewa']) ?> (<?php echo $v['keterangan'] ?>)
+                        </span>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Peralatan A</h1>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </section>
 
         </div>

@@ -13,24 +13,33 @@
 
             <section class="content-header">
                 <h1>
+                    <?php echo $SisaMakanan ?> Porsi Tersedia
+                    <small><?php echo $DateSearch ?></small>
                 </h1>
             </section>
 
             <section class="content">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Paket A</h1>
+                <?php foreach ($TipeMakanan as $t => $m) { ?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="info-box bg-aqua text-center">
+
+                                <span class="info-box-text"><h1>Paket <?php echo $m['idtipemakanan'] ?>
+                                        (Rp. <?php echo number_format($m['harga']) ?>)</h1></span>
+
+                                <?php foreach ($m['MenuMakanan'] as $v) { ?>
+                                    <div class="col-lg-3 col-xs-6">
+                                        <div class="info-box bg-red">
+                                            <span class="info-box-text"><b>variasi menu</b></span>
+                                            <span class=""><?php echo $v['keterangan'] ?></span>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Paket A</h1>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </section>
 
         </div>

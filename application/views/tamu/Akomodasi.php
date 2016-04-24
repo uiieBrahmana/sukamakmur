@@ -11,139 +11,33 @@
     <div class="content-wrapper">
         <div class="container">
 
+            <section class="content-header">
+                <h1>
+                    Akomodasi
+                    <small><?php echo $DateSearch ?></small>
+                </h1>
+            </section>
+
             <section class="content">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Bethel</h1>
-                            <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
+                <?php foreach($TotalAkomodasi as $k => $v) { ?>
+                    <div class="col-lg-4 col-xs-6">
+                        <div class="info-box <?php echo ($v['BookAvailable']) ? 'bg-green' : 'bg-red' ?>">
+                            <span class="info-box-icon"><i class="fa fa-home"></i></span>
 
-                                <ol class="carousel-indicators">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0"
-                                            data-target="#carousel-example-generic"></li>
-                                    <?php } ?>
-                                </ol>
+                            <div class="info-box-content">
+                                <span class="info-box-text"><?php echo $v['nama'] ?></span>
+                                <span class="info-box-number">max. <?php echo $v['kapasitas'] ?> orang</span>
 
-                                <div class="carousel-inner">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
-                                            <img alt="First slide"
-                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'] . '/' . $key ?>">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                                    <span class="fa fa-angle-left"></span>
-                                </a>
-                                <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                                    <span class="fa fa-angle-right"></span>
-                                </a>
+                        <span class="progress-description">
+                          Rp. <?php echo number_format($v['harga']) ?> (<?php echo ($v['BookAvailable']) ? 'Tersedia' : 'Tidak Tersedia' ?>)
+                        </span>
+
                             </div>
-
                         </div>
                     </div>
-                </div>
+                <?php } ?>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Migdal</h1>
-                            <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
-
-                                <ol class="carousel-indicators">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0"
-                                            data-target="#carousel-example-generic"></li>
-                                    <?php } ?>
-                                </ol>
-
-                                <div class="carousel-inner">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
-                                            <img alt="First slide"
-                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'] . '/' . $key ?>">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                                    <span class="fa fa-angle-left"></span>
-                                </a>
-                                <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                                    <span class="fa fa-angle-right"></span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Sharon</h1>
-                            <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
-
-                                <ol class="carousel-indicators">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0"
-                                            data-target="#carousel-example-generic"></li>
-                                    <?php } ?>
-                                </ol>
-
-                                <div class="carousel-inner">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
-                                            <img alt="First slide"
-                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'] . '/' . $key ?>">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                                    <span class="fa fa-angle-left"></span>
-                                </a>
-                                <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                                    <span class="fa fa-angle-right"></span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box box-body text-center">
-                            <h1>Jambur</h1>
-                            <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
-
-                                <ol class="carousel-indicators">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0"
-                                            data-target="#carousel-example-generic"></li>
-                                    <?php } ?>
-                                </ol>
-
-                                <div class="carousel-inner">
-                                    <?php foreach ($Size as $key => $value) { ?>
-                                        <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
-                                            <img alt="First slide"
-                                                 src="service/images/<?php echo $Akomodasi['idakomodasi'] . '/' . $key ?>">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                                <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                                    <span class="fa fa-angle-left"></span>
-                                </a>
-                                <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                                    <span class="fa fa-angle-right"></span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </section>
 
         </div>

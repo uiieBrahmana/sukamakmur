@@ -40,9 +40,10 @@
                                         <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
                                         <td><?php echo $value['status'] ?></td>
                                         <td>
-                                            <a class="btn btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
                                             <?php if(strcmp($value['status'], 'FINISHED') == 0){ ?>
-                                            <a class="btn btn-info" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
+                                                <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
+                                            <?php } else { ?>
+                                                <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
                                             <?php } ?>
                                         </td>
                                     </tr>

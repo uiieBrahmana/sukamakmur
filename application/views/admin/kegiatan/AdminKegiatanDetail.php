@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php $this->load->view('template/head'); ?>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
     <?php $this->load->view('template/header'); ?>
