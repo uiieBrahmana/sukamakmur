@@ -14,27 +14,29 @@
             <ul class="sidebar-menu">
                 <li class="header">Menu Utama</li>
 
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-home"></i> <span>Kelola Fasilitas</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminperalatan">Peralatan</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminmakanan">Makanan</a></li>
-                    </ul>
-                </li>
+                <?php if(strcmp($role, 'Administrator') != 0) { ?>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-home"></i> <span>Kelola Fasilitas</span> <i
+                                class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/adminakomodasi">Akomodasi</a></li>
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/adminperalatan">Peralatan</a></li>
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/adminkegiatan">Kegiatan</a></li>
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/adminmakanan">Makanan</a></li>
+                        </ul>
+                    </li>
 
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-users"></i> <span>Kelola Akun Pegawai</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpegawai">Buat Akun
-                                Pegawai</a></li>
-                        <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpegawai">Daftar
-                                Pegawai</a></li>
-                    </ul>
-                </li>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-users"></i> <span>Kelola Akun Pegawai</span> <i
+                                class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/admintambahpegawai">Buat Akun
+                                    Pegawai</a></li>
+                            <li><a href="<?php echo base_url() ?>index.php/administrator/adminlihatpegawai">Daftar
+                                    Pegawai</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
 
                 <li class="treeview">
                     <a href="#"><i class="fa fa-tasks"></i> <span>Kelola Pemesanan</span> <i

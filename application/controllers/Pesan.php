@@ -38,7 +38,6 @@ class Pesan extends CI_Controller
         $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
 
-
         $this->load->view('pesanan/start', $this->data);
     }
 
@@ -87,7 +86,7 @@ class Pesan extends CI_Controller
         WHERE p.idpemesanan = ' . $idpesanan);
         $this->data['Tamu'] = $tamu[0];
 
-        if(strcmp($tamu[0]['status'], 'FINISHED') == 0){
+        if (strcmp($tamu[0]['status'], 'FINISHED') == 0) {
             redirect('/pesan/');
         }
 
@@ -121,7 +120,7 @@ class Pesan extends CI_Controller
 
         if (!is_numeric($idpesanan))
             redirect('/pesan/');
-        
+
         $this->data['id'] = $idpesanan;
 
         $tamu = $this->koneksi->FetchAll('SELECT * FROM pemesanan p
@@ -338,26 +337,13 @@ class Pesan extends CI_Controller
     private function pesanankosong($idpesanan)
     {
 
-        $sql = "SELECT count(*) as jumlah
-                FROM pesananakomodasi a
-                LEFT JOIN pesananmakanan b USING (idpemesanan)
-                LEFT JOIN pesananperalatan c USING (idpemesanan)
-                LEFT JOIN pesanankegiatan d USING (idpemesanan)
-                WHERE idpemesanan = $idpesanan GROUP BY idpemesanan";
-        $hasil = $this->koneksi->FetchAll($sql);
-
-        if ($hasil == null) {
-
-            $sql = DeleteBuilder('pemesanan', array('idpemesanan' => $idpesanan));
-            $result = $this->koneksi->Save($sql, array($idpesanan));
-
-            $this->data['PesananKosong'] = true;
-            return true;
-
-        } else {
-            $this->data['PesananKosong'] = false;
-            return false;
-        }
+        $sql = DeleteBuilder('pemesanan', array(
+                'idpemesanan' => $idpesanan,
+                'totalharga' => 0,
+                'status' => 'DRAFT'
+            )
+        );
+        $this->koneksi->Save($sql, array($idpesanan));
     }
 
     public function checkout($idpemesanan)
