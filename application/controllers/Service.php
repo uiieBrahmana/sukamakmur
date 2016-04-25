@@ -233,7 +233,7 @@ class Service extends CI_Controller
             ));
         }
 
-        redirect('/pesan/summary');
+        redirect('/pesan/summary/' . $idpemesanan);
     }
     #end region payment
 
