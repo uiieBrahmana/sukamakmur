@@ -13,15 +13,19 @@ class Pengunjung extends CI_Controller
         $this->data['ID'] = $this->session->userdata('ID');
         $this->data['Role'] = $this->session->userdata('role');
 
-        if(strcmp($this->data['Role'], 'Administrator') == 0){
+        if (strcmp($this->data['Role'], 'Administrator') == 0) {
             redirect('Administrator/');
         }
 
-        if(strcmp($this->data['Role'], 'Manager') == 0){
+        if (strcmp($this->data['Role'], 'Manager') == 0) {
             redirect('Administrator/');
         }
 
         $this->data['DateSearch'] = $this->session->userdata('DateSearch');
+        if ($this->data['DateSearch'] == null) {
+            $datenow = $begin = new DateTime();
+            $this->data['DateSearch'] = $datenow->format('d F Y');
+        }
     }
 
     public function index()
@@ -79,7 +83,7 @@ class Pengunjung extends CI_Controller
     {
         $dateSearch = $this->session->userdata('DateSearch');
 
-        if(isset($dateSearch)){
+        if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
             $begin = new DateTime();
@@ -110,7 +114,7 @@ class Pengunjung extends CI_Controller
     {
         $dateSearch = $this->session->userdata('DateSearch');
 
-        if(isset($dateSearch)){
+        if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
             $begin = new DateTime();
@@ -124,9 +128,9 @@ class Pengunjung extends CI_Controller
             $this->data['SisaMakanan'] = $this->data['SisaMakanan'][0]['sisa'];
 
         $this->data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM tipemakanan");
-        foreach($this->data['TipeMakanan'] as $key => $val) {
+        foreach ($this->data['TipeMakanan'] as $key => $val) {
             $this->data['TipeMakanan'][$key]['MenuMakanan'] =
-                $this->koneksi->FetchAll("SELECT * FROM menumakanan where idtipemakanan = '".$val['idtipemakanan']."'");
+                $this->koneksi->FetchAll("SELECT * FROM menumakanan where idtipemakanan = '" . $val['idtipemakanan'] . "'");
         }
 
         $this->load->view('tamu/Makanan', $this->data);
@@ -136,7 +140,7 @@ class Pengunjung extends CI_Controller
     {
         $dateSearch = $this->session->userdata('DateSearch');
 
-        if(isset($dateSearch)){
+        if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
             $begin = new DateTime();
@@ -169,7 +173,7 @@ class Pengunjung extends CI_Controller
 
         $dateSearch = $this->session->userdata('DateSearch');
 
-        if(isset($dateSearch)){
+        if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
             $begin = new DateTime();
@@ -277,5 +281,18 @@ class Pengunjung extends CI_Controller
         $this->data['CountKegiatan'] = $k;
 
         $this->load->view('tamu/Pencarian', $this->data);
+    }
+
+    public function viewakomodasi($id = null)
+    {
+        if($id == null){
+            redirect('pengunjung/');
+        }
+
+        $result = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE idakomodasi = " . $id);
+        $size = $this->koneksi->FetchAll("select namafile from fotoakomodasi where idakomodasi = $id");
+        $this->data['Size'] = $size;
+        $this->data['Akomodasi'] = $result[0];
+        $this->load->view('tamu/ViewAkomodasi', $this->data);
     }
 }

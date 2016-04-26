@@ -2003,6 +2003,15 @@ a:focus {
   border-radius: 2px;
   margin-bottom: 15px;
 }
+
+.hov :hover {
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  background-color: #000;
+}
+
 .info-box small {
   font-size: 14px;
 }
