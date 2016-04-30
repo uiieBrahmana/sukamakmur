@@ -356,35 +356,51 @@ class Pesan extends CI_Controller
                                     WHERE p.idpemesanan = $idpemesanan");
         $datapemesan = $datapemesan[0];
 
-        include_once(APPPATH . 'third_party/phpmailer/PHPMailerAutoload.php');
-        $this->load->library('mail');
-        $data = array(
-            "NAME" => $datapemesan['nama'],
-            "EMAIL" => $datapemesan['email'],
-            "DATE" => date('d F Y (H:i:s)'),
-            "ID" => $idpemesanan,
-            "TOTAL" => number_format($datapemesan['totalharga']), // todo : kalo cicil diubah
-        );
-        $template_html = 'email_pembayaran.html';
+        $submit = $this->input->post('submit');
+        if (isset($submit)) {
+            $terms = $this->input->post('dp');
+            if (isset($terms))
+                $datapemesan['totalharga'] = ($datapemesan['totalharga'] * 30 / 100);
 
-        $mail = new Mail();
-        $mail->setMailBody($data, $template_html);
-        $mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
+            include_once(APPPATH . 'third_party/phpmailer/PHPMailerAutoload.php');
+            $this->load->library('mail');
+            $data = array(
+                "NAME" => $datapemesan['nama'],
+                "EMAIL" => $datapemesan['email'],
+                "DATE" => date('d F Y (H:i:s)'),
+                "ID" => $idpemesanan,
+                "TOTAL" => number_format($datapemesan['totalharga']),
+            );
 
-        $sqlupdate = UpdateBuilder('pemesanan',
-            array(
-                'idpemesanan' => $idpemesanan,
-            ),
-            array(
-                'idpemesanan' => $idpemesanan,
-                'status' => 'CHECKOUT',
-            )
-        );
-        $this->koneksi->Save($sqlupdate, array(
-            $idpemesanan,
-            'CHECKOUT'
-        ));
+            $template_html = 'email_pembayaran.html';
 
+            // todo : activate on production
+            //$mail = new Mail();
+            //$mail->setMailBody($data, $template_html);
+            //$mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
+
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $idpemesanan,
+                ),
+                array(
+                    'idpemesanan' => $idpemesanan,
+                    'status' => 'CHECKOUT',
+                )
+            );
+
+            $this->koneksi->Save($sqlupdate, array(
+                $idpemesanan,
+                'CHECKOUT'
+            ));
+        }
+
+        $this->data['Pemesanan'] = $datapemesan;
         $this->load->view('pesanan/checkout', $this->data);
+    }
+
+    public function konfirmasi($id = null)
+    {
+        $this->load->view('pesanan/konfirmasi', $this->data);
     }
 }

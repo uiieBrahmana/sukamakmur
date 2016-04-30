@@ -3,10 +3,10 @@
 
 <?php $this->load->view('template/head'); ?>
 
-<body class="hold-transition skin-purple layout-top-nav">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <?php $this->load->view('template/tamumenu'); ?>
+    <?php $this->load->view('template/header'); ?>
 
     <aside class="main-sidebar">
         <section class="sidebar">
@@ -73,7 +73,7 @@
 
             <section class="content">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-sm-10">
                         <div class="box box-body text-center">
                             <h1>Pesanan sudah dikonfirmasi.</h1>
                             <p>Terimakasih</p>

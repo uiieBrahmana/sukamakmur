@@ -211,58 +211,74 @@
                     </div>
                     <div class="col-md-3"></div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-8 text-center text-warning">
-                        <h2><b>Total Rp. <?php echo number_format($Total); ?>,-</b></h2>
-                    </div>
-                    <div class="col-xs-2"></div>
-                </div>
 
                 <?php if ($Total > 0) { ?>
-                <div class="row">
-                    <div class="col-xs-3"></div>
-
-                    <div class="col-xs-6">
-                        <div class="box-body">
-                            <a href="pesan/checkout/<?php echo $id; ?>" class="btn btn-info btn-block">Bayar dengan BANK
-                                TRANSFER</a>
+                    <form action="pesan/checkout/<?php echo $id; ?>" method="post">
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <input name="dp" type="checkbox"/> Centang untuk hanya membayar DP 30%
+                            </div>
+                            <div class="col-xs-2"></div>
                         </div>
-                    </div>
-
-                    <div class="col-xs-3"></div>
-
-                </div>
-                <div class="row">
-                    <div class="col-xs-3"></div>
-
-                    <div class="col-xs-6">
-                        <div class="box-body">
-                            <FORM NAME="order" METHOD="Post"
-                                  ACTION="https://apps.myshortcart.com/payment/request-payment/">
-                                <input type="hidden" name="BASKET"
-                                       value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
-                                <input type="hidden" name="STOREID" value="00123548">
-                                <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
-                                <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
-                                <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
-                                <input type="hidden" name="WORDS"
-                                       value="<?php echo securedHash($id, $Total . '.00'); ?>">
-                                <input type="hidden" name="CNAME" value="<?php echo $Tamu['nama'] ?>">
-                                <input type="hidden" name="CEMAIL" value="<?php echo $Tamu['email'] ?>">
-                                <input type="hidden" name="CWPHONE"
-                                       value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                <input type="hidden" name="CHPHONE"
-                                       value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                <input type="hidden" name="CMPHONE"
-                                       value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                <input name="submit" type="submit" class="btn btn-primary btn-block"
-                                       value="Bayar dengan DOKU WALLET"/>
-                            </FORM>
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <b><span name="tamount"><h2>Total Harga Rp. <?php echo number_format($Total); ?>,-</h2></span></b>
+                            </div>
+                            <div class="col-xs-2"></div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <b><span name="vamount"></span></b>
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6">
+                                <div class="box-body">
+                                    <input type="submit" value="Bayar dengan BANK
+                                        TRANSFER" name="submit" class="btn btn-info btn-block">
+                                </div>
+                            </div>
+                            <div class="col-xs-3"></div>
+                        </div>
+                    </form>
+
+                    <div class="row">
+                        <div class="col-xs-3"></div>
+
+                        <div class="col-xs-6">
+                            <div class="box-body">
+                                <FORM NAME="order" METHOD="Post"
+                                      ACTION="https://apps.myshortcart.com/payment/request-payment/">
+                                    <input type="hidden" name="BASKET"
+                                           value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
+                                    <input type="hidden" name="STOREID" value="00123548">
+                                    <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
+                                    <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
+                                    <input type="hidden" name="WORDS"
+                                           value="<?php echo securedHash($id, $Total . '.00'); ?>">
+                                    <input type="hidden" name="CNAME" value="<?php echo $Tamu['nama'] ?>">
+                                    <input type="hidden" name="CEMAIL" value="<?php echo $Tamu['email'] ?>">
+                                    <input type="hidden" name="CWPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input type="hidden" name="CHPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input type="hidden" name="CMPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input name="submit" type="submit" class="btn btn-primary btn-block"
+                                           value="Bayar dengan DOKU WALLET"/>
+                                </FORM>
+                            </div>
+                        </div>
+                        <div class="col-xs-3"></div>
                     </div>
-                    <div class="col-xs-3"></div>
-                </div>
                 <?php } ?>
 
                 <div class="row">
@@ -304,6 +320,24 @@
             .done(function (msg) {
                 console.log(msg);
             });
+
+        $('input[name=dp]').on('click', function(){
+            if ($(this).is(':checked')) {
+                $('span[name=vamount]').hide().html('<h2>DP (30%) Rp. <?php echo number_format(($Total * 30) / 100); ?>,-</h2>').fadeIn(1500);
+                $('span[name=tamount]').hide().html('<p>Total Harga Rp. <?php echo number_format($Total); ?>,-</p>').fadeIn(1500);
+
+                $('input[name=BASKET]').prop('value', 'Pemesanan Fasilitas RC Sukamakmur,<?php echo (($Total * 30) / 100) ?>.00,1,<?php echo (($Total * 30) / 100) ?>.00');
+                $('input[name=AMOUNT]').prop('value', '<?php echo (($Total * 30) / 100) ?>.00');
+                $('input[name=WORDS]').prop('value', '<?php echo securedHash($id, (($Total * 30) / 100) . '.00'); ?>');
+            } else {
+                $('span[name=vamount]').hide().html('');
+                $('span[name=tamount]').hide().html('<h2>Total Harga Rp. <?php echo number_format($Total); ?>,-</h2>').fadeIn(1500);
+
+                $('input[name=BASKET]').prop('value', 'Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00');
+                $('input[name=AMOUNT]').prop('value', '<?php echo $Total ?>.00');
+                $('input[name=WORDS]').prop('value', '<?php echo securedHash($id, $Total . '.00'); ?>');
+            }
+        });
     });
 </script>
 

@@ -172,8 +172,24 @@ class Service extends CI_Controller
 
             if ($data === null)
                 echo 'Stop';
-            else
+            else {
+                $sqlupdate = UpdateBuilder('pemesanan',
+                    array(
+                        'idpemesanan' => $transidmerchant,
+                    ),
+                    array(
+                        'idpemesanan' => $transidmerchant,
+                        'status' => 'CHECKOUT',
+                    )
+                );
+
+                $this->koneksi->Save($sqlupdate, array(
+                    $transidmerchant,
+                    'CHECKOUT'
+                ));
+
                 echo 'Continue';
+            }
         } else {
             echo 'Stop';
         }
@@ -184,13 +200,29 @@ class Service extends CI_Controller
     {
         $transidmerchant = $this->input->post("TRANSIDMERCHANT");
         $totalamount = $this->input->post("AMOUNT");
-
         //Result can be (Success or Fail)
         $result = strtoupper($this->input->post("RESULT"));
 
         if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
-            // Maybe you will do anything else ex : send mail to your cust.
-            echo 'Continue';
+            if (strcasecmp($result, 'Success') == 0) {
+                $sqlbayar = InsertBuilder('pembayaran',
+                    array(
+                        'idpemesanan' => $transidmerchant,
+                        'nominal' => $totalamount,
+                        'metodepembayaran' => 'DOKU WALLET',
+                    )
+                );
+
+                $this->koneksi->Save($sqlbayar, array(
+                    'idpemesanan' => $transidmerchant,
+                    'nominal' => $totalamount,
+                    'metodepembayaran' => 'DOKU WALLET',
+                ));
+
+                echo 'Continue';
+            } else {
+                echo 'Stop';
+            }
         } else {
             echo 'Stop';
         }
@@ -213,7 +245,6 @@ class Service extends CI_Controller
         $idpemesanan = $this->input->post('TRANSIDMERCHANT');
 
         if (strcasecmp(strtoupper($sucess), 'SUCCESS') == 0) {
-
             if ($idpemesanan == null)
                 $idpemesanan = $this->session->userdata('pesanan');
 
@@ -226,15 +257,11 @@ class Service extends CI_Controller
                     'status' => 'FINISHED',
                 )
             );
-
-            //todo save pembayaran pemesanan
-
             $this->koneksi->Save($sqlupdate, array(
                 $idpemesanan,
                 'FINISHED'
             ));
         }
-
         redirect('/pesan/summary/' . $idpemesanan);
     }
     #end region payment

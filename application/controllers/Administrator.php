@@ -1033,7 +1033,6 @@ class Administrator extends CI_Controller
 
     public function accPesanan($idpemesanan)
     {
-
         $sqlupdate = UpdateBuilder('pemesanan',
             array(
                 'idpemesanan' => $idpemesanan,
@@ -1056,14 +1055,6 @@ class Administrator extends CI_Controller
 
         $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpemesanan);
         $this->data['Pesanan'] = $pesan[0];
-
-        $kalimat = 'RC Sukamakmur -
-        Dear ' . $tamu[0]['nama'] . ', Pesanan Anda dengan nomor pesanan #' . $pesan[0]['idpemesanan'] .
-            'menunggu pembayaran. Harap bayar Rp. ' . number_format($pesan[0]['totalharga']) . '
-        maksimal 1x 24 jam setelah menerima SMS ini.';
-
-        // $telp = str_replace('-', '', $tamu[0]['notelp']);
-        // sendsms($telp, $kalimat);
 
         $this->load->view('admin/pesanan/AdminApprovePesanan', $this->data);
     }
