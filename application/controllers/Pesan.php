@@ -356,7 +356,7 @@ class Pesan extends CI_Controller
                                     WHERE p.idpemesanan = $idpemesanan");
         $datapemesan = $datapemesan[0];
 
-        include_once('../third_party/phpmailer/PHPMailerAutoload.php');
+        include_once(APPPATH . 'third_party/phpmailer/PHPMailerAutoload.php');
         $this->load->library('mail');
         $data = array(
             "NAME" => $datapemesan['nama'],
@@ -365,7 +365,7 @@ class Pesan extends CI_Controller
             "ID" => $idpemesanan,
             "TOTAL" => number_format($datapemesan['totalharga']), // todo : kalo cicil diubah
         );
-        $template_html = '../views/mail/email_pembayaran.html';
+        $template_html = 'email_pembayaran.html';
 
         $mail = new Mail();
         $mail->setMailBody($data, $template_html);
@@ -380,7 +380,7 @@ class Pesan extends CI_Controller
                 'status' => 'CHECKOUT',
             )
         );
-        $hasil = $this->koneksi->Save($sqlupdate, array(
+        $this->koneksi->Save($sqlupdate, array(
             $idpemesanan,
             'CHECKOUT'
         ));

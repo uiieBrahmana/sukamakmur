@@ -18,8 +18,8 @@ $config['mail_template_options'] = array(
 // Server Configuration
 $config['mail_smtp']            = 'smtp-mail.outlook.com';
 $config['mail_port']            = 587; // for gmail default 587 with tls
-$config['mail_user']            = 'sofa_marwa@outlook.com';
-$config['mail_pass']            = 'ssw0rd2016';
+$config['mail_user']            = 'someone@outlook.com';
+$config['mail_pass']            = '';
 
 // Mailer config Sender/Receiver Addresses
 $config['mail_admin_mail']      = 'dwipaulina@windowslive.com';
