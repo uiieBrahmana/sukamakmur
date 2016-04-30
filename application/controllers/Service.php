@@ -227,6 +227,8 @@ class Service extends CI_Controller
                 )
             );
 
+            //todo save pembayaran pemesanan
+
             $this->koneksi->Save($sqlupdate, array(
                 $idpemesanan,
                 'FINISHED'

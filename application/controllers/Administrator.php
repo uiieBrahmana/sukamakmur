@@ -305,14 +305,12 @@ class Administrator extends CI_Controller
                 redirect('/administrator/adminlihatmakanan/success');
                 break;
             case 'update':
-                // todo : join table
                 $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
                 $this->data['TipeMakanan'] = $this->koneksi->FetchAll("SELECT * FROM tipemakanan");
                 $this->data['Menumakanan'] = $result[0];
                 $this->load->view('admin/makanan/AdminUpdateMakanan', $this->data);
                 break;
             case 'view':
-                // todo : join table
                 $result = $this->koneksi->FetchAll("SELECT * FROM `menumakanan` WHERE idmenumakanan = " . $id);
                 $this->data['Menumakanan'] = $result[0];
                 $this->load->view('admin/makanan/AdminMakananDetail', $this->data);
@@ -501,9 +499,6 @@ class Administrator extends CI_Controller
             $k = $k + $trainer;
         }
         $this->data['CountKegiatan'] = $k;
-
-        //todo : dashboard kegiatan di admin
-
         $this->load->view('admin/kegiatan/AdminKegiatan', $this->data);
     }
 
@@ -770,8 +765,6 @@ class Administrator extends CI_Controller
         }
         $this->data['CountAkomodasi'] = $i;
 
-        // todo : dashboard akomodasi di admin
-
         $this->load->view('admin/akomodasi/AdminAkomodasi', $this->data);
     }
 
@@ -905,8 +898,6 @@ class Administrator extends CI_Controller
         else
             $this->data['SisaMakanan'] = $this->data['SisaMakanan'][0]['sisa'];
 
-        // todo : dashboard makanan di admin
-
         $this->load->view('admin/makanan/AdminMakanan', $this->data);
     }
 
@@ -951,8 +942,6 @@ class Administrator extends CI_Controller
             $j = $j + $val['jumlah'];
         }
         $this->data['CountPeralatan'] = $j;
-
-        // todo : dashboard peralatan di admin
 
         $this->load->view('admin/peralatan/AdminPeralatan', $this->data);
     }

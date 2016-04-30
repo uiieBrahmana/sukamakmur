@@ -24,6 +24,7 @@
                     <div class="col-lg-12">
                         <div class="box box-body text-center">
                             <h1>Pesanan anda sudah diterima.</h1>
+
                             <p>Silahkan menunggu sms untuk petunjuk pembayaran. Terimakasih</p>
                         </div>
                     </div>

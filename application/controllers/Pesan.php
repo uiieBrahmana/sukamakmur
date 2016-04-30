@@ -351,6 +351,26 @@ class Pesan extends CI_Controller
         if ($idpemesanan == null)
             $idpemesanan = $this->session->userdata('pesanan');
 
+        $datapemesan = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
+                                    LEFT JOIN tamu USING (idtamu)
+                                    WHERE p.idpemesanan = $idpemesanan");
+        $datapemesan = $datapemesan[0];
+
+        include_once('../third_party/phpmailer/PHPMailerAutoload.php');
+        $this->load->library('mail');
+        $data = array(
+            "NAME" => $datapemesan['nama'],
+            "EMAIL" => $datapemesan['email'],
+            "DATE" => date('d F Y (H:i:s)'),
+            "ID" => $idpemesanan,
+            "TOTAL" => number_format($datapemesan['totalharga']), // todo : kalo cicil diubah
+        );
+        $template_html = '../views/mail/email_pembayaran.html';
+
+        $mail = new Mail();
+        $mail->setMailBody($data, $template_html);
+        $mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
+
         $sqlupdate = UpdateBuilder('pemesanan',
             array(
                 'idpemesanan' => $idpemesanan,
@@ -360,7 +380,6 @@ class Pesan extends CI_Controller
                 'status' => 'CHECKOUT',
             )
         );
-
         $hasil = $this->koneksi->Save($sqlupdate, array(
             $idpemesanan,
             'CHECKOUT'
