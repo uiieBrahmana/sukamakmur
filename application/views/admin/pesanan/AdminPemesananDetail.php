@@ -207,7 +207,7 @@
                         <strong class="margin"><i class="fa fa-futbol-o margin-r-5"></i>KEGIATAN</strong>
 
                         <?php if (sizeof($Kegiatan) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong. Silahkan pilih + untuk membuat pesanan baru.</div>'
+                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
                         ?>
 
                         <?php foreach ($Kegiatan as $value) { ?>

@@ -44,7 +44,7 @@
                                                 <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
                                             <?php } elseif(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
                                                 <button disabled class="btn btn-flat">Menunggu Pembayaran</button>
-                                                <a class="btn btn-primary brn-flat" href="pesan/konfirmasi">Konfirmasi</a>
+                                                <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
                                             <?php } else { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
                                             <?php } ?>

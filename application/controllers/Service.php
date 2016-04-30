@@ -142,6 +142,16 @@ class Service extends CI_Controller
         echo $result[$posisi]['filedata'];
     }
 
+    public function bukti($idpembayaran)
+    {
+        $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran");
+        if (!is_array($result))
+            die('not available');
+
+        header('Content-Type: ' . $result[0]['ekstensifile']);
+        echo $result[0]['bukti'];
+    }
+
     public function imageLength($idakomodasi)
     {
         $result = $this->koneksi->FetchAll("select count(*) as jumlah from fotoakomodasi where idakomodasi = $idakomodasi");
@@ -219,6 +229,32 @@ class Service extends CI_Controller
                     'metodepembayaran' => 'DOKU WALLET',
                 ));
 
+                $sqlupdate = UpdateBuilder('pemesanan',
+                    array(
+                        'idpemesanan' => $transidmerchant,
+                    ),
+                    array(
+                        'idpemesanan' => $transidmerchant,
+                        'status' => '',
+                    )
+                );
+
+                $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
+                $data = $this->koneksi->FetchAll($sql);
+                $data = $data[0];
+
+                if($totalamount >= $data['totalharga']){
+                    $this->koneksi->Save($sqlupdate, array(
+                        $transidmerchant,
+                        'FINISHED'
+                    ));
+                } else {
+                    $this->koneksi->Save($sqlupdate, array(
+                        $transidmerchant,
+                        'DP'
+                    ));
+                }
+
                 echo 'Continue';
             } else {
                 echo 'Stop';
@@ -247,21 +283,8 @@ class Service extends CI_Controller
         if (strcasecmp(strtoupper($sucess), 'SUCCESS') == 0) {
             if ($idpemesanan == null)
                 $idpemesanan = $this->session->userdata('pesanan');
-
-            $sqlupdate = UpdateBuilder('pemesanan',
-                array(
-                    'idpemesanan' => $idpemesanan,
-                ),
-                array(
-                    'idpemesanan' => $idpemesanan,
-                    'status' => 'FINISHED',
-                )
-            );
-            $this->koneksi->Save($sqlupdate, array(
-                $idpemesanan,
-                'FINISHED'
-            ));
         }
+
         redirect('/pesan/summary/' . $idpemesanan);
     }
     #end region payment

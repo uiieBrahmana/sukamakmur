@@ -40,6 +40,7 @@ class Pengunjung extends CI_Controller
 
     public function buatakun()
     {
+        $this->data['reg'] = 'open';
         $submit = $this->input->post('submit');
         if ($submit) {
             $nama = $this->input->post('nama');

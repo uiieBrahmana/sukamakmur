@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesan extends CI_Controller
 {
@@ -399,8 +400,5 @@ class Pesan extends CI_Controller
         $this->load->view('pesanan/checkout', $this->data);
     }
 
-    public function konfirmasi($id = null)
-    {
-        $this->load->view('pesanan/konfirmasi', $this->data);
-    }
+
 }

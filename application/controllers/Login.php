@@ -13,6 +13,8 @@ class Login extends CI_Controller
         $auth = $this->session->userdata('ID');
         if (isset($auth))
             redirect('/administrator/');
+
+        $this->data['login'] = 'open';
     }
 
     public function index()

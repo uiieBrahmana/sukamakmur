@@ -37,13 +37,15 @@
 
                 <?php if ($ID == null) { ?>
                     <ul class="nav navbar-nav">
-                        <li><a href="login/">Login</a></li>
-                        <li><a href="pengunjung/buatakun">Register</a></li>
+                        <li class="<?php echo (isset($login)) ? $login : '' ?>"><a href="login/">Login</a></li>
+                        <li class="<?php echo (isset($reg)) ? $reg : '' ?>"><a href="pengunjung/buatakun">Register</a></li>
+                        <li class="<?php echo (isset($conf)) ? $conf : '' ?>"><a href="konfirmasi">Konfirmasi Pesanan</a></li>
                     </ul>
                 <?php } ?>
 
                 <?php if ($ID != null) { ?>
                     <ul class="nav navbar-nav">
+                        <li class="<?php echo (isset($conf)) ? 'open' : '' ?>"><a href="konfirmasi">Konfirmasi Pesanan</a></li>
                         <li class="user user-menu <?php echo (isset($open)) ? $open : '' ?>">
                             <a href="pesan/" class="dropdown-toggle">
                                 <i class="fa fa-archive"></i>

@@ -208,7 +208,6 @@ class Administrator extends CI_Controller
         $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
         $this->data['Pesanan'] = $pesan[0];
 
-        /*
         $totalHarga = 0;
         foreach ($this->data['Akomodasi'] as $value) {
             $totalHarga += $value['harga'];
@@ -223,8 +222,8 @@ class Administrator extends CI_Controller
             $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
         }
         $this->data['Total'] = $totalHarga;
-        */
 
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
         $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
     }
 
@@ -239,8 +238,16 @@ class Administrator extends CI_Controller
     public function adminkonfirmasipesanan()
     {
 
-        $this->data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('CHECKOUT') ORDER BY tanggalpesan ASC;");
+        $this->data['Pesanan'] = $this->koneksi->FetchAll(
+            "SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+            LEFT JOIN pembayaran p using (idpemesanan)
+            LEFT JOIN tamu t USING (idtamu)
+            WHERE psn.status IN ('CHECKOUT')
+            AND p.idpembayaran IS NOT NULL
+            GROUP BY psn.idpemesanan
+            ORDER BY tanggalpesan ASC;"
+        );
+
         $this->load->view('admin/pesanan/AdminKonfirmasiPesanan', $this->data);
     }
 
@@ -1039,13 +1046,15 @@ class Administrator extends CI_Controller
             ),
             array(
                 'idpemesanan' => $idpemesanan,
-                'status' => 'WAITING',
+                'status' => 'DP',
             )
         );
 
+        //todo if idpemesanan pembayaran 30 %
+
         $hasil = $this->koneksi->Save($sqlupdate, array(
             $idpemesanan,
-            'WAITING'
+            'DP'
         ));
 
         $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p

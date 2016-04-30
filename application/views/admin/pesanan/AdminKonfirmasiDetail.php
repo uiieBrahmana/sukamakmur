@@ -93,13 +93,17 @@
                                     class="pull-right"><?php echo $Pesanan['tanggalpesan'] ?></span>
                             </li>
                             <li class="list-group-item">
-                                <b>Total Pesanan</b> <span
+                                <b>Total Harga</b> <span
                                     class="pull-right">Rp <?php echo number_format($Pesanan['totalharga']) ?></span>
                             </li>
                         </ul>
+                        <?php foreach ($Pembayaran as $item) { ?>
+                            <img src="service/bukti/<?php echo $item['idpembayaran'] ?>" style="width: 100%">
+                        <?php } ?>
+                        <br/>
+                        <br/>
                         <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary btn-block"><b>Approve Pesanan</b></a>
                     </div>
-
 
                     <div class="box box-body">
                         <div class="box-header with-border">
@@ -206,7 +210,7 @@
                         <strong class="margin"><i class="fa fa-futbol-o margin-r-5"></i>KEGIATAN</strong>
 
                         <?php if (sizeof($Kegiatan) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong. Silahkan pilih + untuk membuat pesanan baru.</div>'
+                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
                         ?>
 
                         <?php foreach ($Kegiatan as $value) { ?>
@@ -237,7 +241,6 @@
                 <div class="col-md-2"></div>
             </div>
         </section>
-
     </div>
 
     <?php $this->load->view('template/footer'); ?>
