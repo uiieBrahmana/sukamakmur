@@ -52,9 +52,8 @@
                                 </div>
 
                                 <div class="box-footer text-center">
-                                    <input type="submit" class="btn btn-info" name="submit" value="Buat Akun">
+                                    <input type="submit" class="btn btn-info" name="submit" value="Kirim Konfirmasi">
                                     <button class="btn btn-default" type="reset">Reset</button>
-                                    <input type="hidden" name="update" value="update">
                                 </div>
 
                             </form>

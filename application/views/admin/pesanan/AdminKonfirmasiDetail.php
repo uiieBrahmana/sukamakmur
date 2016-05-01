@@ -68,7 +68,7 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                Pemesanan
+                Kode Pemesanan [<?php echo $Pesanan['idpemesanan'] ?>]
                 <small>Detail Pemesanan</small>
             </h1>
         </section>
@@ -76,14 +76,8 @@
         <section class="content">
 
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-
-
-                    <div class="box box-body box-profile">
-                        <h3 class="profile-username text-center">No Pesanan : <?php echo $Pesanan['idpemesanan'] ?></h3>
-
-                        <p class="text-muted text-center">Status : <?php echo $Pesanan['status'] ?></p>
+                <div class="col-md-4">
+                    <div class="box box-body">
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
                                 <b>Nama Pemesan</b> <span class="pull-right"><?php echo $Tamu['nama'] ?></span>
@@ -93,153 +87,178 @@
                                     class="pull-right"><?php echo $Pesanan['tanggalpesan'] ?></span>
                             </li>
                             <li class="list-group-item">
-                                <b>Total Harga</b> <span
+                                <b>Status Pesanan</b> <span class="pull-right"><?php echo $Pesanan['status'] ?></span>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Total Pesanan</b> <span
                                     class="pull-right">Rp <?php echo number_format($Pesanan['totalharga']) ?></span>
                             </li>
                         </ul>
+                        <a href="administrator/adminlihatpesanan" class="btn btn-primary btn-block"><b>Kembali</b></a>
+                    </div>
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">Bukti Pembayaran</h3>
+
+                        <?php if (sizeof($Pembayaran) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pembayaran Belum Dilakukan</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
                         <?php foreach ($Pembayaran as $item) { ?>
                             <img src="service/bukti/<?php echo $item['idpembayaran'] ?>" style="width: 100%">
                         <?php } ?>
                         <br/>
                         <br/>
-                        <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary btn-block"><b>Approve Pesanan</b></a>
-                    </div>
+                        <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary btn-block"><b>Approve Pembayaran</b></a>
 
-                    <div class="box box-body">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">DETAIL PESANAN</h3>
-                        </div>
-
-
-                        <strong class="margin"><i class="fa fa-home margin-r-5"></i>AKOMODASI</strong>
-
-                        <?php if (sizeof($Akomodasi) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
-                        ?>
-
-                        <?php foreach ($Akomodasi as $value) { ?>
-                            <div class="box-header with-border">
-                                <div class="user-block">
-                                            <span style="margin-left: 0px;"
-                                                  class="username"><?php echo $value['nama']; ?>
-                                                untuk <?php echo $value['jumlahtamu']; ?> orang</span>
-                                            <span style="margin-left: 0px;" class="description">
-                                                "<?php echo $value['ket']; ?>"
-                                                <br/>
-                                                Rp. <?php echo number_format($value['harga']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggal'])); ?></span>
-                                </div>
-                                <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/akomodasi/<?php //echo $value['did']; ?>"
-                                       title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
-                                        <i class="fa fa-close"></i>
-                                    </a>
-                                    -->
-                                </div>
-                            </div>
-
-                        <?php } ?>
-
-                        <strong class="margin"><i class="fa fa-coffee margin-r-5"></i>MAKANAN</strong>
-                        <?php if (sizeof($Makanan) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
-                        ?>
-
-                        <?php foreach ($Makanan as $value) { ?>
-                            <div class="box-header with-border">
-                                <div class="user-block">
-                                    <span style="margin-left: 0px;"
-                                          class="username">Paket <?php echo $value['idtipemakanan'] ?>
-                                        untuk <?php echo $value['porsi'] ?>
-                                        orang (Rp. <?php echo number_format($value['harga']); ?> per porsi)</span>
-                                            <span style="margin-left: 0px;" class="description">
-                                                <?php echo $value['ketmenu']; ?>
-
-                                                "<?php echo $value['keterangan']; ?>"
-                                                <br/>
-                                                Rp. <?php echo number_format($value['harga'] * $value['porsi']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggalpemesanan'])) ?>
-                                                (<?php echo $value['waktupemesanan'] ?>)</span>
-                                </div>
-                                <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/makanan/<?php //echo $value['did']; ?>"
-                                       title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
-                                        <i class="fa fa-close"></i>
-                                    </a>
-                                    -->
-                                </div>
-                            </div>
-
-                        <?php } ?>
-
-
-                        <strong class="margin"><i class="fa fa-wrench margin-r-5"></i>PERALATAN</strong>
-
-                        <?php if (sizeof($Peralatan) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
-                        ?>
-
-                        <?php foreach ($Peralatan as $value) { ?>
-                            <div class="box-header with-border">
-                                <div class="user-block">
-                                    <span style="margin-left: 0px;"
-                                          class="username"><?php echo $value['jumlahdisewa'] ?> <?php echo $value['nama'] ?>
-                                        (Rp. <?php echo number_format($value['hargasewa']); ?> per unit)</span>
-                                            <span style="margin-left: 0px;" class="description">
-                                                <?php echo $value['keterangan'] ?>
-                                                <br/>
-                                                "<?php echo $value['ket'] ?>"
-                                                <br/>
-                                                Rp. <?php echo number_format($value['hargasewa'] * $value['jumlahdisewa']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
-                                </div>
-                                <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/peralatan/<?php //echo $value['did']; ?>"
-                                       title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
-                                        <i class="fa fa-close"></i>
-                                    </a>
-                                    -->
-                                </div>
-                            </div>
-
-                        <?php } ?>
-
-                        <strong class="margin"><i class="fa fa-futbol-o margin-r-5"></i>KEGIATAN</strong>
-
-                        <?php if (sizeof($Kegiatan) == 0)
-                            echo '<br/><div class="text-warning">Pesanan Kosong.</div>'
-                        ?>
-
-                        <?php foreach ($Kegiatan as $value) { ?>
-                            <div class="box-header with-border">
-                                <div class="user-block">
-                                            <span style="margin-left: 0px;"
-                                                  class="username"><?php echo $value['nama'] ?>
-
-                                                Untuk <?php echo $value['jumlahpeserta'] ?>
-                                                (Rp. <?php echo number_format($value['harga']); ?> per orang)</span>
-                                            <span style="margin-left: 0px;" class="description">
-                                                "<?php echo $value['ket'] ?>"<br/>
-                                                Rp. <?php echo number_format($value['harga'] * $value['jumlahpeserta']); ?>
-                                                - <?php echo date("d F Y", strtotime($value['tanggal'])) ?></span>
-                                </div>
-                                <div class="box-tools">
-                                    <!--
-                                    <a href="pesan/batalkan/kegiatan/<?php //echo $value['did']; ?>"
-                                       title="Batalkan Pesanan Ini" class="btn btn-box-tool" type="button">
-                                        <i class="fa fa-close"></i>
-                                    </a>
-                                    -->
-                                </div>
-                            </div>
-                        <?php } ?>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+
+                <div class="col-md-8">
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">Data Pembayaran</h3>
+                        <?php if (sizeof($Pembayaran) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pembayaran Belum Dilakukan</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
+                        <ul class="list-group list-group-unbordered">
+                            <?php foreach ($Pembayaran as $value) { ?>
+                                <li class="list-group-item">
+                                    <?php echo $value['idpembayaran']; ?> - <?php echo $value['tanggalbayar']; ?> - Rp.<?php echo number_format($value['nominal']); ?>
+                                    <br/>
+                                    <?php echo $value['metodepembayaran']; ?>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">
+                            <strong class="margin"><i class="fa fa-home margin-r-5"></i>AKOMODASI</strong>
+                        </h3>
+
+                        <?php if (sizeof($Akomodasi) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pesanan Kosong</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
+                        <ul class="list-group list-group-unbordered">
+                            <?php foreach ($Akomodasi as $value) { ?>
+                                <li class="list-group-item">
+                                    <?php echo $value['nama']; ?> untuk <?php echo $value['jumlahtamu']; ?> orang.
+                                    <br/>
+                                    Rp. <?php echo number_format($value['harga']); ?> - <?php echo date("d F Y", strtotime($value['tanggal'])); ?>.
+                                    <br/>
+                                    "<?php echo $value['ket']; ?>"
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">
+                            <strong class="margin"><i class="fa fa-coffee margin-r-5"></i>MAKANAN</strong>
+                        </h3>
+
+                        <?php if (sizeof($Makanan) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pesanan Kosong</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
+                        <ul class="list-group list-group-unbordered">
+                            <?php foreach ($Makanan as $value) { ?>
+                                <li class="list-group-item">
+                                    Paket <?php echo $value['idtipemakanan'] ?> untuk <?php echo $value['porsi'] ?> orang (Rp. <?php echo number_format($value['harga']); ?> per porsi)
+                                    <?php echo $value['ketmenu']; ?>
+                                    <br/>
+                                    Rp. <?php echo number_format($value['harga'] * $value['porsi']); ?>
+                                    - <?php echo date("d F Y", strtotime($value['tanggalpemesanan'])) ?>
+                                    (<?php echo $value['waktupemesanan'] ?>)
+                                    <br/>
+                                    "<?php echo $value['keterangan']; ?>"
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">
+                            <strong class="margin"><i class="fa fa-wrench margin-r-5"></i>PERALATAN</strong>
+                        </h3>
+
+                        <?php if (sizeof($Peralatan) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pesanan Kosong</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
+                        <ul class="list-group list-group-unbordered">
+                            <?php foreach ($Peralatan as $value) { ?>
+                                <li class="list-group-item">
+                                    <?php echo $value['jumlahdisewa'] ?> <?php echo $value['nama'] ?>.
+                                    <br/>
+                                    Rp. <?php echo number_format($value['hargasewa'] * $value['jumlahdisewa']); ?>
+                                    - <?php echo date("d F Y", strtotime($value['tanggal'])) ?>
+                                    <br/>
+                                    "<?php echo $value['ket'] ?>"
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="box box-body">
+                        <h3 class="profile-username text-center">
+                            <strong class="margin"><i class="fa fa-futbol-o margin-r-5"></i>KEGIATAN</strong>
+                        </h3>
+
+                        <?php if (sizeof($Kegiatan) == 0) { ?>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <div class="text-warning text-center">Pesanan Kosong</div>
+                                </li>
+                            </ul>
+                        <?php } ?>
+
+                        <ul class="list-group list-group-unbordered">
+                            <?php foreach ($Kegiatan as $value) { ?>
+                                <li class="list-group-item">
+                                    <?php echo $value['nama'] ?> Untuk <?php echo $value['jumlahpeserta'] ?> orang.
+                                    <br/>
+                                    Rp. <?php echo number_format($value['harga'] * $value['jumlahpeserta']); ?>
+                                    - <?php echo date("d F Y", strtotime($value['tanggal'])) ?>
+                                    <br/>
+                                    "<?php echo $value['ket'] ?>"
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>
 

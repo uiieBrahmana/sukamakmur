@@ -95,162 +95,6 @@ class Administrator extends CI_Controller
         $this->load->view('admin/AdminBeranda', $this->data);
     }
 
-    /**
-     * @deprecated
-     */
-    public function admintambahpesanan()
-    {
-
-        $submit = $this->input->post('submit');
-
-        if (isset($submit)) {
-
-        }
-
-        $this->data['Tamu'] = $this->koneksi->FetchAll('SELECT * FROM tamu');
-        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM akomodasi');
-        $this->data['MenuMakanan'] = $this->koneksi->FetchAll('SELECT * FROM menumakanan');
-        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT * FROM peralatan');
-        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT * FROM kegiatan');
-
-        $this->load->view('admin/pesanan/AdminTambahPesanan', $this->data);
-    }
-
-    public function adminlihatpesanan()
-    {
-        $this->data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) ORDER BY tanggalpesan ASC;");
-
-        $this->load->view('admin/pesanan/AdminListPesanan', $this->data);
-    }
-
-    public function adminpemesanandetail($idpesanan = 0)
-    {
-
-        if (!isset($idpesanan)) {
-            redirect('administrator/adminlihatpesanan');
-        }
-
-        $this->data['id'] = $idpesanan;
-        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
-        FROM pesananakomodasi p
-        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
-        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
-        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
-        LEFT JOIN menumakanan m USING (idmenumakanan)
-        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
-        WHERE pm.idpemesanan = ' . $idpesanan);
-        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
-        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
-        WHERE pn.idpemesanan = ' . $idpesanan);
-        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
-        pn.tanggal, pn.keterangan as ket
-        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
-        WHERE idpemesanan = ' . $idpesanan);
-
-        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
-        LEFT JOIN tamu t USING (idtamu)
-        WHERE p.idpemesanan = ' . $idpesanan);
-        $this->data['Tamu'] = $tamu[0];
-
-        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
-        $this->data['Pesanan'] = $pesan[0];
-
-        /*
-        $totalHarga = 0;
-        foreach ($this->data['Akomodasi'] as $value) {
-            $totalHarga += $value['harga'];
-        }
-        foreach ($this->data['Makanan'] as $value) {
-            $totalHarga += ($value['harga'] * $value['porsi']);
-        }
-        foreach ($this->data['Peralatan'] as $value) {
-            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
-        }
-        foreach ($this->data['Kegiatan'] as $value) {
-            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
-        }
-        $this->data['Total'] = $totalHarga;
-        */
-
-        $this->load->view('admin/pesanan/AdminPemesananDetail', $this->data);
-    }
-
-    public function adminKonfirmasiPesananDetail($idpesanan = 0)
-    {
-
-        if (!isset($idpesanan)) {
-            redirect('administrator/adminkonfirmasipesanan');
-        }
-
-        $this->data['id'] = $idpesanan;
-        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
-        FROM pesananakomodasi p
-        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
-        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
-        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
-        LEFT JOIN menumakanan m USING (idmenumakanan)
-        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
-        WHERE pm.idpemesanan = ' . $idpesanan);
-        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
-        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
-        WHERE pn.idpemesanan = ' . $idpesanan);
-        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
-        pn.tanggal, pn.keterangan as ket
-        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
-        WHERE idpemesanan = ' . $idpesanan);
-
-        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
-        LEFT JOIN tamu t USING (idtamu)
-        WHERE p.idpemesanan = ' . $idpesanan);
-        $this->data['Tamu'] = $tamu[0];
-
-        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
-        $this->data['Pesanan'] = $pesan[0];
-
-        $totalHarga = 0;
-        foreach ($this->data['Akomodasi'] as $value) {
-            $totalHarga += $value['harga'];
-        }
-        foreach ($this->data['Makanan'] as $value) {
-            $totalHarga += ($value['harga'] * $value['porsi']);
-        }
-        foreach ($this->data['Peralatan'] as $value) {
-            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
-        }
-        foreach ($this->data['Kegiatan'] as $value) {
-            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
-        }
-        $this->data['Total'] = $totalHarga;
-
-        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
-        $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
-    }
-
-    public function adminkonfirmasipembayaran()
-    {
-        $this->data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('WAITING') ORDER BY tanggalpesan ASC;");
-
-        $this->load->view('admin/pesanan/AdminKonfirmasiPembayaran', $this->data);
-    }
-
-    public function adminkonfirmasipesanan()
-    {
-
-        $this->data['Pesanan'] = $this->koneksi->FetchAll(
-            "SELECT psn.*, t.nama as namatamu FROM pemesanan psn
-            LEFT JOIN pembayaran p using (idpemesanan)
-            LEFT JOIN tamu t USING (idtamu)
-            WHERE psn.status IN ('CHECKOUT')
-            AND p.idpembayaran IS NOT NULL
-            GROUP BY psn.idpemesanan
-            ORDER BY tanggalpesan ASC;"
-        );
-
-        $this->load->view('admin/pesanan/AdminKonfirmasiPesanan', $this->data);
-    }
-
     public function adminlihatakun()
     {
         $this->data['Akun'] = $this->koneksi->FetchAll("SELECT * FROM `tamu`");
@@ -1038,6 +882,117 @@ class Administrator extends CI_Controller
         }
     }
 
+    #region pemesanan
+    public function adminlihatpesanan()
+    {
+        $this->data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+        LEFT JOIN tamu t USING (idtamu) ORDER BY tanggalpesan ASC;");
+
+        $this->load->view('admin/pesanan/AdminListPesanan', $this->data);
+    }
+
+    public function adminkonfirmasipembayaran()
+    {
+        $this->data['Pesanan'] = $this->koneksi->FetchAll("SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+        LEFT JOIN tamu t USING (idtamu) WHERE psn.status IN ('DP') ORDER BY tanggalpesan ASC;");
+
+        $this->load->view('admin/pesanan/AdminKonfirmasiPembayaran', $this->data);
+    }
+
+    public function adminkonfirmasipesanan()
+    {
+
+        $this->data['Pesanan'] = $this->koneksi->FetchAll(
+            "SELECT psn.*, t.nama as namatamu FROM pemesanan psn
+            LEFT JOIN pembayaran p using (idpemesanan)
+            LEFT JOIN tamu t USING (idtamu)
+            WHERE psn.status IN ('CHECKOUT')
+            AND p.idpembayaran IS NOT NULL
+            GROUP BY psn.idpemesanan
+            ORDER BY tanggalpesan ASC;"
+        );
+
+        $this->load->view('admin/pesanan/AdminKonfirmasiPesanan', $this->data);
+    }
+    #end region pemesanan
+
+    #region detail
+    public function adminPemesananDetail($idpesanan = 0)
+    {
+
+        if (!isset($idpesanan)) {
+            redirect('administrator/adminlihatpesanan');
+        }
+
+        $this->data['id'] = $idpesanan;
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.idpemesanan = ' . $idpesanan);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pesanan'] = $pesan[0];
+
+        $bayar = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pembayaran'] = $bayar;
+
+        $this->load->view('admin/pesanan/AdminPemesananDetail', $this->data);
+    }
+
+    public function adminKonfirmasiPesananDetail($idpesanan = 0)
+    {
+
+        if (!isset($idpesanan)) {
+            redirect('administrator/adminkonfirmasipesanan');
+        }
+
+        $this->data['id'] = $idpesanan;
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.idpemesanan = ' . $idpesanan);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pesanan'] = $pesan[0];
+
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+        $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
+    }
+
+    public function adminKonfirmasiPembayaranDetail(){}
+
     public function accPesanan($idpemesanan)
     {
         $sqlupdate = UpdateBuilder('pemesanan',
@@ -1065,4 +1020,5 @@ class Administrator extends CI_Controller
 
         $this->load->view('admin/pesanan/AdminApprovePesanan', $this->data);
     }
+    #end region detail
 }

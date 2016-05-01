@@ -232,10 +232,16 @@ class Service extends CI_Controller
                     ),
                     array(
                         'idpemesanan' => $transidmerchant,
-                        'status' => '',
+                        'status' => 'DP',
                     )
                 );
 
+                $this->koneksi->Save($sqlupdate, array(
+                    $transidmerchant,
+                    'DP'
+                ));
+
+                /*
                 $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
                 $data = $this->koneksi->FetchAll($sql);
                 $data = $data[0];
@@ -250,7 +256,7 @@ class Service extends CI_Controller
                         $transidmerchant,
                         'DP'
                     ));
-                }
+                }*/
 
                 echo 'Continue';
             } else {

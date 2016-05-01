@@ -73,12 +73,14 @@
 
             <section class="content">
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
                         <div class="box box-body text-center">
-                            <h1>Pesanan sudah dikonfirmasi.</h1>
+                            <h1>Pesanan sudah dikonfirmasi</h1>
                             <p>Terimakasih</p>
                         </div>
                     </div>
+                    <div class="col-md-2"></div>
                 </div>
             </section>
         </div>
