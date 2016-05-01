@@ -158,15 +158,12 @@ class Service extends CI_Controller
         echo json_encode($result[0]);
     }
 
-    public function usernameSimilarity($username)
+    public function usernameSimilarity()
     {
+        $username = $this->input->post('username');
         $result = $this->koneksi->FetchAll("select username from tamu where username = '$username'
         UNION select username from petugas where username = '$username'");
-
-        if (!isset($result[0]) || $result[0] == null)
-            json_encode(0);
-        else
-            json_encode(1);
+        echo json_encode($result[0]['username']);
     }
 
     #region payment
@@ -243,7 +240,7 @@ class Service extends CI_Controller
                 $data = $this->koneksi->FetchAll($sql);
                 $data = $data[0];
 
-                if($totalamount >= $data['totalharga']){
+                if ($totalamount >= $data['totalharga']) {
                     $this->koneksi->Save($sqlupdate, array(
                         $transidmerchant,
                         'FINISHED'

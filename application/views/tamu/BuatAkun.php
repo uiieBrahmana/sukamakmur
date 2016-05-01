@@ -92,6 +92,7 @@
                                         <input required type="text" placeholder="Username"
                                                name="username"
                                                class="form-control">
+                                        <input type="hidden" name="similar">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -133,6 +134,11 @@
 <script src="css/plugins/input-mask/jquery.inputmask.js"></script>
 <script>
     $(document).ready(function () {
+
+        $.validator.addMethod("username_not_same", function(value, element) {
+            return $('input[name=username]').val() != $('input[name=similar]').val()
+        }, "* Username exists. Choose another username.");
+
         $('form[name=add]').validate({
             rules: {
                 nama: {
@@ -140,7 +146,8 @@
                 },
                 username: {
                     required: true,
-                    minlength: 6
+                    minlength: 6,
+                    username_not_same: true,
                 },
                 password: {
                     required: true,
@@ -165,6 +172,20 @@
             $(this).datepicker('hide');
         });
         $('input[name=notelp]').inputmask();
+
+        $('input[name=username]').on('focusout',function() {
+            $.ajax({
+                    method: "POST",
+                    url: "service/usernameSimilarity",
+                    data: {
+                        username: $(this).val(),
+                    }
+                })
+                .done(function (msg) {
+                    $('input[name=similar]').val(msg);
+                    $('input[name=username]').trigger('keyup');
+                });
+        });
     });
 </script>
 </body>

@@ -1050,8 +1050,6 @@ class Administrator extends CI_Controller
             )
         );
 
-        //todo if idpemesanan pembayaran 30 %
-
         $hasil = $this->koneksi->Save($sqlupdate, array(
             $idpemesanan,
             'DP'
