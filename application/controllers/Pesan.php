@@ -376,9 +376,9 @@ class Pesan extends CI_Controller
             $template_html = 'email_pembayaran.html';
 
             // todo : activate on production
-            //$mail = new Mail();
-            //$mail->setMailBody($data, $template_html);
-            //$mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
+            $mail = new Mail();
+            $mail->setMailBody($data, $template_html);
+            $mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
 
             $sqlupdate = UpdateBuilder('pemesanan',
                 array(

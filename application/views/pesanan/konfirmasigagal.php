@@ -9,32 +9,24 @@
     <?php $this->load->view('template/tamumenu'); ?>
 
     <div class="content-wrapper" style="height: 600px;">
-
         <div class="container">
-
             <section class="content">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="box box-body text-center">
 
                             <h1>Konfirmasi Gagal.</h1>
-                            <p>Kode Pemesanan tidak ditemukan. Silahkan coba lagi. Terimakasih</p>
+                            <p>Kesalahan : [<?php echo $reason ?>]. Silahkan coba lagi. Terimakasih</p>
                             <br/>
                             <a href="login" class="btn btn-primary">Login</a>
                         </div>
                     </div>
                 </div>
-
             </section>
-
         </div>
-
-
         <?php $this->load->view('template/footer'); ?>
-
     </div>
 
     <?php $this->load->view('template/script'); ?>
-
 </body>
 </html>

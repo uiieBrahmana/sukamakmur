@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Nomonal Transfer</label>
+                                    <label class="col-sm-4 control-label" for="namapemesan">Nominal Transfer</label>
 
                                     <div class="col-sm-4">
                                         <input required type="text" placeholder="Nominal" name="totalamount" class="form-control">
@@ -46,8 +46,9 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label" for="namapemesan">Bukti Pembayaran</label>
 
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-5">
                                         <input type="file" name="bukti">
+                                        <p class="help-block">Format : PDF, JPEG, PNG. max 10MB.</p>
                                     </div>
                                 </div>
 
@@ -75,9 +76,25 @@
 
 <script src="css/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
-
+<script src="css/plugins/validate/jquery.validate.min.js"></script>
+<script src="css/plugins/validate/additional-methods.min.js"></script>
 <script>
-
+    $(document).ready(function(){
+        $('form[name=add]').validate({
+            rules: {
+                bukti: {
+                    required: true,
+                    extension: "pdf|jpeg|jpg|png",
+                },
+                totalamount: {
+                    number: true
+                },
+                idpemesanan: {
+                    number: true
+                }
+            }
+        });
+    });
 </script>
 
 </html>

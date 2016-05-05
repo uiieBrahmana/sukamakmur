@@ -24,17 +24,10 @@
                         </div>
                     </div>
                 </div>
-
             </section>
-
         </div>
-
-
         <?php $this->load->view('template/footer'); ?>
-
     </div>
-
     <?php $this->load->view('template/script'); ?>
-
 </body>
 </html>
