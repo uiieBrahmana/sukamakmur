@@ -92,6 +92,12 @@ class Administrator extends CI_Controller
         }
         $this->data['CountKegiatan'] = $k;
 
+        $sql = "SELECT count(*) jumlah, YEAR(tanggalpesan) tahun,
+            MONTH(tanggalpesan) bulan FROM `pemesanan` WHERE YEAR(tanggalpesan) = YEAR(NOW())
+            GROUP BY YEAR(tanggalpesan), MONTH(tanggalpesan);";
+        $stats = $this->koneksi->FetchAll($sql);
+        $this->data['Stats'] = $stats;
+
         $this->load->view('admin/AdminBeranda', $this->data);
     }
 

@@ -46,7 +46,7 @@
                                                 <button disabled class="btn btn-flat">Menunggu Pembayaran</button>
                                                 <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
                                             <?php } elseif(strcmp($value['status'], 'DP') == 0) { ?>
-                                                *Lakukan pembayaran ke 2/konfirmasi pelunasan pada hari H.
+                                                *Lakukan pelunasan pembayaran pada hari H.
                                             <?php } else { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
                                             <?php } ?>

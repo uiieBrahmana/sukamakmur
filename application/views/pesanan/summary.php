@@ -128,7 +128,7 @@
                     </div>
                     <div class="col-lg-2"></div>
                 </div>
-                <div class="row">
+                <div class="row hide">
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <button onclick="print()" class="btn btn-info btn-block">Cetak Invoice</button>
@@ -151,7 +151,9 @@
 <script src="css/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <script>
+$(document).ready(function(){
 
+});
 </script>
 
 </html>
