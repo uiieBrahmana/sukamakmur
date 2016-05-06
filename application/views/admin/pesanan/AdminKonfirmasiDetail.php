@@ -84,7 +84,7 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Tanggal Pemesanan</b> <span
-                                    class="pull-right"><?php echo $Pesanan['tanggalpesan'] ?></span>
+                                    class="pull-right"><?php echo date("d F Y (h:i:s)", strtotime($Pesanan['tanggalpesan']));  ?></span>
                             </li>
                             <li class="list-group-item">
                                 <b>Status Pesanan</b> <span class="pull-right"><?php echo $Pesanan['status'] ?></span>
@@ -95,25 +95,6 @@
                             </li>
                         </ul>
                         <a href="administrator/adminlihatpesanan" class="btn btn-primary btn-block"><b>Kembali</b></a>
-                    </div>
-                    <div class="box box-body">
-                        <h3 class="profile-username text-center">Bukti Pembayaran</h3>
-
-                        <?php if (sizeof($Pembayaran) == 0) { ?>
-                            <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <div class="text-warning text-center">Pembayaran Belum Dilakukan</div>
-                                </li>
-                            </ul>
-                        <?php } ?>
-
-                        <?php foreach ($Pembayaran as $item) { ?>
-                            <img src="service/bukti/<?php echo $item['idpembayaran'] ?>" style="width: 100%">
-                        <?php } ?>
-                        <br/>
-                        <br/>
-                        <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary btn-block"><b>Approve Pembayaran</b></a>
-
                     </div>
                 </div>
 
@@ -131,9 +112,15 @@
                         <ul class="list-group list-group-unbordered">
                             <?php foreach ($Pembayaran as $value) { ?>
                                 <li class="list-group-item">
-                                    <?php echo $value['idpembayaran']; ?> - <?php echo $value['tanggalbayar']; ?> - Rp.<?php echo number_format($value['nominal']); ?>
+                                    <img src="service/bukti/<?php echo $value['idpembayaran'] ?>" style="width: 100%">
                                     <br/>
-                                    <?php echo $value['metodepembayaran']; ?>
+                                    <span class="text-center">
+                                        <?php echo $value['idpembayaran']; ?> - <?php echo date("d F Y (h:i:s)", strtotime($value['tanggalbayar'])); ?> - Rp.<?php echo number_format($value['nominal']); ?>
+                                        [<?php echo $value['metodepembayaran']; ?>]
+                                    </span>
+                                    <br/>
+                                    <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary"><b>Approve Pembayaran</b></a>
+                                    <a href="administrator/cancelpembayaran/<?php echo $id ?>" class="btn btn-danger"><b>Batalkan Pembayaran</b></a>
                                 </li>
                             <?php } ?>
                         </ul>

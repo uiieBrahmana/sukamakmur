@@ -48,7 +48,7 @@
 
                                     <div class="col-sm-5">
                                         <input type="file" name="bukti">
-                                        <p class="help-block">Format : PDF, JPEG, PNG. max 10MB.</p>
+                                        <p class="help-block">Format : JPEG, JPG, PNG. max 10MB.</p>
                                     </div>
                                 </div>
 
@@ -84,7 +84,7 @@
             rules: {
                 bukti: {
                     required: true,
-                    extension: "pdf|jpeg|jpg|png",
+                    extension: "jpeg|jpg|png",
                 },
                 totalamount: {
                     number: true

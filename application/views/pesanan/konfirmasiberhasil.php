@@ -17,10 +17,8 @@
                     <div class="col-lg-12">
                         <div class="box box-body text-center">
 
-                            <h1>Konfirmasi Berhasil.</h1>
+                            <h1><?php echo $reason ?></h1>
                             <p>Terimakasih</p>
-                            <br/>
-                            <a href="login" class="btn btn-primary">Login</a>
                         </div>
                     </div>
                 </div>

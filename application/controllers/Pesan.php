@@ -110,8 +110,9 @@ class Pesan extends CI_Controller
 
     public function summary($idp)
     {
-        $idpesanan = $this->session->userdata('pesanan');
-        if (!isset($idpesanan)) {
+        if (!isset($idp)) {
+            $idpesanan = $this->session->userdata('pesanan');
+        } else {
             $idpesanan = $idp;
         }
 
@@ -124,12 +125,12 @@ class Pesan extends CI_Controller
 
         $this->data['id'] = $idpesanan;
 
-        $tamu = $this->koneksi->FetchAll('SELECT * FROM pemesanan p
+        $tamu = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
         LEFT JOIN tamu t USING (idtamu)
-        WHERE p.idpemesanan = ' . $idpesanan);
+        WHERE p.idpemesanan = $idpesanan");
         $this->data['Tamu'] = $tamu[0];
 
-        if (strcasecmp($tamu[0]['status'], 'FINISHED') != 0) {
+        if (strcasecmp($tamu[0]['status'], 'LUNAS') != 0) {
             redirect('/pesan/');
         }
 

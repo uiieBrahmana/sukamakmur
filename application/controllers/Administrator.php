@@ -991,7 +991,42 @@ class Administrator extends CI_Controller
         $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
     }
 
-    public function adminKonfirmasiPembayaranDetail(){}
+    // todo kerjakan hari ini
+    public function adminKonfirmasiPembayaranDetail($idpesanan = 0) {
+
+        if (!isset($idpesanan)) {
+            redirect('administrator/adminkonfirmasipesanan');
+        }
+
+        $this->data['id'] = $idpesanan;
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.idpemesanan = ' . $idpesanan);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Tamu'] = $tamu[0];
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pesanan'] = $pesan[0];
+
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+
+        $this->load->view('admin/pesanan/AdminPembayaranDetail', $this->data);
+    }
 
     public function accPesanan($idpemesanan)
     {
@@ -1010,6 +1045,43 @@ class Administrator extends CI_Controller
             'DP'
         ));
 
+        $sqlupdate = UpdateBuilder('pembayaran',
+            array(
+                'idpemesanan' => $idpemesanan,
+            ),
+            array(
+                'idpemesanan' => $idpemesanan,
+                'idpetugas' => $this->data['auth'],
+            )
+        );
+
+        $hasil = $this->koneksi->Save($sqlupdate, array(
+            'idpemesanan' => $idpemesanan,
+            'idpetugas' => $this->data['auth'],
+        ));
+
+        $datapemesan = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
+            LEFT JOIN tamu USING (idtamu)
+            WHERE p.idpemesanan = $idpemesanan");
+        $datapemesan = $datapemesan[0];
+        $this->data['Pesanan'] = $datapemesan;
+
+        include_once(APPPATH . 'third_party/phpmailer/PHPMailerAutoload.php');
+        $this->load->library('mail');
+        $data = array(
+            "NAME" => $datapemesan['nama'],
+            "EMAIL" => $datapemesan['email'],
+            "DATE" => date('d F Y (H:i:s)'),
+            "ID" => $idpemesanan,
+        );
+
+        $template_html = 'email_pembayaran1.html';
+
+        // todo : activate on production
+        $mail = new Mail();
+        $mail->setMailBody($data, $template_html);
+        $mail->sendMail('Pembayaran 1 berhasil diprosess', $datapemesan['email']);
+
         $tamu = $this->koneksi->FetchAll('SELECT t.* FROM pemesanan p
         LEFT JOIN tamu t USING (idtamu)
         WHERE p.idpemesanan = ' . $idpemesanan);
@@ -1019,6 +1091,114 @@ class Administrator extends CI_Controller
         $this->data['Pesanan'] = $pesan[0];
 
         $this->load->view('admin/pesanan/AdminApprovePesanan', $this->data);
+    }
+
+    public function cancelPembayaran($idpemesanan) {
+        $sqldelete = DeleteBuilder('pembayaran',
+            array(
+                'idpemesanan' => $idpemesanan,
+            )
+        );
+
+        $hasil = $this->koneksi->Save($sqldelete,
+            array(
+                'idpemesanan' => $idpemesanan,
+            ));
+
+        $datapemesan = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
+            LEFT JOIN tamu USING (idtamu)
+            WHERE p.idpemesanan = $idpemesanan");
+        $datapemesan = $datapemesan[0];
+
+        $this->data['Pesanan'] = $datapemesan[0];
+
+        //todo : sendmail rekonfirmasi
+        include_once(APPPATH . 'third_party/phpmailer/PHPMailerAutoload.php');
+        $this->load->library('mail');
+        $data = array(
+            "NAME" => $datapemesan['nama'],
+            "EMAIL" => $datapemesan['email'],
+            "DATE" => date('d F Y (H:i:s)'),
+            "ID" => $idpemesanan,
+        );
+
+        $template_html = 'email_rekonfirmasi.html';
+
+        // todo : activate on production
+        $mail = new Mail();
+        $mail->setMailBody($data, $template_html);
+        $mail->sendMail('Pesanan ' . $idpemesanan . ' gagal diprosess', $datapemesan['email']);
+
+        redirect('administrator/adminkonfirmasipesanan');
+    }
+
+    public function pembayaranPesanan() {
+
+        $submit = $this->input->post('submit');
+        if (isset($submit)) {
+            $idpesanan = $this->input->post('idpesanan');
+            $sisapembayaran = $this->input->post('sisapembayaran');
+
+            if($sisapembayaran > 0) {
+                $sqlinsert = InsertBuilder('pembayaran',
+                    array(
+                        'idpemesanan' => $idpesanan,
+                        'idpetugas' => $this->data['auth'],
+                        'nominal' => $sisapembayaran,
+                        'metodepembayaran' => 'CASH'
+                    )
+                );
+
+                $hasil = $this->koneksi->Save($sqlinsert, array(
+                    'idpemesanan' => $idpesanan,
+                    'idpetugas' => $this->data['auth'],
+                    'nominal' => $sisapembayaran,
+                    'metodepembayaran' => 'CASH'
+                ));
+            } else {
+                $sqlupdate = UpdateBuilder('pembayaran',
+                    array(
+                        'idpemesanan' => $idpesanan,
+                    ),
+                    array(
+                        'idpemesanan' => $idpesanan,
+                        'idpetugas' => $this->data['auth'],
+                    )
+                );
+
+                $hasil = $this->koneksi->Save($sqlupdate, array(
+                    'idpemesanan' => $idpesanan,
+                    'idpetugas' => $this->data['auth'],
+                ));
+            }
+
+            $pesan = $this->koneksi->FetchAll("SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idpemesanan = $idpesanan
+                GROUP BY a.idpemesanan, b.idpemesanan;");
+            $this->data['Pesanan'] = $pesan[0];
+
+            if($pesan[0]['totalharga'] <= $pesan[0]['terbayar']) {
+                $sqlupdate = UpdateBuilder('pemesanan',
+                    array(
+                        'idpemesanan' => $idpesanan,
+                    ),
+                    array(
+                        'idpemesanan' => $idpesanan,
+                        'status' => 'LUNAS',
+                    )
+                );
+
+                $hasil = $this->koneksi->Save($sqlupdate, array(
+                    $idpesanan,
+                    'LUNAS'
+                ));
+            }
+
+        }
+
+        redirect('administrator/adminkonfirmasipembayarandetail/' . $idpesanan);
+
     }
     #end region detail
 }

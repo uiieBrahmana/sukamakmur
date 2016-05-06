@@ -84,7 +84,7 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Tanggal Pemesanan</b> <span
-                                    class="pull-right"><?php echo $Pesanan['tanggalpesan'] ?></span>
+                                    class="pull-right"><?php echo date("d F Y (h:i:s)", strtotime($Pesanan['tanggalpesan'])); ?></span>
                             </li>
                             <li class="list-group-item">
                                 <b>Status Pesanan</b> <span class="pull-right"><?php echo $Pesanan['status'] ?></span>
@@ -111,12 +111,22 @@
                         <?php } ?>
 
                         <ul class="list-group list-group-unbordered">
+                            <?php $datapembayaran = 0; ?>
                             <?php foreach ($Pembayaran as $value) { ?>
                                 <li class="list-group-item">
-                                    <?php echo $value['idpembayaran']; ?> - <?php echo $value['tanggalbayar']; ?> - Rp.<?php echo number_format($value['nominal']); ?>
+                                    <?php echo $value['idpembayaran']; ?> - <?php echo date("d F Y (h:i:s)", strtotime($value['tanggalbayar'])); ?> - Rp.<?php echo number_format($value['nominal']); ?>
                                     <br/>
-                                    <?php echo $value['metodepembayaran']; ?>
+                                    <?php echo $value['metodepembayaran']; $datapembayaran = $datapembayaran + $value['nominal'] ?>
                                 </li>
+                            <?php } ?>
+                            <?php if(($Pesanan['totalharga'] - $datapembayaran) <= 0) { ?>
+                                <div class="text-center">
+                                    <h1>Tidak ada tunggakan pembayaran.</h1>
+                                </div>
+                            <?php } elseif(($Pesanan['totalharga'] - $datapembayaran) > 0) { ?>
+                                <div class="text-center">
+                                    <h1>Tunggakan Pembayaran Rp. <?php echo number_format(($Pesanan['totalharga'] - $datapembayaran)) ?></h1>
+                                </div>
                             <?php } ?>
                         </ul>
 

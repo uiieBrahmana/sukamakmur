@@ -144,7 +144,7 @@ class Service extends CI_Controller
 
     public function bukti($idpembayaran)
     {
-        $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran");
+        $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran AND bukti IS NOT NULL");
         if (!is_array($result))
             die('not available');
 
@@ -249,7 +249,7 @@ class Service extends CI_Controller
                 if ($totalamount >= $data['totalharga']) {
                     $this->koneksi->Save($sqlupdate, array(
                         $transidmerchant,
-                        'FINISHED'
+                        'LUNAS'
                     ));
                 } else {
                     $this->koneksi->Save($sqlupdate, array(

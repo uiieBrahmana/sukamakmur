@@ -90,11 +90,11 @@
                         <tr>
                             <td><?php echo $Value['idpemesanan'] ?></td>
                             <td><?php echo $Value['namatamu'] ?></td>
-                            <td><?php echo $Value['tanggalpesan'] ?></td>
+                            <td><?php echo date("d F Y (h:i:s)", strtotime($Value['tanggalpesan']));  ?></td>
                             <td>Rp. <?php echo number_format($Value['totalharga']) ?></td>
                             <td><?php echo $Value['status'] ?></td>
                             <td>
-                                <a href="<?php echo base_url()?>index.php/administrator/adminpemesanandetail/<?php echo $Value['idpemesanan'] ?>" class="btn btn-sm btn-info">Detail</a>
+                                <a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipembayarandetail/<?php echo $Value['idpemesanan'] ?>" class="btn btn-sm btn-info">Detail</a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -31,13 +31,24 @@ class Konfirmasi extends CI_Controller
         else
             $this->data['idpemesanan'] = '';
 
+        $this->data['reason'] = "Konfirmasi Berhasil.";
+
         $submit = $this->input->post('submit');
         if (isset($submit) && isset($id)) {
             $idpemesanan = $this->input->post('idpemesanan');
             $totalamount = $this->input->post('totalamount');
 
-            $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $idpemesanan";
+            $sql = "SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idpemesanan = $idpemesanan
+                GROUP BY a.idpemesanan, b.idpemesanan;";
             $data = $this->koneksi->FetchAll($sql);
+
+            if($data[0]['idpembayaran'] != null) {
+                $this->data['reason'] = 'konfirmasi pembayaran sebelumnya telah diterima.';
+                $this->load->view('pesanan/konfirmasiberhasil', $this->data);
+                return;
+            }
 
             if ($data == null) {
                 $this->data['reason'] = 'kode pemesanan tidak ditemukan';
@@ -51,8 +62,7 @@ class Konfirmasi extends CI_Controller
             $error = $_FILES['bukti']['error'];
             $size = $_FILES['bukti']['size'];
 
-
-            if ($size > 5000000) {
+            if ($size > 10485760) {
                 $this->data['reason'] = 'ukuran file terlalu besar';
                 $this->load->view('pesanan/konfirmasigagal', $this->data);
                 return;

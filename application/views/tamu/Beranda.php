@@ -55,8 +55,8 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="box box-body">
-                            <h3>Pengantar 1</h3>
-                            <p>Lorem Ipsum</p>
+                            <h3>Retreat Center Sukamakmur GBKP</h3>
+                            <p>Jl. Raya Sibolangit Sumatera Utara</p>
                         </div>
                     </div>
                     <div class="col-lg-4">

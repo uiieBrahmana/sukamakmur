@@ -16,9 +16,11 @@
                         <div class="box box-body text-center">
 
                             <h1>Konfirmasi Gagal.</h1>
-                            <p>Kesalahan : [<?php echo $reason ?>]. Silahkan coba lagi. Terimakasih</p>
+                            <p>Kesalahan : [<?php echo $reason ?>]</p>
+                            <p>Silahkan coba lagi. Terimakasih</p>
                             <br/>
-                            <a href="login" class="btn btn-primary">Login</a>
+                            <a href="konfirmasi" class="btn btn-primary">Coba Lagi</a>
+                            <br/>
                         </div>
                     </div>
                 </div>
