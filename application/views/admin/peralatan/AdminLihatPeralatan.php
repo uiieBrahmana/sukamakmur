@@ -73,7 +73,7 @@
                             <a href="<?php echo base_url() ?>index.php/administrator/detailperalatan/update/<?php echo $Value['idperalatan'] ?>"
                                    class="btn btn-sm btn-info">Ubah</a>
                             <a href="<?php echo base_url() ?>index.php/administrator/detailperalatan/delete/<?php echo $Value['idperalatan'] ?>"
-                                   class="btn btn-sm btn-danger">Hapus</a>
+                                   class="btn btn-sm btn-danger deleteact">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -119,7 +119,7 @@
                                         [<?php echo $value['metodepembayaran']; ?>]
                                     </span>
                                     <br/>
-                                    <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary"><b>Approve Pembayaran</b></a>
+                                    <a href="administrator/accpesanan/<?php echo $id ?>" class="btn btn-primary approveact"><b>Approve Pembayaran</b></a>
                                     <a href="administrator/cancelpembayaran/<?php echo $id ?>" class="btn btn-danger"><b>Batalkan Pembayaran</b></a>
                                 </li>
                             <?php } ?>

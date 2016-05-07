@@ -65,7 +65,7 @@
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi/update/<?php echo $Value['idakomodasi'] ?>"
                                    class="btn btn-sm btn-info">Ubah</a>
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailakomodasi/delete/<?php echo $Value['idakomodasi'] ?>"
-                                   class="btn btn-sm btn-danger">Hapus</a>
+                                   class="btn btn-sm btn-danger deleteact">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>

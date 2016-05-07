@@ -103,7 +103,7 @@
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/update/<?php echo $value['idtamu'] ?>"
                                    class="btn btn-sm btn-info">Ubah</a>
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/delete/<?php echo $value['idtamu'] ?>"
-                                   class="btn btn-sm btn-danger">Hapus</a>
+                                   class="btn btn-sm btn-danger deleteact">Hapus</a>
 
                             </td>
                         </tr>

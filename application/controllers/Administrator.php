@@ -518,7 +518,7 @@ class Administrator extends CI_Controller
             $harga = $this->input->post('harga');
             $keterangan = $this->input->post('keterangan');
 
-            $query = InsertBuilder('Kegiatan', array(
+            $query = InsertBuilder('kegiatan', array(
                 'nama' => $nama,
                 'pesertamin' => $pesertamin,
                 'pesertamax' => $pesertamax,
@@ -730,7 +730,7 @@ class Administrator extends CI_Controller
             $size = $_FILES['fotoakomodasi']['size'];
             */
 
-            $query = InsertBuilder('Akomodasi', array(
+            $query = InsertBuilder('akomodasi', array(
                 'nama' => $nama,
                 'keterangan' => $keterangan,
                 'kapasitas' => $kapasitas,
@@ -766,7 +766,7 @@ class Administrator extends CI_Controller
             $keterangan = $this->input->post('keterangan');
             $harga = $this->input->post('harga');
 
-            $query = InsertBuilder('TipeMakanan', array(
+            $query = InsertBuilder('tipemakanan', array(
                 'idtipemakanan' => $idtipemakanan,
                 'keterangan' => $keterangan,
                 'harga' => $harga
@@ -819,7 +819,7 @@ class Administrator extends CI_Controller
             $keterangan = $this->input->post('keterangan');
             $jumlah = $this->input->post('jumlah');
 
-            $query = InsertBuilder('Peralatan', array(
+            $query = InsertBuilder('peralatan', array(
                 'nama' => $nama,
                 'hargasewa' => $hargasewa,
                 'keterangan' => $keterangan,
