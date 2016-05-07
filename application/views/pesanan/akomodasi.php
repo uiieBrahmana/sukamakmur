@@ -110,7 +110,11 @@
 <script>
     $(document).ready(function () {
         $('.select2').select2();
-        $('input[name=tanggalmasuk]').datepicker({format: 'dd MM yyyy', startDate: new Date()});
+        $('input[name=tanggalmasuk]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: new Date(),
+            endDate: '+2m',
+        });
         $('form[name=add]').validate({
             rules: {
                 jumlah: {

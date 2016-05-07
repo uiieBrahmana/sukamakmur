@@ -63,10 +63,13 @@
                                     <div class="">
                                         <?php echo $this->session->userdata('nama'); ?>
                                     </div>
+                                    <div class="">
+                                        <a href="pengunjung/ubahakun/<?php echo $this->session->userdata('ID'); ?>" class="btn btn-success btn-flat btn-block">Ubah Data</a>
+                                    </div>
                                 </li>
                                 <li class="user-footer">
                                     <div class="">
-                                        <a href="logout/" class="btn btn-default btn-flat btn-block">Keluar</a>
+                                        <a href="logout" class="btn btn-default btn-flat btn-block">Keluar</a>
                                     </div>
                                 </li>
                             </ul>

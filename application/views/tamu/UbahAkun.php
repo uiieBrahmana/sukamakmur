@@ -13,7 +13,7 @@
 
             <section class="content-header">
                 <h1>
-                    Pendaftaran Akun Baru
+                    Ubah Data Akun
                     <small>isilah dengan benar.</small>
                 </h1>
             </section>
@@ -24,92 +24,96 @@
 
                     <div class="col-lg-8">
                         <div class="box box-body">
-                            <form name="add" class="form-horizontal" method="post" action="pengunjung/buatakun">
-
+                            <form name="add" class="form-horizontal" method="post" action="pengunjung/ubahakun/<?php echo $this->session->userdata('ID'); ?>">
+                                <input type="hidden" name="idtamu" value="<?php echo $Member['idtamu']; ?>">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Nama Lengkap</label>
-
+                                    <label class="col-sm-2 control-label" for="namapemesan">Nama Lengkap</label>
                                     <div class="col-sm-5">
                                         <input required type="text" placeholder="Nama Lengkap"
-                                               name="nama"
+                                               name="nama" value="<?php echo $Member['nama']; ?>"
                                                class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Tanggal
+                                    <label class="col-sm-2 control-label" for="namapemesan">Tanggal
                                         Lahir</label>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <input required type="text" placeholder="Tanggal Lahir"
                                                name="tanggallahir"
+                                               value="<?php echo date("d F Y", strtotime($Member['tanggallahir'])); ?>"
                                                class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Jenis
+                                    <label class="col-sm-2 control-label" for="namapemesan">Jenis
                                         Kelamin</label>
 
                                     <div class="col-sm-3">
-                                        <select name="jeniskelamin" class="form-control">
-                                            <option value="W">Wanita</option>
-                                            <option value="P">Pria</option>
+                                        <select name="jeniskelamin" id="" class="form-control">
+                                            <?php if ($Member['jeniskelamin'] == 'W') { ?>
+                                                <option selected value="W">Wanita</option>
+                                                <option value="P">Pria</option>
+                                            <?php } else { ?>
+                                                <option value="W">Wanita</option>
+                                                <option selected value="P">Pria</option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Alamat</label>
+                                    <label class="col-sm-2 control-label" for="namapemesan">Alamat</label>
 
                                     <div class="col-sm-5">
-                                                <textarea name="alamat"
-                                                          style="min-width: 100%; max-width: 100%; min-height: 60px; max-height: 120px;"
-                                                          class="form-control"></textarea>
+                                        <textarea name="alamat" required
+                                                  style="min-width: 100%; max-width: 100%; min-height: 60px; max-height: 120px;"
+                                                  class="form-control"><?php echo $Member['alamat']; ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Email</label>
+                                    <label class="col-sm-2 control-label" for="namapemesan">Email</label>
 
                                     <div class="col-sm-4">
                                         <input required type="email" placeholder="Email"
-                                               name="email"
+                                               name="email" value="<?php echo $Member['email']; ?>"
                                                class="form-control col-lg-3">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="notelppemesan">Nomor
+                                    <label class="col-sm-2 control-label" for="notelppemesan">Nomor
                                         Handphone</label>
 
                                     <div class="col-sm-4">
-                                        <input required type="text"
+                                        <input required type="text" id="notelppemesan"
                                                data-inputmask="'mask': ['9999-999-99999']"
-                                               data-mask
+                                               data-mask value="<?php echo $Member['notelp']; ?>"
                                                name="notelp" class="form-control col-lg-3">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Username</label>
+                                    <label class="col-sm-2 control-label" for="namapemesan">Username</label>
 
                                     <div class="col-sm-3">
                                         <input required type="text" placeholder="Username"
-                                               name="username"
+                                               name="username" value="<?php echo $Member['username']; ?>"
                                                class="form-control">
                                         <input type="hidden" name="similar">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="namapemesan">Password</label>
+                                    <label class="col-sm-2 control-label" for="namapemesan">Password</label>
 
                                     <div class="col-sm-3">
                                         <input required type="password" placeholder="Password"
-                                               name="password"
+                                               name="password" value="<?php echo $Member['password']; ?>"
                                                class="form-control">
                                     </div>
                                 </div>
-
                                 <div class="box-footer text-center">
-                                    <input type="submit" class="btn btn-info" name="submit" value="Buat Akun">
+                                    <input type="submit" class="btn btn-info" name="submit" value="Update Data Akun">
                                     <button class="btn btn-default" type="reset">Reset</button>
+                                    <input type="hidden" name="update" value="update">
                                 </div>
-
                             </form>
                         </div>
                     </div>

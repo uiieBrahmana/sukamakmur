@@ -190,7 +190,11 @@
 
 <script>
     $(document).ready(function () {
-        $('input[name=tanggallahir]').datepicker({format: 'dd MM yyyy'});
+        $('input[name=tanggallahir]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: '-100y',
+            endDate: '-15y',
+        });
         $('input[name=tanggallahir]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
         });

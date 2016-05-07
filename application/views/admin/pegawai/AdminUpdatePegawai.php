@@ -195,7 +195,11 @@
 <script>
     $(document).ready(function(){
 
-        $('input[name=tglLahir]').datepicker({format: 'dd MM yyyy'});
+        $('input[name=tglLahir]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: '-100y',
+            endDate: '-15y',
+        });
         $('input[name=tglLahir]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
         });

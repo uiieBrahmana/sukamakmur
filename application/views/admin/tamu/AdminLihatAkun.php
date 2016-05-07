@@ -67,7 +67,7 @@
         <section class="content-header">
             <h1>
                 Member
-                <small>Tambah Member</small>
+                <small>Semua Member</small>
             </h1>
         </section>
 

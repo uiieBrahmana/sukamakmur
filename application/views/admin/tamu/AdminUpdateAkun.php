@@ -84,7 +84,6 @@
 
                             <input type="hidden" name="idtamu" value="<?php echo $Member['idtamu']; ?>">
 
-                            <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <div class="form-group">
@@ -173,7 +172,6 @@
                                     </div>
                                 </div>
 
-                            </div>
                             <div class="box-footer text-center">
                                 <input type="submit" class="btn btn-info" name="submit" value="Update Data Akun">
                                 <button class="btn btn-default" type="reset">Reset</button>
@@ -193,20 +191,70 @@
 
 <?php $this->load->view('template/script'); ?>
 
+<script src="css/plugins/select2/select2.min.js"></script>
 <script src="css/plugins/validate/jquery.validate.min.js"></script>
 <script src="css/plugins/validate/additional-methods.min.js"></script>
+<script src="css/plugins/iCheck/icheck.min.js"></script>
 <script src="css/plugins/input-mask/jquery.inputmask.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('input[name=tanggallahir]').datepicker({format: 'dd MM yyyy'});
+
+        $.validator.addMethod("username_not_same", function(value, element) {
+            return $('input[name=username]').val() != $('input[name=similar]').val()
+        }, "* Username exists. Choose another username.");
+
+        $('form[name=add]').validate({
+            rules: {
+                nama: {
+                    required: true
+                },
+                username: {
+                    required: true,
+                    minlength: 6,
+                    username_not_same: true,
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                tanggallahir: {
+                    required: true
+                },
+                email: {
+                    required: true
+                },
+                alamat: {
+                    required: true
+                }
+            },
+            showErrors: function (errorMap, errorList) {
+                this.defaultShowErrors();
+            }
+        });
+        $('input[name=tanggallahir]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: '-100y',
+            endDate: '-15y',
+        });
         $('input[name=tanggallahir]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
         });
         $('input[name=notelp]').inputmask();
-        $('form[name=add]').validate();
 
+        $('input[name=username]').on('focusout',function() {
+            $.ajax({
+                    method: "POST",
+                    url: "service/usernameSimilarity",
+                    data: {
+                        username: $(this).val(),
+                    }
+                })
+                .done(function (msg) {
+                    $('input[name=similar]').val(msg);
+                    $('input[name=username]').trigger('keyup');
+                });
+        });
     });
 </script>
-
 </html>

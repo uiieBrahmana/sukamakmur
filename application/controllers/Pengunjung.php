@@ -296,4 +296,60 @@ class Pengunjung extends CI_Controller
         $this->data['Akomodasi'] = $result[0];
         $this->load->view('tamu/ViewAkomodasi', $this->data);
     }
+
+    public function ubahakun($idtamu)
+    {
+        if($idtamu == null) {
+            redirect('pengunjung');
+        }
+
+        $submit = $this->input->post('submit');
+        if ($submit) {
+            $nama = $this->input->post('nama');
+            $tanggallahir = $this->input->post('tanggallahir');
+            $tanggallahir = date("Y-m-d", strtotime($tanggallahir));
+            $jeniskelamin = $this->input->post('jeniskelamin');
+            $alamat = $this->input->post('alamat');
+            $email = $this->input->post('email');
+            $notelp = $this->input->post('notelp');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $queryakun = UpdateBuilder('tamu',
+                array(
+                    'idtamu' => $idtamu,
+                ),
+                array(
+                    'idtamu' => $idtamu,
+                    'nama' => $nama,
+                    'tanggallahir' => $tanggallahir,
+                    'jeniskelamin' => $jeniskelamin,
+                    'alamat' => $alamat,
+                    'email' => $email,
+                    'notelp' => $notelp,
+                    'username' => $username,
+                    'password' => $password
+            ));
+
+            $this->koneksi->Save($queryakun, array(
+                $idtamu,
+                $nama,
+                $tanggallahir,
+                $jeniskelamin,
+                $alamat,
+                $email,
+                $notelp,
+                $username,
+                $password
+            ));
+
+            $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
+            $this->data['Member'] = $tamu[0];
+            redirect('pengunjung/ubahakun/' . $idtamu . '/success');
+        } else {
+            $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
+            $this->data['Member'] = $tamu[0];
+            $this->load->view('tamu/UbahAkun', $this->data);
+        }
+    }
 }

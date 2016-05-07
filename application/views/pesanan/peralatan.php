@@ -81,7 +81,11 @@
 <script>
     $(document).ready(function () {
         $('.select2').select2();
-        $('input[name=tanggalsewa]').datepicker({format: 'dd MM yyyy', startDate: new Date()});
+        $('input[name=tanggalsewa]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: new Date(),
+            endDate: '+2m',
+        });
         $('form[name=add]').validate({
             rules: {
                 jumlahalat: {

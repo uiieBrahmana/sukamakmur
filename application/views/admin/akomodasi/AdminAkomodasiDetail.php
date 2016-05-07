@@ -68,12 +68,12 @@
                     <a class="btn btn-block btn-danger" href="administrator/adminlihatakomodasi">Kembali</a>
                     <br>
                     <div class="box box-body">
-                        <form role="form" action="administrator/detailakomodasi/view/<?php echo $Akomodasi['idakomodasi'] ?>" method="post" enctype="multipart/form-data">
+                        <form name="add" action="administrator/detailakomodasi/view/<?php echo $Akomodasi['idakomodasi'] ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="inputphoto">Tambah gambar <?php echo $Akomodasi['nama'] ?></label>
-                                <input type="file" id="fotoakomodasi" name="fotoakomodasi">
+                                <input type="file" id="foto" name="fotoakomodasi">
 
-                                <p class="help-block">Foto JPG/PNG max 2MB.</p>
+                                <p class="help-block">Foto JPG/JPEG/PNG max 10MB.</p>
                             </div>
 
                             <input type="submit" class="btn btn-block btn-info" value="Simpan Gambar" name="submit"/>
@@ -105,4 +105,19 @@
 
 </body>
 <?php $this->load->view('template/script'); ?>
+<script src="css/plugins/validate/jquery.validate.min.js"></script>
+<script src="css/plugins/validate/additional-methods.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('form[name=add]').validate({
+            rules: {
+                fotoakomodasi: {
+                    required: true,
+                    extension: "jpeg|jpg|png",
+                }
+            }
+        });
+    });
+</script>
+
 </html>
