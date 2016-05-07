@@ -27,7 +27,7 @@
         $('.deleteact').on('click', function(event) {
             event.preventDefault();
             var delobj = $(this);
-            bootbox.confirm("Are you sure?", function(result) {
+            bootbox.confirm("Yakin ingin menghapus?", function(result) {
                 if (result) {
                     window.location = delobj.attr("href");
                 }

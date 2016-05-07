@@ -31,7 +31,7 @@
         <section class="content-header">
             <h1>
                 Akomodasi
-                <small>Tambah Akomodasi</small>
+                <small>Perbaharui Akomodasi</small>
             </h1>
 
         </section>

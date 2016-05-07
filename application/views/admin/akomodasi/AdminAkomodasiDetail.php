@@ -84,36 +84,16 @@
 
                 <div class="col-md-8">
                     <div class="box box-body">
-
-                        <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
-
-                            <!--
-                            <ol class="carousel-indicators">
-                                <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                                <li class="" data-slide-to="1" data-target="#carousel-example-generic"></li>
-                                <li class="" data-slide-to="2" data-target="#carousel-example-generic"></li>
-                            </ol>
-                            -->
-                            <ol class="carousel-indicators">
-                                <?php foreach ($Size as $key => $value) { ?>
-                                <li class="<?php echo ($key == 0) ? 'active' : '' ?>" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                                <?php } ?>
-                            </ol>
-
-                            <div class="carousel-inner">
-                                <?php foreach ($Size as $key => $value) { ?>
-                                <div class="item <?php echo ($key == 0) ? 'active' : '' ?>">
-                                    <img alt="First slide"
-                                         src="service/images/<?php echo $Akomodasi['idakomodasi'].'/'. $key ?>">
-                                </div>
-                                <?php } ?>
+                        <div class="row">
+                        <?php foreach ($Size as $key => $value) { ?>
+                            <div class="col-md-4">
+                                <img alt="First slide" style="width: 100%"
+                                     src="service/images/<?php echo $Akomodasi['idakomodasi'].'/'. $key ?>">
+                                <br/>
+                                <br/>
+                                <a class="btn btn-block btn-danger deleteact" href="service/hapusimages/<?php echo $Akomodasi['idakomodasi'].'/'. $value['namafile'] ?>/">Hapus Gambar</a>
                             </div>
-                            <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                                <span class="fa fa-angle-left"></span>
-                            </a>
-                            <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                                <span class="fa fa-angle-right"></span>
-                            </a>
+                        <?php } ?>
                         </div>
                     </div>
                 </div>

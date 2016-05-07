@@ -142,6 +142,28 @@ class Service extends CI_Controller
         echo $result[$posisi]['filedata'];
     }
 
+    public function hapusimages($idakomodasi, $namafoto)
+    {
+        $namafoto = str_replace('%20', ' ', $namafoto);
+        $sqldelete = DeleteBuilder('fotoakomodasi',
+            array(
+                'idakomodasi' => $idakomodasi,
+                'namafile' => $namafoto,
+            ),
+            array(
+                'idakomodasi' => $idakomodasi,
+                'namafile' => $namafoto,
+            )
+        );
+
+        $this->koneksi->Save($sqldelete, array(
+            'idakomodasi' => $idakomodasi,
+            'namafile' => $namafoto,
+        ));
+
+        redirect('administrator/detailakomodasi/view/' . $idakomodasi);
+    }
+
     public function bukti($idpembayaran)
     {
         $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran AND bukti IS NOT NULL");

@@ -85,7 +85,7 @@
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>ID PETUGAS</b> <span class="pull-right"> <?php echo $Member['idtamu']; ?></span>
+                                    <b>ID MEMBER</b> <span class="pull-right"> <?php echo $Member['idtamu']; ?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Tanggal Lahir</b> <span class="pull-right"> <?php echo indonesianMonth(date("d F Y", strtotime($Member['tanggallahir']))); ?></span>

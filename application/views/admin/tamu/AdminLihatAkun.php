@@ -66,15 +66,15 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                Pegawai
-                <small>Tambah Pegawai</small>
+                Member
+                <small>Tambah Member</small>
             </h1>
         </section>
 
         <section class="content">
             <div class="box box-body">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Daftar Pegawai</h3>
+                    <h3 class="box-title">Daftar Member</h3>
                 </div>
                 <table id="student" class="table table-bordered table-striped">
                     <thead>
