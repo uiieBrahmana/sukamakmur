@@ -34,6 +34,18 @@
             });
         });
 
+        $('.deletetipemakananact').on('click', function(event) {
+            event.preventDefault();
+            var delobj = $(this);
+            bootbox.confirm("Yakin ingin menghapus?<br/> " +
+                "!!Menghapus Tipe Makanan yang dipilih Akan Menghapus Seluruh Makanan dengan Tipe Tersebut <br/>" +
+                " Lanjutkan?", function(result) {
+                if (result) {
+                    window.location = delobj.attr("href");
+                }
+            });
+        });
+
         $('.approveact').on('click', function(event) {
             event.preventDefault();
             var delobj = $(this);

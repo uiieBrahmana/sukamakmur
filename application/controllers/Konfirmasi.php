@@ -36,6 +36,7 @@ class Konfirmasi extends CI_Controller
         $submit = $this->input->post('submit');
         if (isset($submit) && isset($id)) {
             $idpemesanan = $this->input->post('idpemesanan');
+            $totalamount = 0;
             $totalamount = $this->input->post('totalamount');
 
             $sql = "SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
@@ -44,17 +45,23 @@ class Konfirmasi extends CI_Controller
                 GROUP BY a.idpemesanan, b.idpemesanan;";
             $data = $this->koneksi->FetchAll($sql);
 
+            if ($data == null) {
+                $this->data['reason'] = 'kode pemesanan tidak ditemukan';
+                $this->load->view('pesanan/konfirmasigagal', $this->data);
+                return;
+            }
+
             if($data[0]['idpembayaran'] != null) {
                 $this->data['reason'] = 'konfirmasi pembayaran sebelumnya telah diterima.';
                 $this->load->view('pesanan/konfirmasiberhasil', $this->data);
                 return;
             }
 
-            if ($data == null) {
-                $this->data['reason'] = 'kode pemesanan tidak ditemukan';
-                $this->load->view('pesanan/konfirmasigagal', $this->data);
-                return;
-            }
+            //todo : masalah besar pembayaran
+            //pertama checkout itu menginsert pembayaran
+            //kedua konfirmasi menginsert file bukti
+            //approval mengeset idpetugas
+            //reject set null buktipembayaran
 
             $namafile = $_FILES['bukti']['name'];
             $ekstensifile = $_FILES['bukti']['type'];

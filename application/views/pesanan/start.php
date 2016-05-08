@@ -38,12 +38,17 @@
                                         <td><?php echo $value['idpemesanan'] ?></td>
                                         <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
                                         <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
-                                        <td><?php echo $value['status'] ?></td>
+                                        <td>
+                                            <?php if(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
+                                                Menunggu Pembayaran
+                                            <?php } else { ?>
+                                                <?php echo $value['status'] ?>
+                                            <?php } ?>
+                                        </td>
                                         <td>
                                             <?php if(strcmp($value['status'], 'LUNAS') == 0) { ?>
                                                 <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
                                             <?php } elseif(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
-                                                <button disabled class="btn btn-flat">Menunggu Pembayaran</button>
                                                 <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
                                             <?php } elseif(strcmp($value['status'], 'DP') == 0) { ?>
                                                 *Lakukan pelunasan pembayaran pada hari H.

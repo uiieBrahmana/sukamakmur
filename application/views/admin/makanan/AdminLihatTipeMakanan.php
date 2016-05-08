@@ -68,7 +68,7 @@
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailtipemakanan/update/<?php echo $Value['idtipemakanan'] ?>"
                                    class="btn btn-sm btn-info">Ubah</a>
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailtipemakanan/delete/<?php echo $Value['idtipemakanan'] ?>"
-                                   class="btn btn-sm btn-danger deleteact">Hapus</a>
+                                   class="btn btn-sm btn-danger deletetipemakananact">Hapus</a>
                             </td>
                         </tr>
                     <?php } ?>

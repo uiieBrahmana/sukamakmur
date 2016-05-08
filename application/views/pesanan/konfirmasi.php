@@ -35,6 +35,7 @@
                                     </div>
                                 </div>
 
+
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label" for="namapemesan">Nominal Transfer</label>
 
@@ -42,6 +43,7 @@
                                         <input required type="text" placeholder="Nominal" name="totalamount" class="form-control">
                                     </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label" for="namapemesan">Bukti Pembayaran</label>

@@ -91,6 +91,10 @@ class Pesan extends CI_Controller
             redirect('/pesan/');
         }
 
+        if (strcmp($tamu[0]['status'], 'DRAFT') != 0) {
+            redirect('/pesan/');
+        }
+
         $totalHarga = 0;
         foreach ($this->data['Akomodasi'] as $value) {
             $totalHarga += $value['harga'];
@@ -380,6 +384,21 @@ class Pesan extends CI_Controller
             $mail = new Mail();
             $mail->setMailBody($data, $template_html);
             $mail->sendMail('Petunjuk Pembayaran Pesanan ' . $idpemesanan, $datapemesan['email']);
+
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $idpemesanan,
+                ),
+                array(
+                    'idpemesanan' => $idpemesanan,
+                    'status' => 'CHECKOUT',
+                )
+            );
+
+            $this->koneksi->Save($sqlupdate, array(
+                $idpemesanan,
+                'CHECKOUT'
+            ));
 
             $sqlupdate = UpdateBuilder('pemesanan',
                 array(

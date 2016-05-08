@@ -87,7 +87,13 @@
                                     class="pull-right"><?php echo date("d F Y (h:i:s)", strtotime($Pesanan['tanggalpesan'])); ?></span>
                             </li>
                             <li class="list-group-item">
-                                <b>Status Pesanan</b> <span class="pull-right"><?php echo $Pesanan['status'] ?></span>
+                                <b>Status Pesanan</b> <span class="pull-right">
+                                    <?php if(strcmp($Pesanan['status'], 'CHECKOUT') == 0) { ?>
+                                        Menunggu Pembayaran
+                                    <?php } else { ?>
+                                        <?php echo $Pesanan['status'] ?>
+                                    <?php } ?>
+                                </span>
                             </li>
                             <li class="list-group-item">
                                 <b>Total Pesanan</b> <span

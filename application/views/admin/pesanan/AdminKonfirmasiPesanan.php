@@ -92,7 +92,13 @@
                             <td><?php echo $Value['namatamu'] ?></td>
                             <td><?php echo $Value['tanggalpesan'] ?></td>
                             <td>Rp. <?php echo number_format($Value['totalharga']) ?></td>
-                            <td><?php echo $Value['status'] ?></td>
+                            <td>
+                                <?php if(strcmp($Value['status'], 'CHECKOUT') == 0) { ?>
+                                    Menunggu Pembayaran
+                                <?php } else { ?>
+                                    <?php echo $Value['status'] ?>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <a href="<?php echo base_url()?>index.php/administrator/adminkonfirmasipesanandetail/<?php echo $Value['idpemesanan'] ?>" class="btn btn-sm btn-info">Detail</a>
                             </td>
