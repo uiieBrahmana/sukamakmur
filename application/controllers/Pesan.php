@@ -414,6 +414,21 @@ class Pesan extends CI_Controller
                 $idpemesanan,
                 'CHECKOUT'
             ));
+
+             $sqlbayar = InsertBuilder('pembayaran',
+                 array(
+                     'idpemesanan' => $idpemesanan,
+                     'nominal' => $datapemesan['totalharga'],
+                     'metodepembayaran' => 'BELUM BAYAR',
+                 )
+             );
+
+             $this->koneksi->Save($sqlbayar, array(
+                 'idpemesanan' => $idpemesanan,
+                 'nominal' => $datapemesan['totalharga'],
+                 'metodepembayaran' => 'BELUM BAYAR',
+             ));
+
         }
 
         $this->data['Pemesanan'] = $datapemesan;

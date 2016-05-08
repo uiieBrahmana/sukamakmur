@@ -913,7 +913,7 @@ class Administrator extends CI_Controller
             LEFT JOIN pembayaran p using (idpemesanan)
             LEFT JOIN tamu t USING (idtamu)
             WHERE psn.status IN ('CHECKOUT')
-            AND p.idpembayaran IS NOT NULL
+            AND p.idpembayaran IS NOT NULL AND p.ekstensifile <> ''
             GROUP BY psn.idpemesanan
             ORDER BY tanggalpesan ASC;"
         );
@@ -955,7 +955,9 @@ class Administrator extends CI_Controller
         $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
         $this->data['Pesanan'] = $pesan[0];
 
-        $bayar = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+        $bayar = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
+        AND bukti IS NOT NULL and ekstensifile <> ''
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
         $this->data['Pembayaran'] = $bayar;
 
         $this->load->view('admin/pesanan/AdminPemesananDetail', $this->data);
@@ -993,7 +995,10 @@ class Administrator extends CI_Controller
         $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
         $this->data['Pesanan'] = $pesan[0];
 
-        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
+        AND bukti IS NOT NULL and ekstensifile <> ''
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
+
         $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
     }
 
@@ -1029,13 +1034,21 @@ class Administrator extends CI_Controller
         $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
         $this->data['Pesanan'] = $pesan[0];
 
-        $this->data['Pembayaran'] = $this->koneksi->FetchAll('SELECT * FROM pembayaran WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
+        AND bukti IS NOT NULL and ekstensifile <> ''
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
 
         $this->load->view('admin/pesanan/AdminPembayaranDetail', $this->data);
     }
 
     public function accPesanan($idpemesanan)
     {
+        $pesan = $this->koneksi->FetchAll("SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idpemesanan = $idpemesanan
+                GROUP BY a.idpemesanan, b.idpemesanan;");
+        $this->data['Pesanan'] = $pesan[0];
+
         $sqlupdate = UpdateBuilder('pemesanan',
             array(
                 'idpemesanan' => $idpemesanan,
@@ -1053,15 +1066,18 @@ class Administrator extends CI_Controller
 
         $sqlupdate = UpdateBuilder('pembayaran',
             array(
+                'idpembayaran' => $pesan[0]['idpembayaran'],
                 'idpemesanan' => $idpemesanan,
             ),
             array(
+                'idpembayaran' => $pesan[0]['idpembayaran'],
                 'idpemesanan' => $idpemesanan,
                 'idpetugas' => $this->data['auth'],
             )
         );
 
         $hasil = $this->koneksi->Save($sqlupdate, array(
+            'idpembayaran' => $pesan[0]['idpembayaran'],
             'idpemesanan' => $idpemesanan,
             'idpetugas' => $this->data['auth'],
         ));
@@ -1100,15 +1116,31 @@ class Administrator extends CI_Controller
     }
 
     public function cancelPembayaran($idpemesanan) {
-        $sqldelete = DeleteBuilder('pembayaran',
+        $pesan = $this->koneksi->FetchAll("SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idpemesanan = $idpemesanan
+                GROUP BY a.idpemesanan, b.idpemesanan;");
+        $this->data['Pesanan'] = $pesan[0];
+
+        $sqldelete = UpdateBuilder('pembayaran',
             array(
+                'idpembayaran' => $pesan[0]['idpembayaran'],
                 'idpemesanan' => $idpemesanan,
+            ),
+            array(
+                'idpembayaran' => $pesan[0]['idpembayaran'],
+                'idpemesanan' => $idpemesanan,
+                'bukti' => '',
+                'ekstensifile' => '',
             )
         );
 
         $hasil = $this->koneksi->Save($sqldelete,
             array(
+                'idpembayaran' => $pesan[0]['idpembayaran'],
                 'idpemesanan' => $idpemesanan,
+                'bukti' => '',
+                'ekstensifile' => '',
             ));
 
         $datapemesan = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
@@ -1139,11 +1171,17 @@ class Administrator extends CI_Controller
     }
 
     public function pembayaranPesanan() {
-
+        $idpesanan = null;
         $submit = $this->input->post('submit');
         if (isset($submit)) {
             $idpesanan = $this->input->post('idpesanan');
             $sisapembayaran = $this->input->post('sisapembayaran');
+
+            $pesan = $this->koneksi->FetchAll("SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idpemesanan = $idpesanan
+                GROUP BY a.idpemesanan, b.idpemesanan;");
+            $this->data['Pesanan'] = $pesan[0];
 
             if($sisapembayaran > 0) {
                 $sqlinsert = InsertBuilder('pembayaran',
@@ -1151,7 +1189,7 @@ class Administrator extends CI_Controller
                         'idpemesanan' => $idpesanan,
                         'idpetugas' => $this->data['auth'],
                         'nominal' => $sisapembayaran,
-                        'metodepembayaran' => 'CASH'
+                        'metodepembayaran' => 'ADMINCASH'
                     )
                 );
 
@@ -1159,30 +1197,27 @@ class Administrator extends CI_Controller
                     'idpemesanan' => $idpesanan,
                     'idpetugas' => $this->data['auth'],
                     'nominal' => $sisapembayaran,
-                    'metodepembayaran' => 'CASH'
+                    'metodepembayaran' => 'ADMINCASH'
                 ));
             } else {
                 $sqlupdate = UpdateBuilder('pembayaran',
                     array(
+                        'idpembayaran' => $pesan[0]['idpembayaran'],
                         'idpemesanan' => $idpesanan,
                     ),
                     array(
+                        'idpembayaran' => $pesan[0]['idpembayaran'],
                         'idpemesanan' => $idpesanan,
                         'idpetugas' => $this->data['auth'],
                     )
                 );
 
                 $hasil = $this->koneksi->Save($sqlupdate, array(
+                    'idpembayaran' => $pesan[0]['idpembayaran'],
                     'idpemesanan' => $idpesanan,
                     'idpetugas' => $this->data['auth'],
                 ));
             }
-
-            $pesan = $this->koneksi->FetchAll("SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar FROM pemesanan a
-                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
-                WHERE a.idpemesanan = $idpesanan
-                GROUP BY a.idpemesanan, b.idpemesanan;");
-            $this->data['Pesanan'] = $pesan[0];
 
             if($pesan[0]['totalharga'] <= $pesan[0]['terbayar']) {
                 $sqlupdate = UpdateBuilder('pemesanan',

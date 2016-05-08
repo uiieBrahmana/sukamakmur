@@ -36,10 +36,9 @@ class Konfirmasi extends CI_Controller
         $submit = $this->input->post('submit');
         if (isset($submit) && isset($id)) {
             $idpemesanan = $this->input->post('idpemesanan');
-            $totalamount = 0;
-            $totalamount = $this->input->post('totalamount');
 
-            $sql = "SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran FROM pemesanan a
+            $sql = "SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran,
+                b.ekstensifile FROM pemesanan a
                 LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
                 WHERE a.idpemesanan = $idpemesanan
                 GROUP BY a.idpemesanan, b.idpemesanan;";
@@ -51,16 +50,16 @@ class Konfirmasi extends CI_Controller
                 return;
             }
 
-            if($data[0]['idpembayaran'] != null) {
+            if($data[0]['ekstensifile'] != null) {
                 $this->data['reason'] = 'konfirmasi pembayaran sebelumnya telah diterima.';
                 $this->load->view('pesanan/konfirmasiberhasil', $this->data);
                 return;
             }
 
             //todo : masalah besar pembayaran
-            //pertama checkout itu menginsert pembayaran
-            //kedua konfirmasi menginsert file bukti
-            //approval mengeset idpetugas
+            //pertama checkout itu menginsert pembayaran > sudah
+            //kedua konfirmasi menginsert file bukti > sudah
+            //approval mengeset idpetugas > sudah
             //reject set null buktipembayaran
 
             $namafile = $_FILES['bukti']['name'];
@@ -76,6 +75,7 @@ class Konfirmasi extends CI_Controller
             }
 
             if ($error == 0) {
+                /*
                 $sqlbayar = InsertBuilder('pembayaran',
                     array(
                         'idpemesanan' => $idpemesanan,
@@ -89,6 +89,29 @@ class Konfirmasi extends CI_Controller
                 $this->koneksi->Save($sqlbayar, array(
                     'idpemesanan' => $idpemesanan,
                     'nominal' => $totalamount,
+                    'metodepembayaran' => 'TRANSFER',
+                    'bukti' => file_get_contents($filedata),
+                    'ekstensifile' => $ekstensifile,
+                ));
+                */
+
+                $sqlbayar = UpdateBuilder('pembayaran',
+                    array(
+                        'idpemesanan' => $idpemesanan,
+                        'idpembayaran' => $data[0]['idpembayaran'],
+                    ),
+                    array(
+                        'idpemesanan' => $idpemesanan,
+                        'idpembayaran' => $data[0]['idpembayaran'],
+                        'metodepembayaran' => 'TRANSFER',
+                        'bukti' => '',
+                        'ekstensifile' => $ekstensifile,
+                    )
+                );
+
+                $this->koneksi->Save($sqlbayar, array(
+                    'idpemesanan' => $idpemesanan,
+                    'idpembayaran' => $data[0]['idpembayaran'],
                     'metodepembayaran' => 'TRANSFER',
                     'bukti' => file_get_contents($filedata),
                     'ekstensifile' => $ekstensifile,
