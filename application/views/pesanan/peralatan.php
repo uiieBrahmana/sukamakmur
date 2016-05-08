@@ -83,7 +83,7 @@
         $('.select2').select2();
         $('input[name=tanggalsewa]').datepicker({
             format: 'dd MM yyyy',
-            startDate: new Date(),
+            startDate: '+1d',
             endDate: '+2m',
         });
         $('form[name=add]').validate({

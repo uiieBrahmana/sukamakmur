@@ -237,15 +237,21 @@ class Service extends CI_Controller
                 $sqlbayar = InsertBuilder('pembayaran',
                     array(
                         'idpemesanan' => $transidmerchant,
+                        'idpetugas' => 0,
                         'nominal' => $totalamount,
                         'metodepembayaran' => 'DOKU WALLET',
+                        'bukti' => '',
+                        'ekstensifile' => 'image/jpg',
                     )
                 );
 
                 $this->koneksi->Save($sqlbayar, array(
                     'idpemesanan' => $transidmerchant,
+                    'idpetugas' => 0,
                     'nominal' => $totalamount,
                     'metodepembayaran' => 'DOKU WALLET',
+                    'bukti' => '',
+                    'ekstensifile' => 'image/jpg',
                 ));
 
                 $sqlupdate = UpdateBuilder('pemesanan',

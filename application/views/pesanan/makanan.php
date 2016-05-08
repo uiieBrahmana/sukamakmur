@@ -94,7 +94,7 @@
         $('.select2').select2();
         $('input[name=tanggalmakan]').datepicker({
             format: 'dd MM yyyy',
-            startDate: new Date(),
+            startDate: '+1d',
             endDate: '+2m',
         });
         $('form[name=add]').validate({

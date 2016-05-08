@@ -18,7 +18,11 @@
 <script src="css/plugins/bootbox/bootbox.min.js"></script>
 <script>
     $(document).ready(function(){
-        $('input[name=search]').datepicker({format: 'dd MM yyyy', startDate: new Date()});
+        $('input[name=search]').datepicker({
+            format: 'dd MM yyyy',
+            startDate: '+1d',
+            endDate: '+2m',
+        });
         $('input[name=search]').on('changeDate', function (ev) {
             $(this).datepicker('hide');
             $('form[name=searchtamu]').submit();

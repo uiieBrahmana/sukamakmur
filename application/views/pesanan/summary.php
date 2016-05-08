@@ -121,6 +121,36 @@
                                 </div>
                             <?php } ?>
 
+                            <h3 class="profile-username text-center">Data Pembayaran</h3>
+
+                            <?php if (sizeof($Pembayaran) == 0) { ?>
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <div class="text-warning text-center">Pembayaran Belum Dilakukan</div>
+                                    </li>
+                                </ul>
+                            <?php } ?>
+
+                            <ul class="list-group list-group-unbordered">
+                                <?php $datapembayaran = 0; ?>
+                                <?php foreach ($Pembayaran as $value) { ?>
+                                    <li class="list-group-item">
+                                        <?php echo $value['idpembayaran']; ?> - <?php echo date("d F Y (h:i:s)", strtotime($value['tanggalbayar'])); ?> - Rp.<?php echo number_format($value['nominal']); ?>
+                                        <br/>
+                                        <?php echo $value['metodepembayaran']; $datapembayaran = $datapembayaran + $value['nominal'] ?>
+                                    </li>
+                                <?php } ?>
+                                <?php if(($Pesanan['totalharga'] - $datapembayaran) <= 0) { ?>
+                                    <div class="text-center">
+                                        <h1>Tidak ada tunggakan pembayaran.</h1>
+                                    </div>
+                                <?php } elseif(($Pesanan['totalharga'] - $datapembayaran) > 0) { ?>
+                                    <div class="text-center">
+                                        <h1>Tunggakan Pembayaran Rp. <?php echo number_format(($Pesanan['totalharga'] - $datapembayaran)) ?></h1>
+                                    </div>
+                                <?php } ?>
+                            </ul>
+
                             <div class="text-center">
                                 <h2><b>Total Rp. <?php echo number_format($Total); ?>,-</b></h2>
                             </div>

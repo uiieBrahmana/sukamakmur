@@ -27,7 +27,8 @@
                                 <tr>
                                     <th>ID Pesanan</th>
                                     <th>Tanggal</th>
-                                    <th>Total</th>
+                                    <th>Total Harga</th>
+                                    <th>Terbayar</th>
                                     <th>Status</th>
                                     <th>Detail</th>
                                 </tr>
@@ -38,9 +39,14 @@
                                         <td><?php echo $value['idpemesanan'] ?></td>
                                         <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
                                         <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
+                                        <td>Rp. <?php echo number_format($value['terbayar']) ?></td>
                                         <td>
                                             <?php if(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
-                                                Menunggu Pembayaran
+                                                <?php if($value['ekstensifile'] == null) { ?>
+                                                    Menunggu Pembayaran
+                                                <?php } else { ?>
+                                                    Menunggu Konfirmasi Kedatangan
+                                                <?php } ?>
                                             <?php } else { ?>
                                                 <?php echo $value['status'] ?>
                                             <?php } ?>
@@ -49,8 +55,13 @@
                                             <?php if(strcmp($value['status'], 'LUNAS') == 0) { ?>
                                                 <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
                                             <?php } elseif(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
-                                                <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
+                                                <?php if($value['ekstensifile'] == null) { ?>
+                                                    <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
+                                                <?php } else { ?>
+                                                    Konfirmasi Diterima.
+                                                <?php } ?>
                                             <?php } elseif(strcmp($value['status'], 'DP') == 0) { ?>
+                                                <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
                                                 *Lakukan pelunasan pembayaran pada hari H.
                                             <?php } else { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>

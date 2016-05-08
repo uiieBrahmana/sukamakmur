@@ -23,7 +23,7 @@ class Pengunjung extends CI_Controller
 
         $this->data['DateSearch'] = $this->session->userdata('DateSearch');
         if ($this->data['DateSearch'] == null) {
-            $datenow = $begin = new DateTime();
+            $datenow = $begin = new DateTime('+1 day');
             $this->data['DateSearch'] = $datenow->format('d F Y');
         }
     }
@@ -87,7 +87,7 @@ class Pengunjung extends CI_Controller
         if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
-            $begin = new DateTime();
+            $begin = new DateTime('+1 day');
         }
 
         $this->data['SisaAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `pesananakomodasi`
@@ -118,7 +118,7 @@ class Pengunjung extends CI_Controller
         if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
-            $begin = new DateTime();
+            $begin = new DateTime('+1 day');
         }
 
         $this->data['SisaMakanan'] = $this->koneksi->FetchAll("SELECT (1000 - sum(IFNULL(porsi,0))) as sisa FROM `pesananmakanan`
@@ -144,7 +144,7 @@ class Pengunjung extends CI_Controller
         if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
-            $begin = new DateTime();
+            $begin = new DateTime('+1 day');
         }
 
         $this->data['SisaPeralatan'] = $this->koneksi->FetchAll("SELECT p.*, (p.jumlah - pn.jumlah) AS sisajumlah
@@ -177,7 +177,7 @@ class Pengunjung extends CI_Controller
         if (isset($dateSearch)) {
             $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
         } else {
-            $begin = new DateTime();
+            $begin = new DateTime('+1 day');
         }
 
         $this->data['SisaKegiatan'] = $this->koneksi->FetchAll("SELECT k.*, count(pk.tanggal) as jumlah from kegiatan k

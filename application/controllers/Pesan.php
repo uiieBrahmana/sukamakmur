@@ -31,14 +31,17 @@ class Pesan extends CI_Controller
 
         $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
-
         foreach ($this->data['Pesanan'] as $key => $item) {
             $this->pesanankosong($item['idpemesanan']);
         }
 
-        $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
-        $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
+        $sql = "SELECT a.*, IFNULL(SUM(b.nominal),0) terbayar, b.idpembayaran,
+                b.ekstensifile FROM pemesanan a
+                LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
+                WHERE a.idtamu = $this->userId
+                GROUP BY a.idpemesanan, b.idpemesanan";
 
+        $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
         $this->load->view('pesanan/start', $this->data);
     }
 
@@ -134,7 +137,9 @@ class Pesan extends CI_Controller
         WHERE p.idpemesanan = $idpesanan");
         $this->data['Tamu'] = $tamu[0];
 
-        if (strcasecmp($tamu[0]['status'], 'LUNAS') != 0) {
+        $status = (strcasecmp($tamu[0]['status'], 'LUNAS') == 0);
+        $status2 = (strcasecmp($tamu[0]['status'], 'DP') == 0);
+        if (!$status && !$status2) {
             redirect('/pesan/');
         }
 
@@ -168,6 +173,13 @@ class Pesan extends CI_Controller
             $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
         }
         $this->data['Total'] = $totalHarga;
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pesanan'] = $pesan[0];
+
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
+        AND bukti IS NOT NULL and ekstensifile <> ''
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
 
         $this->load->view('pesanan/summary', $this->data);
     }
