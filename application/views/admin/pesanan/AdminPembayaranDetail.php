@@ -149,16 +149,26 @@
                                     <label class="col-sm-4 control-label">Sisa yang harus dibayar</label>
                                     <h1>Rp. <?php echo number_format($Pesanan['totalharga'] - $datapembayaran) ?></h1>
                                 </div>
+
+                                <input required type="hidden" value="<?php echo $Pesanan['idpemesanan'] ?>" name="idpesanan">
+                                <input required type="hidden" value="<?php echo ($Pesanan['totalharga'] - $datapembayaran) ?>" name="sisapembayaran">
+                                <div class="box-footer text-center">
+                                    <input type="submit" class="btn btn-info" name="submit" value="Lunasi dengan Pembayaran Cash">
+                                </div>
+
                             <?php } elseif(($Pesanan['totalharga'] - $datapembayaran) <= 0) { ?>
                                 <div class="text-center">
                                     <h1>Tidak ada tunggakan.</h1>
                                 </div>
+                                <?php if($Pesanan['status'] != 'LUNAS') { ?>
+                                    <input required type="hidden" value="<?php echo $Pesanan['idpemesanan'] ?>" name="idpesanan">
+                                    <input required type="hidden" value="<?php echo ($Pesanan['totalharga'] - $datapembayaran) ?>" name="sisapembayaran">
+                                    <div class="box-footer text-center">
+                                        <input type="submit" class="btn btn-info" name="submit" value="Tandai Lunas">
+                                    </div>
+                                <?php } ?>
                             <?php } ?>
-                            <input required type="hidden" value="<?php echo $Pesanan['idpemesanan'] ?>" name="idpesanan">
-                            <input required type="hidden" value="<?php echo ($Pesanan['totalharga'] - $datapembayaran) ?>" name="sisapembayaran">
-                            <div class="box-footer text-center">
-                                <input type="submit" class="btn btn-info" name="submit" value="Lunasi dengan Pembayaran Cash">
-                            </div>
+
                         </form>
                     </div>
                 </div>

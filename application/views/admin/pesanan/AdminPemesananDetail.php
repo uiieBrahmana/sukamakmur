@@ -134,6 +134,9 @@
                                     <h1>Tunggakan Pembayaran Rp. <?php echo number_format(($Pesanan['totalharga'] - $datapembayaran)) ?></h1>
                                 </div>
                             <?php } ?>
+                            <div class="text-center">
+                                <a class="btn btn-success" href="Administrator/invoice/<?php echo $Pesanan['idpemesanan'] ?>">Invoice</a>
+                            </div>
                         </ul>
 
                     </div>

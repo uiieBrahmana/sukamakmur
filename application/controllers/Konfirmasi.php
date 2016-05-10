@@ -56,12 +56,6 @@ class Konfirmasi extends CI_Controller
                 return;
             }
 
-            //todo : masalah besar pembayaran
-            //pertama checkout itu menginsert pembayaran > sudah
-            //kedua konfirmasi menginsert file bukti > sudah
-            //approval mengeset idpetugas > sudah
-            //reject set null buktipembayaran
-
             $namafile = $_FILES['bukti']['name'];
             $ekstensifile = $_FILES['bukti']['type'];
             $filedata = $_FILES['bukti']['tmp_name'];

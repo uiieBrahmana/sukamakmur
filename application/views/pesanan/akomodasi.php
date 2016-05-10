@@ -36,7 +36,8 @@
                                 <div class="form-group">
                                     <label for="tanggalmasuk">Tanggal</label>
                                     <input type="text" placeholder="dari" name="tanggalmasuk"
-                                           value="<?php echo date("d F Y") ?>"
+                                           value="<?php $datetime = new DateTime('tomorrow');
+                                           echo $datetime->format('d F Y'); ?>"
                                            class="form-control">
                                 </div>
                                 <div class="form-group">

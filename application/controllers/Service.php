@@ -166,12 +166,14 @@ class Service extends CI_Controller
 
     public function bukti($idpembayaran)
     {
-        $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran AND bukti IS NOT NULL");
+        $result = $this->koneksi->FetchAll("select * from pembayaran where idpembayaran = $idpembayaran
+        AND bukti IS NOT NULL");
         if (!is_array($result))
             die('not available');
-
-        header('Content-Type: ' . $result[0]['ekstensifile']);
-        echo $result[0]['bukti'];
+        else {
+            header('Content-Type: ' . $result[0]['ekstensifile']);
+            echo $result[0]['bukti'];
+        }
     }
 
     public function imageLength($idakomodasi)
@@ -194,35 +196,38 @@ class Service extends CI_Controller
         $transidmerchant = $this->input->post("TRANSIDMERCHANT");
         $totalamount = $this->input->post("AMOUNT");
         $storeid = $this->input->post("STOREID");
-        if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+
+        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
 
             $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
             $data = $this->koneksi->FetchAll($sql);
 
-            if ($data === null)
+            if ($data === null) {
                 echo 'Stop';
-            else {
-                $sqlupdate = UpdateBuilder('pemesanan',
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                    ),
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                        'status' => 'CHECKOUT',
-                    )
-                );
-
-                $this->koneksi->Save($sqlupdate, array(
-                    $transidmerchant,
-                    'CHECKOUT'
-                ));
+                return;
+            } else {
+//                $sqlupdate = UpdateBuilder('pemesanan',
+//                    array(
+//                        'idpemesanan' => $transidmerchant,
+//                    ),
+//                    array(
+//                        'idpemesanan' => $transidmerchant,
+//                        'status' => 'CHECKOUT',
+//                    )
+//                );
+//
+//                $this->koneksi->Save($sqlupdate, array(
+//                    $transidmerchant,
+//                    'CHECKOUT'
+//                ));
 
                 echo 'Continue';
+                return;
             }
-        } else {
-            echo 'Stop';
-        }
-
+        //} else {
+        //    echo 'Stop';
+        //}
+        echo 'Stop';
     }
 
     public function notify()
@@ -232,26 +237,20 @@ class Service extends CI_Controller
         //Result can be (Success or Fail)
         $result = strtoupper($this->input->post("RESULT"));
 
-        if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
-            if (strcasecmp($result, 'Success') == 0) {
+        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+            if (strcasecmp($result, 'SUCCESS') == 0) {
                 $sqlbayar = InsertBuilder('pembayaran',
                     array(
                         'idpemesanan' => $transidmerchant,
-                        'idpetugas' => 0,
                         'nominal' => $totalamount,
                         'metodepembayaran' => 'DOKU WALLET',
-                        'bukti' => '',
-                        'ekstensifile' => 'image/jpg',
                     )
                 );
 
                 $this->koneksi->Save($sqlbayar, array(
                     'idpemesanan' => $transidmerchant,
-                    'idpetugas' => 0,
                     'nominal' => $totalamount,
                     'metodepembayaran' => 'DOKU WALLET',
-                    'bukti' => '',
-                    'ekstensifile' => 'image/jpg',
                 ));
 
                 $sqlupdate = UpdateBuilder('pemesanan',
@@ -269,30 +268,15 @@ class Service extends CI_Controller
                     'DP'
                 ));
 
-                /*
-                $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
-                $data = $this->koneksi->FetchAll($sql);
-                $data = $data[0];
-
-                if ($totalamount >= $data['totalharga']) {
-                    $this->koneksi->Save($sqlupdate, array(
-                        $transidmerchant,
-                        'LUNAS'
-                    ));
-                } else {
-                    $this->koneksi->Save($sqlupdate, array(
-                        $transidmerchant,
-                        'DP'
-                    ));
-                }*/
-
                 echo 'Continue';
+                return;
             } else {
                 echo 'Stop';
+                return;
             }
-        } else {
-            echo 'Stop';
-        }
+        //} else {
+        //    echo 'Stop';
+        //}
     }
 
     public function cancel($idpemesanan = null)

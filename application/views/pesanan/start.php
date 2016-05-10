@@ -39,31 +39,35 @@
                                         <td><?php echo $value['idpemesanan'] ?></td>
                                         <td><?php echo date("d F Y (h:i:s)", strtotime($value['tanggalpesan'])) ?></td>
                                         <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
-                                        <td>Rp. <?php echo number_format($value['terbayar']) ?></td>
                                         <td>
-                                            <?php if(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
-                                                <?php if($value['ekstensifile'] == null) { ?>
-                                                    Menunggu Pembayaran
-                                                <?php } else { ?>
-                                                    Menunggu Konfirmasi Kedatangan
-                                                <?php } ?>
-                                            <?php } else { ?>
-                                                <?php echo $value['status'] ?>
-                                            <?php } ?>
+                                            Rp.
+                                            <?php if($value['status'] == 'DP' || $value['status'] == 'LUNAS') {
+                                                echo number_format($value['terbayar']);
+                                            } else {
+                                                echo '0';
+                                            } ?>
                                         </td>
                                         <td>
-                                            <?php if(strcmp($value['status'], 'LUNAS') == 0) { ?>
+                                            <?php if (($value['totalharga'] - $value['terbayar']) == 0 && ($value['status'] == 'DP' || $value['status'] == 'LUNAS')) {
+                                                echo 'Lunas';
+                                            } elseif (($value['totalharga'] - $value['terbayar']) >= 0 && $value['status'] == 'DP') {
+                                                echo 'Belum Lunas';
+                                            } elseif ($value['status'] == 'CHECKOUT' && $value['terbayar'] == 0) {
+                                                echo 'Belum Bayar';
+                                            } else {
+                                                echo 'Menunggu';
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <?php if($value['status'] == 'LUNAS' || $value['status'] == 'DP') { ?>
                                                 <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
-                                            <?php } elseif(strcmp($value['status'], 'CHECKOUT') == 0) { ?>
+                                            <?php } elseif ($value['status'] == 'CHECKOUT') { ?>
                                                 <?php if($value['ekstensifile'] == null) { ?>
                                                     <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
                                                 <?php } else { ?>
-                                                    Konfirmasi Diterima.
+                                                    <a class="btn btn-primary brn-flat" disabled="disabled" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi Diterima</a>
                                                 <?php } ?>
-                                            <?php } elseif(strcmp($value['status'], 'DP') == 0) { ?>
-                                                <a class="btn btn-flat btn-warning" href="pesan/summary/<?php echo $value['idpemesanan'] ?>">Invoice</a>
-                                                *Lakukan pelunasan pembayaran pada hari H.
-                                            <?php } else { ?>
+                                            <?php } elseif ($value['status'] == 'DRAFT') { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
                                             <?php } ?>
                                         </td>

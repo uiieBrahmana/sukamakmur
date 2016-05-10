@@ -179,7 +179,7 @@ class Pesan extends CI_Controller
 
         $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
         AND bukti IS NOT NULL and ekstensifile <> ''
-        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran IN ('ADMINCASH','DOKU WALLET')");
 
         $this->load->view('pesanan/summary', $this->data);
     }

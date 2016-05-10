@@ -957,7 +957,7 @@ class Administrator extends CI_Controller
 
         $bayar = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
         AND bukti IS NOT NULL and ekstensifile <> ''
-        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran IN ('ADMINCASH', 'DOKU WALLET')");
         $this->data['Pembayaran'] = $bayar;
 
         $this->load->view('admin/pesanan/AdminPemesananDetail', $this->data);
@@ -997,7 +997,7 @@ class Administrator extends CI_Controller
 
         $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
         AND bukti IS NOT NULL and ekstensifile <> ''
-        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran IN ('ADMINCASH', 'DOKU WALLET')");
 
         $this->load->view('admin/pesanan/AdminKonfirmasiDetail', $this->data);
     }
@@ -1036,7 +1036,7 @@ class Administrator extends CI_Controller
 
         $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
         AND bukti IS NOT NULL and ekstensifile <> ''
-        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran = 'ADMINCASH'");
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran IN ('ADMINCASH', 'DOKU WALLET')");
 
         $this->load->view('admin/pesanan/AdminPembayaranDetail', $this->data);
     }
@@ -1219,27 +1219,93 @@ class Administrator extends CI_Controller
                 ));
             }
 
-            if($pesan[0]['totalharga'] <= $pesan[0]['terbayar']) {
-                $sqlupdate = UpdateBuilder('pemesanan',
-                    array(
-                        'idpemesanan' => $idpesanan,
-                    ),
-                    array(
-                        'idpemesanan' => $idpesanan,
-                        'status' => 'LUNAS',
-                    )
-                );
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $idpesanan,
+                ),
+                array(
+                    'idpemesanan' => $idpesanan,
+                    'status' => 'LUNAS',
+                )
+            );
 
-                $hasil = $this->koneksi->Save($sqlupdate, array(
-                    $idpesanan,
-                    'LUNAS'
-                ));
-            }
-
+            $hasil = $this->koneksi->Save($sqlupdate, array(
+                $idpesanan,
+                'LUNAS'
+            ));
         }
 
         redirect('administrator/adminkonfirmasipembayarandetail/' . $idpesanan);
 
+    }
+
+    public function invoice($idp)
+    {
+        if (!isset($idp)) {
+            $idpesanan = $this->session->userdata('pesanan');
+        } else {
+            $idpesanan = $idp;
+        }
+
+        if (!isset($idpesanan)) {
+            redirect('/pesan/');
+        }
+
+        if (!is_numeric($idpesanan))
+            redirect('/pesan/');
+
+        $this->data['id'] = $idpesanan;
+
+        $tamu = $this->koneksi->FetchAll("SELECT * FROM pemesanan p
+        LEFT JOIN tamu t USING (idtamu)
+        WHERE p.idpemesanan = $idpesanan");
+        $this->data['Tamu'] = $tamu[0];
+
+        $status = (strcasecmp($tamu[0]['status'], 'LUNAS') == 0);
+        $status2 = (strcasecmp($tamu[0]['status'], 'DP') == 0);
+        if (!$status && !$status2) {
+            redirect('/pesan/');
+        }
+
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT p.idpesananakomodasi as did, a.*, p.tanggal, p.jumlahtamu, p.keterangan as ket
+        FROM pesananakomodasi p
+        LEFT JOIN akomodasi a USING (idakomodasi) WHERE p.idpemesanan = ' . $idpesanan);
+        $this->data['Makanan'] = $this->koneksi->FetchAll('SELECT pm.idpesananmakanan as did, t.harga, t.idtipemakanan, t.keterangan as kettipe,
+        m.keterangan as ketmenu, pm.* FROM pesananmakanan pm
+        LEFT JOIN menumakanan m USING (idmenumakanan)
+        LEFT JOIN tipemakanan t ON (m.idtipemakanan = t.idtipemakanan)
+        WHERE pm.idpemesanan = ' . $idpesanan);
+        $this->data['Peralatan'] = $this->koneksi->FetchAll('SELECT pn.idpesananperalatan as did, p.*, pn.jumlah as jumlahdisewa, pn.keterangan as ket,
+        pn.tanggal FROM pesananperalatan pn LEFT JOIN peralatan p using (idperalatan)
+        WHERE pn.idpemesanan = ' . $idpesanan);
+        $this->data['Kegiatan'] = $this->koneksi->FetchAll('SELECT k.*, pn.idpesanankegiatan as did, pn.idpetugas, pn.jumlahpeserta,
+        pn.tanggal, pn.keterangan as ket
+        FROM pesanankegiatan pn LEFT JOIN kegiatan k USING (idkegiatan)
+        WHERE idpemesanan = ' . $idpesanan);
+
+        $totalHarga = 0;
+        foreach ($this->data['Akomodasi'] as $value) {
+            $totalHarga += $value['harga'];
+        }
+        foreach ($this->data['Makanan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['porsi']);
+        }
+        foreach ($this->data['Peralatan'] as $value) {
+            $totalHarga += ($value['hargasewa'] * $value['jumlahdisewa']);
+        }
+        foreach ($this->data['Kegiatan'] as $value) {
+            $totalHarga += ($value['harga'] * $value['jumlahpeserta']);
+        }
+        $this->data['Total'] = $totalHarga;
+
+        $pesan = $this->koneksi->FetchAll('SELECT * FROM pemesanan WHERE idpemesanan = ' . $idpesanan);
+        $this->data['Pesanan'] = $pesan[0];
+
+        $this->data['Pembayaran'] = $this->koneksi->FetchAll("SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan
+        AND bukti IS NOT NULL and ekstensifile <> ''
+        UNION SELECT * FROM pembayaran WHERE idpemesanan = $idpesanan AND metodepembayaran IN ('ADMINCASH','DOKU WALLET')");
+
+        $this->load->view('admin/pesanan/AdminInvoicePesanan', $this->data);
     }
     #end region detail
 }
