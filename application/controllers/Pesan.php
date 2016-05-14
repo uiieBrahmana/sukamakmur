@@ -374,7 +374,7 @@ class Pesan extends CI_Controller
                                     WHERE p.idpemesanan = $idpemesanan");
         $datapemesan = $datapemesan[0];
 
-        $submit = $this->input->post('submit');
+        $submit = $this->input->post('bayar');
         if (isset($submit)) {
             $terms = $this->input->post('dp');
             if (isset($terms))

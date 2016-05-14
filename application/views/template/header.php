@@ -12,6 +12,13 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
+                <li class="user user-menu <?php echo isset($open) ? 'open' : '' ?>">
+                    <a href="Administrator/laporan" class="dropdown-toggle">
+                        <i class="fa fa-fax"></i>
+                        <span class="hidden-xs">Laporan</span>
+                    </a>
+                </li>
+
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user"></i>

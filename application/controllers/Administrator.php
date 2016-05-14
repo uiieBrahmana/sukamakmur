@@ -1308,4 +1308,9 @@ class Administrator extends CI_Controller
         $this->load->view('admin/pesanan/AdminInvoicePesanan', $this->data);
     }
     #end region detail
+
+    public function laporan(){
+        $this->data['open'] = true;
+        $this->load->view('admin/laporan/Laporan', $this->data);
+    }
 }
