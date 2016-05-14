@@ -66,10 +66,11 @@
                                                         <?php if (($value['totalharga'] - $value['terbayar']) != 0) { ?>
                                                             <input name="dp" type="hidden" value="checked"/>
                                                         <?php } ?>
-                                                            <input type="submit" value="Kirim tata cara pembayaran" name="submit" class="btn btn-success">
+                                                            <br/>
+                                                            <input type="submit" value="Kirim tata cara pembayaran" name="submit" style="">
                                                     </form>
                                                 <?php } else { ?>
-                                                    <a class="btn btn-primary brn-flat" disabled="disabled" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi Diterima</a>
+                                                    Konfirmasi Diterima
                                                 <?php } ?>
                                             <?php } elseif ($value['status'] == 'DRAFT') { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>

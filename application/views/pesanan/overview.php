@@ -236,7 +236,7 @@
                                            value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
                                     <input type="hidden" name="CMPHONE"
                                            value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                    <input name="submit" type="submit" class="btn btn-primary btn-block"
+                                    <input id="bayarorder" type="submit" class="btn btn-primary btn-block"
                                            value="Bayar dengan DOKU WALLET"/>
                                 </FORM>
                             </div>
@@ -273,7 +273,8 @@
                             <div class="col-xs-6">
                                 <div class="box-body">
                                     <span class="text-center">Atau request tata cara pembayaran dengan Bank Transfer</span>
-                                    <input type="submit" value="DISINI" name="submit" class="btn btn-info btn-block">
+                                    <input type="hidden" value="bayar" name="submit">
+                                    <input id="bayarpay" type="submit" value="DISINI" class="btn btn-info btn-block">
                                 </div>
                             </div>
                             <div class="col-xs-3"></div>
@@ -339,22 +340,22 @@
             }
         });
 
-        $("form[name=order]").submit(function(event) {
+        $("#bayarorder").on('click',function(event) {
             event.preventDefault();
             bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
                 if (result) {
-                    $("form[name=order]").unbind('submit').submit();
+                    $("form[name=order]").submit();
                 } else {
                     return false;
                 }
             });
         });
 
-        $("form[name=pay]").submit(function(event) {
+        $("#bayarpay").on('click',function(event) {
             event.preventDefault();
             bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
                 if (result) {
-                    $("form[name=pay]").unbind('submit').submit();
+                    $("form[name=pay]").submit();
                 } else {
                     return false;
                 }

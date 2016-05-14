@@ -57,6 +57,8 @@
 <body style="padding: 0px; margin: 0px;">
 <div id="mailsub" class="notification" align="center">
 
+    <span>Laporan Pemesanan</span>
+    <p>Periode : 2016</p>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;">
         <tr>
             <td align="center">
@@ -72,9 +74,9 @@
                     <?php foreach ($Stats as $value) { ?>
                     <tr>
                         <td><?php echo $value['idpemesanan'] ?></td>
-                        <td><?php echo $value['idtamu'] ?></td>
-                        <td><?php echo $value['tanggalpesan'] ?></td>
-                        <td><?php echo $value['totalharga'] ?></td>
+                        <td><?php echo $value['nama'] ?></td>
+                        <td><?php echo date("d F Y", strtotime($value['tanggalpesan'])) ?></td>
+                        <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
                         <td><?php echo $value['status'] ?></td>
                     </tr>
                     <?php } ?>

@@ -32,9 +32,17 @@ class Report extends CI_Controller
     {
         require_once (APPPATH . 'third_party/dompdf/autoload.inc.php');
 
-        $sql = "SELECT *, YEAR(tanggalpesan) tahun,
-            MONTH(tanggalpesan) bulan FROM `pemesanan` WHERE YEAR(tanggalpesan) = YEAR(NOW())
-            GROUP BY YEAR(tanggalpesan), MONTH(tanggalpesan);";
+        $sql = "SELECT `pemesanan`.*, `tamu`.nama,
+                    YEAR (tanggalpesan) tahun,
+                    MONTH (tanggalpesan) bulan
+                FROM
+                    `pemesanan`
+                LEFT JOIN `tamu` USING (idtamu)
+                WHERE
+                    YEAR (tanggalpesan) = YEAR (NOW())
+                GROUP BY
+                    YEAR (tanggalpesan),
+                    MONTH (tanggalpesan);";
         $stats = $this->koneksi->FetchAll($sql);
         $this->data['Stats'] = $stats;
 
