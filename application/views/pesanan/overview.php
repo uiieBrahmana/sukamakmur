@@ -213,42 +213,6 @@
                 </div>
 
                 <?php if ($Total > 0) { ?>
-                    <form action="pesan/checkout/<?php echo $id; ?>" method="post">
-                        <div class="row">
-                            <div class="col-xs-2"></div>
-                            <div class="col-xs-8 text-center text-warning">
-                                <input name="dp" type="checkbox"/> Centang untuk hanya membayar DP 30%
-                            </div>
-                            <div class="col-xs-2"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-2"></div>
-                            <div class="col-xs-8 text-center text-warning">
-                                <b><span name="tamount"><h2>Total Harga Rp. <?php echo number_format($Total); ?>,-</h2></span></b>
-                            </div>
-                            <div class="col-xs-2"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-2"></div>
-                            <div class="col-xs-8 text-center text-warning">
-                                <b><span name="vamount"></span></b>
-                            </div>
-                            <div class="col-xs-2"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-6">
-                                <div class="box-body">
-                                    <input type="submit" value="Bayar dengan BANK
-                                        TRANSFER" name="submit" class="btn btn-info btn-block">
-                                </div>
-                            </div>
-                            <div class="col-xs-3"></div>
-                        </div>
-                    </form>
-
                     <div class="row">
                         <div class="col-xs-3"></div>
 
@@ -279,6 +243,42 @@
                         </div>
                         <div class="col-xs-3"></div>
                     </div>
+
+                    <form name="pay" action="pesan/checkout/<?php echo $id; ?>" method="post">
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <input name="dp" type="checkbox"/> Centang untuk hanya membayar DP 30%
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <b><span name="tamount"><h2>Total Harga Rp. <?php echo number_format($Total); ?>,-</h2></span></b>
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-8 text-center text-warning">
+                                <b><span name="vamount"></span></b>
+                            </div>
+                            <div class="col-xs-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-6">
+                                <div class="box-body">
+                                    <span class="text-center">Atau request tata cara pembayaran dengan Bank Transfer</span>
+                                    <input type="submit" value="DISINI" name="submit" class="btn btn-info btn-block">
+                                </div>
+                            </div>
+                            <div class="col-xs-3"></div>
+                        </div>
+                    </form>
                 <?php } ?>
 
                 <div class="row">
@@ -337,6 +337,30 @@
                 $('input[name=AMOUNT]').prop('value', '<?php echo $Total ?>.00');
                 $('input[name=WORDS]').prop('value', '<?php echo securedHash($id, $Total . '.00'); ?>');
             }
+        });
+
+        $("form[name=order]").submit(function(event) {
+            event.preventDefault();
+            bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
+                if (result) {
+                    $("form[name=order]").unbind();
+                    $("form[name=order]").submit();
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        $("form[name=pay]").submit(function(event) {
+            event.preventDefault();
+            bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
+                if (result) {
+                    $("form[name=pay]").unbind();
+                    $("form[name=pay]").submit();
+                } else {
+                    return false;
+                }
+            });
         });
     });
 </script>

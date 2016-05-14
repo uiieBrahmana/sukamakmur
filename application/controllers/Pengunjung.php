@@ -345,7 +345,7 @@ class Pengunjung extends CI_Controller
 
             $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
             $this->data['Member'] = $tamu[0];
-            redirect('pengunjung/ubahakun/' . $idtamu . '/success');
+            redirect('pengunjung/ubahakun/' . $idtamu . '?status=success');
         } else {
             $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
             $this->data['Member'] = $tamu[0];
