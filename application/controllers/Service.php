@@ -197,86 +197,82 @@ class Service extends CI_Controller
         $totalamount = $this->input->post("AMOUNT");
         $storeid = $this->input->post("STOREID");
 
-        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+        $this->session->set_userdata('AMMOUNT', $totalamount);
 
-            $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
-            $data = $this->koneksi->FetchAll($sql);
+        $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
+        $data = $this->koneksi->FetchAll($sql);
 
-            if ($data === null) {
-                echo 'Stop';
-                return;
-            } else {
-//                $sqlupdate = UpdateBuilder('pemesanan',
-//                    array(
-//                        'idpemesanan' => $transidmerchant,
-//                    ),
-//                    array(
-//                        'idpemesanan' => $transidmerchant,
-//                        'status' => 'CHECKOUT',
-//                    )
-//                );
-//
-//                $this->koneksi->Save($sqlupdate, array(
-//                    $transidmerchant,
-//                    'CHECKOUT'
-//                ));
+        if ($data === null) {
+            echo 'Stop';
+            return;
+        } else {
+            /*
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $transidmerchant,
+                ),
+                array(
+                    'idpemesanan' => $transidmerchant,
+                    'status' => 'CHECKOUT',
+                )
+            );
 
-                echo 'Continue';
-                return;
-            }
-        //} else {
-        //    echo 'Stop';
-        //}
-        echo 'Stop';
+            $this->koneksi->Save($sqlupdate, array(
+                $transidmerchant,
+                'CHECKOUT'
+            ));
+            */
+            echo 'Continue';
+            return;
+        }
+
     }
 
     public function notify()
     {
         $transidmerchant = $this->input->post("TRANSIDMERCHANT");
         $totalamount = $this->input->post("AMOUNT");
+
+        $this->session->set_userdata('AMMOUNT', $totalamount);
         //Result can be (Success or Fail)
         $result = strtoupper($this->input->post("RESULT"));
 
-        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
-            if (strcasecmp($result, 'SUCCESS') == 0) {
-                $sqlbayar = InsertBuilder('pembayaran',
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                        'nominal' => $totalamount,
-                        'metodepembayaran' => 'DOKU WALLET',
-                    )
-                );
-
-                $this->koneksi->Save($sqlbayar, array(
+        if (strcasecmp($result, 'SUCCESS') == 0) {
+            $sqlbayar = InsertBuilder('pembayaran',
+                array(
                     'idpemesanan' => $transidmerchant,
-                    'nominal' => $totalamount,
+                    'nominal' => (int)$totalamount,
                     'metodepembayaran' => 'DOKU WALLET',
-                ));
+                )
+            );
 
-                $sqlupdate = UpdateBuilder('pemesanan',
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                    ),
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                        'status' => 'DP',
-                    )
-                );
+            $this->koneksi->Save($sqlbayar, array(
+                'idpemesanan' => $transidmerchant,
+                'nominal' => (int)$totalamount,
+                'metodepembayaran' => 'DOKU WALLET',
+            ));
 
-                $this->koneksi->Save($sqlupdate, array(
-                    $transidmerchant,
-                    'DP'
-                ));
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $transidmerchant,
+                ),
+                array(
+                    'idpemesanan' => $transidmerchant,
+                    'status' => 'DP',
+                )
+            );
 
-                echo 'Continue';
-                return;
-            } else {
-                echo 'Stop';
-                return;
-            }
-        //} else {
-        //    echo 'Stop';
-        //}
+            $this->koneksi->Save($sqlupdate, array(
+                $transidmerchant,
+                'DP'
+            ));
+
+            echo 'Continue';
+            return;
+        } else {
+            echo 'Stop';
+            return;
+        }
     }
 
     public function cancel($idpemesanan = null)
@@ -293,15 +289,13 @@ class Service extends CI_Controller
     public function redirect()
     {
         $sucess = $this->input->post('RESULT');
-        $idpemesanan = $this->input->post('TRANSIDMERCHANT');
+        $transidmerchant = $this->input->post('TRANSIDMERCHANT');
 
         if (strcasecmp(strtoupper($sucess), 'SUCCESS') == 0) {
-            if ($idpemesanan == null)
-                $idpemesanan = $this->session->userdata('pesanan');
+            if ($transidmerchant == null)
+                $transidmerchant = $this->session->userdata('pesanan');
         }
-
-        redirect('/pesan/summary/' . $idpemesanan);
+        redirect('/pesan/summary/' . $transidmerchant);
     }
     #end region payment
-
 }

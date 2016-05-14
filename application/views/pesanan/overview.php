@@ -222,7 +222,7 @@
                                       ACTION="https://apps.myshortcart.com/payment/request-payment/">
                                     <input type="hidden" name="BASKET"
                                            value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
-                                    <input type="hidden" name="STOREID" value="00123548">
+                                    <input type="hidden" name="STOREID" value="002733">
                                     <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
                                     <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
                                     <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
@@ -236,7 +236,7 @@
                                            value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
                                     <input type="hidden" name="CMPHONE"
                                            value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                    <input id="orderpay" name="bayar" type="submit" class="btn btn-primary btn-block"
+                                    <input name="submit" type="submit" class="btn btn-primary btn-block"
                                            value="Bayar dengan DOKU WALLET"/>
                                 </FORM>
                             </div>
@@ -273,8 +273,7 @@
                             <div class="col-xs-6">
                                 <div class="box-body">
                                     <span class="text-center">Atau request tata cara pembayaran dengan Bank Transfer</span>
-                                    <input type="hidden" value="submit" name="bayar">
-                                    <input id="submitpay" type="submit" value="DISINI" class="btn btn-info btn-block">
+                                    <input type="submit" value="DISINI" name="submit" class="btn btn-info btn-block">
                                 </div>
                             </div>
                             <div class="col-xs-3"></div>
@@ -340,24 +339,22 @@
             }
         });
 
-        $("#orderpay").on('click', function(event) {
+        $("form[name=order]").submit(function(event) {
             event.preventDefault();
             bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
                 if (result) {
-                    $("form[name=order]").submit();
-                    return true;
+                    $("form[name=order]").unbind('submit').submit();
                 } else {
                     return false;
                 }
             });
         });
 
-        $("#submitpay").on('click', function(event) {
+        $("form[name=pay]").submit(function(event) {
             event.preventDefault();
             bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
                 if (result) {
-                    $("form[name=pay]").submit();
-                    return true;
+                    $("form[name=pay]").unbind('submit').submit();
                 } else {
                     return false;
                 }
