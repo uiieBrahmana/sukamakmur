@@ -30,28 +30,60 @@ class Report extends CI_Controller
 
     public function pdf()
     {
-        require_once (APPPATH . 'third_party/dompdf/autoload.inc.php');
+        $picker = $this->input->post('picker');
 
-        $sql = "SELECT `pemesanan`.*, `tamu`.nama,
-                    YEAR (tanggalpesan) tahun,
-                    MONTH (tanggalpesan) bulan
-                FROM
-                    `pemesanan`
-                LEFT JOIN `tamu` USING (idtamu)
-                WHERE
-                    YEAR (tanggalpesan) = YEAR (NOW())
-                GROUP BY
-                    YEAR (tanggalpesan),
-                    MONTH (tanggalpesan);";
-        $stats = $this->koneksi->FetchAll($sql);
-        $this->data['Stats'] = $stats;
+        if(isset($picker)) {
 
-        $view = $this->load->view('templates/report/example', $this->data, true);
+            $date = explode(' ', $picker);
 
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($view);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $dompdf->stream('RCSukamakmur_report');
+            require_once (APPPATH . 'third_party/dompdf/autoload.inc.php');
+
+            $sql = "select * from (
+                        select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu
+                        from pemesanan q
+                        left join pesananakomodasi p using (idpemesanan)
+                        left join akomodasi a using (idakomodasi)
+                        left join tamu t using (idtamu)
+                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu
+                        from pemesanan q
+                        left join pesananmakanan p using (idpemesanan)
+                        left join menumakanan a using (idmenumakanan)
+                        left join tipemakanan b using (idtipemakanan)
+                        left join tamu t using (idtamu)
+                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu
+                        from pemesanan q
+                        left join pesananperalatan p using (idpemesanan)
+                        left join peralatan a using (idperalatan)
+                        left join tamu t using (idtamu)
+                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu
+                        from pemesanan q
+                        left join pesanankegiatan p using (idpemesanan)
+                        left join kegiatan a using (idkegiatan)
+                        left join tamu t using (idtamu)
+                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                    ) report where jumlahtamu is not null
+                    AND YEAR (tanggalpesan) = $date[1]
+                    AND MONTHNAME (tanggalpesan) = '$date[0]'
+                    order by tanggalpesan asc";
+
+            $stats = $this->koneksi->FetchAll($sql);
+            $this->data['Stats'] = $stats;
+            $this->data['Period'] = $picker;
+
+            $view = $this->load->view('templates/report/example', $this->data, true);
+
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml($view);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream('RCSukamakmur_report');
+        }
+
     }
 }

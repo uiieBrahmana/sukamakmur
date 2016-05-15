@@ -79,14 +79,15 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Buat Laporan Pemesanan</h3>
                 </div>
+                <br/>
 
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="box box-body">
-                            <form role="form">
+                            <form role="form" method="post" action="report/pdf">
                                 <div class="form-group">
                                     <label for="per">Periode</label>
-                                    <input id="monthpicker" type="text" placeholder="Periode" class="form-control">
+                                    <input id="monthpicker" name="picker" type="text" placeholder="Periode" class="form-control">
                                 </div>
                                 <div class="box-footer">
                                     <button class="btn btn-primary" type="submit">Submit</button>

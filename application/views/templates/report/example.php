@@ -57,8 +57,9 @@
 <body style="padding: 0px; margin: 0px;">
 <div id="mailsub" class="notification" align="center">
 
-    <span>Laporan Pemesanan</span>
-    <p>Periode : 2016</p>
+    <span><h2>Laporan Pemesanan</h2></span>
+
+    <p>Periode : <?php echo $Period ?></p>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;">
         <tr>
             <td align="center">
@@ -66,21 +67,28 @@
                        style="max-width: 800px; min-width: 300px;">
                     <tr>
                         <th>ID Pemesanan</th>
-                        <th>Tamu</th>
                         <th>Tanggal</th>
-                        <th>Total Harga</th>
-                        <th>Status</th>
+                        <th>Pemesan</th>
+                        <th>Pesanan</th>
+                        <th>Harga</th>
+                        <th>Keterangan</th>
                     </tr>
-                    <?php foreach ($Stats as $value) { ?>
-                    <tr>
-                        <td><?php echo $value['idpemesanan'] ?></td>
-                        <td><?php echo $value['nama'] ?></td>
-                        <td><?php echo date("d F Y", strtotime($value['tanggalpesan'])) ?></td>
-                        <td>Rp. <?php echo number_format($value['totalharga']) ?></td>
-                        <td><?php echo $value['status'] ?></td>
-                    </tr>
+                    <?php $total = 0;
+                    foreach ($Stats as $value) { ?>
+                        <tr>
+                            <td><?php echo $value['idpemesanan'] ?></td>
+                            <td><?php echo date("d F Y", strtotime($value['tanggalpesan'])) ?></td>
+                            <td><?php echo $value['namatamu'] ?></td>
+                            <td><?php echo $value['nama'] ?></td>
+                            <td>Rp. <?php $total = $total + $value['harga'];
+                                echo number_format($value['harga']) ?></td>
+                            <td>Jumlah : <?php echo $value['jumlahtamu'] ?></td>
+                        </tr>
                     <?php } ?>
                 </table>
+                <br/>
+
+                <div align="center">Total : Rp. <?php echo number_format($total) ?>,-</div>
         </tr>
     </table>
 
