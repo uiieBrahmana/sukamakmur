@@ -82,7 +82,7 @@
                             <td><?php echo $value['nama'] ?></td>
                             <td>Rp. <?php $total = $total + $value['harga'];
                                 echo number_format($value['harga']) ?></td>
-                            <td>Jumlah : <?php echo $value['jumlahtamu'] ?></td>
+                            <td><?php echo $value['jumlahtamu'] . " " . $value['unit'] ?></td>
                         </tr>
                     <?php } ?>
                 </table>

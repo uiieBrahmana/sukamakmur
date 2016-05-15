@@ -39,34 +39,34 @@ class Report extends CI_Controller
             require_once (APPPATH . 'third_party/dompdf/autoload.inc.php');
 
             $sql = "select * from (
-                        select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu
+                        select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu, 'orang' unit
                         from pemesanan q
                         left join pesananakomodasi p using (idpemesanan)
                         left join akomodasi a using (idakomodasi)
                         left join tamu t using (idtamu)
-                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        where q.`status` = 'LUNAS'
                         union
-                        select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu
+                        select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu, 'porsi' unit
                         from pemesanan q
                         left join pesananmakanan p using (idpemesanan)
                         left join menumakanan a using (idmenumakanan)
                         left join tipemakanan b using (idtipemakanan)
                         left join tamu t using (idtamu)
-                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        where q.`status` = 'LUNAS'
                         union
-                        select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu
+                        select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu, 'unit' unit
                         from pemesanan q
                         left join pesananperalatan p using (idpemesanan)
                         left join peralatan a using (idperalatan)
                         left join tamu t using (idtamu)
-                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        where q.`status` = 'LUNAS'
                         union
-                        select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu
+                        select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu, 'orang' unit
                         from pemesanan q
                         left join pesanankegiatan p using (idpemesanan)
                         left join kegiatan a using (idkegiatan)
                         left join tamu t using (idtamu)
-                        where t.idtamu = 1 and q.`status` = 'LUNAS'
+                        where q.`status` = 'LUNAS'
                     ) report where jumlahtamu is not null
                     AND YEAR (tanggalpesan) = $date[1]
                     AND MONTHNAME (tanggalpesan) = '$date[0]'
@@ -82,7 +82,7 @@ class Report extends CI_Controller
             $dompdf->loadHtml($view);
             $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
-            $dompdf->stream('RCSukamakmur_report');
+            $dompdf->stream(date('dMy').'_RCSukamakmur_Report_'.$date[0].'_'.$date[1]);
         }
 
     }
