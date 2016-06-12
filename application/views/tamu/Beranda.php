@@ -126,6 +126,7 @@
                     <div class="col-lg-4">
                         <div class="box box-body">
                             <h3>Retreat Center Sukamakmur GBKP</h3>
+<<<<<<< HEAD
 
                             <p>
                                 Retreat Center adalah salah satu unit pelayanan gereja GBKP yang dibuat untuk penyegaran
@@ -137,17 +138,41 @@
                                 akan membawa Anda menikmati keasrian suasana di RC.
                                 <br/> Dengan menikmati retreat di RC Sukamakmur, kita Akan merasakan keagungan kuasa
                                 Tuhan yang akan mengembalikan inspirasi dan keceriaan dalam hidup kita.
+=======
+                            <p>
+                            Retreat Center adalah salah satu unit pelayanan gereja GBKP yang dibuat untuk penyegaran rohani dan jasmani Anda
+                                <br/> Di sini kita bersama membangun keceriaan dan keharmonisan baik bagi keluarga dan kelompok Anda.
+                                <br/> Kami menawarkan pemandangan yang indah dengan taman yang memiliki rumput hijau yang luas serta bunga yang indah, lengkap dengan taman hutan dengan 3 buah sungai yang akan membawa Anda menikmati keasrian suasana di RC.
+                                <br/> Dengan menikmati retreat di RC Sukamakmur, kita Akan merasakan keagungan kuasa Tuhan yang akan mengembalikan inspirasi dan keceriaan dalam hidup kita.
                             </p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="box box-body">
                             <h3>Visi - Misi RC Sukamakmur</h3>
+                            <p> <br/>
+                            <h4>  "INI  AKU  UTUSLAH  AKU" </h4>
+                                "Hidup sebagai Tubuh Kristus, yang menjadi garam dan terang di tengah-tengah tantangan dan perubahan jaman"
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="box box-body">
+<<<<<<< HEAD
+                            <h3>Visi - Misi RC Sukamakmur</h3>
 
                             <p><br/>
                             <h4> "INI AKU UTUSLAH AKU" </h4>
                             "Hidup sebagai Tubuh Kristus, yang menjadi garam dan terang di tengah-tengah tantangan dan
                             perubahan jaman"
+=======
+                            <h3>Kontak Kami</h3>
+                            <p>
+                            Taman Jubelium 100Thn GBKP
+                            Jl. Raya Sibolangit km 45 Desa Sukamakmur
+                                Deli Serdang, Sumatera Utara
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                             </p>
                         </div>
                     </div>

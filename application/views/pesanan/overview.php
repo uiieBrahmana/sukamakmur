@@ -273,7 +273,11 @@
                             <div class="col-xs-6">
                                 <div class="box-body">
                                     <span class="text-center">Atau request tata cara pembayaran dengan Bank Transfer</span>
+<<<<<<< HEAD
                                     <input type="hidden" value="bayar" name="bayar">
+=======
+                                    <input type="hidden" value="bayar" name="submit">
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                                     <input id="bayarpay" type="submit" value="DISINI" class="btn btn-info btn-block">
                                 </div>
                             </div>

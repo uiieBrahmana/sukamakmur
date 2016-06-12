@@ -84,6 +84,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="box box-body">
+<<<<<<< HEAD
                             <form name="report" role="form" method="post" action="report/pdf">
                                 <div class="form-group">
                                     <label for="per">Tipe Laporan</label>
@@ -113,6 +114,16 @@
                                 <?php if (isset($_GET['status'])) { ?>
 
                                 <?php } ?>
+=======
+                            <form role="form" method="post" action="report/pdf">
+                                <div class="form-group">
+                                    <label for="per">Periode</label>
+                                    <input id="monthpicker" name="picker" type="text" placeholder="Periode" class="form-control">
+                                </div>
+                                <div class="box-footer">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                             </form>
                         </div>
                     </div>
@@ -128,6 +139,7 @@
 <?php $this->load->view('template/script'); ?>
 <script>
     $(document).ready(function () {
+<<<<<<< HEAD
         $("#monthpicker1").datepicker({
             format: "dd MM yyyy"
         });
@@ -167,6 +179,12 @@
             } else {
                 bootbox.alert("periode sampai harus lebih besar.");
             }
+=======
+        $("#monthpicker").datepicker({
+            format: "MM yyyy",
+            startView: "months",
+            minViewMode: "months"
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
         });
     });
 </script>

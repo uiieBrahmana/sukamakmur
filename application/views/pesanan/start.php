@@ -52,8 +52,11 @@
                                                 echo 'Lunas';
                                             } elseif (($value['totalharga'] - $value['terbayar']) >= 0 && $value['status'] == 'DP') {
                                                 echo 'Belum Lunas';
+<<<<<<< HEAD
                                             }elseif ($value['ekstensifile'] != null){
                                                 echo 'Menunggu Konfirmasi';
+=======
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                                             } else {
                                                 echo 'Belum Bayar';
                                             } ?>
@@ -69,7 +72,11 @@
                                                             <input name="dp" type="hidden" value="checked"/>
                                                         <?php } ?>
                                                             <br/>
+<<<<<<< HEAD
                                                             <input type="submit" value="Instruksi Pembayaran" name="submit" style="">
+=======
+                                                            <input type="submit" value="Kirim tata cara pembayaran" name="submit" style="">
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                                                     </form>
                                                 <?php } else { ?>
                                                     Konfirmasi Diterima

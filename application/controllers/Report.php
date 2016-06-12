@@ -30,6 +30,7 @@ class Report extends CI_Controller
 
     public function pdf()
     {
+<<<<<<< HEAD
         $picker1 = $this->input->post('picker1');
         $picker2 = $this->input->post('picker2');
         $tipe = $this->input->post('tipe');
@@ -50,14 +51,30 @@ class Report extends CI_Controller
                     $sql = "select * from (
                         select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu, 'orang' unit,
                         'no' multiply
+=======
+        $picker = $this->input->post('picker');
+
+        if(isset($picker)) {
+
+            $date = explode(' ', $picker);
+
+            require_once (APPPATH . 'third_party/dompdf/autoload.inc.php');
+
+            $sql = "select * from (
+                        select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu, 'orang' unit
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                         from pemesanan q
                         left join pesananakomodasi p using (idpemesanan)
                         left join akomodasi a using (idakomodasi)
                         left join tamu t using (idtamu)
                         where q.`status` = 'LUNAS'
                         union
+<<<<<<< HEAD
                         select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu, 'porsi' unit,
                         'yes' multiply
+=======
+                        select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu, 'porsi' unit
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                         from pemesanan q
                         left join pesananmakanan p using (idpemesanan)
                         left join menumakanan a using (idmenumakanan)
@@ -65,22 +82,31 @@ class Report extends CI_Controller
                         left join tamu t using (idtamu)
                         where q.`status` = 'LUNAS'
                         union
+<<<<<<< HEAD
                         select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu, 'unit' unit,
                         'yes' multiply
+=======
+                        select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu, 'unit' unit
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                         from pemesanan q
                         left join pesananperalatan p using (idpemesanan)
                         left join peralatan a using (idperalatan)
                         left join tamu t using (idtamu)
                         where q.`status` = 'LUNAS'
                         union
+<<<<<<< HEAD
                         select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu, 'orang' unit,
                         'yes' multiply
+=======
+                        select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu, 'orang' unit
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
                         from pemesanan q
                         left join pesanankegiatan p using (idpemesanan)
                         left join kegiatan a using (idkegiatan)
                         left join tamu t using (idtamu)
                         where q.`status` = 'LUNAS'
                     ) report where jumlahtamu is not null
+<<<<<<< HEAD
                     AND ((tanggalpesan) BETWEEN STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y') AND STR_TO_DATE('" . $end->format("d-m-Y") . "','%d-%m-%Y'))
                     order by tanggalpesan asc";
 
@@ -146,13 +172,30 @@ class Report extends CI_Controller
 
                     break;
             }
+=======
+                    AND YEAR (tanggalpesan) = $date[1]
+                    AND MONTHNAME (tanggalpesan) = '$date[0]'
+                    order by tanggalpesan asc";
+
+            $stats = $this->koneksi->FetchAll($sql);
+            $this->data['Stats'] = $stats;
+            $this->data['Period'] = $picker;
+
+            $view = $this->load->view('templates/report/example', $this->data, true);
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
 
             $dompdf = new Dompdf();
             $dompdf->loadHtml($view);
             $dompdf->setPaper('A4', 'portrait');
             $dompdf->render();
+<<<<<<< HEAD
             $dompdf->stream(date('dMy').'_RCSukamakmur_Report_'.$date1[0].'_'.$date1[1]); //namafilelaporan
             die();
         }
+=======
+            $dompdf->stream(date('dMy').'_RCSukamakmur_Report_'.$date[0].'_'.$date[1]);
+        }
+
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
     }
 }

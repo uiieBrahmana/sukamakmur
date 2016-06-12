@@ -305,6 +305,7 @@ class Service extends CI_Controller
         redirect('/pesan/summary/' . $transidmerchant);
     }
     #end region payment
+<<<<<<< HEAD
 
     public function pdf()
     {
@@ -395,4 +396,6 @@ class Service extends CI_Controller
             echo json_encode(sizeof($stats));
         }
     }
+=======
+>>>>>>> c4e0f3ce92028d19d01a656d7674dcd7e1355bfc
 }
