@@ -56,9 +56,10 @@
                                             <label class="col-sm-2 control-label" for="namapemesan">ID Tipe Makanan</label>
 
                                             <div class="col-sm-10">
-                                                <input required type="text" placeholder="ID Tipe Makanan" id="idtipemakanan"
+                                                <input required type="text" placeholder="ID Tipe Makanan"
                                                        name="idtipemakanan"
                                                        class="form-control">
+                                                <input type="hidden" name="similar">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -71,7 +72,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="namapemesan">Harga</label>
                                             <div class="col-sm-3">
-                                                <input required type="text" placeholder="Harga" id="harga"
+                                                <input required type="text" placeholder="Harga"
                                                        name="harga"
                                                        class="form-control">
                                             </div>
@@ -109,18 +110,43 @@
 
 <script>
     $(document).ready(function () {
+
+        $.validator.addMethod("tipe_not_same", function(value, element) {
+            return $('input[name=idtipemakanan]').val() != $('input[name=similar]').val()
+        }, "* Type exists. Choose another food type.");
+
+        $.validator.addMethod("caps", function(value, element) {
+            return this.optional(element) || /[A-Z]+/.test(value);
+        }, "Only uppercase letters allowed.");
+
         $('form[name=add]').validate({
             rules: {
                 harga: {
                     required: true,
-                    number: true
+                    number: true,
+                },
+                idtipemakanan: {
+                    tipe_not_same: true,
+                    caps: true,
                 }
             },
             showErrors: function (errorMap, errorList) {
                 this.defaultShowErrors();
             }
         });
-
+        $('input[name=idtipemakanan]').on('focusout',function() {
+            $.ajax({
+                    method: "POST",
+                    url: "service/tipemakananSimilarity",
+                    data: {
+                        tipe: $(this).val(),
+                    }
+                })
+                .done(function (msg) {
+                    $('input[name=similar]').val(msg);
+                    $('input[name=idtipemakanan]').trigger('keyup');
+                });
+        });
     });
 </script>
 </html>

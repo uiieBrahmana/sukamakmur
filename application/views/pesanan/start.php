@@ -52,10 +52,10 @@
                                                 echo 'Lunas';
                                             } elseif (($value['totalharga'] - $value['terbayar']) >= 0 && $value['status'] == 'DP') {
                                                 echo 'Belum Lunas';
-                                            } elseif ($value['status'] == 'CHECKOUT' && $value['terbayar'] == 0) {
-                                                echo 'Belum Bayar';
+                                            }elseif ($value['ekstensifile'] != null){
+                                                echo 'Menunggu Konfirmasi';
                                             } else {
-                                                echo 'Menunggu';
+                                                echo 'Belum Bayar';
                                             } ?>
                                         </td>
                                         <td>
@@ -64,8 +64,15 @@
                                             <?php } elseif ($value['status'] == 'CHECKOUT') { ?>
                                                 <?php if($value['ekstensifile'] == null) { ?>
                                                     <a class="btn btn-primary brn-flat" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi</a>
+                                                    <form name="pay" action="pesan/checkout/<?php echo $value['idpemesanan']; ?>" method="post">
+                                                        <?php if (($value['totalharga'] - $value['terbayar']) != 0) { ?>
+                                                            <input name="dp" type="hidden" value="checked"/>
+                                                        <?php } ?>
+                                                            <br/>
+                                                            <input type="submit" value="Instruksi Pembayaran" name="submit" style="">
+                                                    </form>
                                                 <?php } else { ?>
-                                                    <a class="btn btn-primary brn-flat" disabled="disabled" href="konfirmasi/<?php echo $value['idpemesanan'] ?>">Konfirmasi Diterima</a>
+                                                    Konfirmasi Diterima
                                                 <?php } ?>
                                             <?php } elseif ($value['status'] == 'DRAFT') { ?>
                                                 <a class="btn btn-flat btn-info" href="pesan/overview/<?php echo $value['idpemesanan'] ?>">Detail</a>
@@ -104,8 +111,10 @@
     $(document).ready(function () {
         $('table[id=datatable]').DataTable({
             "aoColumnDefs": [
-                {'bSortable': false, 'aTargets': [4]}
-            ]
+                {'bSortable': false, 'aTargets': [4, 5]}
+            ],
+            "aaSorting": [],
+            "order": []
         });
     });
 </script>

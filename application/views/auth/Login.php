@@ -41,6 +41,9 @@
                 </div>
             </div>
         </form>
+        <div class="social-auth-links text-center">
+            <font color ="red"><p><?php echo $Reason ?></p></font>
+        </div>
 
         <br/>
 

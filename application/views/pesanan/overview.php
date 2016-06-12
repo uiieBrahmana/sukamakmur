@@ -213,7 +213,38 @@
                 </div>
 
                 <?php if ($Total > 0) { ?>
-                    <form action="pesan/checkout/<?php echo $id; ?>" method="post">
+                    <div class="row">
+                        <div class="col-xs-3"></div>
+
+                        <div class="col-xs-6">
+                            <div class="box-body">
+                                <FORM NAME="order" METHOD="Post"
+                                      ACTION="https://apps.myshortcart.com/payment/request-payment/">
+                                    <input type="hidden" name="BASKET"
+                                           value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
+                                    <input type="hidden" name="STOREID" value="002733">
+                                    <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
+                                    <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
+                                    <input type="hidden" name="WORDS"
+                                           value="<?php echo securedHash($id, $Total . '.00'); ?>">
+                                    <input type="hidden" name="CNAME" value="<?php echo $Tamu['nama'] ?>">
+                                    <input type="hidden" name="CEMAIL" value="<?php echo $Tamu['email'] ?>">
+                                    <input type="hidden" name="CWPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input type="hidden" name="CHPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input type="hidden" name="CMPHONE"
+                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
+                                    <input id="bayarorder" type="submit" class="btn btn-primary btn-block"
+                                           value="Bayar dengan DOKU WALLET"/>
+                                </FORM>
+                            </div>
+                        </div>
+                        <div class="col-xs-3"></div>
+                    </div>
+
+                    <form name="pay" action="pesan/checkout/<?php echo $id; ?>" method="post">
                         <div class="row">
                             <div class="col-xs-2"></div>
                             <div class="col-xs-8 text-center text-warning">
@@ -241,44 +272,14 @@
                             <div class="col-xs-3"></div>
                             <div class="col-xs-6">
                                 <div class="box-body">
-                                    <input type="submit" value="Bayar dengan BANK
-                                        TRANSFER" name="submit" class="btn btn-info btn-block">
+                                    <span class="text-center">Atau request tata cara pembayaran dengan Bank Transfer</span>
+                                    <input type="hidden" value="bayar" name="bayar">
+                                    <input id="bayarpay" type="submit" value="DISINI" class="btn btn-info btn-block">
                                 </div>
                             </div>
                             <div class="col-xs-3"></div>
                         </div>
                     </form>
-
-                    <div class="row">
-                        <div class="col-xs-3"></div>
-
-                        <div class="col-xs-6">
-                            <div class="box-body">
-                                <FORM NAME="order" METHOD="Post"
-                                      ACTION="https://apps.myshortcart.com/payment/request-payment/">
-                                    <input type="hidden" name="BASKET"
-                                           value="Pemesanan Fasilitas RC Sukamakmur,<?php echo $Total ?>.00,1,<?php echo $Total ?>.00">
-                                    <input type="hidden" name="STOREID" value="00123548">
-                                    <input type="hidden" name="TRANSIDMERCHANT" value="<?php echo $id; ?>">
-                                    <input type="hidden" name="AMOUNT" value="<?php echo $Total ?>.00">
-                                    <input type="hidden" name="URL" value="http://rcsukamakmur.co.id/sukamakmur">
-                                    <input type="hidden" name="WORDS"
-                                           value="<?php echo securedHash($id, $Total . '.00'); ?>">
-                                    <input type="hidden" name="CNAME" value="<?php echo $Tamu['nama'] ?>">
-                                    <input type="hidden" name="CEMAIL" value="<?php echo $Tamu['email'] ?>">
-                                    <input type="hidden" name="CWPHONE"
-                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                    <input type="hidden" name="CHPHONE"
-                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                    <input type="hidden" name="CMPHONE"
-                                           value="<?php echo str_replace('-', '', $Tamu['notelp']) ?>">
-                                    <input name="submit" type="submit" class="btn btn-primary btn-block"
-                                           value="Bayar dengan DOKU WALLET"/>
-                                </FORM>
-                            </div>
-                        </div>
-                        <div class="col-xs-3"></div>
-                    </div>
                 <?php } ?>
 
                 <div class="row">
@@ -337,6 +338,28 @@
                 $('input[name=AMOUNT]').prop('value', '<?php echo $Total ?>.00');
                 $('input[name=WORDS]').prop('value', '<?php echo securedHash($id, $Total . '.00'); ?>');
             }
+        });
+
+        $("#bayarorder").on('click',function(event) {
+            event.preventDefault();
+            bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
+                if (result) {
+                    $("form[name=order]").submit();
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        $("#bayarpay").on('click',function(event) {
+            event.preventDefault();
+            bootbox.confirm("Anda tidak dapat mengubah lagi pesanan anda jika melanjutkan ke pambayaran. Lanjutkan?", function(result) {
+                if (result) {
+                    $("form[name=pay]").submit();
+                } else {
+                    return false;
+                }
+            });
         });
     });
 </script>

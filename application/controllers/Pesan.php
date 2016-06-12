@@ -29,7 +29,7 @@ class Pesan extends CI_Controller
     public function index()
     {
 
-        $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId";
+        $sql = "SELECT idpemesanan, tanggalpesan, totalharga, status FROM pemesanan WHERE idtamu = $this->userId ORDER BY `tanggalpesan` ASC";
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
         foreach ($this->data['Pesanan'] as $key => $item) {
             $this->pesanankosong($item['idpemesanan']);
@@ -39,7 +39,8 @@ class Pesan extends CI_Controller
                 b.ekstensifile FROM pemesanan a
                 LEFT JOIN pembayaran b ON (a.idpemesanan = b.idpemesanan)
                 WHERE a.idtamu = $this->userId
-                GROUP BY a.idpemesanan, b.idpemesanan";
+                GROUP BY a.idpemesanan, b.idpemesanan
+                ORDER BY a.`tanggalpesan` DESC";
 
         $this->data['Pesanan'] = $this->koneksi->FetchAll($sql);
         $this->load->view('pesanan/start', $this->data);
@@ -212,7 +213,7 @@ class Pesan extends CI_Controller
             redirect('/pesan/overview/' . $idpesanan);
         }
 
-        $this->data['Akomodasi'] = $this->koneksi->FetchAll('SELECT * FROM akomodasi');
+        $this->data['Akomodasi'] = $this->koneksi->FetchAll("SELECT * FROM akomodasi WHERE status = 'Tersedia'");
         $this->load->view('pesanan/akomodasi', $this->data);
     }
 
@@ -374,7 +375,7 @@ class Pesan extends CI_Controller
                                     WHERE p.idpemesanan = $idpemesanan");
         $datapemesan = $datapemesan[0];
 
-        $submit = $this->input->post('submit');
+        $submit = $this->input->post('bayar');
         if (isset($submit)) {
             $terms = $this->input->post('dp');
             if (isset($terms))

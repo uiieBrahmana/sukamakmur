@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 
+    private $data;
+
     /**
      * Login constructor.
      */
     public function __construct()
     {
         parent::__construct();
+        $this->data['Reason'] = '';
         $auth = $this->session->userdata('ID');
         if (isset($auth))
             redirect('/administrator/');
@@ -26,7 +29,7 @@ class Login extends CI_Controller
 
             $this->Auth($username, $password);
             $auth = $this->session->userdata('role');
-            if (isset($auth))
+            if (isset($auth)) {
                 switch ($auth) {
                     case 'Tamu':
                         redirect('/pesan/');
@@ -41,12 +44,14 @@ class Login extends CI_Controller
                         redirect('/login/');
                         break;
                 }
-            else
-                $this->load->view('auth/GagalLogin');
+            } else {
+                $this->data['Reason'] = 'Invalid Username or Password.';
+                $this->load->view('auth/Login', $this->data);
+            }
 
         } else {
             // untuk mengubah file view yang dituju
-            $this->load->view('auth/Login');
+            $this->load->view('auth/Login', $this->data);
         }
 
     }

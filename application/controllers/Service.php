@@ -15,7 +15,7 @@ class Service extends CI_Controller
     public function KapasitasAkomodasi()
     {
         $idakomodasi = $this->input->post('idakomodasi');
-        $kapasitas = $this->koneksi->FetchAll("SELECT kapasitas FROM `akomodasi` where idakomodasi = $idakomodasi;");
+        $kapasitas = $this->koneksi->FetchAll("SELECT kapasitas FROM `akomodasi` where status = 'Tersedia' AND idakomodasi = $idakomodasi;");
         echo json_encode($kapasitas[0]);
     }
 
@@ -35,8 +35,8 @@ class Service extends CI_Controller
         $data = array();
         foreach ($period as $k => $dt) {
             $temp = $this->koneksi->FetchAll(
-                "SELECT * FROM `pesananakomodasi` where idakomodasi = $idakomodasi
-                and tanggal = STR_TO_DATE('" . $dt->format("d-m-Y") . "','%d-%m-%Y');");
+                "SELECT * FROM `pesananakomodasi` WHERE idakomodasi = $idakomodasi
+                AND tanggal = STR_TO_DATE('" . $dt->format("d-m-Y") . "','%d-%m-%Y');");
             $data['Akomodasi'][$k]['Tanggal'] = $dt->format("d F Y");
             $data['Akomodasi'][$k]['IDTanggal'] = $dt->format("Y-m-d");
             $data['Akomodasi'][$k]['Result'] = (sizeof($temp) > 0 && isset($temp)) ? false : true;
@@ -190,6 +190,13 @@ class Service extends CI_Controller
         echo json_encode($result[0]['username']);
     }
 
+    public function tipemakananSimilarity(){
+        $tipe = $this->input->post('tipe');
+        $tipe = strtoupper($tipe);
+        $result = $this->koneksi->FetchAll("select idtipemakanan from tipemakanan where idtipemakanan = '$tipe'");
+        echo json_encode($result[0]['idtipemakanan']);
+    }
+
     #region payment
     public function verify()
     {
@@ -197,86 +204,82 @@ class Service extends CI_Controller
         $totalamount = $this->input->post("AMOUNT");
         $storeid = $this->input->post("STOREID");
 
-        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
+        $this->session->set_userdata('AMMOUNT', $totalamount);
 
-            $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
-            $data = $this->koneksi->FetchAll($sql);
+        $sql = "SELECT * FROM pemesanan WHERE idpemesanan = $transidmerchant";
+        $data = $this->koneksi->FetchAll($sql);
 
-            if ($data === null) {
-                echo 'Stop';
-                return;
-            } else {
-//                $sqlupdate = UpdateBuilder('pemesanan',
-//                    array(
-//                        'idpemesanan' => $transidmerchant,
-//                    ),
-//                    array(
-//                        'idpemesanan' => $transidmerchant,
-//                        'status' => 'CHECKOUT',
-//                    )
-//                );
-//
-//                $this->koneksi->Save($sqlupdate, array(
-//                    $transidmerchant,
-//                    'CHECKOUT'
-//                ));
+        if ($data === null) {
+            echo 'Stop';
+            return;
+        } else {
+            /*
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $transidmerchant,
+                ),
+                array(
+                    'idpemesanan' => $transidmerchant,
+                    'status' => 'CHECKOUT',
+                )
+            );
 
-                echo 'Continue';
-                return;
-            }
-        //} else {
-        //    echo 'Stop';
-        //}
-        echo 'Stop';
+            $this->koneksi->Save($sqlupdate, array(
+                $transidmerchant,
+                'CHECKOUT'
+            ));
+            */
+            echo 'Continue';
+            return;
+        }
+
     }
 
     public function notify()
     {
         $transidmerchant = $this->input->post("TRANSIDMERCHANT");
         $totalamount = $this->input->post("AMOUNT");
+
+        $this->session->set_userdata('AMMOUNT', $totalamount);
         //Result can be (Success or Fail)
         $result = strtoupper($this->input->post("RESULT"));
 
-        //if ($_SERVER['REMOTE_ADDR'] = '103.10.128.11') {
-            if (strcasecmp($result, 'SUCCESS') == 0) {
-                $sqlbayar = InsertBuilder('pembayaran',
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                        'nominal' => $totalamount,
-                        'metodepembayaran' => 'DOKU WALLET',
-                    )
-                );
-
-                $this->koneksi->Save($sqlbayar, array(
+        if (strcasecmp($result, 'SUCCESS') == 0) {
+            $sqlbayar = InsertBuilder('pembayaran',
+                array(
                     'idpemesanan' => $transidmerchant,
-                    'nominal' => $totalamount,
+                    'nominal' => (int)$totalamount,
                     'metodepembayaran' => 'DOKU WALLET',
-                ));
+                )
+            );
 
-                $sqlupdate = UpdateBuilder('pemesanan',
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                    ),
-                    array(
-                        'idpemesanan' => $transidmerchant,
-                        'status' => 'DP',
-                    )
-                );
+            $this->koneksi->Save($sqlbayar, array(
+                'idpemesanan' => $transidmerchant,
+                'nominal' => (int)$totalamount,
+                'metodepembayaran' => 'DOKU WALLET',
+            ));
 
-                $this->koneksi->Save($sqlupdate, array(
-                    $transidmerchant,
-                    'DP'
-                ));
+            $sqlupdate = UpdateBuilder('pemesanan',
+                array(
+                    'idpemesanan' => $transidmerchant,
+                ),
+                array(
+                    'idpemesanan' => $transidmerchant,
+                    'status' => 'DP',
+                )
+            );
 
-                echo 'Continue';
-                return;
-            } else {
-                echo 'Stop';
-                return;
-            }
-        //} else {
-        //    echo 'Stop';
-        //}
+            $this->koneksi->Save($sqlupdate, array(
+                $transidmerchant,
+                'DP'
+            ));
+
+            echo 'Continue';
+            return;
+        } else {
+            echo 'Stop';
+            return;
+        }
     }
 
     public function cancel($idpemesanan = null)
@@ -293,15 +296,103 @@ class Service extends CI_Controller
     public function redirect()
     {
         $sucess = $this->input->post('RESULT');
-        $idpemesanan = $this->input->post('TRANSIDMERCHANT');
+        $transidmerchant = $this->input->post('TRANSIDMERCHANT');
 
         if (strcasecmp(strtoupper($sucess), 'SUCCESS') == 0) {
-            if ($idpemesanan == null)
-                $idpemesanan = $this->session->userdata('pesanan');
+            if ($transidmerchant == null)
+                $transidmerchant = $this->session->userdata('pesanan');
         }
-
-        redirect('/pesan/summary/' . $idpemesanan);
+        redirect('/pesan/summary/' . $transidmerchant);
     }
     #end region payment
 
+    public function pdf()
+    {
+        $picker1 = $this->input->post('picker1');
+        $picker2 = $this->input->post('picker2');
+        $tipe = $this->input->post('tipe');
+
+        $view = null;
+
+        $begin = new DateTime(date("Y-m-d", strtotime($picker1)));
+        $end = new DateTime(date("Y-m-d", strtotime($picker2)));
+
+        if(isset($picker1)) {
+            $date1 = explode(' ', $picker1);
+            $date2 = explode(' ', $picker2);
+            switch ($tipe) {
+                case '1':
+                    $sql = "select * from (
+                        select q.*, p.jumlahtamu, a.nama, a.harga, t.nama namatamu, 'orang' unit,
+                        'no' multiply
+                        from pemesanan q
+                        left join pesananakomodasi p using (idpemesanan)
+                        left join akomodasi a using (idakomodasi)
+                        left join tamu t using (idtamu)
+                        where q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.porsi, a.idtipemakanan, b.harga, t.nama namatamu, 'porsi' unit,
+                        'yes' multiply
+                        from pemesanan q
+                        left join pesananmakanan p using (idpemesanan)
+                        left join menumakanan a using (idmenumakanan)
+                        left join tipemakanan b using (idtipemakanan)
+                        left join tamu t using (idtamu)
+                        where q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.jumlah, a.nama, a.hargasewa, t.nama namatamu, 'unit' unit,
+                        'yes' multiply
+                        from pemesanan q
+                        left join pesananperalatan p using (idpemesanan)
+                        left join peralatan a using (idperalatan)
+                        left join tamu t using (idtamu)
+                        where q.`status` = 'LUNAS'
+                        union
+                        select q.*, p.jumlahpeserta, a.nama, a.harga, t.nama namatamu, 'orang' unit,
+                        'yes' multiply
+                        from pemesanan q
+                        left join pesanankegiatan p using (idpemesanan)
+                        left join kegiatan a using (idkegiatan)
+                        left join tamu t using (idtamu)
+                        where q.`status` = 'LUNAS'
+                    ) report where jumlahtamu is not null
+                    AND ((tanggalpesan) BETWEEN STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y') AND STR_TO_DATE('" . $end->format("d-m-Y") . "','%d-%m-%Y'))
+                    order by tanggalpesan asc";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+                case '2': //pegawai
+                    $sql = "select nama, alamat, notelp, jeniskelamin, status from petugas";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+                case '3': // akomodasi
+                    $sql = "select nama, kapasitas, harga, COUNT(pesananakomodasi.tanggal) jumlahpesanan
+                    from akomodasi LEFT JOIN pesananakomodasi USING (idakomodasi)
+                    WHERE ((pesananakomodasi.tanggal) BETWEEN STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y') AND STR_TO_DATE('" . $end->format("d-m-Y") . "','%d-%m-%Y'))
+                    GROUP BY idakomodasi asc";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+                case '4': //menu makanan
+                    $sql = "select menumakanan.*, tipemakanan.harga, SUM(pesananmakanan.porsi) jumlahpesanan
+                    from menumakanan LEFT JOIN pesananmakanan USING (idmenumakanan)
+                    left join tipemakanan using (idtipemakanan)
+                    WHERE ((pesananmakanan.tanggalpemesanan) BETWEEN STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y') AND STR_TO_DATE('" . $end->format("d-m-Y") . "','%d-%m-%Y'))
+                    GROUP BY idmenumakanan asc";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+                case '5': //peralatan
+                    $sql = "select * from peralatan";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+                case '6': //kegiatan
+                    $sql = "select kegiatan.nama, kegiatan.pesertamin, kegiatan.pesertamax, kegiatan.harga, pesanankegiatan.jumlahpeserta, COUNT(pesanankegiatan.tanggal) jumlahpesanan
+                    from kegiatan LEFT JOIN pesanankegiatan USING (idkegiatan)
+                    WHERE ((pesanankegiatan.tanggal) BETWEEN STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y') AND STR_TO_DATE('" . $end->format("d-m-Y") . "','%d-%m-%Y'))
+                    GROUP BY idkegiatan asc";
+                    $stats = $this->koneksi->FetchAll($sql);
+                    break;
+            }
+
+            echo json_encode(sizeof($stats));
+        }
+    }
 }

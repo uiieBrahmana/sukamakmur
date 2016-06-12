@@ -763,6 +763,7 @@ class Administrator extends CI_Controller
         $submit = $this->input->post('submit');
         if (isset($submit)) {
             $idtipemakanan = $this->input->post('idtipemakanan');
+            $idtipemakanan = strtoupper($idtipemakanan);
             $keterangan = $this->input->post('keterangan');
             $harga = $this->input->post('harga');
 
@@ -1308,4 +1309,9 @@ class Administrator extends CI_Controller
         $this->load->view('admin/pesanan/AdminInvoicePesanan', $this->data);
     }
     #end region detail
+
+    public function laporan(){
+        $this->data['open'] = true;
+        $this->load->view('admin/laporan/Laporan', $this->data);
+    }
 }

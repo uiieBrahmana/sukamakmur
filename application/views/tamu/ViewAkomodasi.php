@@ -33,7 +33,7 @@
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
                                         <b>Kapasitas</b>
-                                        <section class="pull-right"><?php echo $Akomodasi['kapasitas'] ?>orang
+                                        <section class="pull-right"><?php echo $Akomodasi['kapasitas'] ?> orang
                                         </section>
                                     </li>
                                     <li class="list-group-item">
@@ -44,7 +44,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <b>Status</b>
-                                        <section class="pull-right"><?php echo $Akomodasi['status'] ?></section>
+                                        <section class="pull-right"><?php echo ($Akomodasi['BookAvailable']) ? $Akomodasi['status'] : 'Tersewa' ?></section>
                                     </li>
                                 </ul>
                             </div>

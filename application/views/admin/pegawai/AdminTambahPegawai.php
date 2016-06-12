@@ -138,7 +138,6 @@
                                                 <select class="form-control" name="status">
                                                     <option value="Manager">Manager</option>
                                                     <option value="Administrator">Administrator Aplikasi</option>
-                                                    <option value="Trainer">Trainer Kegiatan</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -92,7 +92,7 @@ class Pengunjung extends CI_Controller
 
         $this->data['SisaAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `pesananakomodasi`
         WHERE tanggal = STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y');");
-        $this->data['TotalAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `akomodasi`");
+        $this->data['TotalAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` where status = 'Tersedia'");
 
         $i = 0;
         foreach ($this->data['TotalAkomodasi'] as $key => $val) {
@@ -290,10 +290,37 @@ class Pengunjung extends CI_Controller
             redirect('pengunjung/');
         }
 
-        $result = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE idakomodasi = " . $id);
+        //region akomodasi
+        $dateSearch = $this->session->userdata('DateSearch');
+
+        if (isset($dateSearch)) {
+            $begin = new DateTime(date("Y-m-d", strtotime($dateSearch)));
+        } else {
+            $begin = new DateTime('+1 day');
+        }
+
+        $this->data['SisaAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `pesananakomodasi`
+        WHERE tanggal = STR_TO_DATE('" . $begin->format("d-m-Y") . "','%d-%m-%Y');");
+        $this->data['TotalAkomodasi'] = $this->koneksi->FetchAll("SELECT * FROM `akomodasi` WHERE status = 'Tersedia' AND idakomodasi = " . $id);
+
+        $i = 0;
+        foreach ($this->data['TotalAkomodasi'] as $key => $val) {
+            $this->data['TotalAkomodasi'][$key]['BookAvailable'] = true;
+            foreach ($this->data['SisaAkomodasi'] as $k => $v) {
+                if (strcmp($val['idakomodasi'], $v['idakomodasi']) == 0) {
+                    $this->data['TotalAkomodasi'][$key]['BookAvailable'] = false;
+                    $i = $i - 1;
+                    break;
+                }
+            }
+            $i = $i + 1;
+        }
+        $this->data['CountAkomodasi'] = $i;
+        //end region
+
         $size = $this->koneksi->FetchAll("select namafile from fotoakomodasi where idakomodasi = $id");
         $this->data['Size'] = $size;
-        $this->data['Akomodasi'] = $result[0];
+        $this->data['Akomodasi'] = $this->data['TotalAkomodasi'][0];
         $this->load->view('tamu/ViewAkomodasi', $this->data);
     }
 
@@ -345,7 +372,7 @@ class Pengunjung extends CI_Controller
 
             $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
             $this->data['Member'] = $tamu[0];
-            redirect('pengunjung/ubahakun/' . $idtamu . '/success');
+            redirect('pengunjung/ubahakun/' . $idtamu . '?status=success');
         } else {
             $tamu = $this->koneksi->FetchAll("SELECT * FROM `tamu` WHERE idtamu = " . $idtamu);
             $this->data['Member'] = $tamu[0];

@@ -12,6 +12,8 @@
             <ul class="sidebar-menu">
                 <li class="header">Menu Utama</li>
 
+
+
                 <?php if (strcmp($role, 'Administrator') != 0) { ?>
                     <li class="treeview">
                         <a href="#"><i class="fa fa-home"></i> <span>Kelola Fasilitas</span> <i

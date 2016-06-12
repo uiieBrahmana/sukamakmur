@@ -31,7 +31,7 @@
                                 <span class="info-box-number">max. <?php echo $v['kapasitas'] ?> orang</span>
 
                             <span class="progress-description">
-                              Rp. <?php echo number_format($v['harga']) ?> (<?php echo ($v['BookAvailable']) ? 'Tersedia' : 'Tidak Tersedia' ?>)
+                              Rp. <?php echo number_format($v['harga']) ?> (<?php echo ($v['BookAvailable']) ? 'Tersedia' : 'Tersewa' ?>)
                             </span>
 
                             </div>

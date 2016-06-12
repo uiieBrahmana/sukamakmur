@@ -90,7 +90,7 @@
                     <tr>
                         <td><?php echo $Value['idpemesanan'] ?></td>
                         <td><?php echo $Value['namatamu'] ?></td>
-                        <td><?php echo $Value['tanggalpesan'] ?></td>
+                        <td><?php echo date("d F Y", strtotime($Value['tanggalpesan'])) ?></td>
                         <td>Rp. <?php echo number_format($Value['totalharga']) ?></td>
                         <td>
                             <?php if(strcmp($Value['status'], 'CHECKOUT') == 0) { ?>

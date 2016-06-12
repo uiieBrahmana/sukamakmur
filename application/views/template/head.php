@@ -18,9 +18,13 @@
     <link rel="stylesheet" href="css/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet" href="css/dist/css/AdminLTE.css">
     <style>
-        .carousel-inner{
+        .carousel-inner {
             width:100%;
             max-height: 450px !important;
+        }
+
+        .carousel img {
+            min-width: 100%;
         }
     </style>
 </head>

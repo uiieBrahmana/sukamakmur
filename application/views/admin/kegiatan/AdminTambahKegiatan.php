@@ -125,19 +125,28 @@
 
 <script>
     $(document).ready(function () {
+
+        $.validator.addMethod('positiveNumber',
+            function (value) {
+                return Number(value) > 0;
+            }, 'Angka harus positif.');
+
         $('form[name=add]').validate({
             rules: {
                 pesertamax: {
                     required: true,
-                    number: true
+                    number: true,
+                    positiveNumber: true
                 },
                 pesertamin: {
                     required: true,
-                    number: true
+                    number: true,
+                    positiveNumber: true
                 },
                 harga: {
                     required: true,
-                    number: true
+                    number: true,
+                    positiveNumber: true
                 }
             },
             showErrors: function (errorMap, errorList) {

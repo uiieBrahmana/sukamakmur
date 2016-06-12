@@ -83,20 +83,17 @@
                         <th>Nama Tamu</th>
                         <th>Email</th>
                         <th>No. Telepon</th>
-                        <th>Username</th>
-                        <th>Password</th>
                         <th width="170px">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($Akun as $value) { ?>
                         <tr>
+                           <?php $namatrim = substr($value['nama'],0,15); ?>
                             <td><?php echo $value['idtamu'] ?></td>
-                            <td><?php echo $value['nama'] ?></td>
+                            <td><?php echo $namatrim ?></td>
                             <td><?php echo $value['email'] ?></td>
                             <td><?php echo $value['notelp'] ?></td>
-                            <td><?php echo $value['username'] ?></td>
-                            <td>*******</td>
                             <td>
                                 <a href="<?php echo base_url() ?>index.php/administrator/detailprofilmember/view/<?php echo $value['idtamu'] ?>"
                                    class="btn btn-sm btn-default">Detail</a>
@@ -129,7 +126,7 @@
     $(document).ready(function () {
         $('#student').DataTable({
             "aoColumnDefs": [
-                {'bSortable': false, 'aTargets': [6]}
+                {'bSortable': false, 'aTargets': [4]}
             ]
         });
     });
